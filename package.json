@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "export NODE_ENV=production && node index.js",
-    "clean": "node rimraf.js"
+    "clean": "node rimraf.js",
+    "test:unit": "jest src --watch"
   },
   "author": "",
   "license": "ISC",

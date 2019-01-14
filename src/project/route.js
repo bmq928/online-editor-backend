@@ -11,6 +11,20 @@ route.get('/new', async (req, res) => {
 
     if (!error.isOperational) throw error
     res.status(400).json({ message: error.message })
+
+  }
+})
+
+route.get('/open', async (req, res) => {
+  const {name} = req.query
+
+  try {
+    const data = await controller.openProject(name)
+    res.status(200).json({data})
+  } catch (error) {
+    
+    if (!error.isOperational) throw error
+    res.status(400).json({ message: error.message })
     
   }
 })
