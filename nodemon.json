@@ -1,5 +1,10 @@
 {
   "events": {
-    "start": "node debug.js"
-  }
+    "start": "npm run test:unit && node debug.js"
+  },
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "project-storage"
+  ]
 }

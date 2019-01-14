@@ -6,3 +6,5 @@ fileUpload
 package-lock.json
 logs
 debug.js
+project-storage
+test.json
