@@ -1,7 +1,14 @@
+
+/**
+ * For handling error
+ * 
+ * @param {isOperational} Boolean show this error should send to client or not
+ */
 class AppError extends Error {
-  constructor(msg, isOperational = true) {
+  constructor(msg, isOperational = true, reason='') {
     super(msg)
     this.isOperational = isOperational
+    if(reason) this.reason = reason
   }
 }
 

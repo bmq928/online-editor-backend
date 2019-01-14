@@ -1,4 +1,5 @@
 {
   "port": 3000,
-  "logPath": "logs"
+  "logPath": "logs",
+  "project-storage": "/home/bui/Desktop/test"
 }
