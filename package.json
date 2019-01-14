@@ -1,0 +1,26 @@
+{
+  "name": "online-editor-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "config": "^3.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "lodash": "^4.17.11",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.3"
+  }
+}

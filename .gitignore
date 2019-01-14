@@ -1,0 +1,8 @@
+node_modules
+fileUpload
+/config/production.json
+/config/development.json
+.vscode
+package-lock.json
+logs
+debug.js
