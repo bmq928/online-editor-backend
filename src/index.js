@@ -18,7 +18,9 @@ process.on('unhandledRejection', (reason, p) => {
 process.on('uncaughtException', (error) => {
   // I just received an error that was never handled, time to handle it and then decide whether a restart is needed
   errorHandler(error)
+  console.log(error)
   if (!error.isOperational) throw error
+  
 })
 
 

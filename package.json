@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=production && node index.js",
+    "start": "export NODE_ENV=production && node src/index.js",
     "clean": "node rimraf.js",
     "test:unit": "jest src"
   },
