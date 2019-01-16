@@ -134,3 +134,18 @@ module.exports.openProject = async (name) => {
   }
 
 }
+
+/**
+ * get the list of project storage in PROJECT_STORAGE
+ * @returns {FItem[]} array of class FItem
+ */
+module.exports.listProject = async () => {
+  const projectNames = await readdir(PROJECT_STORAGE)
+  const projects = projectNames.map(
+    name => new FItem({
+      rootName: name,
+      rootIsFile: false
+    })
+  )
+  return projects
+}

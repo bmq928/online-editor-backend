@@ -9,12 +9,8 @@ module.exports = class FItem {
 
     this.rootName = options.rootName
     this.path = options.path || '/'+options.rootName
-    this.rootIsFile = options.rootIsFile || true
+    this.rootIsFile = !!(options.rootIsFile)
     this.files = options.files || []
     this.folders = options.folders || []
-  }
-
-  findChildren() {
-
   }
 }
