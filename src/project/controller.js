@@ -56,8 +56,8 @@ module.exports.readFolder = async (dir) => {
       insideItems.map(async (i) => {
         const itemPath = path.join(folderPath, i)
         const rootIsFile = (await stat(itemPath)).isFile()
-        const parrentName = path.basename(folderPath)
-        const relativePath = path.join(parrentName, i)
+        // const parrentName = path.basename(folderPath)
+        const relativePath = path.join(dir, i)
 
         return {
           itemPath: relativePath,

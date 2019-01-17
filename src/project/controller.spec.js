@@ -46,6 +46,11 @@ describe('project route', () => {
         expect(data.files.length).toEqual(2)
       })
 
+      it('level 2 folder should have correct path of inside file or folder ', async () => {
+        const data = await controller.readFolder('test-read-folder/something')
+        expect(data.files[0].path).toEqual('test-read-folder/something/scripts.js')
+      })
+
       it('should throw folder is not exists', async () => {
         try {
           const data = await controller.readFile('not exist')
