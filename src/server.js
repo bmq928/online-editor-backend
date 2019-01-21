@@ -8,9 +8,11 @@ const appRootPath = require('app-root-path')
 const path = require('path')
 
 const app = express()
+const REQUEST_LOG = path.join(appRootPath.toString(), config.get('logPath'), 'request.log')
 
 const project = require('./project')
-const REQUEST_LOG = path.join(appRootPath.toString(), config.get('logPath'), 'request.log')
+const htmlSrc = require('./html-src')
+
 
 app.use(cors())
 app.use(helmet())
@@ -20,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 
 //api
 app.use('/project', project.route)
+app.use('/html-src', htmlSrc.route)
 
 
 module.exports = app
