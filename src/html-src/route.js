@@ -6,6 +6,7 @@ route.get('/load', async (req, res) => {
 
   try {
     const data = await controller.loadFile(project, file)
+    res.status(200).json({data})
   } catch (error) {
     if (!error.isOperational) throw error
     res.status(400).json({ message: error.message })
