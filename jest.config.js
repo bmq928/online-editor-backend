@@ -1,4 +1,4 @@
-// global.AppError = require('./src/app-error').AppError
+global.AppError = require('./src/app-error').AppError
 
 module.exports = {
   globals: {

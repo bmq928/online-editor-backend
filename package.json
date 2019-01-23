@@ -6,7 +6,7 @@
   "scripts": {
     "start": "export NODE_ENV=production && node src/index.js",
     "clean": "node rimraf.js",
-    "test:unit": "jest src"
+    "test:unit": "jest src --config ./jest.config.js --watch"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "axios": "^0.18.0",
+    "eslint-plugin-node": "^8.0.1",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "rimraf": "^2.6.3"

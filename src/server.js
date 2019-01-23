@@ -12,6 +12,7 @@ const REQUEST_LOG = path.join(appRootPath.toString(), config.get('logPath'), 're
 
 const project = require('./project')
 const htmlSrc = require('./html-src')
+const codeRunner = require('./code-runner')
 
 
 app.use(cors())
@@ -29,6 +30,6 @@ if (process.env.NODE_ENV === 'production') {
 //api
 app.use('/project', project.route)
 app.use('/html-src', htmlSrc.route)
-
+app.use('/code-runner', codeRunner.route)
 
 module.exports = app

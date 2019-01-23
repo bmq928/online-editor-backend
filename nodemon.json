@@ -1,6 +1,6 @@
 {
   "events": {
-    "start": "npm run test:unit && node debug.js"
+    "start": "node debug.js"
   },
   "ignore": [
     ".git",

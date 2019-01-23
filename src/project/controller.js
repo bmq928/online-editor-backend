@@ -11,6 +11,7 @@ const readdir = util.promisify(fs.readdir)
 const readFile = util.promisify(fs.readFile)
 const stat = util.promisify(fs.stat)
 const FItem = require('./FItem')
+const { AppError } = require('../app-error')
 
 const PROJECT_STORAGE = config.get('project-storage')
 

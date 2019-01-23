@@ -2,6 +2,7 @@ const config = require('config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
+const {AppError} = require('../app-error')
 
 const readFile = util.promisify(fs.readFile)
 
