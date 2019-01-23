@@ -15,7 +15,13 @@ const htmlSrc = require('./html-src')
 
 
 app.use(cors())
-app.use(helmet())
+app.use(helmet({
+  frameguard: {
+    action: 'allow-from',
+    domain: config.get('clientDomain')
+  }
+}))
+app.use(express.static(path.join(appRootPath.toString(), 'project-storage')))
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined', { stream: fs.createWriteStream(REQUEST_LOG) }))
 }
