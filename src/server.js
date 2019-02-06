@@ -9,6 +9,7 @@ const path = require('path')
 
 const app = express()
 const REQUEST_LOG = path.join(appRootPath.toString(), config.get('logPath'), 'request.log')
+const PROJECT_STORAGE = config.get('project-storage')
 
 const project = require('./project')
 const htmlSrc = require('./html-src')
@@ -22,7 +23,7 @@ app.use(helmet({
     domain: config.get('clientDomain')
   }
 }))
-app.use(express.static(path.join(appRootPath.toString(), 'project-storage')))
+app.use(express.static(PROJECT_STORAGE))
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined', { stream: fs.createWriteStream(REQUEST_LOG) }))
 }
