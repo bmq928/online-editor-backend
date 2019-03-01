@@ -1,0 +1,14 @@
+.vscode
+logs
+node_modules
+.dockerignore
+.eslintignore
+.eslintrc
+.gitignore
+Dockerfile
+jest.config.js
+package-lock.json
+README.md
+rimraf.js
+config/default.json
+config/development.json
