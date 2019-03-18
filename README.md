@@ -1,3 +1,7 @@
+#convention
+* folder with underscore (_) define private module (just interact with each other or is utils)
+* folder without underscore (api: controller, route)
+
 #start
 
 

@@ -2,5 +2,6 @@
   "port": 3000,
   "logPath": "logs",
   "project-storage": "",
-  "clientDomain": "http://localhost:8080"
+  "clientDomain": "http://localhost:8080",
+  "dbUri": "mongodb://localhost:27017/online-editor"
 }

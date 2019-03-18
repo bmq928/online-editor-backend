@@ -3,7 +3,8 @@ const controller = require('./controller')
 
 route.get('/list', async (req, res) => {
   try {
-    const data = await controller.listProject()
+    const { user } = req.query
+    const data = await controller.listProject(user)
     res.status(200).json({ data })
   } catch (error) {
     if (error.isOperational) throw error

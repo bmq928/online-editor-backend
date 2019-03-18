@@ -1,15 +1,17 @@
 const http = require('http')
-const app = require('./server')
-const server = http.createServer(app)
 const config = require('config')
 
 const PORT = config.get('port')
-
-const { AppError, errorHandler } = require('./app-error')
+const app = require('./server')
+const server = http.createServer(app)
+const db = require('./_db')
+const { errorHandler } = require('./app-error')
 const logger = require('./logger')
 
-global.logger = logger
-global.AppError = AppError
+db.connect()
+
+// global.logger = logger
+// global.AppError = AppError
 
 
 process.on('unhandledRejection', (reason, p) => {

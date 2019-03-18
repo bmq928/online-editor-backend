@@ -3,6 +3,7 @@ const util = require('util')
 const path = require('path')
 const config = require('config')
 const { ncp } = require('ncp')
+const _ = require('lodash')
 
 const mkdir = util.promisify(fs.mkdir)
 const exists = util.promisify(fs.exists)
@@ -12,6 +13,7 @@ const readFile = util.promisify(fs.readFile)
 const stat = util.promisify(fs.stat)
 const FItem = require('./FItem')
 const { AppError } = require('../app-error')
+const { models } = require('../_db')
 
 const PROJECT_STORAGE = config.get('project-storage')
 
@@ -138,15 +140,25 @@ module.exports.openProject = async (name) => {
 
 /**
  * get the list of project storage in PROJECT_STORAGE
+ * @param {String} user 
  * @returns {FItem[]} array of class FItem
  */
-module.exports.listProject = async () => {
+module.exports.listProject = async (user) => {
+  if (!user) throw new AppError('user is required')
+
+  const { listProject: allowProjForUser } = await models.User
+    .findOne({ username: user })
+    .select('listProject')
+    .exec()
+  
   const projectNames = await readdir(PROJECT_STORAGE)
-  const projects = projectNames.map(
-    name => new FItem({
+  const projects = projectNames
+    .filter(proj => allowProjForUser.includes(proj))
+    .map(name => new FItem({
       rootName: name,
       rootIsFile: false
-    })
-  )
+    }))
+    
+
   return projects
 }
