@@ -131,6 +131,11 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 
+############################
+# install package pypthon
+RUN pip install requests
+COPY ./wilibs /usr/local/lib/python3.7/site-packages/wilibs
+
 #######################################
 # app
 
@@ -148,7 +153,7 @@ RUN npm i --only=prod &&\
 
 
 
-########################################
+#######################################
 
 
 CMD ["npm", "start"]
