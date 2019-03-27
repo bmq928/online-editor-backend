@@ -36,6 +36,18 @@ route.get('/open', async (req, res) => {
   }
 })
 
+route.get('/delete', async (req, res) => {
+  const { name } = req.query
+
+  try {
+    const data = await controller.deleteProject(name)
+    res.status(200).json({ data })
+  } catch (error) {
+    if (!error.isOperational) throw error
+    res.status(400).json({ message: error.message })
+  }
+})
+
 route.get('/read-file', async (req, res) => {
   const { dir } = req.query
 
@@ -59,5 +71,6 @@ route.get('/read-folder', async (req, res) => {
     res.status(400).json({ message: error.message })
   }
 })
+
 
 module.exports = route

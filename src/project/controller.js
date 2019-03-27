@@ -4,6 +4,7 @@ const path = require('path')
 const config = require('config')
 const { ncp } = require('ncp')
 const _ = require('lodash')
+const rimraf = require('rimraf')
 
 const mkdir = util.promisify(fs.mkdir)
 const exists = util.promisify(fs.exists)
@@ -14,6 +15,7 @@ const stat = util.promisify(fs.stat)
 const FItem = require('./FItem')
 const { AppError } = require('../app-error')
 const { models } = require('../_db')
+const rm = util.promisify(rimraf)
 
 const PROJECT_STORAGE = config.get('project-storage')
 
@@ -114,6 +116,23 @@ module.exports.newProject = async (name) => {
 
   await mkdir(projectPath)
   await copyFolder(templatePath, projectPath) // write template to new project
+
+  return 'done'
+}
+
+/**
+ * remove project
+ * @param {String} name name of the project
+ */
+module.exports.deleteProject = async (name) => {
+  if (!name) throw new AppError('name is required')
+
+  const projectPath = path.join(PROJECT_STORAGE, name)
+  
+
+  if (!(await exists(projectPath))) throw new AppError('project isn\'t existed')
+  await rm(projectPath)
+
 
   return 'done'
 }
