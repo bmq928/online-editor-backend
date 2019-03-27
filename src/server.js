@@ -16,6 +16,7 @@ const project = require('./project')
 const htmlSrc = require('./html-src')
 const codeRunner = require('./code-runner')
 const codeAction = require('./code-action')
+const fileSys = require('./file-sys')
 
 
 app.use(cors())
@@ -37,5 +38,6 @@ app.use('/project', project.route)
 app.use('/html-src', htmlSrc.route)
 app.use('/code-runner', codeRunner.route)
 app.use('/code-action', codeAction.route)
+app.use('/file-sys', fileSys.route)
 
 module.exports = app
