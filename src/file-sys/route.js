@@ -17,7 +17,7 @@ route.get('/remove-file', async (req, res) => {
 route.get('/remove-folder', async (req, res) => {
   const { project, folder } = req.query
   try {
-    const data = await controller.deleteFile(project, folder)
+    const data = await controller.deleteFolder(project, folder)
     res.status(200).json({data})
   } catch (error) {
     if (!error.isOperational) throw error
