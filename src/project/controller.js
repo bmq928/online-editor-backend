@@ -124,7 +124,7 @@ module.exports.newProject = async (projectName, username) => {
     .exec()
 
   
-  if(user.listProject.includes(projectName)){
+  if(!user.listProject.includes(projectName)){
     user.listProject.push(projectName)
     await user.save()
   }
