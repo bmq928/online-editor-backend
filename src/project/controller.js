@@ -104,12 +104,13 @@ module.exports.readFolder = async (dir) => {
 
 /**
  * create new project
- * @param {String} name name of the project
+ * @param {String} projectName name of the project
+ * @param {String} username owner of project
  */
-module.exports.newProject = async (name) => {
-  if (!name) throw new AppError('name is required')
+module.exports.newProject = async (projectName, username) => {
+  if (!projectName) throw new AppError('projectName is required')
 
-  const projectPath = path.join(PROJECT_STORAGE, name)
+  const projectPath = path.join(PROJECT_STORAGE, projectName)
   const templatePath = path.join(__dirname, 'templates')
 
   if (await exists(projectPath)) throw new AppError('project is existed')
@@ -117,6 +118,17 @@ module.exports.newProject = async (name) => {
   await mkdir(projectPath)
   await copyFolder(templatePath, projectPath) // write template to new project
 
+  const user = await models.User
+    .findOne({ username })
+    .select('listProject')
+    .exec()
+
+  
+  if(user.listProject.includes(projectName)){
+    user.listProject.push(projectName)
+    await user.save()
+  }
+  
   return 'done'
 }
 
@@ -128,7 +140,7 @@ module.exports.deleteProject = async (name) => {
   if (!name) throw new AppError('name is required')
 
   const projectPath = path.join(PROJECT_STORAGE, name)
-  
+
 
   if (!(await exists(projectPath))) throw new AppError('project isn\'t existed')
   await rm(projectPath)
@@ -169,7 +181,7 @@ module.exports.listProject = async (user) => {
     .findOne({ username: user })
     .select('listProject')
     .exec()
-  
+
   const projectNames = await readdir(PROJECT_STORAGE)
   const projects = projectNames
     .filter(proj => allowProjForUser.includes(proj))
@@ -177,7 +189,7 @@ module.exports.listProject = async (user) => {
       rootName: name,
       rootIsFile: false
     }))
-    
+
 
   return projects
 }

@@ -13,10 +13,10 @@ route.get('/list', async (req, res) => {
 })
 
 route.get('/new', async (req, res) => {
-  const { name } = req.query
+  const { name, user } = req.query
 
   try {
-    const data = await controller.newProject(name)
+    const data = await controller.newProject(name, user)
     res.status(200).json({ data })
   } catch (error) {
     if (!error.isOperational) throw error
