@@ -5,7 +5,7 @@ route.get('/load', async (req, res) => {
   const {project, file} = req.query
 
   try {
-    const data = await controller.loadFile(project, file)
+    const data = await controller.loadFile(project, file, req.decoded.username)
     res.status(200).json({data})
   } catch (error) {
     if (!error.isOperational) throw error

@@ -16,11 +16,11 @@ const exists = util.promisify(fs.exists)
  * @param {String} fileName name or relative path to the project
  * @returns {Object}
  */
-module.exports.execute = async (project, fileName) => {
+module.exports.execute = async (project, fileName, user) => {
   if (!project) throw new AppError('project is required')
   if (!fileName) throw new AppError('file is required')
 
-  const filePath = path.join(PROJECT_STORAGE, project, fileName)
+  const filePath = path.join(PROJECT_STORAGE, user, project, fileName)
   if(!(await exists(filePath))) throw new AppError('file is not exist')
 
   if(jsRunner.isJs(fileName)) return await jsRunner.exec(filePath)

@@ -15,16 +15,16 @@ const PROJECT_STORAGE = config.get('project-storage')
  * @param {String} file
  * @returns {String}
  */
-module.exports.loadFile = async (project, file) => {
-  if (!project) throw new AppError('project is required')
-  if (!file) throw new AppError('file is required')
+module.exports.loadFile = async (project, file, user) => {
+	if (!project) throw new AppError('project is required')
+	if (!file) throw new AppError('file is required')
 
-  try {
-    const filePath = path.join(PROJECT_STORAGE,project, file)
-    const data = await readFile(filePath, { encoding: 'utf8' })
+	try {
+		const filePath = path.join(PROJECT_STORAGE, user, project, file)
+		const data = await readFile(filePath, {encoding: 'utf8'})
 
-    return data
-  } catch (error) {
-    throw new AppError('file is not found')
-  }
+		return data
+	} catch (error) {
+		throw new AppError('file is not found')
+	}
 }

@@ -2,9 +2,9 @@ const router = require('express').Router()
 const controller = require('./controller')
 
 router.post('/save', async (req, res) => {
-  const { fileName, code, project } = req.body
+  const { fileName, code, project} = req.body
   try {
-    await controller.save(project, fileName, code)
+    await controller.save(project, fileName, code, req.decoded.username)
     res.status(200).json({message: 'done'})
   } catch (error) {
     if (!error.isOperational) throw error

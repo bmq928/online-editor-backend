@@ -18,11 +18,11 @@ const readdir = util.promisify(fs.readdir);
  * @param {String} project projectName
  * @param {String} fileName fileName
  */
-module.exports.deleteFile = async (project, fileName) => {
+module.exports.deleteFile = async (project, fileName, user) => {
   if (!project) throw new AppError('project is required')
   if (!fileName) throw new AppError('file name is required')
 
-  const filePath = path.join(PROJECT_STORAGE, project, fileName)
+  const filePath = path.join(PROJECT_STORAGE, user, project, fileName)
   if (!(await exists(filePath))) throw new AppError('file is not exist')
 
   await removeItem(filePath)
@@ -34,11 +34,11 @@ module.exports.deleteFile = async (project, fileName) => {
  * @param {String} project projectName
  * @param {String} file fileName or a path to file e.g /folder/nah.py
  */
-module.exports.newFile = async (project, file) => {
+module.exports.newFile = async (project, file, user) => {
   if (!project) throw new AppError('project is required')
   if (!file) throw new AppError('file name is required')
 
-  const filePath = path.join(PROJECT_STORAGE, project, file)
+  const filePath = path.join(PROJECT_STORAGE, user, project, file)
   const parentFolder = path.dirname(filePath)
   
 
@@ -54,11 +54,11 @@ module.exports.newFile = async (project, file) => {
  * @param {String} project projectName
  * @param {String} folderName fileName
  */
-module.exports.deleteFolder = async (project, folderName) => {
+module.exports.deleteFolder = async (project, folderName, user) => {
   if (!project) throw new AppError('project is required')
   if (!folderName) throw new AppError('folder name is required')
 
-  const folderPath = path.join(PROJECT_STORAGE, project, folderName)
+  const folderPath = path.join(PROJECT_STORAGE, user, project, folderName)
   if (!(await exists(folderPath))) throw new AppError('file is not exist')
 
   await removeItem(folderPath)
@@ -70,11 +70,11 @@ module.exports.deleteFolder = async (project, folderName) => {
  * @param {String} project projectName
  * @param {String} folder folderName or path to folder e.x: /as/d/folderName
  */
-module.exports.newFolder = async (project, folder) => {
+module.exports.newFolder = async (project, folder, user) => {
   if (!project) throw new AppError('project is required')
   if (!folder) throw new AppError('folder name is required')
 
-  const folderPath = path.join(PROJECT_STORAGE, project, folder)
+  const folderPath = path.join(PROJECT_STORAGE, user, project, folder)
   const parentFolder = path.dirname(folderPath)
 
   if (!(await exists(parentFolder))) throw new AppError('parent folder is not exist')
@@ -84,9 +84,9 @@ module.exports.newFolder = async (project, folder) => {
   return 'done'
 }
 
-module.exports.readFolder = async (folder) => {
+module.exports.readFolder = async (folder, user) => {
   if (!folder) throw new AppError('folder is required');
-  const folderPath = path.join(PROJECT_STORAGE);
+  const folderPath = path.join(PROJECT_STORAGE, user);
   let subdirs = await readdir(folderPath);
   console.log(subdir);
   return 'done';

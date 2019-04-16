@@ -15,11 +15,11 @@ const writeFile = util.promisify(fs.writeFile)
  * @param {String} code
  * @returns {Object}
  */
-module.exports.save = async (project, fileName, code) => {
+module.exports.save = async (project, fileName, code, user) => {
   if(!project) throw new AppError('project is required')
   if(!fileName) throw new AppError('fileName is required')
   
-  const filePath = path.join(PROJECT_STORAGE, project, fileName)
+  const filePath = path.join(PROJECT_STORAGE, user, project, fileName)
   if(!(await exists(filePath))) throw new AppError('file is not exist')
 
   await writeFile(filePath, code)
