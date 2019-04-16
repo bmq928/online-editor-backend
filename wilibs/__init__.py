@@ -5,7 +5,7 @@ import requests
 
 def login(username, password):
   root_url = os.environ.get('USER_RELATED_ROOT_URL', 'http://localhost:3000')
-  url = root_url + '/user/login'
+  url = root_url + '/login'
   payload = {
     "username": str(username),
     "password": str(password)

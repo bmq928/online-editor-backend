@@ -118,6 +118,7 @@ module.exports.newProject = async (projectName, username) => {
   await mkdir(projectPath)
   await copyFolder(templatePath, projectPath) // write template to new project
 
+/*
   const user = await models.User
     .findOne({ username })
     .select('listProject')
@@ -128,7 +129,7 @@ module.exports.newProject = async (projectName, username) => {
     user.listProject.push(projectName)
     await user.save()
   }
-  
+*/  
   return 'done'
 }
 
@@ -175,21 +176,25 @@ module.exports.openProject = async (name) => {
  * @returns {FItem[]} array of class FItem
  */
 module.exports.listProject = async (user) => {
+  console.log("User:", user);
   if (!user) throw new AppError('user is required')
 
+/*
   const { listProject: allowProjForUser } = await models.User
     .findOne({ username: user })
     .select('listProject')
     .exec()
-
+*/
+  console.log(PROJECT_STORAGE);
   const projectNames = await readdir(PROJECT_STORAGE)
+  console.log(projectNames);
   const projects = projectNames
-    .filter(proj => allowProjForUser.includes(proj))
+/*    .filter(proj => allowProjForUser.includes(proj))
     .map(name => new FItem({
       rootName: name,
       rootIsFile: false
     }))
-
+*/
 
   return projects
 }

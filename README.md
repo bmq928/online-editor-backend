@@ -9,11 +9,11 @@
 * create folder logs
 * create folder project-storage  which container project
 * build image
-  e.x: docker build . -t online-editor-backend
+  e.x: docker build . -t wi-python-backend
 * run container
-  e.x: docker run -d --name online-editor-backend \
+  e.x: docker run -d --name wi-python-backend \
      -e USER_RELATED_ROOT_URL=''  # login url \
      -e PROJECT_RELATED_ROOT_URL='' # project \
      -v<logs-folder>:/app/logs \
      -v<project-store>:/storage \
-     -p3001:3001 online-editor-backend
+     -p3001:3001 wi-python-backend

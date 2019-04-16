@@ -12,6 +12,7 @@ const removeItem = util.promisify(rimraf)
 const exists = util.promisify(fs.exists)
 const createFile = util.promisify(fs.writeFile)
 const mkdir = util.promisify(fs.mkdir)
+const readdir = util.promisify(fs.readdir);
 
 /**
  * @param {String} project projectName
@@ -81,4 +82,12 @@ module.exports.newFolder = async (project, folder) => {
   
   await mkdir(folderPath)
   return 'done'
+}
+
+module.exports.readFolder = async (folder) => {
+  if (!folder) throw new AppError('folder is required');
+  const folderPath = path.join(PROJECT_STORAGE);
+  let subdirs = await readdir(folderPath);
+  console.log(subdir);
+  return 'done';
 }
