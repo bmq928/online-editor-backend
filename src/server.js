@@ -9,8 +9,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const REQUEST_LOG = path.join(appRootPath.toString(), config.get('logPath'), 'request.log');
-const PROJECT_STORAGE = config.get('project-storage');
+const REQUEST_LOG = path.join(appRootPath.toString(), process.env.PYTHON_LOG_PATH || config.get('logPath'), 'request.log');
+const PROJECT_STORAGE = process.env.PYTHON_PROJECT_STORAGE || config.get('project-storage');
 
 const project = require('./project');
 const htmlSrc = require('./html-src');
@@ -24,14 +24,14 @@ app.use(cors());
 app.use(bodyParser.json({limit: '50mb', extended: true, type: 'application/json'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, type: 'application/json'}));
 app.use(helmet({
-  frameguard: {
-    action: 'allow-from',
-    domain: config.get('clientDomain')
-  }
+	frameguard: {
+		action: 'allow-from',
+		domain: process.env.PYTHON_CLIENT_DOMAIN || config.get('clientDomain')
+	}
 }));
 app.use(express.static(PROJECT_STORAGE));
 if (process.env.NODE_ENV === 'production') {
-  app.use(morgan('combined', { stream: fs.createWriteStream(REQUEST_LOG) }))
+	app.use(morgan('combined', {stream: fs.createWriteStream(REQUEST_LOG)}))
 }
 
 //api

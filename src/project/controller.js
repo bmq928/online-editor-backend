@@ -17,7 +17,7 @@ const {AppError} = require('../app-error');
 const {models} = require('../_db');
 const rm = util.promisify(rimraf);
 
-const PROJECT_STORAGE = config.get('project-storage');
+const PROJECT_STORAGE = process.env.PYTHON_PROJECT_STORAGE || config.get('project-storage');
 
 
 /**

@@ -1,13 +1,13 @@
-const config = require('config')
-const path = require('path')
-const fs = require('fs')
-const util = require('util')
+const config = require('config');
+const path = require('path');
+const fs = require('fs');
+const util = require('util');
 
-const { AppError } = require('../app-error')
-const PROJECT_STORAGE = config.get('project-storage')
+const { AppError } = require('../app-error');
+const PROJECT_STORAGE = process.env.PYTHON_PROJECT_STORAGE || config.get('project-storage');
 
-const exists = util.promisify(fs.exists)
-const writeFile = util.promisify(fs.writeFile)
+const exists = util.promisify(fs.exists);
+const writeFile = util.promisify(fs.writeFile);
 
 /**
  * @param {String} project
@@ -16,12 +16,12 @@ const writeFile = util.promisify(fs.writeFile)
  * @returns {Object}
  */
 module.exports.save = async (project, fileName, code, user) => {
-  if(!project) throw new AppError('project is required')
-  if(!fileName) throw new AppError('fileName is required')
+  if(!project) throw new AppError('project is required');
+  if(!fileName) throw new AppError('fileName is required');
   
-  const filePath = path.join(PROJECT_STORAGE, user, project, fileName)
-  if(!(await exists(filePath))) throw new AppError('file is not exist')
+  const filePath = path.join(PROJECT_STORAGE, user, project, fileName);
+  if(!(await exists(filePath))) throw new AppError('file is not exist');
 
   await writeFile(filePath, code)
 
-}
+};

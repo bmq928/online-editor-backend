@@ -3,7 +3,7 @@ const { combine, timestamp, prettyPrint, colorize, json } = format
 const config = require('config')
 const path = require('path')
 const appRootPath = require('app-root-path')
-const LOG_FOLDER = path.join(appRootPath.toString(), config.get('logPath'))
+const LOG_FOLDER = path.join(appRootPath.toString(), process.env.PYTHON_LOG_PATH || config.get('logPath'))
 
 const logger = createLogger({
   format: combine(

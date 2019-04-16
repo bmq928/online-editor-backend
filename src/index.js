@@ -1,7 +1,7 @@
 const http = require('http');
 const config = require('config');
 
-const PORT = config.get('port');
+const PORT = process.env.PYTHON_PORT || config.get('port');
 const app = require('./server');
 const server = http.createServer(app);
 // const db = require('./_db')
