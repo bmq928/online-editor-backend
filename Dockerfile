@@ -134,6 +134,13 @@ RUN set -ex; \
 ############################
 # install package pypthon
 RUN pip install requests
+RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk --no-cache --update-cache add gcc gfortran python python-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+#RUN pip install numpy
+#RUN pip install scipy
+#RUN pip install pandas
+#RUN pip install matplotlib
 COPY ./wilibs /usr/local/lib/python3.7/site-packages/wilibs
 
 #######################################
