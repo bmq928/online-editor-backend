@@ -61,3 +61,6 @@ class Dataset:
         if check:
             return None
         return content
+    
+    def createCurve(self, **data):
+        pass

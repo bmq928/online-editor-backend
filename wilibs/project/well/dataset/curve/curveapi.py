@@ -39,8 +39,27 @@ def editCurveInfo(token, username, curveId, **data):
     return verifyAndReturn(r)
 
 def deleteCurve(token, curveId):
-    r = deleteCurve_RAW(token, curveId)
+    r = deleteCurve_RAW(token, {'idCurve' : curveId})
     return verifyAndReturn(r)
+
+def createCurve(token, datasetId, **data ) :
+    payload = {
+        "idDataset": datasetId
+    }
+    if 'name' in data:
+        payload['name'] = data['name']
+    else:
+        return False, "Name field can't be empty"
+    if 'duplicate' in data:
+        payload['duplicate'] = data['duplicate']
+    if 'unit' in data:
+        payload['unit'] = data['unit']
+    if 'initValue' in data:
+        payload['initValue'] = data['initValue']
+    r = createCurve_RAW(token, payload)
+    return verifyAndReturn(r)
+
+
 
 #RAW:
 
@@ -69,3 +88,7 @@ def deleteCurve_RAW(token, payload):
     r = requests.delete(url, json = payload, header = tokenHeader(token))
     return r.json()
     
+def createCurve_RAW(token, payload):
+    url = ROOT_API + '/project/well/dataset/curve/new'
+    r = requests.post(url, json = payload, header = tokenHeader(token))
+    return r.json()
