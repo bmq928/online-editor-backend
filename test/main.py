@@ -1,5 +1,10 @@
 import wilibs.wilib as wilib
 import wilibs.project.project_obj as project
+import wilibs.project.well.well_obj as Well
+import wilibs.project.well.dataset.dataset_obj as dataset
+import wilibs.project.well.dataset.curve.curve_obj as curve
+
+
 client = wilib.login("tunghx","123456")
 
 """user"""
@@ -19,29 +24,18 @@ projectByID = client.getProjectById(12)
 project.createProject(client.token, name = "THINH1")
 
 #delete project
-# client.deleteProject(14)
+client.deleteProject(14)
 
 
 """well"""
 #create well
 project.createWell(client.token, 16,username = "tunghx" , name = "test_well")
 
-# getListWell
-
-
-
-
-"""dataset"""
-
+#list well
+list_Well = Well.listWell(client.token, 1)
 
 
 """curve"""
-# craate well 
-# create dataset
 # create curve ()
-project = client.getListProject()
-# well = project.createWell()
-# dataset = well.createDataset()
-# curve = dataset.createCurve()
 
-print(project)
+
