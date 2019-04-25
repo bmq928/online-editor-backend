@@ -22,6 +22,20 @@ def editDatasetInfo(token, datasetId, **data):
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)
 
+def createDataSet(token, wellId, username, **data):
+    payload = {
+        'idWell': wellId,
+        'createdBy': username,
+        'updatedBy': username,
+    }
+    if 'datasetKey' in data:
+        payload['datasetKey'] = data['datasetKey']
+    if 'datasetLabel' in data:
+        payload['datasetLabel'] = data['datasetLabel']
+    if 'name' in data:
+        payload['name'] = data['name']
+    r = createDataSet_RAW(token, payload)
+    return verifyAndReturn(r)
 
 #RAW:
 
@@ -32,5 +46,10 @@ def getDatasetInfo_RAW(token, datasetId):
 
 def editDatasetInfo_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/edit'
+    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    return r.json()
+
+def createDataSet_RAW(token, payload):
+    url = ROOT_API + '/project/well/dataset/new'
     r = requests.post(url, json = payload, headers = tokenHeader(token))
     return r.json()

@@ -38,7 +38,26 @@ class Curve:
         return None
     
 
-    def updateCurveData(self, curveData, name = False) :
+    def updateCurveData(self, curveData, name = False):
+        """Update data to curve
+
+        Args: 
+            data: array of dic {'x':5, 'y':6}
+            name (optional): name you want to change
+        
+        Returns:
+            None if no error
+            err as string to describe what err is
+
+        Example:
+            dataCurve = [{'x':7, 'y':8},{'x':6, 'y':7}]
+
+            curve = app.getCurveById(78)
+            err = curve.updateCurveData(dataCurve)
+            if err:
+                print(err)
+
+        """
         tempFile = TemporaryFile('r+')
         temp = []
         for i in curveData:
@@ -76,6 +95,7 @@ class Curve:
 
         """
         check,  content = updateCurveData(self.token, self.curveInfo['idDataset'], self.curveInfo['idCurve'], data, name)
+        data.close()
         if check:
             return None
         return content

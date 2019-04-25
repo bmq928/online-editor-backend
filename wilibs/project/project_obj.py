@@ -93,8 +93,6 @@ class Project:
         """
         return getFullInfoProject(self.token, self.projectId)
 
-    
-
     def editProjectInfo(self, **data):
         """Edit project for this account
         

@@ -10,7 +10,7 @@ curve = client.getCurveById(78)
 
 curves = curve.getCurveData()
 
-curves.append({'x':45400, 'y': 4645})
+curves.append({'x':1111, 'y': 1234})
 
 curve.updateCurveData(curves)
 
