@@ -1,20 +1,16 @@
+from tempfile import mkstemp
+
 import wilibs.wilib as wilib
-client = wilib.login("hoang","1")
+client = wilib.login("tunghx","123456")
 
-# curve = client.getCurveById(99)
+tempFile = mkstemp()
 
-# err = curve.editCurveInfo(unit = 'cm', name = 'Demo')
+tempFile.write("[[1,2][3,4]]")
 
-# #lấy về thông tin người dùng
-# getuserinfo = client.getUserInfo()
+curve = client.getCurveById(78)
+print(curve)
 
-# #list các project
-# listProject = client.getListProject()
+curve.updateCurveDataByFile(tempFile.open())
 
-# #lấy về 
+tempFile.close()
 
-dataset = client.getDatasetById(41)
-
-curve = dataset.createCurve(name = 'new Curve yoho2', initValue='60', unit = 'cm/h')
-
-# print(curve)
