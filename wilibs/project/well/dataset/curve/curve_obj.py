@@ -36,7 +36,12 @@ class Curve:
             return content
         return None
     
-    def updateCurveData(self, data, name = False):
+
+    def updateCurveDataByArray(self, curveData, name = False) :
+        pass
+
+
+    def updateCurveDataByFile(self, data, name = False):
         """Update data to curve
 
         Args: 
@@ -55,7 +60,7 @@ class Curve:
 
             curve = app.getCurveById(78)
             file = open('data.txt', 'rb')
-            err = curve.updateCurveData(file)
+            err = curve.updateCurveData(file) // array 
             if err:
                 print(err)
 
@@ -81,7 +86,7 @@ class Curve:
                 print(err)
 
         """
-        check, content = editCurveInfo(self.token, self.curveInfo['idCurve'], **data)
+        check, content = editCurveInfo(self.token,self.user['username'] ,self.curveInfo['idCurve'], **data)
         if check:
             return None
         return content

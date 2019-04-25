@@ -22,7 +22,7 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
     r = updateCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
 
-def editCurveInfo(token, curveId, **data):
+def editCurveInfo(token, username, curveId, **data):
     payload = {
         'idCurve': curveId
     }
@@ -34,7 +34,12 @@ def editCurveInfo(token, curveId, **data):
         payload['unit'] = data['unit']
     if 'initValue' in data:
         payload['initValue'] = data['initValue']
+    payload['updatedBy'] = username
     r = editCurveInfo_RAW(token, payload)
+    return verifyAndReturn(r)
+
+def deleteCurve(token, curveId):
+    r = deleteCurve_RAW(token, curveId)
     return verifyAndReturn(r)
 
 #RAW:
@@ -55,7 +60,12 @@ def updateCurveData_RAW(token, payload, data):
     return r.json()
 
 def editCurveInfo_RAW(token, payload):
-    url = ROOT_API + '/project/well/curve/edit'
+    url = ROOT_API + '/project/well/dataset/curve/edit'
     r = requests.post(url, json = payload, headers = tokenHeader(token))
+    return r.json()
+
+def deleteCurve_RAW(token, payload):
+    url = ROOT_API + '/project/well/dataset/curve/delete'
+    r = requests.delete(url, json = payload, header = tokenHeader(token))
     return r.json()
     
