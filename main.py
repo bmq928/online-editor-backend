@@ -1,5 +1,5 @@
 import wilibs.wilib as wilib
-client = wilib.login("tunghx","123456")
+client = wilib.login("hoang","1")
 
 # curve = client.getCurveById(99)
 
@@ -13,8 +13,8 @@ client = wilib.login("tunghx","123456")
 
 # #lấy về 
 
-dataset = client.getDatasetById(13)
+dataset = client.getDatasetById(41)
 
 curve = dataset.createCurve(name = 'new Curve yoho2', initValue='60', unit = 'cm/h')
 
-print(curve)
+# print(curve)
