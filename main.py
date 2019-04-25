@@ -5,7 +5,10 @@ curve = client.getCurveById(99)
 
 err = curve.editCurveInfo(unit = 'cm', name = 'Demo')
 
-if err:
-    print(err)
-else:
-    print(curve.getCurveInfo())
+#lấy về thông tin người dùng
+getuserinfo = client.getUserInfo()
+
+#list các project
+listProject = client.getListProject()
+
+#lấy về 
