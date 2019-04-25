@@ -78,7 +78,11 @@ def getCurveData_RAW(token, curveId):
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
     r = requests.post(url, data = payload, files = data, headers = tokenHeader(token))
-    return r.json()
+    try:
+        r = r.json()
+    except:
+        r = {'code': 501, 'reason':'File format is wrong'}
+    return r
 
 def editCurveInfo_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/curve/edit'

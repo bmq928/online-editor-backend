@@ -1,16 +1,18 @@
 from tempfile import mkstemp
+import os
+from tempfile import TemporaryFile
 
 import wilibs.wilib as wilib
 client = wilib.login("tunghx","123456")
 
-tempFile = mkstemp()
-
-tempFile.write("[[1,2][3,4]]")
 
 curve = client.getCurveById(78)
-print(curve)
 
-curve.updateCurveDataByFile(tempFile.open())
+curves = curve.getCurveData()
 
-tempFile.close()
+curves.append({'x':45400, 'y': 4645})
+
+curve.updateCurveData(curves)
+
+print(curve.getCurveData())
 

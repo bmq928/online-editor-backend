@@ -1,4 +1,5 @@
 from .curveapi import *
+from tempfile import TemporaryFile
 
 class Curve:
     def __init__(self, token, user, curveInfo):
@@ -37,8 +38,17 @@ class Curve:
         return None
     
 
-    def updateCurveDataByArray(self, curveData, name = False) :
-        pass
+    def updateCurveData(self, curveData, name = False) :
+        tempFile = TemporaryFile('r+')
+        temp = []
+        for i in curveData:
+            arr = []
+            arr.append(i['y'])
+            arr.append(i['x'])
+            temp.append(arr)
+        tempFile.write(str(temp))
+        tempFile.seek(0)
+        return self.updateCurveDataByFile(tempFile)
 
 
     def updateCurveDataByFile(self, data, name = False):

@@ -8,6 +8,7 @@ from .project.well.dataset.datasetapi import getDatasetInfo
 from .project.well.dataset.dataset_obj import Dataset
 from .project.well.dataset.curve.curveapi import getCurveInfo
 from .project.well.dataset.curve.curve_obj import Curve
+from .project.projectapi import createProject
 
 class Wilib:
     def __init__(self, user):
@@ -71,5 +72,27 @@ class Wilib:
             listProjectObj.append(Project(self.token,self.user, i))
         return listProjectObj
 
-    
+    def createProject(self, **data):
+        """Create project for this account.
+
+        pass info for project as name, company, department, description to create new project
+
+        Args:
+            **data: need name* (required), company, department, description, all as STRING
+        
+        Returns:
+            (bool, any):
+            A tuple.
+            If success, :bool: is false, :any: is object contain project info which created.
+            If false, :bool: is false, :any: is string tell what error happened.
+
+        Example:
+            check, project = createProject(name = 'test project', description='example for lib')
+
+        **name field is required
+        """
+        check, content = createProject(self.token, **data)
+        if check:
+            return Project(self.token, self.token, content)
+        return None
 
