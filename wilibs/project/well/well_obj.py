@@ -1,6 +1,5 @@
 from .wellapi import *
 from .dataset.dataset_obj import Dataset
-from .dataset.datasetapi import createDataSet
 
 class Well:
     def __init__(self, token, user, projectId, wellInfo):
@@ -95,14 +94,6 @@ class Well:
         
         """
         check, content = editWellInfo(self.token, self.wellId, **data)
-        if check:
-            return None
-        return content
-    
-    def deleteWell(self):
-        """
-        """
-        check, content = deleteWell(self.token, self.wellId)
         if check:
             return None
         return content

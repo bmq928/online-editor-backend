@@ -1,7 +1,5 @@
 from .datasetapi import *
-from .curve.curveapi import createCurve
 from .curve.curve_obj import Curve
-from .curve.curveapi import getCurveInfo
 
 class Dataset:
     def __init__(self, token, user, datasetInfo):
@@ -63,10 +61,3 @@ class Dataset:
         if check:
             return None
         return content
-    
-    def createCurve(self, **data):
-        check, content = createCurve(self.token, self.datasetInfo['idDataset'], self.user['username'], **data)
-        if check:
-            _, content2 = getCurveInfo(self.token, content['idCurve'])
-            return Curve(self.token, self.user, content2)
-        return None
