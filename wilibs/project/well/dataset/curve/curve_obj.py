@@ -121,3 +121,8 @@ class Curve:
             return None
         return content
     
+    def deleteCurve(self):
+        check, content = deleteCurve(self.token, self.curveId)
+        if check:
+            return None
+        return content

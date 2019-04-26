@@ -53,3 +53,6 @@ def createDataSet_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/new'
     r = requests.post(url, json = payload, headers = tokenHeader(token))
     return r.json()
+
+def deleteDataset_RAW(token, payload):
+    
