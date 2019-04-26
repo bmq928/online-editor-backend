@@ -1,4 +1,5 @@
 from .curveapi import *
+from tempfile import TemporaryFile
 
 class Curve:
     def __init__(self, token, user, curveInfo):
@@ -37,8 +38,36 @@ class Curve:
         return None
     
 
-    def updateCurveDataByArray(self, curveData, name = False) :
-        pass
+    def updateCurveData(self, curveData, name = False):
+        """Update data to curve
+
+        Args: 
+            data: array of dic {'x':5, 'y':6}
+            name (optional): name you want to change
+        
+        Returns:
+            None if no error
+            err as string to describe what err is
+
+        Example:
+            dataCurve = [{'x':7, 'y':8},{'x':6, 'y':7}]
+
+            curve = app.getCurveById(78)
+            err = curve.updateCurveData(dataCurve)
+            if err:
+                print(err)
+
+        """
+        tempFile = TemporaryFile('r+')
+        temp = []
+        for i in curveData:
+            arr = []
+            arr.append(i['y'])
+            arr.append(i['x'])
+            temp.append(arr)
+        tempFile.write(str(temp))
+        tempFile.seek(0)
+        return self.updateCurveDataByFile(tempFile)
 
 
     def updateCurveDataByFile(self, data, name = False):
@@ -66,6 +95,7 @@ class Curve:
 
         """
         check,  content = updateCurveData(self.token, self.curveInfo['idDataset'], self.curveInfo['idCurve'], data, name)
+        data.close()
         if check:
             return None
         return content
