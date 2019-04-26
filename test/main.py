@@ -3,6 +3,9 @@ import wilibs.project.project_obj as project
 import wilibs.project.well.well_obj as Well
 import wilibs.project.well.dataset.dataset_obj as dataset
 import wilibs.project.well.dataset.curve.curve_obj as curve
+from tempfile import mkstemp
+import os
+from tempfile import TemporaryFile
 
 
 client = wilib.login("tunghx","123456")
@@ -36,6 +39,15 @@ list_Well = Well.listWell(client.token, 1)
 
 
 """curve"""
-# create curve ()
+#update curve
+curve = client.getCurveById(78)
+
+curves = curve.getCurveData()
+
+curves.append({'x':45400, 'y': 4645})
+
+curve.updateCurveData(curves)
+
+print(curve.getCurveData())
 
 
