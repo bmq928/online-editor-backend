@@ -93,6 +93,28 @@ class Project:
         """
         return getFullInfoProject(self.token, self.projectId)
 
+    
+    def createProject(self, **data):
+        """Create project for this account.
+
+        pass info for project as name, company, department, description to create new project
+
+        Args:
+            **data: need name* (required), company, department, description, all as STRING
+        
+        Retunns:
+            (bool, any):
+            A tuple.
+            If success, :bool: is false, :any: is object contain project info which created.
+            If false, :bool: is false, :any: is string tell what error happened.
+
+        Example:
+            check, project = createProject(name = 'test project', description='example for lib')
+
+        **name field is required
+        """
+        return createProject(self.token, **data)
+
     def editProjectInfo(self, **data):
         """Edit project for this account
         

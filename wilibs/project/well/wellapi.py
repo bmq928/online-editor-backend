@@ -62,6 +62,20 @@ def createWell(token, projectId, username, **data):
     r = createWell_RAW(token, payload)
     return verifyAndReturn(r)
 
+def createDataSet(token, wellId, username, **data):
+    payload = {
+        'idWell': wellId,
+        'createdBy': username,
+        'updatedBy': username,
+    }
+    if 'datasetKey' in data:
+        payload['datasetKey'] = data['datasetKey']
+    if 'datasetLabel' in data:
+        payload['datasetLabel'] = data['datasetLabel']
+    if 'name' in data:
+        payload['name'] = data['name']
+    r = createDataSet_RAW(token, payload)
+    return verifyAndReturn(r)
 
 def getWellHeaders(token, wellId):
     r = getWellHeaders(token, wellId)
@@ -88,6 +102,10 @@ def deleteWell(token, wellId):
 
 #RAW:
 
+def createDataSet_RAW(token, payload):
+    url = ROOT_API + '/project/well/dataset/new'
+    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    return r.json()
 
 def getWellFullInfo_RAW(token, wellId):
     url = ROOT_API + '/project/well/full-info'

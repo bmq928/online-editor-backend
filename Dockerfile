@@ -4,7 +4,7 @@ ENV PATH /usr/local/bin:$PATH
 
 RUN pip install requests
 
-COPY ./wilibs /usr/local/lib/python3.7/site-packages/wilibs
+COPY ./wilibs /root/.local/lib/python3.6/site-packages/wilibs
 
 #######################################
 # app
