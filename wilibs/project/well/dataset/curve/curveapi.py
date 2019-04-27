@@ -11,10 +11,26 @@ def getCurveData(token, curveId):
     r = getCurveData_RAW(token, curveId)
     return verifyAndReturn(r)
 
+def createCurve(token, datasetId, name, data, **kwargsData):
+    payload = {
+        'curveName': name,
+        'idDataset': datasetId
+    }
+    if 'unit' in kwargsData:
+        payload['unit'] = kwargsData['unit']
+    if 'idFamily' in kwargsData:
+        payload['idFamily'] = kwargsData['idFamily']
+    if 'type' in kwargsData:
+        payload['type'] = kwargsData['type']
+    data = {'data': data}
+    r = updateCurveData_RAW(token, payload, data)
+    return verifyAndReturn(r)
+
 def updateCurveData(token, datasetId, desCurveId, data, name):
     payload = {
         'idDataset': datasetId,
         'idDesCurve': desCurveId,
+        'curveIndex': desCurveId
     }
     if name:
         payload['curveName'] = name
@@ -22,7 +38,7 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
     r = updateCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
 
-def editCurveInfo(token, username, curveId, **data):
+def editCurveInfo(token, curveId, **data):
     payload = {
         'idCurve': curveId
     }
@@ -34,9 +50,16 @@ def editCurveInfo(token, username, curveId, **data):
         payload['unit'] = data['unit']
     if 'initValue' in data:
         payload['initValue'] = data['initValue']
-    payload['updatedBy'] = username
     r = editCurveInfo_RAW(token, payload)
     return verifyAndReturn(r)
+
+def checkIfCurveExisted(token, datasetId, name):
+    r = checkIfCurveExisted_RAW(token, datasetId, name)
+    if r['reason'] == 'No curve found by name':
+        return False, 'nothing'
+    if r['reason'] == 'Found curve':
+        return True, r['content']
+    return False, r['reason']
 
 def deleteCurve(token, curveId):
     r = deleteCurve_RAW(token, curveId)
@@ -57,7 +80,11 @@ def getCurveData_RAW(token, curveId):
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
     r = requests.post(url, data = payload, files = data, headers = tokenHeader(token))
-    return r.json()
+    try:
+        r = r.json()
+    except:
+        r = {'code': 501, 'reason': 'Format wrong'}
+    return r
 
 def editCurveInfo_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/curve/edit'
@@ -69,3 +96,7 @@ def deleteCurve_RAW(token, payload):
     r = requests.delete(url, json = payload, header = tokenHeader(token))
     return r.json()
     
+def checkIfCurveExisted_RAW(token, datasetId, name):
+    url = ROOT_API + '/project/well/dataset/curve/is-existed'
+    r = requests.post(url, json = {'idDataset': datasetId, 'name': name}, headers = tokenHeader(token))
+    return r.json()

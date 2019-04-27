@@ -10,9 +10,8 @@ from .project.well.dataset.curve.curveapi import getCurveInfo
 from .project.well.dataset.curve.curve_obj import Curve
 
 class Wilib:
-    def __init__(self, user):
-        self.token = user['token']
-        self.user = user['user']
+    def __init__(self, token):
+        self.token = token
     
     def deleteProject(self, projectId):
         """Delete project
@@ -30,35 +29,27 @@ class Wilib:
         check, projectInfo = getInfoProject(self.token, projectId)
         if not check:
             return None
-        return Project(self.token, self.user, projectInfo)
+        return Project(self.token, projectInfo)
 
     def getWellById(self, wellId):
         check, wellInfo = getWellInfo(self.token, wellId)
         if not check:
             return None
-        return Well(self.token, self.user, wellInfo['idProject'], wellInfo)
+        return Well(self.token, wellInfo)
 
-    def getUserInfo(self):
-        """Return user info like username, company id.
-        """
-        return self.user
     
     def getDatasetById(self, datasetId):
         check, datasetInfo = getDatasetInfo(self.token, datasetId) 
         if check:
-            return Dataset(self.token, self.user, datasetInfo)
+            return Dataset(self.token, datasetInfo)
         return None
     
     def getCurveById(self, curveId):
         check, curveInfo = getCurveInfo(self.token, curveId)
         if check:
-            return Curve(self.token, self.user, curveInfo)
+            return Curve(self.token, curveInfo)
         return None
 
-    def getUserName(self):
-        """Return username for this account
-        """
-        return self.user['username']
     
     def getListProject(self):
         obj = listProject(self.token)
@@ -66,6 +57,6 @@ class Wilib:
             return obj
         listProjectObj = []
         for i in obj:
-            listProjectObj.append(Project(self.token,self.user, i))
+            listProjectObj.append(Project(self.token, i))
         return listProjectObj
 

@@ -1,11 +1,8 @@
 import wilibs.wilib as wilib
 client = wilib.login("tunghx","123456")
 
-curve = client.getCurveById(99)
+dataset = client.getDatasetById(30)
 
-err = curve.editCurveInfo(unit = 'cm', name = 'Demo')
+curve = dataset.createCurve('new Curve check', initValue = 10)
 
-if err:
-    print(err)
-else:
-    print(curve.getCurveInfo())
+print(curve)

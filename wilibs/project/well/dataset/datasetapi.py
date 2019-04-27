@@ -26,6 +26,34 @@ def deleteDataset(token, datasetId):
     r = deleteDataset_RAW(token, datasetId)
     return verifyAndReturn(r)
 
+def createDataSet(token, wellId, **data):
+    payload = {
+        'idWell': wellId,
+    }
+    if 'datasetKey' in data:
+        payload['datasetKey'] = data['datasetKey']
+    if 'datasetLabel' in data:
+        payload['datasetLabel'] = data['datasetLabel']
+    if 'name' in data:
+        payload['name'] = data['name']
+    else:
+        return False, 'name is required'
+    if 'bottom' in data:
+        payload['bottom'] = data['bottom']
+    else:
+        return False, 'bottom is required'
+    if 'top' in data:
+        payload['top'] = data['top']
+        return False, 'top is required'
+    if 'step' in data:
+        payload['step'] = data['step']
+        return False, 'step is required'
+    if 'unit' in data:
+        payload['unit'] = data['unit']
+    else:
+        return False, 'unit is required'
+    r = createDataSet_RAW(token, payload)
+    return verifyAndReturn(r)
 
 #RAW:
 

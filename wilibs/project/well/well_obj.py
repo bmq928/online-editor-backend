@@ -1,21 +1,19 @@
 from .wellapi import *
 from .dataset.dataset_obj import Dataset
+from .dataset.datasetapi import createDataSet
 
 class Well:
-    def __init__(self, token, user, projectId, wellInfo):
+    def __init__(self, token, wellInfo):
         self.token = token
-        self.user = user
         self.wellInfo = {
             'idProject': wellInfo['idProject'],
             'idWell': wellInfo['idWell'],
             'name': wellInfo['name'],
         }
         self.wellId = wellInfo['idWell']
-        self.projectId = projectId
 
     def __repr__(self):
         obj = dict(self.wellInfo)
-        obj['sessionUser'] = self.user['username']
         return str(obj)
     
     def __str__(self):
@@ -43,21 +41,25 @@ class Well:
             list = info['datasets']
             listObj = []
             for i in list:
-                listObj.append(Dataset(self.token, self.user, i))
+                listObj.append(Dataset(self.token, i))
             return listObj
 
         return None
 
-    def addDataSet(self, **data):
+    def createDataset(self, **data):
         """Add dataset to this well
 
         Args:
-            dict: name, datasetKey, datasetLabel (string)
+            dict: name, datasetKey, datasetLabel (string), unit, top, bottom, step
             datasetLabel is optional, others required
+        
+        Returns:
+            Dataset object if success
+            None if fail
         """
-        check, dataset = createDataSet(self.token, self.wellId, self.user['username'], **data)
+        check, dataset = createDataSet(self.token, self.wellId, **data)
         if check:
-            return Dataset(self.token, self.user, dataset)
+            return Dataset(self.token, dataset)
         else:
             return None
     
@@ -94,6 +96,12 @@ class Well:
         
         """
         check, content = editWellInfo(self.token, self.wellId, **data)
+        if check:
+            return None
+        return content
+    
+    def deleteWell(self):
+        check, content = deleteWell(self.token, self.wellId)
         if check:
             return None
         return content

@@ -3,7 +3,7 @@ from .well.wellapi import *
 from .well.well_obj import Well
 
 class Project:
-    def __init__(self, token, user, projectInfo):
+    def __init__(self, token, projectInfo):
         self.token = token
         self.projectInfo = {
             'idProject': projectInfo['idProject'],
@@ -11,13 +11,11 @@ class Project:
             'alias': projectInfo['alias']
         }
         self.projectId = projectInfo['idProject']
-        self.user = user
 
     def __repr__(self):
         payload = {
             'idProject': self.projectId,
             'name': self.projectInfo['name'],
-            'sessionUser': self.user['username']
         }
         return str(payload)
 
@@ -43,7 +41,7 @@ class Project:
             return None
         listObj = []
         for i in list:
-            listObj.append(Well(self.token, self.user, self.projectId, i))
+            listObj.append(Well(self.token, i))
         return listObj
     
     def createWell(self, **data):
@@ -61,22 +59,12 @@ class Project:
         Example:
             wellObj = project.createWell(name = 'hello', idWell = 2, step = 30)
         """
-        check, content = createWell(self.token, self.projectId, self.user['username'], **data)
+        check, content = createWell(self.token, self.projectId, **data)
         if check:
-            return Well(self.token, self.user, self.projectId, content)
+            return Well(self.token, content)
         else:
             return None
         
-
-    def getUserNameSession(self):
-        """Get user name session of this project object
-        """
-        return self.user['name']
-
-    def getUserSession(self):
-        """Get user info own this project obj
-        """
-        return self.user
 
     def getProjectId(self):
         """Get this project Id

@@ -1,9 +1,9 @@
 from .curveapi import *
+from tempfile import TemporaryFile
 
 class Curve:
-    def __init__(self, token, user, curveInfo):
+    def __init__(self, token, curveInfo):
         self.token = token
-        self.user = user
         self.curveInfo = {
             'idDataset': curveInfo['idDataset'],
             'idCurve': curveInfo['idCurve'],
@@ -14,7 +14,6 @@ class Curve:
 
     def __repr__(self):
         obj = dict(self.curveInfo)
-        obj['sessionUser'] = self.user['username']
         return str(obj)
 
     def __str__(self):
@@ -37,12 +36,37 @@ class Curve:
         return None
     
 
-    def updateCurveDataByArray(self, curveData, name = False) :
-        pass
+    def updateCurveData(self, curveData, name = False):
+        """Update data to curve by array of object
+
+        Args:
+            data: array of object like {'x':25, 'y':16} with y is index
+            name: optional if you want to change curve name
+
+        Returns:
+            None if no error
+            err as string to describe what err is
+
+            curveData = [{'x':5, 'y':7}, {'x':8, 'y':8}]
+            curve = app.getCurveById(78)
+            err = curve.updateCurveData(curveData)
+            if err:
+                print(err)
+        """
+        tempFile = TemporaryFile('r+')
+        tempArr = []
+        for i in curveData:
+            temp = []
+            temp.append(i['y'])
+            temp.append(i['x'])
+            tempArr.append(temp)
+        tempFile.write(str(tempArr))
+        tempFile.seek(0)
+        return self.updateCurveDataByFile(tempFile)
 
 
     def updateCurveDataByFile(self, data, name = False):
-        """Update data to curve
+        """Update data to curve by file .txt
 
         Args: 
             data: file object
@@ -60,7 +84,7 @@ class Curve:
 
             curve = app.getCurveById(78)
             file = open('data.txt', 'rb')
-            err = curve.updateCurveData(file) // array 
+            err = curve.updateCurveDataByFile(file) // array 
             if err:
                 print(err)
 
@@ -86,7 +110,7 @@ class Curve:
                 print(err)
 
         """
-        check, content = editCurveInfo(self.token,self.user['username'] ,self.curveInfo['idCurve'], **data)
+        check, content = editCurveInfo(self.token, self.curveInfo['idCurve'], **data)
         if check:
             return None
         return content

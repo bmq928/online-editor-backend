@@ -5,4 +5,7 @@ def login(username, password):
     err, user = loginAPI(username, password)
     if not err:
         return None
-    return Wilib(user)
+    return Wilib(user['token'])
+
+def loginByToken(token):
+    return Wilib(token)
