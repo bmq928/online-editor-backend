@@ -8,3 +8,5 @@ logs
 debug.js
 project-storage
 test.json
+*.pyc
+__pycache__/
