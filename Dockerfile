@@ -5,6 +5,7 @@ ENV PATH /usr/local/bin:$PATH
 RUN pip install requests
 
 COPY ./wilibs /root/.local/lib/python3.6/site-packages/wilibs
+COPY ./sitecustomize.py /usr/lib/python3.6/
 
 #######################################
 # app
