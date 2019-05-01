@@ -34,6 +34,7 @@ project_obj.createWell(client.token, 43, name = "test_well", unit = "cm")
 project = client.getProjectById(43)
 list_well_in_project = project.getListWell()
 
+print(list_well_in_project)
 
 #get well info (token, wellID)
 
@@ -45,19 +46,13 @@ well_obj.editWellInfo(client.token, 51, name = "changed_name_test-well", topDept
 
 #delete well (token, wellID)
 
-#well_obj.deleteWell(client.token, 43)
+well_obj.deleteWell(client.token, 51)
 
 """dataset demo"""
 
 #create dataset 
 """loi code ?"""
  # list dataset
-
-
-
-
-
-
 
 
 
@@ -76,4 +71,5 @@ well_obj.editWellInfo(client.token, 51, name = "changed_name_test-well", topDept
 dataset = client.getDatasetById(30)
 
 curve = dataset.createCurve('new Curve check', initValue = 10)
+
 
