@@ -93,7 +93,7 @@ def editCurveInfo_RAW(token, payload):
 
 def deleteCurve_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/curve/delete'
-    r = requests.delete(url, json = payload, header = tokenHeader(token))
+    r = requests.delete(url, json = payload, headers = tokenHeader(token))
     return r.json()
     
 def checkIfCurveExisted_RAW(token, datasetId, name):
