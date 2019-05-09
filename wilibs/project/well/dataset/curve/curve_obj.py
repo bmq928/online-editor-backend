@@ -1,6 +1,6 @@
 from .curveapi import *
 from tempfile import TemporaryFile
-
+import json
 class Curve:
     def __init__(self, token, curveInfo):
         self.token = token
@@ -60,7 +60,7 @@ class Curve:
             temp.append(i['y'])
             temp.append(i['x'])
             tempArr.append(temp)
-        tempFile.write(str(tempArr))
+        tempFile.write(str(json.dumps(tempArr)))
         tempFile.seek(0)
         return self.updateCurveDataByFile(tempFile)
 
