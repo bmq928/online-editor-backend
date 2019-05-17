@@ -16,8 +16,8 @@ ENV PYTHON_PROJECT_STORAGE /storage
 ENV PYTHON_LOG_PATH ./logs
 ENV PYTHON_PORT 3000
 ENV PYTHON_CLIENT_DOMAIN localhost:8080
-ENV PROJECT_RELATED_ROOT_URL http://dev.i2g.cloud
-ENV USER_RELATED_ROOT_URL http://admin.dev.i2g.cloud
+ENV PROJECT_RELATED_ROOT_URL https://api-1.i2g.cloud
+ENV USER_RELATED_ROOT_URL https://users.i2g.cloud
 
 COPY . .
 RUN npm i --only=prod &&\
