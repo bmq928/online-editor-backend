@@ -98,6 +98,7 @@ module.exports.renameFile = async (project, file, newName, user) => {
 	if (!newName) throw new AppError('new name is required');
 	const filePath = path.join(PROJECT_STORAGE, user, project, file);
 	const newPath = path.join(PROJECT_STORAGE, user, project, newName);
+	if (!fs.existsSync(filePath)) throw new AppError('file is not exsited');
 	fs.renameSync(filePath, newPath);
 	return 'done';
 };
@@ -108,6 +109,7 @@ module.exports.renameFolder = async (project, folder, newName, user) => {
 	if (!newName) throw new AppError('new name is required');
 	const folderPath = path.join(PROJECT_STORAGE, user, project, folder);
 	const newFolderPath = path.join(PROJECT_STORAGE, user, project, newName);
+	if (!fs.existsSync(folderPath)) throw new AppError('folder is not exsited');
 	fs.renameSync(folderPath, newFolderPath);
 	return 'done';
 };
