@@ -30,7 +30,7 @@ function wsServer(express, port) {
 			}
 		});
 		ws.on('close', (code, reason) => {
-			logger.info('close', code, reason);
+			logger.info('close ' + reason + code);
 			let wiId = ws._wiId;
 			if (wiId) {
 				delete express._activeSockets[wiId];
