@@ -1,7 +1,7 @@
 const path = require('path')
 const execa = require('execa')
 const exec = require('child_process').spawn;
-
+const readline = require('readline');
 
 /**
  * Check if the file is python or not
@@ -23,6 +23,30 @@ module.exports.exec = async (dir, socket, key) => {
 	let opts = {};
 	if (socket) {
 		let pythonProcess = exec('unbuffer', ['python', dir], {stdio: ['pipe', 'pipe', 'pipe'], ...opts})
+		const rl = readline.createInterface({
+			input: pythonProcess.stdout,
+			prompt: "output> ",
+			crlfDelay: 10000
+		});
+		rl.on('line', function (line) {
+			socket.send(JSON.stringify({
+				key: key,
+				content: line.toString()
+			}));
+		});
+		const rlerror = readline.createInterface({
+			input: pythonProcess.stderr,
+			prompt: "output> ",
+			crlfDelay: 10000
+		});
+		rlerror.on('line', line => {
+			socket.send(JSON.stringify({
+				key: key,
+				content: line.toString(),
+				error: true
+			}));
+		});
+		/*
 		pythonProcess.stdout.on('data', data => {
 			socket.send(JSON.stringify({
 				key: key,
@@ -36,6 +60,7 @@ module.exports.exec = async (dir, socket, key) => {
 				error: true
 			}));
 		});
+		*/
 		pythonProcess.on('exit', code => {
 			let msg = "+--------------------------------------------------------- | FINISH +---------------------------------------------------------"
 			socket.send(JSON.stringify({
