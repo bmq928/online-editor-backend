@@ -37,7 +37,12 @@ module.exports.exec = async (dir, socket, key) => {
 			}));
 		});
 		pythonProcess.on('exit', code => {
-			console.log("Exit ", code);
+			let msg = "+--------------------------------------------------------- | FINISH +---------------------------------------------------------"
+			socket.send(JSON.stringify({
+				key: key,
+				content: msg.toString(),
+				error: false
+			}));
 		});
 	}
 	return socket ? socket._wiId : "No socket connection"
