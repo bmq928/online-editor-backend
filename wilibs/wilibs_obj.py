@@ -9,10 +9,11 @@ from .project.well.dataset.dataset_obj import Dataset
 from .project.well.dataset.curve.curveapi import getCurveInfo
 from .project.well.dataset.curve.curve_obj import Curve
 
+
 class Wilib:
     def __init__(self, token):
         self.token = token
-    
+
     def deleteProject(self, projectId):
         """Delete project
 
@@ -37,20 +38,18 @@ class Wilib:
             return None
         return Well(self.token, wellInfo)
 
-    
     def getDatasetById(self, datasetId):
-        check, datasetInfo = getDatasetInfo(self.token, datasetId) 
+        check, datasetInfo = getDatasetInfo(self.token, datasetId)
         if check:
             return Dataset(self.token, datasetInfo)
         return None
-    
+
     def getCurveById(self, curveId):
         check, curveInfo = getCurveInfo(self.token, curveId)
         if check:
             return Curve(self.token, curveInfo)
         return None
 
-    
     def getListProject(self):
         obj = listProject(self.token)
         if obj == None:
@@ -60,3 +59,40 @@ class Wilib:
             listProjectObj.append(Project(self.token, i))
         return listProjectObj
 
+    def findProjectByName(self, projectName):
+        projects = self.getListProject()
+        for project in projects:
+            projectObj = project.getProjectInfo()[1] if project.getProjectInfo()[0] else {}
+            if projectObj["alias"].lower() == projectName.lower():
+                return project
+        return False
+
+    def findWellByName(self, wellName, projectName):
+        project = self.findProjectByName(projectName)
+        if project:
+            wells = project.getListWell()
+            for well in wells:
+                wellObj = well.getWellInfo()
+                if wellObj["name"].lower() == wellName.lower():
+                    return well
+        return False
+
+    def findDatasetByName(self, datasetName, wellName, projectName):
+        well = self.findWellByName(wellName, projectName)
+        if well:
+            datasets = well.getListDataset()
+            for dataset in datasets:
+                datasetObj = dataset.getDatasetInfo()
+                if datasetObj["name"].lower() == datasetName.lower():
+                    return dataset
+        return False
+
+    def findCurveByName(self, curveName, datasetName, wellName, projectName):
+        dataset = self.findDatasetByName(datasetName, wellName, projectName)
+        if dataset:
+            curves = dataset.getListCurve()
+            for curve in curves:
+                curveObj = curve.getCurveInfo()
+                if curveObj["name"].lower() == curveName.lower():
+                    return curve
+        return False

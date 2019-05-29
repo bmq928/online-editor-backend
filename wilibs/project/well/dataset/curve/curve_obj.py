@@ -1,6 +1,8 @@
 from .curveapi import *
 from tempfile import TemporaryFile
 import json
+
+
 class Curve:
     def __init__(self, token, curveInfo):
         self.token = token
@@ -11,6 +13,8 @@ class Curve:
             'description': curveInfo['description']
         }
         self.curveId = curveInfo['idCurve']
+        self.curveName = curveInfo['name']
+        self.datasetId = curveInfo['idDataset']
 
     def __repr__(self):
         obj = dict(self.curveInfo)
@@ -22,7 +26,7 @@ class Curve:
     def getCurveInfo(self):
         """Return curve meta data (info)
         """
-        check, content =  getCurveInfo(self.token, self.curveId)
+        check, content = getCurveInfo(self.token, self.curveId)
         if check:
             return content
         return None
@@ -34,9 +38,8 @@ class Curve:
         if check:
             return content
         return None
-    
 
-    def updateCurveData(self, curveData, name = False):
+    def updateCurveData(self, curveData, name=False):
         """Update data to curve by array of object
 
         Args:
@@ -64,8 +67,7 @@ class Curve:
         tempFile.seek(0)
         return self.updateCurveDataByFile(tempFile)
 
-
-    def updateCurveDataByFile(self, data, name = False):
+    def updateCurveDataByFile(self, data, name=False):
         """Update data to curve by file .txt
 
         Args: 
@@ -89,11 +91,14 @@ class Curve:
                 print(err)
 
         """
-        check,  content = updateCurveData(self.token, self.curveInfo['idDataset'], self.curveInfo['idCurve'], data, name)
+        check, content = updateCurveData(self.token, self.curveInfo['idDataset'], self.curveInfo['idCurve'], data, name)
         if check:
-            return None
-        return content
-    
+            print("Update datacurve successfull")
+            return True
+        else:
+            print(content)
+        return False
+
     def editCurveInfo(self, **data):
         """Edit curve info
 
@@ -114,9 +119,46 @@ class Curve:
         if check:
             return None
         return content
-    
+
     def deleteCurve(self):
         check, content = deleteCurve(self.token, self.curveId)
         if check:
             return None
         return content
+
+    def clipDataCurve(self, minValue, maxValue):
+        if minValue > maxValue:
+            print("minValue and maxValue is not valid")
+            return None
+        check, curveData = getCurveData(self.token, self.curveId)
+        if check:
+            for raw in curveData:
+                if raw['x'] is not None and raw['x'] < minValue:
+                    raw['x'] = minValue
+                elif raw['x'] is not None and raw['x'] > maxValue:
+                    raw['x'] = maxValue
+            content = self.updateCurveData(curveData)
+            return content
+        else:
+            print("curve data not found")
+        return None
+
+    def copyFamily(self, sourceCurve):
+        if not sourceCurve:
+            print("sourceCurve not found")
+            return False
+        sourceCurveObj = sourceCurve.getCurveInfo()
+        err = self.editCurveInfo(name=self.getCurveInfo()["name"], idFamily=sourceCurveObj["idFamily"])
+        if err:
+            print(err)
+            return False
+        else:
+            return True
+
+    def renameCurve(self, newName):
+        err = self.editCurveInfo(name=newName)
+        if err:
+            print(err)
+            return False
+        else:
+            return True
