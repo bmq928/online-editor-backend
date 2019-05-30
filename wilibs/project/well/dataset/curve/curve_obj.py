@@ -123,8 +123,10 @@ class Curve:
     def deleteCurve(self):
         check, content = deleteCurve(self.token, self.curveId)
         if check:
-            return None
-        return content
+            return True
+        else:
+            print(content)
+        return False
 
     def clipDataCurve(self, minValue, maxValue):
         if minValue > maxValue:

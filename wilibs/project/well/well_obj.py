@@ -157,8 +157,12 @@ class Well:
         return None
 
     def renameWell(self, newName):
-        content = self.editWellInfo(name=newName, idGroup=self.getWellInfo()["idGroup"])
-        return content
+        check, content = self.editWellInfo(name=newName, idGroup=self.getWellInfo()["idGroup"])
+        if check:
+            return True
+        else:
+            print(content)
+        return False
 
     def deleteAllZoneSets(self):
         zonesets = self.getAllZoneSets()
@@ -212,3 +216,9 @@ class Well:
                         else:
                             print(content)
         return False
+    def getZoneSetByName(self, zonesetName):
+        zonesets = self.getAllZoneSets()
+        for zoneset in zonesets:
+            if zoneset["name"].lower() == zonesetName.lower():
+                return zoneset
+        return None

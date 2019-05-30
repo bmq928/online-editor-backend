@@ -109,8 +109,10 @@ class Dataset:
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])
         if check:
-            return None
-        return content
+            return True
+        else:
+            print(content)
+        return False
 
     def createBlankCurve(self, curveName, **data):
         return self.createCurve(curveName, **data)
@@ -123,5 +125,9 @@ class Dataset:
         return curves
 
     def renameDataset(self, newName):
-        content = self.editDatasetInfo(name=newName, datasetKey=newName, datasetLabel=newName)
-        return content
+        check, content = self.editDatasetInfo(name=newName, datasetKey=newName, datasetLabel=newName)
+        if check:
+            return True
+        else:
+            print(content)
+        return False

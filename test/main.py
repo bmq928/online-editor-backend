@@ -44,5 +44,9 @@ client = wilib.loginByToken(
 # newData = curve.getCurveData();
 # print("newData: ", newData)
 
-well = client.findWellByName("w4", "hoang")
-well.renameZone("2", "newZoneSetName", "123")
+# well = client.findWellByName("w4", "hoang")
+# well.renameZone("2", "newZoneSetName", "123")
+
+project = client.findProjectByName("hoang")
+wells = project.getAllWells()
+print(wells)
