@@ -8,7 +8,9 @@ Contain RAW API with full information return from server and main API with less 
 import requests
 from ..api_url import ROOT_API
 from ..common import *
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def getInfoProject(token, projectId):
     """Get info from a project
@@ -181,33 +183,33 @@ def editProject(token, projectId, **modifyData):
 
 def getInfoProject_RAW(token, projectId):
     url = ROOT_API + '/project/info'
-    r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token))
+    r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def getFullInfoProject_RAW(token, projectId):
     url = ROOT_API + '/project/fullinfo'
-    r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token))
+    r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def closeProject_RAW(token, projectId):
     url = ROOT_API + '/project/close'
-    r = requests.post(url, json={'idProject': projectId}, headers = tokenHeader(token))
+    r = requests.post(url, json={'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
  
 def editProject_RAW(token, payload):
     url = ROOT_API + '/project/edit'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def createProject_RAW(token, payload):
     url = ROOT_API + '/project/new'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     r = r.json()
     return r
 
 def listProject_RAW(token):
     url = ROOT_API + '/project/list'
-    r = requests.post(url, headers = tokenHeader(token))
+    r = requests.post(url, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def deleteProject_RAW(token, projectId):
@@ -215,6 +217,6 @@ def deleteProject_RAW(token, projectId):
     payload = {
         "idProject": projectId
     }
-    r = requests.delete(url, json = payload, headers = tokenHeader(token))
+    r = requests.delete(url, json = payload, headers = tokenHeader(token), verify=False)
     r = r.json()
     return r

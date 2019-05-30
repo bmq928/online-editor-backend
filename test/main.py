@@ -1,7 +1,7 @@
 from random import random
 
 client = wilib.loginByToken(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvYW5nIiwicm9sZSI6MCwiY29tcGFueSI6IkkyRyIsImlhdCI6MTU1OTAyODg1NiwiZXhwIjoxNTU5MjAxNjU2fQ.TOF8Q2QU8rcCowD26lDXqcEa-TID7yKxzuMvRVwl3q8")
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvYW5nIiwicm9sZSI6MiwiY29tcGFueSI6IlVFVCIsImlhdCI6MTU1OTIwMjQzNiwiZXhwIjoxNTU5Mzc1MjM2fQ.f-ShhjIEm5wVVOIN5s0EEVKjVmmWabUNehKSEmJp5P4")
 
 # curveObj = client.getCurveById(661)
 # curveInfo = curveObj.getCurveInfo()
@@ -47,6 +47,5 @@ client = wilib.loginByToken(
 # well = client.findWellByName("w4", "hoang")
 # well.renameZone("2", "newZoneSetName", "123")
 
-project = client.findProjectByName("hoang")
-wells = project.getAllWells()
-print(wells)
+project = client.findProjectByName("hoangbuidang")
+print(project)
