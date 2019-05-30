@@ -9,7 +9,7 @@ def getDatasetInfo(token, datasetId):
 
 def editDatasetInfo(token, datasetId, **data):
     payload = {
-        'idDateset': datasetId
+        'idDataset': datasetId
     }
     if 'idWell' in data:
         payload['idWell'] = data['idWell']
@@ -19,6 +19,7 @@ def editDatasetInfo(token, datasetId, **data):
         payload['datasetKey'] = data['datasetKey']
     if 'datasetLabel' in data:
         payload['datasetLabel'] = data['datasetLabel']
+    print(payload)
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)
 
@@ -30,12 +31,14 @@ def createDataSet(token, wellId, **data):
     payload = {
         'idWell': wellId,
     }
-    if 'datasetKey' in data:
-        payload['datasetKey'] = data['datasetKey']
-    if 'datasetLabel' in data:
-        payload['datasetLabel'] = data['datasetLabel']
+    # if 'datasetKey' in data:
+    #     payload['datasetKey'] = data['datasetKey']
+    # if 'datasetLabel' in data:
+    #     payload['datasetLabel'] = data['datasetLabel']
     if 'name' in data:
         payload['name'] = data['name']
+        payload['datasetKey'] = data['name']
+        payload['datasetLabel'] = data['name']
     else:
         return False, 'name is required'
     if 'bottom' in data:
@@ -44,9 +47,11 @@ def createDataSet(token, wellId, **data):
         return False, 'bottom is required'
     if 'top' in data:
         payload['top'] = data['top']
+    else:
         return False, 'top is required'
     if 'step' in data:
         payload['step'] = data['step']
+    else:
         return False, 'step is required'
     if 'unit' in data:
         payload['unit'] = data['unit']

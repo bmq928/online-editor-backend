@@ -177,4 +177,5 @@ class Project:
         if check:
             return None
         return reason
-
+    def getAllWells(self):
+        return self.getListWell()
