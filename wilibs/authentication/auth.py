@@ -4,6 +4,9 @@
 
 import requests
 from ..api_url import AUTH_API
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def login(username, password):
     r = login_RAW(username, password)
@@ -17,5 +20,5 @@ def login_RAW(username, password):
         "password": password
     }
     url = AUTH_API + '/login'
-    r = requests.post(url, json = payload)
+    r = requests.post(url, json = payload, verify=False)
     return r.json()

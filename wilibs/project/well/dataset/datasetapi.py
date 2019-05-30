@@ -1,7 +1,9 @@
 from ....api_url import ROOT_API
 from ....common import *
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def getDatasetInfo(token, datasetId):
     r = getDatasetInfo_RAW(token, datasetId)
@@ -64,20 +66,20 @@ def createDataSet(token, wellId, **data):
 
 def getDatasetInfo_RAW(token, datasetId):
     url = ROOT_API + '/project/well/dataset/info'
-    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token))
+    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def editDatasetInfo_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/edit'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def createDataSet_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/new'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def deleteDataset_RAW(token, datasetId):
     url = ROOT_API + '/project/well/dataset/delete'
-    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token))
+    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
     return r.json()

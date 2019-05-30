@@ -1,7 +1,9 @@
 from .....api_url import ROOT_API
 from .....common import *
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def getCurveInfo(token, curveId):
     r = getCurveInfo_RAW(token, curveId)
@@ -84,18 +86,18 @@ def deleteCurve(token, curveId):
 
 def getCurveInfo_RAW(token, curveId):
     url = ROOT_API + '/project/well/dataset/curve/info'
-    r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token))
+    r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def getCurveData_RAW(token, curveId):
     url = ROOT_API + '/project/well/dataset/curve/getData'
-    r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token))
+    r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def createCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/new-raw-curve'
-    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token))
+    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()
     except:
@@ -103,7 +105,7 @@ def createCurveData_RAW(token, payload, data):
     return r
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
-    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token))
+    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()
     except:
@@ -113,17 +115,17 @@ def updateCurveData_RAW(token, payload, data):
 
 def editCurveInfo_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/curve/edit'
-    r = requests.post(url, json=payload, headers=tokenHeader(token))
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def deleteCurve_RAW(token, payload):
     url = ROOT_API + '/project/well/dataset/curve/delete'
-    r = requests.delete(url, json=payload, headers=tokenHeader(token))
+    r = requests.delete(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def checkIfCurveExisted_RAW(token, datasetId, name):
     url = ROOT_API + '/project/well/dataset/curve/is-existed'
-    r = requests.post(url, json={'idDataset': datasetId, 'name': name}, headers=tokenHeader(token))
+    r = requests.post(url, json={'idDataset': datasetId, 'name': name}, headers=tokenHeader(token), verify=False)
     return r.json()
