@@ -19,6 +19,9 @@ class Dataset:
         self.datasetName = datasetInfo['name']
         self.datasetId = datasetInfo['idDataset']
         self.wellId = datasetInfo['idWell']
+        self.top = float(datasetInfo['top'])
+        self.step = float(datasetInfo['step'])
+        self.bottom = float(datasetInfo['bottom'])
 
     def __repr__(self):
         obj = dict(self.datasetInfo)
@@ -131,3 +134,25 @@ class Dataset:
         else:
             print(content)
         return False
+
+    def getDepth(self):
+        result = []
+        if self.step == 0:
+            curves = self.getAllCurves()
+            if len(curves) == 0:
+                print("This discrete dataset has no curve")
+                return []
+            else:
+                curveData = curves[0].getCurveData()
+                result = []
+                for row in curveData:
+                    result.append(row["y"])
+                return result
+        else:
+            top = self.top
+            bottom = self.bottom
+            step = self.step
+            while top <= bottom:
+                result.append(top)
+                top += step
+        return result
