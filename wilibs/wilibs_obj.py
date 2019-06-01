@@ -63,7 +63,7 @@ class Wilib:
         projects = self.getListProject()
         for project in projects:
             projectObj = project.getProjectInfo()[1] if project.getProjectInfo()[0] else {}
-            if projectObj["alias"].lower() == projectName.lower():
+            if projectObj["alias"].lower() == projectName.lower() or projectObj["name"].lower() == projectName.lower():
                 return project
         return False
 
