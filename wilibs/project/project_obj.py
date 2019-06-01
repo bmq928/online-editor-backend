@@ -2,6 +2,7 @@ from .projectapi import *
 from .well.wellapi import *
 from .well.well_obj import Well
 
+
 class Project:
     def __init__(self, token, projectInfo):
         self.token = token
@@ -21,7 +22,7 @@ class Project:
 
     def __str__(self):
         return self.__repr__()
-    
+
     def getListWell(self, **data):
         """Get list well from this project
 
@@ -43,7 +44,7 @@ class Project:
         for i in list:
             listObj.append(Well(self.token, i))
         return listObj
-    
+
     def createWell(self, **data):
         """Create well and put it into this project.
 
@@ -64,7 +65,6 @@ class Project:
             return Well(self.token, content)
         else:
             return None
-        
 
     def getProjectId(self):
         """Get this project Id
@@ -75,13 +75,12 @@ class Project:
         """Return project info mini ver
         """
         return getInfoProject(self.token, self.projectId)
-    
+
     def getFullProjectInfo(self):
         """Return full version for project.
         """
         return getFullInfoProject(self.token, self.projectId)
 
-    
     def createProject(self, **data):
         """Create project for this account.
 
@@ -133,9 +132,9 @@ class Project:
             True if success, false if false
 
         """
-        check, _ = self.editProjectInfo(name = name)
+        check, _ = self.editProjectInfo(name=name)
         return check
-    
+
     def changeDescriptionProject(self, description):
         """change description of project
 
@@ -143,7 +142,7 @@ class Project:
             True if success, false if false
 
         """
-        check, _ = self.editProjectInfo(description = description)
+        check, _ = self.editProjectInfo(description=description)
         return check
 
     def changeCompanyInfoProject(self, company):
@@ -152,7 +151,7 @@ class Project:
         Returns: 
             True if success, false if false
         """
-        check, _ = self.editProjectInfo(company = company)
+        check, _ = self.editProjectInfo(company=company)
         return check
 
     def changeDepartmentInfoProject(self, department):
@@ -162,9 +161,9 @@ class Project:
             True if success, false if false
         """
 
-        check, _ = self.editProjectInfo(department = department)
+        check, _ = self.editProjectInfo(department=department)
         return check
-    
+
     def deleteProject(self):
         """Delete project
 
@@ -177,5 +176,6 @@ class Project:
         if check:
             return None
         return reason
+
     def getAllWells(self):
         return self.getListWell()

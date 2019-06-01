@@ -22,6 +22,7 @@ class Dataset:
         self.top = float(datasetInfo['top'])
         self.step = float(datasetInfo['step'])
         self.bottom = float(datasetInfo['bottom'])
+        self.sampleRate = float(datasetInfo['step'])
 
     def __repr__(self):
         obj = dict(self.datasetInfo)
@@ -156,3 +157,8 @@ class Dataset:
                 result.append(top)
                 top += step
         return result
+
+    def getSampleRate(self):
+        return self.sampleRate
+    def getTotalDepth(self):
+        return self.bottom - self.top

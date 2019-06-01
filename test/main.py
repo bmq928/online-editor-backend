@@ -47,5 +47,7 @@ client = wilib.loginByToken(
 # well = client.findWellByName("w4", "hoang")
 # well.renameZone("2", "newZoneSetName", "123")
 
-dataset = client.findDatasetByName("w4","w4","hoang")
-print(dataset.getDepth())
+# dataset = client.findDatasetByName("w4","w4","hoang")
+well = client.findWellByName("w4","hoang")
+
+print(well.exportWellDatacsv())

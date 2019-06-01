@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //api
+app.use('/download/exported-files', express.static(config.exportPath));
 app.use(authenticate());
 app.use('/project', project.route);
 app.use('/html-src', htmlSrc.route);
