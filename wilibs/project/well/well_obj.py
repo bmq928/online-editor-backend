@@ -1,6 +1,7 @@
 from .wellapi import *
 from .dataset.dataset_obj import Dataset
 from .dataset.datasetapi import createDataSet
+from ...api_url import DOWNLOAD_BASE_URL
 
 
 class Well:
@@ -216,9 +217,36 @@ class Well:
                         else:
                             print(content)
         return False
+
     def getZoneSetByName(self, zonesetName):
         zonesets = self.getAllZoneSets()
         for zoneset in zonesets:
             if zoneset["name"].lower() == zonesetName.lower():
                 return zoneset
+        return None
+
+    def exportWellDatacsv(self):
+        payload = {'idObjs': [{'idProject': self.projectId, 'idWell': self.wellId, 'datasets': []}]}
+        datasets = self.getAllDatasets()
+        for dataset in datasets:
+            datasetObj = {'idDataset': dataset.datasetId, 'idCurves': []}
+            curves = dataset.getAllCurves()
+            for curve in curves:
+                datasetObj['idCurves'].append(curve.curveId)
+            payload['idObjs'][0]['datasets'].append(datasetObj)
+        check, content = exportCsvWDRV(self.token, payload)
+        if check:
+            str = "Your donwload files are ready for well" + self.wellName + ":\n\n"
+            for file in content:
+                f = downloadExportedFile(self.token, file)
+                str += "Donwload url: " + DOWNLOAD_BASE_URL + "/download/exported-files/" + f + "\n"
+            str += "\n*** Warning: All files will be deleted after 1 hour ***\n"
+            print(str)
+            return True
+        else:
+            print(content)
+        return False
+
+    def downloadExportedFile(self):
+        downloadExportedFile(self.token, {'fileName': 'W4_W4_1559360192540.csv'})
         return None

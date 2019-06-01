@@ -2,11 +2,14 @@
     This module help you interact with project/well (crud, edit)
 """
 from ...api_url import ROOT_API
+from ...api_url import EXPORT_PATH
+import os as os
 from ...common import *
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 
 def getWellInfo(token, wellId):
     r = getWellInfo_RAW(token, wellId)
@@ -142,6 +145,23 @@ def createZoneSetTemplate(token, payload):
     return verifyAndReturn(r)
 
 
+def exportCsvWDRV(token, payload):
+    r = exportCsvRDRV_RAW(token, payload)
+    return verifyAndReturn(r)
+
+
+def exportCsvRV(token, payload):
+    r = exportCsvRV_RAW(token, payload)
+    return verifyAndReturn(r)
+
+
+def downloadExportedFile(token, payload):
+    r = downloadExportedFile_RAW(token, payload)
+    path = os.path.join(EXPORT_PATH, payload['fileName'])
+    open(path, 'wb').write(r.content)
+    return payload['fileName']
+
+
 # RAW:
 
 def getWellFullInfo_RAW(token, wellId):
@@ -238,3 +258,21 @@ def deleteZoneSetTemplate_RAW(token, idZoneSetTemplate):
     url = ROOT_API + '/zone-set-template/delete'
     r = requests.delete(url, json={'idZoneSetTemplate': idZoneSetTemplate}, headers=tokenHeader(token), verify=False)
     return r.json()
+
+
+def exportCsvRDRV_RAW(token, payload):
+    url = ROOT_API + '/export/CSV/wdrv'
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    return r.json()
+
+
+def exportCsvRV_RAW(token, payload):
+    url = ROOT_API + '/export/CSV/rv'
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    return r.json()
+
+
+def downloadExportedFile_RAW(token, payload):
+    url = ROOT_API + '/export/files'
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    return r

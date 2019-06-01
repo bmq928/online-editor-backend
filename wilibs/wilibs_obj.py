@@ -52,7 +52,7 @@ class Wilib:
 
     def getListProject(self):
         obj = listProject(self.token)
-        if obj == None:
+        if obj is None:
             return obj
         listProjectObj = []
         for i in obj:
