@@ -23,6 +23,7 @@ class Dataset:
         self.step = float(datasetInfo['step'])
         self.bottom = float(datasetInfo['bottom'])
         self.sampleRate = float(datasetInfo['step'])
+        self.unit = datasetInfo['unit']
 
     def __repr__(self):
         obj = dict(self.datasetInfo)

@@ -63,7 +63,6 @@ class Well:
             None if fail
         """
         check, dataset = createDataSet(self.token, self.wellId, **data)
-        print(dataset)
         if check:
             return Dataset(self.token, dataset)
         else:
