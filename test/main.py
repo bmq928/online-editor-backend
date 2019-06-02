@@ -38,7 +38,7 @@ if project:
             depth = dataset.getDepth()
 
             # create new temp dataset
-            tmpDatasetName = 'newDataset' #change this name each run or program will be exited
+            tmpDatasetName = 'newDataset13' #change this name each run or program will be exited
             tmpDataset = well.createDataset(name=tmpDatasetName, top=dataset.top, bottom=dataset.bottom,
                                             step=dataset.step, unit=dataset.unit)
             if tmpDataset is None:
@@ -122,7 +122,9 @@ if project:
                 elif curve.curveName == 'RD':
                     rd = curve
                     rdData = curve.getCurveData()
-
+            if gr is None or npl is None or dpl is None or den is None or rd is None:
+                print("Not enough curves in STD")
+                sys.exit()
             # get all zonesets
             zonesets = well.getAllZoneSets()
             if len(zonesets) != 0:
