@@ -81,6 +81,7 @@ module.exports.newFolder = async (project, folder, user) => {
 	if (await exists(folderPath)) throw new AppError('folder is exist');
 
 	await mkdir(folderPath);
+	await createFile(folderPath + '/__init__.py', '# do not edit', {encoding: 'utf8'});
 	return 'done'
 };
 

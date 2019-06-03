@@ -7,6 +7,7 @@ const _ = require('lodash');
 const rimraf = require('rimraf');
 
 const mkdir = util.promisify(fs.mkdir);
+const createFile = util.promisify(fs.writeFile);
 const exists = util.promisify(fs.exists);
 const copyFolder = util.promisify(ncp);
 const readdir = util.promisify(fs.readdir);
@@ -114,6 +115,7 @@ module.exports.newProject = async (projectName, username) => {
 	if (await exists(projectPath)) throw new AppError('project is existed');
 
 	await mkdir(projectPath);
+	await createFile(projectPath + '/__init__.py', '# do not edit', {encoding: 'utf8'});
 	await copyFolder(templatePath, projectPath); // write template to new project
 
 	/*
