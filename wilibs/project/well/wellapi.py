@@ -162,6 +162,11 @@ def downloadExportedFile(token, payload):
     return payload['fileName']
 
 
+def updateWellHeaders(token, payload):
+    r = updateWellHeaders_RAW(token, payload)
+    return verifyAndReturn(r)
+
+
 # RAW:
 
 def getWellFullInfo_RAW(token, wellId):
@@ -276,3 +281,9 @@ def downloadExportedFile_RAW(token, payload):
     url = ROOT_API + '/export/files'
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r
+
+
+def updateWellHeaders_RAW(token, payload):
+    url = ROOT_API + '/project/well/bulk-update-well-header'
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    return r.json()

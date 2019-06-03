@@ -3,6 +3,45 @@ from .dataset.dataset_obj import Dataset
 from .dataset.datasetapi import createDataSet
 from ...api_url import DOWNLOAD_BASE_URL
 
+defaultHeaders = [
+    {'header': 'NULL', 'value': '-9999', 'unit': ''},
+    {'header': 'WELL', 'value': '', 'unit': ''},
+    {'header': 'UWI', 'value': '', 'unit': ''},
+    {'header': 'API', 'value': '', 'unit': ''},
+    {'header': 'LATI', 'value': '', 'unit': ''},
+    {'header': 'LONG', 'value': '', 'unit': ''},
+    {'header': 'E', 'value': '', 'unit': ''},
+    {'header': 'N', 'value': '', 'unit': ''},
+    {'header': 'KB', 'value': '', 'unit': ''},
+    {'header': 'GL', 'value': '', 'unit': ''},
+    {'header': 'ID', 'value': '', 'unit': ''},
+    {'header': 'NAME', 'value': '', 'unit': ''},
+    {'header': 'COMP', 'value': '', 'unit': ''},
+    {'header': 'OPERATOR', 'value': '', 'unit': ''},
+    {'header': 'AUTHOR', 'value': '', 'unit': ''},
+    {'header': 'DATE', 'value': '', 'unit': ''},
+    {'header': 'LOGDATE', 'value': '', 'unit': ''},
+    {'header': 'SRVC', 'value': '', 'unit': ''},
+    {'header': 'GDAT', 'value': '', 'unit': ''},
+    {'header': 'LIC', 'value': '', 'unit': ''},
+    {'header': 'CNTY', 'value': '', 'unit': ''},
+    {'header': 'STATE', 'value': '', 'unit': ''},
+    {'header': 'PROV', 'value': '', 'unit': ''},
+    {'header': 'CTRY', 'value': '', 'unit': ''},
+    {'header': 'LOC', 'value': '', 'unit': ''},
+    {'header': 'FLD', 'value': '', 'unit': ''},
+    {'header': 'PROJ', 'value': '', 'unit': ''},
+    {'header': 'CODE', 'value': '', 'unit': ''},
+    {'header': 'AREA', 'value': '', 'unit': ''},
+    {'header': 'TYPE', 'value': '', 'unit': ''},
+    {'header': 'STATUS', 'value': '', 'unit': ''},
+    {'header': 'WTYPE', 'value': '', 'unit': ''},
+    {'header': 'filename', 'value': '', 'unit': ''},
+    {'header': 'STEP', 'value': '', 'unit': ''},
+    {'header': 'STRT', 'value': '', 'unit': ''},
+    {'header': 'STOP', 'value': '', 'unit': ''}
+]
+
 
 class Well:
     def __init__(self, token, wellInfo):
@@ -249,3 +288,31 @@ class Well:
     def downloadExportedFile(self):
         downloadExportedFile(self.token, {'fileName': 'W4_W4_1559360192540.csv'})
         return None
+
+    def updateDefaultWellHeaders(self):
+        # print(self.headers)
+        for defaultHeader in defaultHeaders:
+            for wellHeader in self.headers:
+                if defaultHeader['header'] == wellHeader['header']:
+                    defaultHeader['value'] = wellHeader['value']
+                    defaultHeader['unit'] = wellHeader['unit']
+                    defaultHeader['idWell'] = wellHeader['idWell']
+                    defaultHeader['idWellHeader'] = wellHeader['idWellHeader']
+        check, content = updateWellHeaders(self.token, {'idWell': self.wellId, 'headers': defaultHeaders})
+        if check:
+            return True
+        else:
+            print(content)
+            return False
+
+    def updateWellHeader(self, **data):
+        for header in self.headers:
+            if header['header'] == data['header']:
+                header['value'] = data['value']
+                header['unit'] = data['unit']
+                check, content = updateWellHeaders(self.token, {'idWell': self.wellId, 'headers': [header]})
+                if check:
+                    return True
+                else:
+                    print(content)
+                    return False
