@@ -108,8 +108,9 @@ class Dataset:
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
 
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])
@@ -163,3 +164,20 @@ class Dataset:
         return self.sampleRate
     def getTotalDepth(self):
         return self.bottom - self.top
+
+    def addTags(self, tags):
+        datasetInfo = self.getDatasetInfo()
+        relatedTo = datasetInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            oldTags = relatedTo["tags"]
+            newTags = oldTags
+            for t in tags:
+                if not (t in oldTags):
+                    newTags = newTags + [t]
+            relatedTo["tags"] = newTags
+        else:
+            relatedTo = {
+                "tags": tags
+            }
+        check = self.editDatasetInfo(relatedTo = relatedTo)
+        return check

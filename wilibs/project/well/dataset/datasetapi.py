@@ -21,6 +21,8 @@ def editDatasetInfo(token, datasetId, **data):
         payload['datasetKey'] = data['datasetKey']
     if 'datasetLabel' in data:
         payload['datasetLabel'] = data['datasetLabel']
+    if 'relatedTo' in data:
+        payload['relatedTo'] = data['relatedTo']
     print(payload)
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)

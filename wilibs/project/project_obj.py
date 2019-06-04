@@ -179,3 +179,81 @@ class Project:
 
     def getAllWells(self):
         return self.getListWell()
+
+    def getWellsByTags(self, tag):
+        def isExistsTags(well):
+            relatedTo = well["relatedTo"]
+            if relatedTo and "tags" in relatedTo:
+                if tag in relatedTo["tags"]:
+                    return True
+            return False
+        check, project = self.getFullProjectInfo()
+        if check:
+            wells = project["wells"]
+            filterWells = list(filter(lambda well:isExistsTags(well), wells))
+            return filterWells
+        return None
+
+    def getDatasetsByTag(self, tag, datasets):
+        def isExistsTagInDataset(dataset):
+            relatedTo = dataset["relatedTo"]
+            if relatedTo and "tags" in relatedTo:
+                if tag in relatedTo["tags"]:
+                    return True
+            return False
+
+        filterDatasets = list(filter(lambda dataset: isExistsTagInDataset(dataset), datasets))
+        return filterDatasets
+
+    def getCurvesByTag(self, tag, curves):
+        def isExistsTagInCurve(curve):
+            relatedTo = curve["relatedTo"]
+            if relatedTo and "tags" in relatedTo:
+                if tag in relatedTo["tags"]:
+                    return True
+            return False
+
+        filterCurves = list(filter(lambda curve: isExistsTagInCurve(curve), curves))
+        return filterCurves
+
+    def findByTag(self, tag):
+        """ Find by tag in this project.
+
+            Args:
+                tag: String
+
+            Returns:
+                None if empty
+                else List Wells
+
+            Example:
+                wells = project.findByTag("tag1")
+        """
+        def isExistsTagInWell(_well):
+            relatedTo = _well["relatedTo"]
+            if relatedTo and "tags" in relatedTo:
+                if tag in relatedTo["tags"]:
+                    return True
+            return False
+        check, project = self.getFullProjectInfo()
+        if check:
+            wells = project["wells"]
+            result = []
+            for well in wells:
+                if isExistsTagInWell(well):
+                    result = result + [well]
+                else:
+                    datasets = well["datasets"]
+                    newDatasets = self.getDatasetsByTag(tag, datasets)
+                    if newDatasets and len(newDatasets) > 0:
+                        well["datasets"] = newDatasets
+                        result = result + [well]
+                    else:
+                        for dataset in datasets:
+                            curves = dataset["curves"]
+                            newCurves = self.getCurvesByTag(tag, curves)
+                            if newCurves and len(newCurves) > 0:
+                                dataset["curves"] = newCurves
+                                result = result + [well]
+            return result
+        return None

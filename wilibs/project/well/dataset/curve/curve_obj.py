@@ -117,8 +117,9 @@ class Curve:
         """
         check, content = editCurveInfo(self.token, self.curveInfo['idCurve'], **data)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
 
     def deleteCurve(self):
         check, content = deleteCurve(self.token, self.curveId)
@@ -164,3 +165,20 @@ class Curve:
             return False
         else:
             return True
+
+    def addTags(self, tags):
+        curveInfo = self.getCurveInfo()
+        relatedTo = curveInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            oldTags = relatedTo["tags"]
+            newTags = oldTags
+            for t in tags:
+                if not (t in oldTags):
+                    newTags = newTags + [t]
+            relatedTo["tags"] = newTags
+        else:
+            relatedTo = {
+                "tags": tags
+            }
+        check = self.editCurveInfo(relatedTo = relatedTo, name = curveInfo["name"])
+        return check
