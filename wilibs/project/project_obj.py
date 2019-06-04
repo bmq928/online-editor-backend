@@ -216,7 +216,7 @@ class Project:
         filterCurves = list(filter(lambda curve: isExistsTagInCurve(curve), curves))
         return filterCurves
 
-    def findByTag(self, tag):
+    def findWellsByTag(self, tag):
         """ Find by tag in this project.
 
             Args:
@@ -227,7 +227,7 @@ class Project:
                 else List Wells
 
             Example:
-                wells = project.findByTag("tag1")
+                wells = project.findWellsByTag("tag1")
         """
         def isExistsTagInWell(_well):
             relatedTo = _well["relatedTo"]
