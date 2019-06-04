@@ -11,3 +11,5 @@ test.json
 *.pyc
 __pycache__/
 /test/thanh.py
+/storage
+.idea
