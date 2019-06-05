@@ -13,3 +13,4 @@ __pycache__/
 /test/thanh.py
 /storage
 .idea
+venv
