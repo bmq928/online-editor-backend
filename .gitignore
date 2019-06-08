@@ -1,7 +1,5 @@
 node_modules
 fileUpload
-/config/production.json
-/config/development.json
 .vscode
 package-lock.json
 logs
@@ -10,3 +8,7 @@ project-storage
 test.json
 *.pyc
 __pycache__/
+/test/thanh.py
+/storage
+.idea
+venv

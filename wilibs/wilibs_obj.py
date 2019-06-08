@@ -8,7 +8,8 @@ from .project.well.dataset.datasetapi import getDatasetInfo
 from .project.well.dataset.dataset_obj import Dataset
 from .project.well.dataset.curve.curveapi import getCurveInfo
 from .project.well.dataset.curve.curve_obj import Curve
-
+from .api_url import EXPORT_PATH
+from .api_url import DOWNLOAD_BASE_URL
 
 class Wilib:
     def __init__(self, token):
@@ -96,3 +97,12 @@ class Wilib:
                 if curveObj["name"].lower() == curveName.lower():
                     return curve
         return False
+
+    def wiSavefig(self, plt, fileName, **data):
+        filePath = EXPORT_PATH + '/' + fileName
+        plt.savefig(filePath, **data)
+        str = "Your donwload files are ready:\n\n"
+        str += "Donwload url: " + DOWNLOAD_BASE_URL + "/download/exported-files/" + fileName + "\n"
+        str += "\n*** Warning: All files will be deleted after 1 hour ***\n"
+        print(str)
+        return True

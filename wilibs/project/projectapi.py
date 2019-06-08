@@ -93,11 +93,11 @@ def createProject(token: str, **data):
         If false, :bool: is false, :any: is string tell what error happened.
 
     Example:
-        >>> check, payload = createProject(token, name = 'Test create project', description = 'this field is optional')
-        >>> if check:
-        >>>     print(payload) 
-        >>> else:
-        >>>     print("Fail. Error: " + payload)
+         check, payload = createProject(token, name = 'Test create project', description = 'this field is optional')
+             if check:
+             print(payload)
+         else:
+             print("Fail. Error: " + payload)
     """
     payload = {
         'name': "",

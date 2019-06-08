@@ -91,6 +91,8 @@ def editWellInfo(token, wellId, **data):
         payload['bottomDepth'] = data['bottomDepth']
     if 'step' in data:
         payload['step'] = data['step']
+    if 'relatedTo' in data:
+        payload['relatedTo'] = data['relatedTo']
     r = editWellInfo_RAW(token, payload)
     return verifyAndReturn(r)
 

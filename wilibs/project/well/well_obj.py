@@ -141,8 +141,9 @@ class Well:
         """
         check, content = editWellInfo(self.token, self.wellId, **data)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
 
     def deleteWell(self):
         check, content = deleteWell(self.token, self.wellId)
@@ -316,3 +317,20 @@ class Well:
                 else:
                     print(content)
                     return False
+
+    def addTags(self, tags):
+        wellInfo = self.getWellInfo()
+        relatedTo = wellInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            oldTags = relatedTo["tags"]
+            newTags = oldTags
+            for t in tags:
+                if not(t in oldTags):
+                    newTags = newTags + [t]
+            relatedTo["tags"] = newTags
+        else:
+            relatedTo = {
+                "tags": tags
+            }
+        check = self.editWellInfo(relatedTo = relatedTo)
+        return check

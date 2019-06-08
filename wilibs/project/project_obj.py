@@ -179,3 +179,84 @@ class Project:
 
     def getAllWells(self):
         return self.getListWell()
+
+    def isExistsTag(self, relatedTo, tag):
+        if relatedTo and "tags" in relatedTo:
+            if tag in relatedTo["tags"]:
+                return True
+        return False
+
+    def findWellsByTag(self, tag):
+        wells = self.getAllWells()
+        result = []
+        for well in wells:
+            relatedTo = well.getWellInfo()["relatedTo"]
+            if self.isExistsTag(relatedTo, tag):
+                result = result + [well]
+        return result
+
+    def findDatasetsByTag(self, tag):
+        wells = self.getAllWells()
+        result = []
+        for well in wells:
+            datasets = well.getAllDatasets()
+            for dataset in datasets:
+                relatedTo = dataset.getDatasetInfo()["relatedTo"]
+                if self.isExistsTag(relatedTo, tag):
+                    result = result + [dataset]
+        return result
+
+    def findCurvesByTag(self, tag):
+        wells = self.getAllWells()
+        result = []
+        for well in wells:
+            datasets = well.getAllDatasets()
+            for dataset in datasets:
+                curves = dataset.getAllCurves()
+                print("Processing curves in Dataset ", dataset.datasetName)
+                for curve in curves:
+                    relatedTo = curve.getCurveInfo()["relatedTo"]
+                    if self.isExistsTag(relatedTo, tag):
+                        result = result + [curve]
+        return result
+
+
+    def findAllByTag(self, tag):
+        """ Find by tag in this project.
+
+            Args:
+                tag: String
+
+            Returns:
+                None if empty
+                else List Wells
+
+            Example:
+                wells = project.findWellsByTag("tag1")
+        """
+
+        wells = self.getAllWells()
+        result = {
+            "wells": [],
+            "datasets": [],
+            "curves": []
+        }
+        for well in wells:
+            relatedTo = well.getWellInfo()["relatedTo"]
+            if self.isExistsTag(relatedTo, tag):
+                result["wells"] = result["wells"] + [well]
+            else:
+                datasets = well.getAllDatasets()
+                print("Processing Datasets in Well ", well.wellName)
+                for dataset in datasets:
+                    relatedToDataset = dataset.getDatasetInfo()["relatedTo"]
+                    if self.isExistsTag(relatedToDataset, tag):
+                        result["datasets"] = result["datasets"] + [dataset]
+                    else:
+                        curves = dataset.getAllCurves()
+                        print("Processing Curves in Dataset ", dataset.datasetName)
+                        for curve in curves:
+                            relatedToCurve = curve.getCurveInfo()["relatedTo"]
+                            if self.isExistsTag(relatedToCurve, tag):
+                                result["curves"] = result["curves"] + [curve]
+        return result
