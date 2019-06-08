@@ -188,6 +188,16 @@ module.exports.listProject = async (user) => {
 	console.log(PROJECT_STORAGE);
 	if (!fs.existsSync(path.join(PROJECT_STORAGE, user))) {
 		fs.mkdirSync(path.join(PROJECT_STORAGE, user));
+		const exec = require('child_process').exec;
+		let bashCommand = 'ln -s ' + config.get('project-storage') + '/hoang/DemoAPIs/ ' + config.get('project-storage') + '/' + user;
+		exec(bashCommand,
+			(error, stdout, stderr) => {
+				console.log(`stdout: ${stdout}`);
+				console.log(`stderr: ${stderr}`);
+				if (error !== null) {
+					console.log(`exec error: ${error}`);
+				}
+			});
 	}
 	const projectNames = await readdir(path.join(PROJECT_STORAGE, user));
 	console.log(projectNames);
