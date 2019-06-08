@@ -189,7 +189,7 @@ module.exports.listProject = async (user) => {
 	if (!fs.existsSync(path.join(PROJECT_STORAGE, user))) {
 		fs.mkdirSync(path.join(PROJECT_STORAGE, user));
 		const exec = require('child_process').exec;
-		let bashCommand = 'ln -s ' + config.get('project-storage') + '/hoang/DemoAPIs/ ' + config.get('project-storage') + '/' + user;
+		let bashCommand = 'ln -s  ' + PROJECT_STORAGE + '/hoang/DemoAPIs/ ' + PROJECT_STORAGE + '/' + user;
 		exec(bashCommand,
 			(error, stdout, stderr) => {
 				console.log(`stdout: ${stdout}`);
