@@ -62,7 +62,10 @@ module.exports.exec = async (dir, socket, key) => {
 		});
 		*/
 		pythonProcess.on('exit', code => {
-			let msg = "+--------------------------------------------------------- | FINISH +---------------------------------------------------------"
+			let msg;
+			msg =  "+--------------------------------------------------------+";
+			msg += "|                           END                          |";
+			msg += "+--------------------------------------------------------+";
 			socket.send(JSON.stringify({
 				key: key,
 				content: msg.toString(),

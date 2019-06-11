@@ -13,7 +13,7 @@ builtins.curve_obj = curve_obj
 builtins.plot_object = plot_object
 welcome = """
 +---------------------------------------------------------
-|                     WELCOME 
+|                         WELCOME                        | 
 +---------------------------------------------------------
 """
 print(welcome)
