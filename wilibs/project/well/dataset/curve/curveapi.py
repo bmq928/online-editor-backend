@@ -66,7 +66,6 @@ def editCurveInfo(token, curveId, **data):
         payload['idFamily'] = data['idFamily']
     if 'relatedTo' in data:
         payload['relatedTo'] = data['relatedTo']
-    print(payload)
     r = editCurveInfo_RAW(token, payload)
     return verifyAndReturn(r)
 

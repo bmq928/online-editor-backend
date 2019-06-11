@@ -50,6 +50,8 @@ class Well:
             'idProject': wellInfo['idProject'],
             'idWell': wellInfo['idWell'],
             'name': wellInfo['name'],
+            'tags': wellInfo['relatedTo']['tags'] if wellInfo["relatedTo"] is not None and "tags" in wellInfo[
+                "relatedTo"] else []
         }
         self.wellId = wellInfo['idWell']
         self.projectId = wellInfo['idProject']
@@ -142,7 +144,6 @@ class Well:
         check, content = editWellInfo(self.token, self.wellId, **data)
         if check:
             return True
-        print(content)
         return False
 
     def deleteWell(self):
@@ -199,6 +200,8 @@ class Well:
     def renameWell(self, newName):
         check, content = self.editWellInfo(name=newName, idGroup=self.getWellInfo()["idGroup"])
         if check:
+            self.wellName = newName
+            self.wellInfo["name"] = newName
             return True
         else:
             print(content)
@@ -325,12 +328,24 @@ class Well:
             oldTags = relatedTo["tags"]
             newTags = oldTags
             for t in tags:
-                if not(t in oldTags):
+                if not (t in oldTags):
                     newTags = newTags + [t]
             relatedTo["tags"] = newTags
+            wellInfo["tags"] = relatedTo["tags"]
         else:
             relatedTo = {
                 "tags": tags
             }
-        check = self.editWellInfo(relatedTo = relatedTo)
+        check = self.editWellInfo(relatedTo=relatedTo)
+        return check
+
+    def removeTags(self, tags):
+        wellInfo = self.getWellInfo()
+        relatedTo = wellInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            for t in tags:
+                if t in relatedTo["tags"]:
+                    relatedTo["tags"].remove(t)
+                    self.wellInfo["tags"] = relatedTo["tags"]
+        check = self.editWellInfo(relatedTo=relatedTo, name=wellInfo["name"])
         return check

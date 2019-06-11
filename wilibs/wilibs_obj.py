@@ -11,6 +11,7 @@ from .project.well.dataset.curve.curve_obj import Curve
 from .api_url import EXPORT_PATH
 from .api_url import DOWNLOAD_BASE_URL
 
+
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -96,6 +97,15 @@ class Wilib:
                 curveObj = curve.getCurveInfo()
                 if curveObj["name"].lower() == curveName.lower():
                     return curve
+        return False
+
+    def findPlotByName(self, plotName, projectName):
+        project = self.findProjectByName(projectName)
+        if project:
+            plots = project.getAllPlots()
+            for plot in plots:
+                if plot.plotName == plotName:
+                    return plot
         return False
 
     def wiSavefig(self, plt, fileName, **data):

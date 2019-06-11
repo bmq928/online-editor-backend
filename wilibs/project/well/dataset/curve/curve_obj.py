@@ -10,7 +10,9 @@ class Curve:
             'idDataset': curveInfo['idDataset'],
             'idCurve': curveInfo['idCurve'],
             'name': curveInfo['name'],
-            'description': curveInfo['description']
+            'description': curveInfo['description'],
+            'tags': curveInfo['relatedTo']['tags'] if curveInfo["relatedTo"] is not None and "tags" in curveInfo[
+                "relatedTo"] else []
         }
         self.curveId = curveInfo['idCurve']
         self.curveName = curveInfo['name']
@@ -59,9 +61,7 @@ class Curve:
         tempFile = TemporaryFile('r+')
         tempArr = []
         for i in curveData:
-            temp = []
-            temp.append(i['y'])
-            temp.append(i['x'])
+            temp = [i['y'], i['x']]
             tempArr.append(temp)
         tempFile.write(str(json.dumps(tempArr)))
         tempFile.seek(0)
@@ -118,7 +118,6 @@ class Curve:
         check, content = editCurveInfo(self.token, self.curveInfo['idCurve'], **data)
         if check:
             return True
-        print(content)
         return False
 
     def deleteCurve(self):
@@ -176,9 +175,21 @@ class Curve:
                 if not (t in oldTags):
                     newTags = newTags + [t]
             relatedTo["tags"] = newTags
+            self.curveInfo["tags"] = relatedTo["tags"]
         else:
             relatedTo = {
                 "tags": tags
             }
-        check = self.editCurveInfo(relatedTo = relatedTo, name = curveInfo["name"])
+        check = self.editCurveInfo(relatedTo=relatedTo, name=curveInfo["name"])
+        return check
+
+    def removeTags(self, tags):
+        curveInfo = self.getCurveInfo()
+        relatedTo = curveInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            for t in tags:
+                if t in relatedTo["tags"]:
+                    relatedTo["tags"].remove(t)
+                    self.curveInfo["tags"] = relatedTo["tags"]
+        check = self.editCurveInfo(relatedTo=relatedTo, name=curveInfo["name"])
         return check

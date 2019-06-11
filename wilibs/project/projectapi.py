@@ -75,7 +75,7 @@ def closeProject(token, projectId):
         return True, r['reason']
     return False, r['reason']
 
-def createProject(token: str, **data):
+def createProject(token, **data):
     """Create project
 
     Create project, need token pass.
@@ -210,7 +210,6 @@ def createProject_RAW(token, payload):
 def listProject_RAW(token):
     url = ROOT_API + '/project/list'
     r = requests.post(url, headers = tokenHeader(token), verify=False)
-    print(url)
     return r.json()
 
 def deleteProject_RAW(token, projectId):

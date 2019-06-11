@@ -1,6 +1,8 @@
 from .projectapi import *
 from .well.wellapi import *
 from .well.well_obj import Well
+from .plot.plotapi import *
+from .plot.plot_object import Plot
 
 
 class Project:
@@ -23,6 +25,18 @@ class Project:
     def __str__(self):
         return self.__repr__()
 
+    def getListPlot(self):
+        check, list = getListPlot(self.token, self.projectId)
+        if check is False and list is None:
+            return []
+        listObj = []
+        for i in list:
+            listObj.append(Plot(self.token, i))
+        return listObj
+
+    def getAllPlots(self):
+        return self.getListPlot()
+
     def getListWell(self, **data):
         """Get list well from this project
 
@@ -38,12 +52,20 @@ class Project:
             List well object        
         """
         list = listWell(self.token, self.projectId, **data)
-        if list == None:
+        if list is None:
             return None
         listObj = []
         for i in list:
             listObj.append(Well(self.token, i))
         return listObj
+
+    def createPlot(self, **data):
+        check, content = createNewPlot(self.token, self.projectId, **data)
+        if check:
+            return content
+        else:
+            print(content)
+            return False
 
     def createWell(self, **data):
         """Create well and put it into this project.
@@ -220,7 +242,6 @@ class Project:
                         result = result + [curve]
         return result
 
-
     def findAllByTag(self, tag):
         """ Find by tag in this project.
 
@@ -245,18 +266,34 @@ class Project:
             relatedTo = well.getWellInfo()["relatedTo"]
             if self.isExistsTag(relatedTo, tag):
                 result["wells"] = result["wells"] + [well]
-            else:
-                datasets = well.getAllDatasets()
-                print("Processing Datasets in Well ", well.wellName)
-                for dataset in datasets:
-                    relatedToDataset = dataset.getDatasetInfo()["relatedTo"]
-                    if self.isExistsTag(relatedToDataset, tag):
-                        result["datasets"] = result["datasets"] + [dataset]
-                    else:
-                        curves = dataset.getAllCurves()
-                        print("Processing Curves in Dataset ", dataset.datasetName)
-                        for curve in curves:
-                            relatedToCurve = curve.getCurveInfo()["relatedTo"]
-                            if self.isExistsTag(relatedToCurve, tag):
-                                result["curves"] = result["curves"] + [curve]
+            # else:
+            datasets = well.getAllDatasets()
+            for dataset in datasets:
+                relatedToDataset = dataset.getDatasetInfo()["relatedTo"]
+                if self.isExistsTag(relatedToDataset, tag):
+                    result["datasets"] = result["datasets"] + [dataset]
+                # else:
+                curves = dataset.getAllCurves()
+                for curve in curves:
+                    relatedToCurve = curve.getCurveInfo()["relatedTo"]
+                    if self.isExistsTag(relatedToCurve, tag):
+                        result["curves"] = result["curves"] + [curve]
+        return result
+
+    def renameTag(self, oldTag, newtag):
+        result = True
+        objects = self.findAllByTag(oldTag)
+        print(objects)
+        for curve in objects["curves"]:
+            # print("do curve ", curve.curveName)
+            result = result and curve.removeTags([oldTag])
+            result = result and curve.addTags([newtag])
+        for dataset in objects["datasets"]:
+            # print("do dataset ", dataset.datasetName)
+            result = result and dataset.removeTags([oldTag])
+            result = result and dataset.addTags([newtag])
+        for well in objects["wells"]:
+            # print("do well ", well.wellName)
+            result = result and well.removeTags([oldTag])
+            result = result and well.addTags([newtag])
         return result

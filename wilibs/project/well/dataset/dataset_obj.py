@@ -14,7 +14,9 @@ class Dataset:
             'idWell': datasetInfo['idWell'],
             'idDataset': datasetInfo['idDataset'],
             'name': datasetInfo['name'],
-            'datasetKey': datasetInfo['datasetKey']
+            'datasetKey': datasetInfo['datasetKey'],
+            'tags': datasetInfo['relatedTo']['tags'] if datasetInfo["relatedTo"] is not None and "tags" in datasetInfo[
+                "relatedTo"] else []
         }
         self.datasetName = datasetInfo['name']
         self.datasetId = datasetInfo['idDataset']
@@ -162,6 +164,7 @@ class Dataset:
 
     def getSampleRate(self):
         return self.sampleRate
+
     def getTotalDepth(self):
         return self.bottom - self.top
 
@@ -175,9 +178,21 @@ class Dataset:
                 if not (t in oldTags):
                     newTags = newTags + [t]
             relatedTo["tags"] = newTags
+            self.datasetInfo["tags"] = relatedTo["tags"]
         else:
             relatedTo = {
                 "tags": tags
             }
-        check = self.editDatasetInfo(relatedTo = relatedTo)
+        check = self.editDatasetInfo(relatedTo=relatedTo)
+        return check
+
+    def removeTags(self, tags):
+        datasetInfo = self.getDatasetInfo()
+        relatedTo = datasetInfo["relatedTo"]
+        if relatedTo and "tags" in relatedTo:
+            for t in tags:
+                if t in relatedTo["tags"]:
+                    relatedTo["tags"].remove(t)
+                    self.datasetInfo["tags"] = relatedTo["tags"]
+        check = self.editDatasetInfo(relatedTo=relatedTo, name=datasetInfo["name"])
         return check
