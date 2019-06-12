@@ -8,10 +8,9 @@ from wilibs.project.well.dataset.curve import curve_obj
 #login
 client = wilib.login("tunghx","123456")
 
-client.getCrossPlotById(2).removeTags(['helloTag2'])
+client.getProjectById(12).newBlankHistogram(name = "helloBlankHistogram")
 
-print(client.getCrossPlotById(2).getInfoCrossPlot())
-
+print(client.getProjectById(12).getAllHistograms())
 # """project demo"""
 
 

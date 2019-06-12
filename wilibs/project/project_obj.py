@@ -312,8 +312,8 @@ class Project:
             print(content)
         return result
     
-    def newBlankHistogram(self, name = "New Blank Histogram"):
-        check, content = createHistogram(self.token, name, self.projectId)
+    def newBlankHistogram(self, **kwargs):
+        check, content = createHistogram(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idHistogram'], content['name'])
         else:
@@ -329,8 +329,8 @@ class Project:
             print(content)
         return result
     
-    def newBlankCrossPlot(self, name = "New Blank Histogram"):
-        check, content = createCrossPlot(self.token, name, self.projectId)
+    def newBlankCrossPlot(self, **kwargs):
+        check, content = createCrossPlot(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idCrossPlot'], content['name'])
         else:

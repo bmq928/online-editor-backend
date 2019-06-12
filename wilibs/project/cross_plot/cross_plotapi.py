@@ -14,8 +14,9 @@ def getCrossPlotInfo(token, crossPlotId):
     r = getCrossPlotInfo_RAW(token, crossPlotId)
     return verifyAndReturn(r)
 
-def createCrossPlot(token, name, projectId):
-    r = createCrossPlot_RAW(token, name, projectId)
+def createCrossPlot(token, projectId, **kwargs):
+    kwargs['idPrject'] = projectId 
+    r = createCrossPlot_RAW(token, kwargs)
     return verifyAndReturn(r)
 
 def editCrossPlot(token, crossPlotId, **kwargs):
@@ -41,9 +42,9 @@ def getCrossPlotInfo_RAW(token, crossPlotId):
     r = requests.post(url, json={'idCrossPlot': crossPlotId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
-def createCrossPlot_RAW(token, name, projectId):
+def createCrossPlot_RAW(token, payload):
     url = ROOT_API + '/project/cross-plot/new'
-    r = requests.post(url, json={'name': name, 'idProject': projectId}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def editCrossPlot_RAW(token, payload):

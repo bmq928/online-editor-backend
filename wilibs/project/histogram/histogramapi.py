@@ -13,8 +13,9 @@ def getHistogramInfo(token, histogramId):
     r = getHistogramInfo_RAW(token, histogramId)
     return verifyAndReturn(r)
 
-def createHistogram(token, name, projectId):
-    r = createHistogram_RAW(token, name, projectId)
+def createHistogram(token, projectId, **kwargs):
+    kwargs['idProject'] = projectId 
+    r = createHistogram_RAW(token, kwargs)
     return verifyAndReturn(r)
 
 def editHistogram(token, histogramId, **kwargs):
@@ -37,9 +38,9 @@ def getHistogramInfo_RAW(token, histogramId):
     r = requests.post(url, json={'idHistogram': histogramId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
-def createHistogram_RAW(token, name, projectId):
+def createHistogram_RAW(token, payload):
     url = ROOT_API + '/project/histogram/new'
-    r = requests.post(url, json={'name': name, 'idProject': projectId}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def editHistogram_RAW(token, payload):
