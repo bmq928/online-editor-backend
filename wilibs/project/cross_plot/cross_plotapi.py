@@ -15,7 +15,7 @@ def getCrossPlotInfo(token, crossPlotId):
     return verifyAndReturn(r)
 
 def createCrossPlot(token, projectId, **kwargs):
-    kwargs['idPrject'] = projectId 
+    kwargs['idProject'] = projectId 
     r = createCrossPlot_RAW(token, kwargs)
     return verifyAndReturn(r)
 
