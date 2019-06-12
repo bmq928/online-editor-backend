@@ -245,6 +245,33 @@ class Project:
                     if self.isExistsTag(relatedTo, tag):
                         result = result + [curve]
         return result
+    
+    def findPlotByTag(self,tag):
+        plots = self.getAllPlots()
+        result = []
+        for plot in plots:
+            relatedTo = plot.getPlotInfo()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result = result + [plot]
+        return result
+    
+    def findCrossPlotByTag(self,tag):
+        crossPlots = self.getAllCrossPlots()
+        result = []
+        for crossPlot in crossPlots:
+            relatedTo = crossPlot.getInfoCrossPlot()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result = result + [crossPlot]
+        return result
+
+    def findHistogramByTag(self,tag):
+        histograms = self.getAllHistograms()
+        result = []
+        for histogram in histograms:
+            relatedTo = histogram.getInfoHistogram()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result = result + [histogram]
+        return result
 
     def findAllByTag(self, tag):
         """ Find by tag in this project.
@@ -261,11 +288,34 @@ class Project:
         """
 
         wells = self.getAllWells()
+        plots = self.getAllPlots()
+        crossPlots = self.getAllCrossPlots()
+        histograms = self.getAllHistograms()
+
         result = {
             "wells": [],
             "datasets": [],
-            "curves": []
+            "curves": [],
+            "plots": [],
+            "crossPlots": [],
+            "histograms": []
         }
+
+        for plot in plots:
+            relatedTo = plot.getPlotInfo()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result['plots'] = result['plots'] + [plot]
+
+        for crossPlot in crossPlots:
+            relatedTo = crossPlot.getInfoCrossPlot()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result['crossPlots'] = result['crossPlots'] + [crossPlot]
+                
+        for histogram in histograms:
+            relatedTo = histogram.getInfoHistogram()['relatedTo']
+            if self.isExistsTag(relatedTo, tag):
+                result['histogram'] = result['histogram'] + [histogram]
+
         for well in wells:
             relatedTo = well.getWellInfo()["relatedTo"]
             if self.isExistsTag(relatedTo, tag):
@@ -299,7 +349,16 @@ class Project:
         for well in objects["wells"]:
             # print("do well ", well.wellName)
             result = result and well.removeTags([oldTag])
-            result = result and well.addTags([newtag])
+            result = result and well.addTags([newtag])    
+        for plot in objects["plots"]:
+            result = result and plot.removeTags([oldTag])
+            result = result and plot.addTags([newtag])
+        for crossPlot in objects["crossPlots"]:
+            result = result and crossPlot.removeTags([oldTag])
+            result = result and crossPlot.addTags([newtag])
+        for histogram in objects["histograms"]:
+            result = result and histogram.removeTags([oldTag])
+            result = result and histogram.addTags([newtag])
         return result
 
     def getAllHistograms(self):
