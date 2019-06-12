@@ -63,7 +63,7 @@ class Project:
             listObj.append(Well(self.token, i))
         return listObj
 
-    def createPlot(self, **data):
+    def newBlankPlot(self, **data):
         check, content = createNewPlot(self.token, self.projectId, **data)
         if check:
             return content
