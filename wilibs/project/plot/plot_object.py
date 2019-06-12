@@ -48,8 +48,8 @@ class Plot:
             print(content)
             return False
 
-    def addTags(self):
-        plotInfo = self.getplotInfo()
+    def addTags(self, tags):
+        plotInfo = self.getPlotInfo()
         relatedTo = plotInfo["relatedTo"]
         if relatedTo and "tags" in relatedTo:
             oldTags = relatedTo["tags"]
@@ -66,8 +66,8 @@ class Plot:
         check = self.editPlot(relatedTo=relatedTo)
         return check
 
-    def removeTags(self):
-        plotInfo = self.plotInfo()
+    def removeTags(self, tags):
+        plotInfo = self.getPlotInfo()
         relatedTo = plotInfo["relatedTo"]
         if relatedTo and "tags" in relatedTo:
             for t in tags:

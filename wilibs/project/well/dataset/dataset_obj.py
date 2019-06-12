@@ -110,17 +110,14 @@ class Dataset:
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
-            return True
-        print(content)
-        return False
+            return None
+        return content
 
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])
         if check:
-            return True
-        else:
-            print(content)
-        return False
+            return None
+        return content
 
     def createBlankCurve(self, curveName, **data):
         return self.createCurve(curveName, **data)

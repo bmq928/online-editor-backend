@@ -65,7 +65,7 @@ class Curve:
             tempArr.append(temp)
         tempFile.write(str(json.dumps(tempArr)))
         tempFile.seek(0)
-        return self.updateCurveDataByFile(tempFile)
+        return self.updateCurveDataByFile(tempFile, name)
 
     def updateCurveDataByFile(self, data, name=False):
         """Update data to curve by file .txt
@@ -93,7 +93,7 @@ class Curve:
         """
         check, content = updateCurveData(self.token, self.curveInfo['idDataset'], self.curveInfo['idCurve'], data, name)
         if check:
-            print("Update datacurve successfull")
+            print("Update datacurve successful")
             return True
         else:
             print(content)

@@ -10,6 +10,10 @@ from .project.well.dataset.curve.curveapi import getCurveInfo
 from .project.well.dataset.curve.curve_obj import Curve
 from .api_url import EXPORT_PATH
 from .api_url import DOWNLOAD_BASE_URL
+from .project.histogram.histogramapi import getHistogramInfo
+from .project.histogram.histogram_object import *
+from .project.cross_plot.cross_plot_object import *
+from .project.cross_plot.cross_plotapi import getCrossPlotInfo
 
 
 class Wilib:
@@ -50,6 +54,18 @@ class Wilib:
         check, curveInfo = getCurveInfo(self.token, curveId)
         if check:
             return Curve(self.token, curveInfo)
+        return None
+    
+    def getHistogramById(self, histogramId):
+        check, info = getHistogramInfo(self.token, histogramId)
+        if check:
+            return Histogram(self.token, histogramId, info['name'])
+        return None
+    
+    def getCrossPlotById(self, crossPlotId):
+        check, info = getCrossPlotInfo(self.token, crossPlotId)
+        if check:
+            return CrossPlot(self.token, crossPlotId, info['name'])
         return None
 
     def getListProject(self):

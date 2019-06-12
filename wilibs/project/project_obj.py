@@ -3,6 +3,10 @@ from .well.wellapi import *
 from .well.well_obj import Well
 from .plot.plotapi import *
 from .plot.plot_object import Plot
+from .histogram.histogramapi import *
+from .histogram.histogram_object import *
+from .cross_plot.cross_plot_object import *
+from .cross_plot.cross_plotapi import *
 
 
 class Project:
@@ -297,3 +301,37 @@ class Project:
             result = result and well.removeTags([oldTag])
             result = result and well.addTags([newtag])
         return result
+
+    def getAllHistograms(self):
+        result = []
+        check, content = getHistogramList(self.token, self.projectId)
+        if check:
+            for i in content:
+                result.append(Histogram(self.token, i['idHistogram'], i['name']))
+        else:
+            print(content)
+        return result
+    
+    def newBlankHistogram(self, name = "New Blank Histogram"):
+        check, content = createHistogram(self.token, name, self.projectId)
+        if check:
+            return Histogram(self.token, content['idHistogram'], content['name'])
+        else:
+            return None
+    
+    def getAllCrossPlots(self):
+        result = []
+        check, content = getCrossPlotList(self.token, self.projectId)
+        if check:
+            for i in content:
+                result.append(CrossPlot(self.token, i['idCrossPlot'], i['name']))
+        else:
+            print(content)
+        return result
+    
+    def newBlankCrossPlot(self, name = "New Blank Histogram"):
+        check, content = createCrossPlot(self.token, name, self.projectId)
+        if check:
+            return Histogram(self.token, content['idCrossPlot'], content['name'])
+        else:
+            return None
