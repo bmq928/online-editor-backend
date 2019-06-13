@@ -167,9 +167,11 @@ class Well:
             print(content)
             return None
 
-    def getAllCurves(self):
+    def limitWell(self, top, bottom, unit):
         datasets = self.getAllDatasets()
-        
+        for dataset in datasets:
+            dataset.limitAllCurves(top, bottom, unit)
+
 
     def getAllZoneSets(self):
         check, content = listZoneSet(self.token, self.wellId)

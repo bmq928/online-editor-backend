@@ -10,19 +10,8 @@ def getDatasetInfo(token, datasetId):
     return verifyAndReturn(r)
 
 def editDatasetInfo(token, datasetId, **data):
-    payload = {
-        'idDataset': datasetId
-    }
-    if 'idWell' in data:
-        payload['idWell'] = data['idWell']
-    if 'name' in data:
-        payload['name'] = data['name']
-    if 'datasetKey' in data:
-        payload['datasetKey'] = data['datasetKey']
-    if 'datasetLabel' in data:
-        payload['datasetLabel'] = data['datasetLabel']
-    if 'relatedTo' in data:
-        payload['relatedTo'] = data['relatedTo']
+    payload = data
+    payload['idDataset'] = datasetId
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)
 

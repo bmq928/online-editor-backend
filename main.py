@@ -9,18 +9,19 @@ import json
 #login
 client = wilib.login("hoang","1")
 
-arrayCurve = client.findCurveByName("array_curve","source","g_1x","demo_edit_curve")
-textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
-singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
+# arrayCurve = client.findCurveByName("array_curve","source","g_1x","demo_edit_curve")
+# textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
+# singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
 
-arr = arrayCurve.getCurveData()
-# arr2 = [arr[i] for i in range(0,10)]
-
-# print(arrayCurve)
-
-# arrayCurve.updateRawCurveData(arr2)
-
-print(arr)
-# print(textCurve)
-
-# print(singleCurve)
+well = client.findWellByName("g_3x","demo_edit_curve")
+dataset = well.getAllDatasets()[0]
+curve = dataset.getAllCurves()[1]
+data = curve.getCurveData()
+print ([data[i] for i in range(0,20)])
+print ([data[i] for i in range(len(data)-20,len(data)-1)])
+print(dataset.getDatasetInfo())
+well.limitWell(1300,2000, 'm')
+print(dataset.getDatasetInfo())
+data = curve.getCurveData()
+print ([data[i] for i in range(0,20)])
+print ([data[i] for i in range(len(data)-20,len(data)-1)])
