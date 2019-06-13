@@ -167,6 +167,10 @@ class Well:
             print(content)
             return None
 
+    def getAllCurves(self):
+        datasets = self.getAllDatasets()
+        
+
     def getAllZoneSets(self):
         check, content = listZoneSet(self.token, self.wellId)
         if check:

@@ -5,6 +5,40 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+#format convert tool
+def arrayTypeConverter(data):
+    result = []
+    for i in data:
+        line = ''
+        line += str(i['y'])
+        for j in i['x']:
+            if j != None:
+                line += ' ' + str(j)
+            else:
+                line += ' ' + 'null'
+        result.append(line)
+    return result
+
+def numberTypeConverter(data):
+    result = []
+    for i in data:
+        line = ''
+        line += str(i['y'])
+        line += ' ' + str(i['x'])
+        result.append(line)
+    return result
+
+def textTypeConverter(data):
+    result = []
+    for i in data:
+        line = ''
+        line += str(i['y'])
+        line += ' "' + str(i['x']) + '"'
+        result.append(line)
+    return result
+
+#api
+
 def getCurveInfo(token, curveId):
     r = getCurveInfo_RAW(token, curveId)
     return verifyAndReturn(r)
@@ -41,6 +75,13 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
         payload['curveName'] = name
     data = {'data': data}
     r = updateCurveData_RAW(token, payload, data)
+    return verifyAndReturn(r)
+
+def createRawCurveData(token, curveId, data):
+    payload = {
+        'idCurve': curveId
+    }
+    r = createCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
 
 
@@ -99,15 +140,17 @@ def getCurveData_RAW(token, curveId):
 
 def createCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/new-raw-curve'
-    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, data=payload, files={'data': data}, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()
     except:
         r = {'code': 501, 'reason': 'Format wrong'}
+    print(r)
     return r
+
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
-    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, data=payload, files={'file': data}, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()
     except:

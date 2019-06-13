@@ -12,7 +12,8 @@ class Curve:
             'name': curveInfo['name'],
             'description': curveInfo['description'],
             'tags': curveInfo['relatedTo']['tags'] if curveInfo["relatedTo"] is not None and "tags" in curveInfo[
-                "relatedTo"] else []
+                "relatedTo"] else [],
+            'type': curveInfo['type']
         }
         self.curveId = curveInfo['idCurve']
         self.curveName = curveInfo['name']
@@ -40,6 +41,21 @@ class Curve:
         if check:
             return content
         return None
+
+    def updateRawCurveData(self, curveData):
+        tempFile = TemporaryFile('r+')
+        data = []
+        if self.curveInfo['type'] == 'TEXT':
+            data = textTypeConverter(curveData)
+        if self.curveInfo['type'] == 'NUMBER':
+            data = numberTypeConverter(curveData)
+        if self.curveInfo['type'] == 'ARRAY':
+            data = arrayTypeConverter(curveData)
+        for line in data:
+            tempFile.write(line)
+            tempFile.write('\n')
+        tempFile.seek(0)
+        return createRawCurveData(self.token, self.curveId, tempFile)
 
     def updateCurveData(self, curveData, name=False):
         """Update data to curve by array of object
