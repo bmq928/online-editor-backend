@@ -156,7 +156,7 @@ class Dataset:
                      del data[0]
                      if len(data) <= 0:
                          break
-            if len(data) < 0:
+            if len(data) > 0:
                 while data[len(data)-1]['y'] > newBottom:
                     del data[len(data)-1]
                     if len(data) <= 0:

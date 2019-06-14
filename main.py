@@ -13,16 +13,12 @@ client = wilib.login("hoang","1")
 # textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
 # singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
 
-well = client.findWellByName("g_3x","demo_edit_curve")
-print(well)
-dataset = (well.getAllDatasets())[0]
-curve = (dataset.getAllCurves())[1]
-data = curve.getCurveData()
-print ([data[i] for i in range(0,20)])
-print ([data[i] for i in range(len(data)-20,len(data)-1)])
-print(dataset.getDatasetInfo())
-well.limitWell(1300,2000, 'm')
-print(dataset.getDatasetInfo())
-data = curve.getCurveData()
-print ([data[i] for i in range(0,20)])
-print ([data[i] for i in range(len(data)-20,len(data)-1)])
+well = client.getWellById(33)
+
+well.limitWell(1200,1500,'m')
+
+# curve = client.getCurveById(527)
+
+# data = curve.getCurveData()
+
+# print(data[3000])

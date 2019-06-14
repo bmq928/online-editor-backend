@@ -145,7 +145,6 @@ def createCurveData_RAW(token, payload, data):
         r = r.json()
     except:
         r = {'code': 501, 'reason': 'Format wrong'}
-    print(r)
     return r
 
 def updateCurveData_RAW(token, payload, data):

@@ -141,7 +141,7 @@ class Well:
                 print(err)
         
         """
-        check, content = editWellInfo(self.token, self.wellId, **data)
+        check, _ = editWellInfo(self.token, self.wellId, **data)
         if check:
             return True
         return False
