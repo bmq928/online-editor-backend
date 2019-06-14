@@ -165,7 +165,7 @@ class Dataset:
             for i in range(0, len(curves)-1):
                 for j in datas[i]:
                     j['y'] = int((j['y'] - newTop)/self.step)
-        for i in range(0, len(curves)-1):
+        for i in range(0, len(curves)):
             curves[i].updateRawCurveData(datas[i])
         self.editDatasetInfo(top = newTop, bottom = newBottom)
         

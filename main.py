@@ -13,9 +13,9 @@ client = wilib.login("hoang","1")
 # textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
 # singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
 
-well = client.getWellById(33)
+well = client.getWellById(34)
 
-well.limitWell(1200,1500,'m')
+well.limitWell(1,5,'m')
 
 # curve = client.getCurveById(527)
 
