@@ -1,11 +1,16 @@
-import wilibs.wilib as wilib
-from wilibs.project import project_obj
-from wilibs.project.well import well_obj
-from wilibs.project.well.dataset import dataset_obj
-from wilibs.project.well.dataset.curve import curve_obj
-from wilibs.common import *
-import json
-from wilibs.common import convertUnit
+# import wilibs.wilib as wilib
+# from wilibs.project import project_obj
+# from wilibs.project.well import well_obj
+# from wilibs.project.well.dataset import dataset_obj
+# from wilibs.project.well.dataset.curve import curve_obj
+# from wilibs.common import *
+# import json
+# from wilibs.common import convertUnit
+
+# import wilibs as wilib
+# import wilibs.wilibs_obj as obj
+
+import wilibs.export as obj
 
 #login
 # client = wilib.login("hoang","1")
@@ -18,4 +23,5 @@ from wilibs.common import convertUnit
 
 # well.limitWell(10,1300,'m')
 
-print(convertUnit(1000,'.0005 M','.01 M'))
+for i in dir(obj):
+    print(i)
