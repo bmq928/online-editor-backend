@@ -138,6 +138,8 @@ class Dataset:
         return False
     
     def limitAllCurves(self, top, bottom, unit):
+        if top <= self.top and bottom > self.bottom:
+            return
         newTop = top if top > self.top else self.top
         newBottom = bottom if bottom < self.bottom else self.bottom
         curves = self.getAllCurves()

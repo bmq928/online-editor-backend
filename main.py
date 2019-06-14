@@ -14,8 +14,9 @@ client = wilib.login("hoang","1")
 # singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
 
 well = client.findWellByName("g_3x","demo_edit_curve")
-dataset = well.getAllDatasets()[0]
-curve = dataset.getAllCurves()[1]
+print(well)
+dataset = (well.getAllDatasets())[0]
+curve = (dataset.getAllCurves())[1]
 data = curve.getCurveData()
 print ([data[i] for i in range(0,20)])
 print ([data[i] for i in range(len(data)-20,len(data)-1)])
