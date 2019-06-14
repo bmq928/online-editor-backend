@@ -7,6 +7,7 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import *
 from .cross_plot.cross_plot_object import *
 from .cross_plot.cross_plotapi import *
+from .well.markerset_template.markerset_template_obj import *
 
 
 class Project:
@@ -89,6 +90,13 @@ class Project:
         check, content = createWell(self.token, self.projectId, **data)
         if check:
             return Well(self.token, content)
+        else:
+            return None
+
+    def createMarkerSetTemplate(self, **data):
+        check, content = createMarkerSetTemplate(self.token, self.projectId, **data)
+        if check:
+            return MarkerSetTemplate(self.token, content)
         else:
             return None
 
@@ -394,3 +402,5 @@ class Project:
             return Histogram(self.token, content['idCrossPlot'], content['name'])
         else:
             return None
+    
+    # def createMarkerSetTemplate()
