@@ -167,7 +167,7 @@ class Dataset:
                     j['y'] = int((j['y'] - newTop) / self.step)
         for i in range(0, len(curves)):
             curves[i].updateRawCurveData(datas[i])
-            print(curves[i].curveName, "Done")
+            print(curves[i].curveName, self.datasetName, "Done")
         self.editDatasetInfo(top=newTop, bottom=newBottom)
 
     def getDepth(self):
