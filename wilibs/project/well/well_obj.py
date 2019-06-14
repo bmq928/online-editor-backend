@@ -2,6 +2,9 @@ from .wellapi import *
 from .dataset.dataset_obj import Dataset
 from .dataset.datasetapi import createDataSet
 from ...api_url import DOWNLOAD_BASE_URL
+from .imageset.imageset_obj import *
+from .imageset.imageset_api import createImageSet
+from .imageset.imageset_api import getListImageSet
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -91,6 +94,14 @@ class Well:
             return listObj
 
         return None
+    
+    def createImageSet(self, name):
+        check, content = createImageSet(name, self.wellId, name)
+        if check:
+            return ImageSet(self.token, content)
+        else:
+            print(content)
+        return None
 
     def createDataset(self, **data):
         """Add dataset to this well
@@ -132,13 +143,7 @@ class Well:
             Dict optional: name, bottomDepth, topDepth, step
         
         Returns:
-            None if there is no err
-            err as string
-        
-        Example: 
-            err = wellobj.editWellInfo(name = 'new name well', step = '10')
-            if err:
-                print(err)
+            True if success, false if fail
         
         """
         check, _ = editWellInfo(self.token, self.wellId, **data)
@@ -171,7 +176,14 @@ class Well:
         datasets = self.getAllDatasets()
         for dataset in datasets:
             dataset.limitAllCurves(top, bottom, unit)
-
+        imageSets = self.getAllImageSets()
+        images = []
+        for i in imageSets:
+            for j in i.getAllImages():
+                images.append(j)
+        for i in images:
+            if i.top < top or i.bottom > bottom:
+                i.deleteImage()
 
     def getAllZoneSets(self):
         check, content = listZoneSet(self.token, self.wellId)
@@ -355,3 +367,13 @@ class Well:
                     self.wellInfo["tags"] = relatedTo["tags"]
         check = self.editWellInfo(relatedTo=relatedTo, name=wellInfo["name"])
         return check
+
+    def getAllImageSets(self):
+        check, content = getListImageSet(self.token, self.wellId)
+        result = []
+        if check:
+            for i in content:
+                result.append(ImageSet(self.token, i))
+        else:
+            print(content)
+        return result

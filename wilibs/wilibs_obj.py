@@ -14,6 +14,8 @@ from .project.histogram.histogramapi import getHistogramInfo
 from .project.histogram.histogram_object import *
 from .project.cross_plot.cross_plot_object import *
 from .project.cross_plot.cross_plotapi import getCrossPlotInfo
+from .project.well.imageset.imageset_api import getImageSetInfo
+from .project.well.imageset.imageset_obj import *
 
 
 class Wilib:
@@ -66,6 +68,12 @@ class Wilib:
         check, info = getCrossPlotInfo(self.token, crossPlotId)
         if check:
             return CrossPlot(self.token, crossPlotId, info['name'])
+        return None
+    
+    def getImageSetById(self, imageSetId):
+        check, info = getImageSetInfo(self.token, imageSetId)
+        if check:
+            return ImageSet(self.token, info)
         return None
 
     def getListProject(self):
