@@ -136,7 +136,7 @@ class Dataset:
         else:
             print(content)
         return False
-    
+
     def limitAllCurves(self, top, bottom, unit):
         if top <= self.top and bottom > self.bottom:
             return
@@ -146,29 +146,29 @@ class Dataset:
         datas = [i.getCurveData() for i in curves]
         if self.step != 0:
             for data in datas:
-                #convert
+                # convert
                 topTemp = self.top
                 for i in data:
-                    i['y'] = i['y']*self.step + topTemp
+                    i['y'] = i['y'] * self.step + topTemp
         for data in datas:
             if len(data) > 0:
                 while data[0]['y'] < newTop:
-                     del data[0]
-                     if len(data) <= 0:
-                         break
+                    del data[0]
+                    if len(data) <= 0:
+                        break
             if len(data) > 0:
-                while data[len(data)-1]['y'] > newBottom:
-                    del data[len(data)-1]
+                while data[len(data) - 1]['y'] > newBottom:
+                    del data[len(data) - 1]
                     if len(data) <= 0:
                         break
         if self.step != 0:
             for i in range(0, len(curves)):
                 for j in datas[i]:
-                    j['y'] = int((j['y'] - newTop)/self.step)
+                    j['y'] = int((j['y'] - newTop) / self.step)
         for i in range(0, len(curves)):
             curves[i].updateRawCurveData(datas[i])
-        self.editDatasetInfo(top = newTop, bottom = newBottom)
-        
+            print(curves[i].curveName, "Done")
+        self.editDatasetInfo(top=newTop, bottom=newBottom)
 
     def getDepth(self):
         result = []
