@@ -162,7 +162,7 @@ class Dataset:
                     if len(data) <= 0:
                         break
         if self.step != 0:
-            for i in range(0, len(curves)-1):
+            for i in range(0, len(curves)):
                 for j in datas[i]:
                     j['y'] = int((j['y'] - newTop)/self.step)
         for i in range(0, len(curves)):
