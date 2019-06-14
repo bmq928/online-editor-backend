@@ -5,6 +5,7 @@ from ...api_url import DOWNLOAD_BASE_URL
 from .imageset.imageset_obj import *
 from .imageset.imageset_api import createImageSet
 from .imageset.imageset_api import getListImageSet
+from ...common import convertUnit
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -173,9 +174,11 @@ class Well:
             return None
 
     def limitWell(self, top, bottom, unit):
+        top = convertUnit(top, unit)
+        bottom = convertUnit(bottom, unit)
         datasets = self.getAllDatasets()
         for dataset in datasets:
-            dataset.limitAllCurves(top, bottom, unit)
+            dataset.limitAllCurves(top, bottom)
         imageSets = self.getAllImageSets()
         images = []
         for i in imageSets:
