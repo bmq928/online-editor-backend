@@ -358,6 +358,6 @@ def convertUnit(value, srcUnit, destUnit = "m"):
     srcRate = getRate(srcUnit)
     destRate = getRate(destUnit)
     if (srcRate == None) or (destRate==None):
-        return None
+        return False
     return value*srcRate/destRate
 

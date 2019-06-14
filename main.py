@@ -23,5 +23,9 @@ import wilibs.export as obj
 
 # well.limitWell(10,1300,'m')
 
-for i in dir(obj):
-    print(i)
+for i in obj.__dict__:
+    if (i[0] != '_'):
+        for j in getattr(obj, i).__dict__:
+            if (j[0] != '_'):
+                print(j)
+
