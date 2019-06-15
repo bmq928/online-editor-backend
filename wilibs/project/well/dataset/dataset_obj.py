@@ -137,38 +137,77 @@ class Dataset:
             print(content)
         return False
 
+    # def limitAllCurves(self, top, bottom):
+    #     if top <= self.top and bottom >= self.bottom:
+    #         return
+    #     newTopIndex = top // self.step + 1
+    #     newBottomIndex = bottom // self.step
+    #     depthInTopIndex = round(newTopIndex * self.step, 4)
+    #     depthInBottomIndex = round(newBottomIndex * self.step, 4)
+    #     self.editDatasetInfo(top=newTop, bottom=newBottom)
+    #     # newTop = top if top > self.top else self.top
+    #     # newBottom = bottom if bottom < self.bottom else self.bottom
+    #     # curves = self.getAllCurves()
+    #     return
     def limitAllCurves(self, top, bottom):
-        if top <= self.top and bottom > self.bottom:
+        if top <= self.top and bottom >= self.bottom:
             return
-        newTop = top if top > self.top else self.top
-        newBottom = bottom if bottom < self.bottom else self.bottom
+        # find top:
+        if self.step == 0:
+            newTop = top if top > self.top else self.top
+            newBottom = bottom if bottom < self.bottom else self.bottom
+            curves = self.getAllCurves()
+            datas = [i.getCurveData() for i in curves]
+            for data in datas:
+                if len(data) > 0:
+                    while data[0]['y'] < newTop:
+                        del data[0]
+                        if len(data) <= 0:
+                            break
+                if len(data) > 0:
+                    while data[len(data) - 1]['y'] > newBottom:
+                        del data[len(data) - 1]
+                        if len(data) <= 0:
+                            break
+            for i in range(0, len(curves)):
+                curves[i].updateRawCurveData(datas[i])
+                print(curves[i].curveName, self.datasetName, "Done")
+            self.editDatasetInfo(top=newTop, bottom=newBottom)
+            return
+        newTopInteger = 0
+        delStep = 0
+        while self.top + newTopInteger * self.step < top:
+            newTopInteger += 1
+        newBottomInteger = int((self.bottom - self.top) / self.step)
+        while self.top + newBottomInteger * self.step > bottom:
+            newBottomInteger -= 1
+            delStep += 1
+        oldBottomInteger = int((self.bottom - self.top) / self.step)
+        newTop = self.top + round(newTopInteger * self.step, 4)
+        newBottom = self.top + round(newBottomInteger * self.step, 4)
+
         curves = self.getAllCurves()
         datas = [i.getCurveData() for i in curves]
-        if self.step != 0:
-            for data in datas:
-                # convert
-                topTemp = self.top
-                for i in data:
-                    i['y'] = i['y'] * self.step + topTemp
-        for data in datas:
-            if len(data) > 0:
-                while data[0]['y'] < newTop:
-                    del data[0]
-                    if len(data) <= 0:
-                        break
-            if len(data) > 0:
-                while data[len(data) - 1]['y'] > newBottom:
-                    del data[len(data) - 1]
-                    if len(data) <= 0:
-                        break
-        if self.step != 0:
-            for i in range(0, len(curves)):
-                for j in datas[i]:
-                    j['y'] = int((j['y'] - newTop) / self.step)
+
+        for i in datas:
+            for j in range(0, newTopInteger):
+                if len(i) > 0:
+                    del i[0]
+                else:
+                    break
+            for j in range(0, oldBottomInteger - newBottomInteger):
+                if len(i) > 0:
+                    del i[len(i) - 1]
+
         for i in range(0, len(curves)):
+            k = 0
+            for j in datas[i]:
+                j['y'] = k
+                k += 1
             curves[i].updateRawCurveData(datas[i])
             print(curves[i].curveName, self.datasetName, "Done")
         self.editDatasetInfo(top=newTop, bottom=newBottom)
+        return
 
     def getDepth(self):
         result = []

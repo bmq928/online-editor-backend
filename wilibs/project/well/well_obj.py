@@ -178,15 +178,16 @@ class Well:
         bottom = convertUnit(bottom, unit)
         datasets = self.getAllDatasets()
         for dataset in datasets:
+            print("Processing dataset ", dataset.datasetName)
             dataset.limitAllCurves(top, bottom)
-        imageSets = self.getAllImageSets()
-        images = []
-        for i in imageSets:
-            for j in i.getAllImages():
-                images.append(j)
-        for i in images:
-            if i.top < top or i.bottom > bottom:
-                i.deleteImage()
+        # imageSets = self.getAllImageSets()
+        # images = []
+        # for i in imageSets:
+        #     for j in i.getAllImages():
+        #         images.append(j)
+        # for i in images:
+        #     if i.top < top or i.bottom > bottom:
+        #         i.deleteImage()
 
     def getAllZoneSets(self):
         check, content = listZoneSet(self.token, self.wellId)
