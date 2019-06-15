@@ -25,6 +25,7 @@ import wilibs.export as obj
 
 for i in obj.__dict__:
     if (i[0] != '_'):
+        print("----'"+i+"'-----")
         for j in getattr(obj, i).__dict__:
             if (j[0] != '_'):
                 print(j)
