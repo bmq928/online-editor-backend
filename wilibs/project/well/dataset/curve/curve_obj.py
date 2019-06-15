@@ -131,7 +131,7 @@ class Curve:
                 print(err)
 
         """
-        check, content = editCurveInfo(self.token, self.curveInfo['idCurve'], **data)
+        check, content = editCurveInfo(self.token, self, **data)
         if check:
             return True
         return False

@@ -85,9 +85,10 @@ def createRawCurveData(token, curveId, data):
     return verifyAndReturn(r)
 
 
-def editCurveInfo(token, curveId, **data):
+def editCurveInfo(token, curve, **data):
     payload = {
-        'idCurve': curveId
+        'idCurve': curve.curveId,
+        'name': curve.curveName
     }
     if 'name' in data:
         payload['name'] = data['name']
