@@ -1,6 +1,6 @@
 from ....api_url import ROOT_API
 from ....api_url import EXPORT_PATH
-from .markerset_template_api import *
+from .markersets_template_api import *
 import os as os
 from ....common import *
 
@@ -8,14 +8,14 @@ class MarkerSetTemplate:
     def __init__(self, token, MarkerSetTempateInfo):
         self.token = token
         self.MarkerSetTempateInfo = {
-            'idProject': MarkerSetTempateInfo['idProject'],
-            'idMarkerTemplate': MarkerSetTempateInfo['idMarkerTemplate'],
-            'name': MarkerSetTempateInfo["name"]
+            'idProject' : MarkerSetTempateInfo['idProject'],
+            'idMarkerTemplate' : MarkerSetTempateInfo['idMarkerTemplate'],
+            'name' : MarkerSetTempateInfo["name"]
         }
         self.markerSetTemplateId = MarkerSetTempateInfo['idMarkerTemplate']
         self.projectId = MarkerSetTempateInfo['idProject']
         self.markerSetTemplateName = MarkerSetTempateInfo['name']
-
+   
     def __repr__(self):
         obj = dict(self.MarkerSetTempateInfo)
         return str(obj)

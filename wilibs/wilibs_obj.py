@@ -57,19 +57,19 @@ class Wilib:
         if check:
             return Curve(self.token, curveInfo)
         return None
-    
+
     def getHistogramById(self, histogramId):
         check, info = getHistogramInfo(self.token, histogramId)
         if check:
             return Histogram(self.token, histogramId, info['name'])
         return None
-    
+
     def getCrossPlotById(self, crossPlotId):
         check, info = getCrossPlotInfo(self.token, crossPlotId)
         if check:
             return CrossPlot(self.token, crossPlotId, info['name'])
         return None
-    
+
     def getImageSetById(self, imageSetId):
         check, info = getImageSetInfo(self.token, imageSetId)
         if check:

@@ -14,17 +14,18 @@ from .well.markerset_template.markerset_template_api import createMarkerset
 class Project:
     def __init__(self, token, projectInfo):
         self.token = token
-        self.projectInfo = {
-            'idProject': projectInfo['idProject'],
-            'name': projectInfo['name'],
-            'alias': projectInfo['alias']
-        }
+        self.projectInfo = projectInfo
         self.projectId = projectInfo['idProject']
+        self.projectName = projectInfo['name']
+        self.alias = projectInfo['alias']
+        self.shared = projectInfo['shared'] if 'shared' in projectInfo else False
+        self.owner = projectInfo['owner'] if 'owner' in projectInfo else projectInfo['createdBy']
 
     def __repr__(self):
         payload = {
             'idProject': self.projectId,
-            'name': self.projectInfo['name'],
+            'name': self.projectName,
+            'shared': self.shared
         }
         return str(payload)
 
@@ -127,7 +128,12 @@ class Project:
     def getFullInfo(self):
         """Return full version for project.
         """
-        return getFullInfoProject(self.token, self.projectId)
+        payload = {'idProject': self.projectId}
+        if 'shared' and 'owner' in data:
+            payload['shared'] = data['shared']
+            payload['owner'] = data['owner']
+            payload['name'] = self.projectName
+        return getFullInfoProject(self.token, payload)
 
     def createProject(self, **data):
         """Create project for this account.
@@ -290,7 +296,7 @@ class Project:
             relatedTo = crossPlot.getInfoCrossPlot()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['crossPlots'] = result['crossPlots'] + [crossPlot]
-                
+
         for histogram in histograms:
             relatedTo = histogram.getInfoHistogram()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
@@ -329,7 +335,7 @@ class Project:
         for well in objects["wells"]:
             # print("do well ", well.wellName)
             result = result and well.removeTags([oldTag])
-            result = result and well.addTags([newtag])    
+            result = result and well.addTags([newtag])
         for plot in objects["plots"]:
             result = result and plot.removeTags([oldTag])
             result = result and plot.addTags([newtag])
