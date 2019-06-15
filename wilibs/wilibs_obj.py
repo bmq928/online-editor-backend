@@ -16,6 +16,7 @@ from .project.cross_plot.cross_plot_object import CrossPlot
 from .project.cross_plot.cross_plotapi import getCrossPlotInfo
 from .project.well.imageset.imageset_api import getImageSetInfo
 from .project.well.imageset.imageset_obj import ImageSet
+from .project.projectapi import createProject
 
 
 class Wilib:
@@ -169,3 +170,27 @@ class Wilib:
                     return htg
         print("No histogram found for name query.")
         return False
+
+    def createProject(self, **data):
+        """Create project for this account.
+
+        pass info for project as name, company, department, description to create new project
+
+        Args:
+            **data: need name* (required), company, department, description, all as STRING
+        
+        Retunns:
+            (bool, any):
+            A tuple.
+            If success, :bool: is false, :any: is object contain project info which created.
+            If false, :bool: is false, :any: is string tell what error happened.
+
+        Example:
+            check, project = createProject(name = 'test project', description='example for lib')
+
+        **name field is required
+        """
+        return createProject(self.token, **data)
+    
+    def newProject(self, **data):
+        return createProject(self.token, **data)

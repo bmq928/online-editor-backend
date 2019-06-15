@@ -140,7 +140,7 @@
                 }
             },
             "returns": "A Project object",
-            "explain": "Get a project with specified name",
+            "explain": "Get a project with specified name. Print err if get err and return None",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.getProjectByName('Example Project')\nproject.delete()"
         },
         "getWellByName(wellName, projectName)": {
@@ -154,7 +154,7 @@
                 }
             },
             "returns": "A Well object",
-            "explain": "Get a well with specified name",
+            "explain": "Get a well with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nwell = client.getWellByName('Example Well', 'Example Project')\nwell.delete()"
         },
         "getDatasetByName(datasetName, wellName, projectName)": {
@@ -169,7 +169,7 @@
                 }
             },
             "returns": "A Dataset object",
-            "explain": "Get a dataset with specified name",
+            "explain": "Get a dataset with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\ndataset = client.getDatasetByName('Example Dataset', 'Example Well', 'Example Project')\ndataset.delete()"
         },
         "getCurveByName(curveName, datasetName, wellName, projectName)": {
@@ -185,7 +185,7 @@
                 }
             },
             "returns": "A Curve object",
-            "explain": "Get a curve with specified name",
+            "explain": "Get a curve with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncurve = client.getCurveByName('Example curve', 'Example Dataset', 'Example Well', 'Example Project')\ncurve.delete()"
         },
         "getPlotByName(plotName, projectName)": {
@@ -199,7 +199,7 @@
                 }
             },
             "returns": "A Plot object",
-            "explain": "Get a plot with specified name",
+            "explain": "Get a plot with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getPlotByName('Example Plot','Example Project')\nplot.delete()"
         },
         "getCrossPlotByName(crossPlotName, projectName)": {
@@ -213,7 +213,7 @@
                 }
             },
             "returns": "A CrossPlot object",
-            "explain": "Get a cross plot with specified name",
+            "explain": "Get a cross plot with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncrossPlot = client.getCrossPlotByName('Example Cross Plot', 'Example Project')\ncrossPlot.delete()"
         },
         "getHistogramByName(histogramName, projectName)": {
@@ -227,11 +227,26 @@
                 }
             },
             "returns": "A Histogram object",
-            "explain": "Get a histogram with specified name",
+            "explain": "Get a histogram with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nhistogram = client.getHistogramByName('Example Histogram', 'Example Project')\nhistogram.delete()"
         },
         "wiSavefig(plt, fileName, **data)": {
 
+        },
+        "newProject(**dict)": {
+            "params": {
+                "required": {
+                    "dict.name": "String. Name of new project"
+                },
+                "optional": {
+                    "dict.company": "String. Company of new project",
+                    "dict.department": "String. Department of new project",
+                    "dict.description": "String. Description of new project"
+                }
+            },
+            "returns": "A Project object if create project successfully, None if fail",
+            "explain": "Create a new project",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.newProject(name='example name', description='example project description')\nif project:\n\tprint('create project successful')"
         }
     }
     ,
@@ -393,6 +408,425 @@
             "returns": "Return a Histogram object for new cross plot you just created\nReturn None if create new Histogram fail",
             "explain": "Create a new blank Histogram in this project",
             "example": "project = client.getProjectById(56)\nhistogram = project.newBlankHistogram('Blank Cross Plot')\nif histogram:\n\thistogram.delete()"
+        },
+        "findDatasetsByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. dataset tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Datasets object match the tag, array can be empty",
+            "explain": "Find all dataset that match tag",
+            "example": "project = client.getProjectById(56)\ndatasets = project.findDatasetsByTag('Example Tag')\nprint(datasets)"
+        },
+        "findWellsByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. well tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Well object match the tag, array can be empty",
+            "explain": "Find all well that match tag",
+            "example": "project = client.getProjectById(56)\nwells = project.findWellsByTag('Example Tag')\nprint(wells)"
+        },
+        "findCurvesByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. curve tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Curve object match the tag, array can be empty",
+            "explain": "Find all curve that match tag",
+            "example": "project = client.getProjectById(56)\ncurves = project.findCurvesByTag('Example Tag')\nprint(curves)"
+        },
+        "findPlotsByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. plot tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Plot object match the tag, array can be empty",
+            "explain": "Find all plot that match tag",
+            "example": "project = client.getProjectById(56)\nplots = project.findPlotsByTag('Example Tag')\nprint(plots)"
+        },
+        "findCrossPlotsByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. cross plot tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of CrossPlot object match the tag, array can be empty",
+            "explain": "Find all cross plot that match tag",
+            "example": "project = client.getProjectById(56)\ncrossPlots = project.findCrossPlotsByTag('Example Tag')\nprint(crossPlots)"
+        },
+        "findHistogramsByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. histogram tag need to find"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Histogram object match the tag, array can be empty",
+            "explain": "Find all histogram that match tag",
+            "example": "project = client.getProjectById(56)\nhistograms = project.findHistogramsByTag('Example Tag')\nprint(histograms)"
+        },
+        "findAllByTag(tag)": {
+            "params": {
+                "required": {
+                    "tag": "String. tag need to find"
+                },
+                "optional": {
+                    
+                }
+            },
+            "returns": "Object contain key: 'wells', 'datasets', 'curves', 'plots', 'crossPlots', 'histograms'.\nValue of each key is array of object",
+            "explain": "Find all datasets, wells, plots, crossPlots, histograms which match a specified tag",
+            "example": "project = client.getProjectById(56)\nmatch = project.findAllByTag('Example Tag')\nprint(match['wells'])"
+        },
+        "renameTag(oldTag, newTag)": {
+            "params": {
+                "required": {
+                    "oldTag": "String. old tag which need to rename",
+                    "newTag": "String. new name need to change to"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if successfully change all tag to new name. False if get error.",
+            "explain": "Rename name of tag to new name",
+            "example": "project = client.getProjectById(56)\n success = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
+        }
+    },
+    "Well": {
+        "newZoneSet(zoneSetName)": {
+            "params": {
+                "required": {
+                    "zoneSetName": "String. Name of Zone Set that need to create"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Json contain info of new zone set if success, None if create zone set fail",
+            "explain": "Create new Zone set in well with specified name",
+            "example": "jsonZoneSet = well.newZoneSet('ZoneSet Name')\nif jsonZoneSet:\n\tprint(jsonZoneSet)"
+        },
+        "getAllZoneSets()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array<json> contain zone set info of all zoneset in well. Array can be empty",
+            "explain": "Get list info of all zone set in well",
+            "example": "zonesets = well.getAllZoneSets()\nprint(zonesets)"
+        },
+        "getAllZones(zoneSetName)": {
+            "params": {
+                "required": {
+                    "zoneSetName": "String. Name of Zone set that you need to query all zones from"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array<json> contain zone info in zone set. Array can be empty",
+            "explain": "Get all zones info in a zone set with specified name",
+            "example": "zones = well.getAllZones('Example zone set')\nprint(zones)"
+        },
+        "getWellHeaders()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array<json> well headers",
+            "explain": "Get all headers info as array of json",
+            "example": "headers = well.getWellHeaders()\nprint(headers)"
+        },
+        "getWellHeader(headerName)": {
+            "params": {
+                "required": {
+                    "headerName": "String. header name need to query"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Json info of header. None if header not found",
+            "explain": "Get header info with specified name",
+            "example": "header = well.getWellHeader('Example header name')\nif header:\n\tprint(header)"
+        },
+        "rename(newName)": {
+            "params": {
+                "required": {
+                    "newName": "String. new name need to change to"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if changing name successful, False if error",
+            "explain": "Rename well",
+            "example": "success = well.rename('New name')\nif success:\n\tprint('rename successfully')"
+        },
+        "deleteAllZoneSets()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete successfully, False if error",
+            "explain": "Delete all Zone set in well",
+            "example": "success = well.deleteAllZoneSets()\nif success:\n\tprint('delete successfully')"
+        },
+        "deleteZoneSet(zoneSetName)": {
+            "params": {
+                "required": {
+                    "zoneSetName": "String. Name of zone set need to delete"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete successfully, False if error",
+            "explain": "Delete a zone set with specified name",
+            "example": "success = well.deleteZoneSet()\nif success:\n\tprint('delete successfully')"
+        },
+        "renameZoneSet(oldZoneSetName, newZoneSetName)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "renameZone(zoneName, zoneSetName, newZoneSetName)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getZoneSetByName()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "exportWellDatacsv()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "downloadExportedFile()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "updateDefaultWellHeaders": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "updateWellHeader(**dict)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getAllImageSets()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getFullInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "edit()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getAllDatasets()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "delete()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "newDataset(**dict)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
         }
     }
 }

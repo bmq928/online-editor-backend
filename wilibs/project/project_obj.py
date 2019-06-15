@@ -135,27 +135,6 @@ class Project:
             payload['name'] = self.projectName
         return getFullInfoProject(self.token, payload)
 
-    def createProject(self, **data):
-        """Create project for this account.
-
-        pass info for project as name, company, department, description to create new project
-
-        Args:
-            **data: need name* (required), company, department, description, all as STRING
-        
-        Retunns:
-            (bool, any):
-            A tuple.
-            If success, :bool: is false, :any: is object contain project info which created.
-            If false, :bool: is false, :any: is string tell what error happened.
-
-        Example:
-            check, project = createProject(name = 'test project', description='example for lib')
-
-        **name field is required
-        """
-        return createProject(self.token, **data)
-
     def edit(self, **data):
         """Edit project for this account
         
@@ -260,19 +239,6 @@ class Project:
         return result
 
     def findAllByTag(self, tag):
-        """ Find by tag in this project.
-
-            Args:
-                tag: String
-
-            Returns:
-                None if empty
-                else List Wells
-
-            Example:
-                wells = project.findWellsByTag("tag1")
-        """
-
         wells = self.getAllWells()
         plots = self.getAllPlots()
         crossPlots = self.getAllCrossPlots()
