@@ -9,3 +9,4 @@ from .project.param.param_obj import Param
 from .project.histogram.histogram_object import Histogram
 from .project.cross_plot.cross_plot_object import CrossPlot
 from .wilibs_obj import Wilib
+from .project.well.markerset_template.markerset_template_obj import MarkerSetTemplate

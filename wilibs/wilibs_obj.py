@@ -11,11 +11,11 @@ from .project.well.dataset.curve.curve_obj import Curve
 from .api_url import EXPORT_PATH
 from .api_url import DOWNLOAD_BASE_URL
 from .project.histogram.histogramapi import getHistogramInfo
-from .project.histogram.histogram_object import *
-from .project.cross_plot.cross_plot_object import *
+from .project.histogram.histogram_object import Histogram
+from .project.cross_plot.cross_plot_object import CrossPlot
 from .project.cross_plot.cross_plotapi import getCrossPlotInfo
 from .project.well.imageset.imageset_api import getImageSetInfo
-from .project.well.imageset.imageset_obj import *
+from .project.well.imageset.imageset_obj import ImageSet
 
 
 class Wilib:
@@ -76,7 +76,7 @@ class Wilib:
             return ImageSet(self.token, info)
         return None
 
-    def getListProject(self):
+    def getAllProjects(self):
         obj = listProject(self.token)
         if obj is None:
             return obj
@@ -85,56 +85,56 @@ class Wilib:
             listProjectObj.append(Project(self.token, i))
         return listProjectObj
 
-    def findProjectByName(self, projectName):
-        projects = self.getListProject()
+    def getProjectByName(self, projectName):
+        projects = self.getAllProjects()
         for project in projects:
-            if project.alias.lower() == projectName.lower() or project.projectName.lower() == projectName.lower():
-                if project.shared:
-                    print("Working in sharing project ...")
-                    project = project.getFullProjectInfo(shared=project.shared, owner=project.owner)
-                    return Project(self.token, project)
-                else:
-                    project = project.getFullProjectInfo()
-                    return Project(self.token, project)
+            projectObj = project.getProjectInfo()[1] if project.getProjectInfo()[0] else {}
+            if projectObj["alias"].lower() == projectName.lower() or projectObj["name"].lower() == projectName.lower():
+                return project
+        print("No project found for name query.")
         return False
 
-    def findWellByName(self, wellName, projectName):
-        project = self.findProjectByName(projectName)
+    def getWellByName(self, wellName, projectName):
+        project = self.getProjectByName(projectName)
         if project:
             wells = project.getListWell()
             for well in wells:
                 wellObj = well.getWellInfo()
                 if wellObj["name"].lower() == wellName.lower():
                     return well
+        print("No well found for name query.")
         return False
 
-    def findDatasetByName(self, datasetName, wellName, projectName):
-        well = self.findWellByName(wellName, projectName)
+    def getDatasetByName(self, datasetName, wellName, projectName):
+        well = self.getWellByName(wellName, projectName)
         if well:
             datasets = well.getListDataset()
             for dataset in datasets:
                 datasetObj = dataset.getDatasetInfo()
                 if datasetObj["name"].lower() == datasetName.lower():
                     return dataset
+        print("No dataset found for name query.")
         return False
 
-    def findCurveByName(self, curveName, datasetName, wellName, projectName):
-        dataset = self.findDatasetByName(datasetName, wellName, projectName)
+    def getCurveByName(self, curveName, datasetName, wellName, projectName):
+        dataset = self.getDatasetByName(datasetName, wellName, projectName)
         if dataset:
             curves = dataset.getListCurve()
             for curve in curves:
                 curveObj = curve.getCurveInfo()
                 if curveObj["name"].lower() == curveName.lower():
                     return curve
+        print("No curve found for name query.")
         return False
 
-    def findPlotByName(self, plotName, projectName):
-        project = self.findProjectByName(projectName)
+    def getPlotByName(self, plotName, projectName):
+        project = self.getProjectByName(projectName)
         if project:
             plots = project.getAllPlots()
             for plot in plots:
                 if plot.plotName == plotName:
                     return plot
+        print("No plot found for name query.")
         return False
 
     def wiSavefig(self, plt, fileName, **data):
@@ -145,3 +145,23 @@ class Wilib:
         str += "\n*** Warning: All files will be deleted after 1 hour ***\n"
         print(str)
         return True
+    
+    def getCrossPlotByName(self, crossPlotName, projectName):
+        project = self.getProjectByName(projectName)
+        if project:
+            cps = project.getAllCrossPlots()
+            for cplot in cps:
+                if cplot.crossPlotName == crossPlotName:
+                    return cplot
+        print("No cross plot found for name query.")
+        return False
+    
+    def getHistogramByName(self, histogramName, projectName):
+        project = self.getProjectByName(projectName)
+        if project:
+            htgs = project.getAllHistograms()
+            for htg in htgs:
+                if htg.histogramName == histogramName:
+                    return htg
+        print("No histogram found for name query.")
+        return False

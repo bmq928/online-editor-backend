@@ -4,10 +4,11 @@ from .well.well_obj import Well
 from .plot.plotapi import *
 from .plot.plot_object import Plot
 from .histogram.histogramapi import *
-from .histogram.histogram_object import *
-from .cross_plot.cross_plot_object import *
+from .histogram.histogram_object import Histogram
+from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-from .well.markersets_template.markersets_template_obj import *
+from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
+from .well.markerset_template.markerset_template_api import createMarkerset
 
 
 class Project:
@@ -42,6 +43,7 @@ class Project:
 
     def getAllPlots(self):
         return self.getListPlot()
+    
 
     def getListWell(self, **data):
         """Get list well from this project
@@ -64,14 +66,20 @@ class Project:
         for i in list:
             listObj.append(Well(self.token, i))
         return listObj
+    
+    def getAllWells(self, **data):
+        return self.getListWell(**data)
 
-    def newBlankPlot(self, **data):
+    def createBlankPlot(self, **data):
         check, content = createNewPlot(self.token, self.projectId, **data)
         if check:
             return content
         else:
             print(content)
             return False
+
+    def newBlankPlot(self, name):
+        return self.createBlankPlot(name = name)
 
     def createWell(self, **data):
         """Create well and put it into this project.
@@ -94,24 +102,30 @@ class Project:
         else:
             return None
 
+    def newWell(self, **data):
+        return self.createWell(**data)
+
     def createMarkerSetTemplate(self, **data):
-        check, content = createMarkerSetTemplate(self.token, self.projectId, **data)
+        check, content = createCrossPlot(self.token, self.projectId, **data)
         if check:
             return MarkerSetTemplate(self.token, content)
         else:
             return None
+    
+    def newMarketSetTemplate(self, **data):
+        return self.createMarkerSetTemplate(**data)
 
-    def getProjectId(self):
+    def getId(self):
         """Get this project Id
         """
         return self.projectId
 
-    def getProjectInfo(self):
+    def getInfo(self):
         """Return project info mini ver
         """
         return getInfoProject(self.token, self.projectId)
 
-    def getFullProjectInfo(self, **data):
+    def getFullInfo(self):
         """Return full version for project.
         """
         payload = {'idProject': self.projectId}
@@ -142,7 +156,7 @@ class Project:
         """
         return createProject(self.token, **data)
 
-    def editProjectInfo(self, **data):
+    def edit(self, **data):
         """Edit project for this account
         
         pass info need to modify (name, company, department, description)
@@ -165,46 +179,7 @@ class Project:
             return None
         return content
 
-    def changeNameProject(self, name):
-        """change name of project
-
-        Returns: 
-            True if success, false if false
-
-        """
-        check, _ = self.editProjectInfo(name=name)
-        return check
-
-    def changeDescriptionProject(self, description):
-        """change description of project
-
-        Returns: 
-            True if success, false if false
-
-        """
-        check, _ = self.editProjectInfo(description=description)
-        return check
-
-    def changeCompanyInfoProject(self, company):
-        """change company info of project
-
-        Returns: 
-            True if success, false if false
-        """
-        check, _ = self.editProjectInfo(company=company)
-        return check
-
-    def changeDepartmentInfoProject(self, department):
-        """change department info of project
-
-        Returns: 
-            True if success, false if false
-        """
-
-        check, _ = self.editProjectInfo(department=department)
-        return check
-
-    def deleteProject(self):
+    def delete(self):
         """Delete project
 
         Returns: 
@@ -216,9 +191,6 @@ class Project:
         if check:
             return None
         return reason
-
-    def getAllWells(self):
-        return self.getListWell()
 
     def isExistsTag(self, relatedTo, tag):
         if relatedTo and "tags" in relatedTo:
@@ -259,8 +231,8 @@ class Project:
                     if self.isExistsTag(relatedTo, tag):
                         result = result + [curve]
         return result
-
-    def findPlotByTag(self, tag):
+    
+    def findPlotsByTag(self,tag):
         plots = self.getAllPlots()
         result = []
         for plot in plots:
@@ -268,8 +240,8 @@ class Project:
             if self.isExistsTag(relatedTo, tag):
                 result = result + [plot]
         return result
-
-    def findCrossPlotByTag(self, tag):
+    
+    def findCrossPlotsByTag(self,tag):
         crossPlots = self.getAllCrossPlots()
         result = []
         for crossPlot in crossPlots:
@@ -278,7 +250,7 @@ class Project:
                 result = result + [crossPlot]
         return result
 
-    def findHistogramByTag(self, tag):
+    def findHistogramsByTag(self,tag):
         histograms = self.getAllHistograms()
         result = []
         for histogram in histograms:
@@ -384,13 +356,16 @@ class Project:
         else:
             print(content)
         return result
-
-    def newBlankHistogram(self, **kwargs):
+    
+    def createBlankHistogram(self, **kwargs):
         check, content = createHistogram(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idHistogram'], content['name'])
         else:
             return None
+    
+    def newBlankHistogram(self, name):
+        return self.createBlankHistogram(name = name)
 
     def getAllCrossPlots(self):
         result = []
@@ -401,12 +376,15 @@ class Project:
         else:
             print(content)
         return result
-
-    def newBlankCrossPlot(self, **kwargs):
+    
+    def createBlankCrossPlot(self, **kwargs):
         check, content = createCrossPlot(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idCrossPlot'], content['name'])
         else:
             return None
-
+    
+    def newBlankCrossPlot(self, name):
+        return self.createBlankCrossPlot(name = name)
+    
     # def createMarkerSetTemplate()

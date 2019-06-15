@@ -1,8 +1,8 @@
 from ....api_url import ROOT_API
 from ....api_url import EXPORT_PATH
+from .markersets_template_api import *
 import os as os
 from ....common import *
-import requests
 
 class MarkerSetTemplate:
     def __init__(self, token, MarkerSetTempateInfo):
@@ -24,7 +24,7 @@ class MarkerSetTemplate:
         return self.__repr__()  
 
     def deleteMarkerSet(self):
-        check, content = deleteMarkerSet(self.token, self.markerSetTemplateId)
+        check, content = deleteMarkerSetTemplate(self.token, self.markerSetTemplateId)
         if check:
             return None
         return content

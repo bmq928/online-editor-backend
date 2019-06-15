@@ -58,12 +58,6 @@ def createWell(token, projectId, **data):
         payload['name'] = data['name']
     else:
         return False, "Name field can't be null"
-    if 'topDepth' in data:
-        payload['topDepth'] = data['topDepth']
-    if 'bottomDepth' in data:
-        payload['bottomDepth'] = data['bottomDepth']
-    if 'step' in data:
-        payload['step'] = data['step']
     if 'unit' in data:
         payload['unit'] = data['unit']
     if 'color' in data:

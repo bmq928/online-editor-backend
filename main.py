@@ -6,7 +6,7 @@ from wilibs.project.well.dataset.curve import curve_obj
 from wilibs.common import *
 import json
 from wilibs.common import convertUnit
-
+import wilibs.export as obj
 
 #login
 client = wilib.login("hoang","1")
@@ -19,15 +19,13 @@ client = wilib.login("hoang","1")
 
 # well.limitWell(10,1300,'m')
 
-# for i in obj.__dict__:
-#     if (i[0] != '_'):
-#         for j in getattr(obj, i).__dict__:
-#             if (j[0] != '_'):
-#                 print(j)
-
-List_pro =  client.getListProject()
-# print(List_pro)
+for i in obj.__dict__:
+    if (i[0] != '_'):
+        print("----'"+i+"'-----")
+        for j in getattr(obj, i).__dict__:
+            if (j[0] != '_'):
+                print(j)
 
 #{'idProject': 3, 'name': 'hoang'
-project = client.getProjectById(3)
-project.createWell(3)
+# project = client.getProjectById(3)
+# project.createWell(3)

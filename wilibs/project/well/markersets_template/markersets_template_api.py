@@ -1,6 +1,5 @@
 from ....api_url import ROOT_API
 from ....api_url import EXPORT_PATH
-import os as os
 from ....common import *
 import requests
 
@@ -10,8 +9,8 @@ def createMarkerset(token, projectId, **data):
     }
     if 'name' in data:
         payload['name'] = data['name']
-   r = createMarkerSetTemplate_RAW(token, payload)
-   return verfyAndReturn(r)
+    r = createMarkerSetTemplate_RAW(token, payload)
+    return verifyAndReturn(r)
 
 def listMarkerSetTemplate(token, projectId):
     payload = {

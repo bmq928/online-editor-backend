@@ -1,0 +1,398 @@
+{
+    "Wilib":{
+        "login(username, password)":{
+            "params": {
+                "required": {
+                    "username": "String. Insert your username",
+                    "password": "String. Insert your password"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "A Client object for this login session", 
+            "explain": "From your username and password, return a client object for controlling your login",
+            "example": "import wilibs.wilib\nclient = wilib.login('username', 'password')\nproject.getProjectById(56)"
+        },
+        "loginByToken(token)": {
+            "params": {
+                "required": {
+                    "token": "String. Your token string."
+                }
+            },
+            "returns": "A Client object for this login session", 
+            "explain": "From your token, return a client object for controlling your login",
+            "example": "import wilibs.wilib\nclient = wilib.loginByToken('YOUR_TOKEN')\nproject.getProjectById(56)"
+        }
+    },
+    "Client": {
+        "getAllProjects()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "A list of Project object", 
+            "explain": "Get a list of project from your login session",
+            "example": "import wilibs.wilib\nclient = wilib.loginByToken('YOUR_TOKEN')\nprojects = client.getAllProjects()"
+        },
+        "getProjectById(projectId)": {
+            "params": {
+                "required": {
+                    "projectId": "Integer. Id of project with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Project object",
+            "explain": "Get a project with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.getProjectById(55)\nproject.delete()"
+        },
+        "getWellById(wellId)": {
+            "params": {
+                "required": {
+                    "wellId": "Integer. Id of well with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Well object",
+            "explain": "Get a well with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nwell = client.getProjectById(55)\nwell.delete()"
+        },
+        "getDatasetById(datasetId)": {
+            "params": {
+                "required": {
+                    "datasetId": "Integer. Id of project with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Dataset object",
+            "explain": "Get a dataset with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.getDatasetById(55)\ndataset.delete()"
+        },
+        "getCurveById(curveId)": {
+            "params": {
+                "required": {
+                    "curveId": "Integer. Id of curve with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Curve object",
+            "explain": "Get a curve with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncurve = client.getCurveById(55)\ncurve.delete()"
+        },
+        "getHistogramById(histogramId)": {
+            "params": {
+                "required": {
+                    "histogramId": "Integer. Id of project with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Histogram object",
+            "explain": "Get a histogram with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nhistogram = client.getHistogramById(55)\nhistogram.delete()"
+        },
+        "getCrossPlotById(crossPlotId)": {
+            "params": {
+                "required": {
+                    "crossPlotId": "Integer. Id of project with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A CrossPlot object",
+            "explain": "Get a crossPlot with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncrossPlot = client.getCrossPlotById(55)\ncrossPlot.delete()"
+        },
+        "getImageSetById(imageSetId)": {
+            "params": {
+                "required": {
+                    "imageSetId": "Integer. Id of project with you want to get from your login session"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A ImageSet object",
+            "explain": "Get a imageSet with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nimageSet = client.getProjectById(55)\nimageSet.delete()"
+        },
+        "getProjectByName(projectName)": {
+            "params": {
+                "required": {
+                    "projectName": "String. Name of project you want to query"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Project object",
+            "explain": "Get a project with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.getProjectByName('Example Project')\nproject.delete()"
+        },
+        "getWellByName(wellName, projectName)": {
+            "params": {
+                "required": {
+                    "wellName": "String, Name of well you want to query",
+                    "projectName": "String. Name of project you want to query well from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Well object",
+            "explain": "Get a well with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nwell = client.getWellByName('Example Well', 'Example Project')\nwell.delete()"
+        },
+        "getDatasetByName(datasetName, wellName, projectName)": {
+            "params": {
+                "required": {
+                    "datasetName": "String. Name of dataset you want to query",
+                    "wellName": "String. Name of well you want to query from",
+                    "projectName": "String. Name of project you want to query well from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Dataset object",
+            "explain": "Get a dataset with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\ndataset = client.getDatasetByName('Example Dataset', 'Example Well', 'Example Project')\ndataset.delete()"
+        },
+        "getCurveByName(curveName, datasetName, wellName, projectName)": {
+            "params": {
+                "required": {
+                    "curveName": "String. Name of curve you want to query",
+                    "datasetName": "String. Name of dataset you want to query from",
+                    "wellName": "String. Name of well you want to query from",
+                    "projectName": "String. Name of project you want to query well from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Curve object",
+            "explain": "Get a curve with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncurve = client.getCurveByName('Example curve', 'Example Dataset', 'Example Well', 'Example Project')\ncurve.delete()"
+        },
+        "getPlotByName(plotName, projectName)": {
+            "params": {
+                "required": {
+                    "plotName": "String. Name of plot you want to query",
+                    "projectName": "String. Name of project you want to query from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Plot object",
+            "explain": "Get a plot with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getPlotByName('Example Plot','Example Project')\nplot.delete()"
+        },
+        "getCrossPlotByName(crossPlotName, projectName)": {
+            "params": {
+                "required": {
+                    "crossPlotName": "String. Name of cross plot you want to query",
+                    "projectName": "String. Name of project you want to query from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A CrossPlot object",
+            "explain": "Get a cross plot with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncrossPlot = client.getCrossPlotByName('Example Cross Plot', 'Example Project')\ncrossPlot.delete()"
+        },
+        "getHistogramByName(histogramName, projectName)": {
+            "params": {
+                "required": {
+                    "histogramName": "String. Name of histogram you want to query",
+                    "projectName": "String. Name of project you want to query from"
+                }, 
+                "optional": {
+
+                }
+            },
+            "returns": "A Histogram object",
+            "explain": "Get a histogram with specified name",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nhistogram = client.getHistogramByName('Example Histogram', 'Example Project')\nhistogram.delete()"
+        },
+        "wiSavefig(plt, fileName, **data)": {
+
+        }
+    }
+    ,
+    "Project": {
+        "getAllWells()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A list of Well object",
+            "explain": "Get a list of well in this project",
+            "example": "project = client.getProjectById(56)\nwells = project.getAllWells()\nprint(wells)"
+        },
+        "getAllHistograms()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A list of Histogram object",
+            "explain": "Get a list of histogram in this project",
+            "example": "project = client.getProjectById(56)\nhistograms = project.getAllHistograms()\nprint(histograms)"
+        },
+        "getAllPlots()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A list of Plot object",
+            "explain": "Get a list of plot in this project",
+            "example": "project = client.getProjectById(56)\nplots = project.getAllPlots()\nprint(plots)"
+        },
+        "getAllCrossPlots()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A list of CrossPlot object",
+            "explain": "Get a list of cross plot in this project",
+            "example": "project = client.getProjectById(56)\ncrossPlots = project.getAllWells()\nprint(crossPlots)"
+        },
+        "getId()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A integer which is id of this project",
+            "explain": "Get id of project object",
+            "example": "project = client.getProjectById(56)\nid = project.getId()\nprint(id)"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A json contain project info",
+            "explain": "Get minimal info of this project",
+            "example": "project = client.getProjectById(56)\ninfo = project.getInfo()\nprint(info)"
+        },
+        "getFullInfo()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "A json contain project info full version",
+            "explain": "Get full info of this project",
+            "example": "project = client.getProjectById(56)\nfullInfo = project.getFullInfo()\nprint(fullInfo)"
+        },
+        "delete()": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                }
+            },
+            "returns": "Return True if successfully delete this project, False if get some error",
+            "explain": "Delete this project.\nWarning: You should delete this project object right after call this function successful",
+            "example": "project = client.getProjectById(56)\nsuccess = project.delete()\nif success:\n\tdel project"
+        },
+        "edit(**dict)": {
+            "params": {
+                "required": {
+                }, 
+                "optional": {
+                    "dict.name": "String. new name",
+                    "dict.alias": "String. new alias",
+                    "dict.company": "String. new company",
+                    "dict.department": "String. new department",
+                    "dict.description": "String. new description"
+                }
+            },
+            "returns": "Return True if successfully edit this project, False if get some error",
+            "explain": "Edit this project info",
+            "example": "project = client.getProjectById(56)\nsuccess = project.edit(name='new name', company='your company',description='example description')\nif success:\n\tprint('edit successful')"
+        },
+        "newWell(**dict)": {
+            "params": {
+                "required": {
+                    "dict.name": "String. name for new well"
+                },
+                "optional": {
+                    "dict.color": "String. color of well",
+                    "dict.unit": "String. unit of well",
+                    "dict.idWell": "Integer. id for well. Should leave it create automatic"
+                }
+            },
+            "returns": "Return a well object for new Well you just created. None if create well false",
+            "explain": "Create a new well in this project",
+            "example": "project = client.getProjectById(56)\nnewWell = project.newWell(name='new well', unit='m')\nif newWell:\n\tnewWell.delete()"            
+        },
+        "newBlankCrossPlot(name)": {
+            "params": {
+                "required": {
+                    "name": "String. name for new blank cross plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Return a CrossPlot object for new cross plot you just created\nReturn None if create new CrossPlot fail",
+            "explain": "Create a new blank Cross Plot in this project",
+            "example": "project = client.getProjectById(56)\ncrossPlot = project.newBlankCrossPlot('Blank Cross Plot')\nif crossPlot:\n\tcrossPlot.delete()"
+        },
+        "newBlankPlot(name)": {
+            "params": {
+                "required": {
+                    "name": "String. name for new blank plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Return a Plot object for new cross plot you just created\nReturn None if create new Plot fail",
+            "explain": "Create a new blank Plot in this project",
+            "example": "project = client.getProjectById(56)\nplot = project.newBlankPlot('Blank Plot')\nif plot:\n\tplot.delete()"
+        },
+        "newBlankHistogram(name)": {
+            "params": {
+                "required": {
+                    "name": "String. name for new blank histogram"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Return a Histogram object for new cross plot you just created\nReturn None if create new Histogram fail",
+            "explain": "Create a new blank Histogram in this project",
+            "example": "project = client.getProjectById(56)\nhistogram = project.newBlankHistogram('Blank Cross Plot')\nif histogram:\n\thistogram.delete()"
+        }
+    }
+}
