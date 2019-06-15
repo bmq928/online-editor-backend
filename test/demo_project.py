@@ -1,5 +1,10 @@
-client = wilib.login("hoang","1")
+client = wilib.login("su_test", "123456")
 
-project = client.findProjectByName("my")
+# project = client.findProjectByName("SD - B9 project - ESS2CLJOC")
 
-print(project.newBlankHistogram(name="hoang"))
+projects = client.getListProject()
+for project in projects:
+    print(project)
+
+project = client.findProjectByName('Test release 1')
+print("==", len(project.getAllWells()))

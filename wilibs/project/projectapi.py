@@ -32,7 +32,7 @@ def getInfoProject(token, projectId):
     return verifyAndReturn(r)
 
 
-def getFullInfoProject(token, projectId):
+def getFullInfoProject(token, payload):
     """Get info from a project
     
     Need token and projectId and return full version info of project
@@ -48,8 +48,10 @@ def getFullInfoProject(token, projectId):
         if :bool: is true then :any: is json that contain project info.
 
     """
-    r = getFullInfoProject_RAW(token, projectId)
-    return verifyAndReturn(r)
+    r = getFullInfoProject_RAW(token, payload)
+    if r['code'] == 200:
+        return r['content']
+    return None
     
 
 def listProject(token):
@@ -186,9 +188,9 @@ def getInfoProject_RAW(token, projectId):
     r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
 
-def getFullInfoProject_RAW(token, projectId):
+def getFullInfoProject_RAW(token, payload):
     url = ROOT_API + '/project/fullinfo'
-    r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token), verify=False)
+    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def closeProject_RAW(token, projectId):

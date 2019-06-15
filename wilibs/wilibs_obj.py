@@ -57,19 +57,19 @@ class Wilib:
         if check:
             return Curve(self.token, curveInfo)
         return None
-    
+
     def getHistogramById(self, histogramId):
         check, info = getHistogramInfo(self.token, histogramId)
         if check:
             return Histogram(self.token, histogramId, info['name'])
         return None
-    
+
     def getCrossPlotById(self, crossPlotId):
         check, info = getCrossPlotInfo(self.token, crossPlotId)
         if check:
             return CrossPlot(self.token, crossPlotId, info['name'])
         return None
-    
+
     def getImageSetById(self, imageSetId):
         check, info = getImageSetInfo(self.token, imageSetId)
         if check:
@@ -88,9 +88,14 @@ class Wilib:
     def findProjectByName(self, projectName):
         projects = self.getListProject()
         for project in projects:
-            projectObj = project.getProjectInfo()[1] if project.getProjectInfo()[0] else {}
-            if projectObj["alias"].lower() == projectName.lower() or projectObj["name"].lower() == projectName.lower():
-                return project
+            if project.alias.lower() == projectName.lower() or project.projectName.lower() == projectName.lower():
+                if project.shared:
+                    print("Working in sharing project ...")
+                    project = project.getFullProjectInfo(shared=project.shared, owner=project.owner)
+                    return Project(self.token, project)
+                else:
+                    project = project.getFullProjectInfo()
+                    return Project(self.token, project)
         return False
 
     def findWellByName(self, wellName, projectName):

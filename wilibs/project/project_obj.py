@@ -7,23 +7,24 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import *
 from .cross_plot.cross_plot_object import *
 from .cross_plot.cross_plotapi import *
-from .well.markerset_template.markerset_template_obj import *
+from .well.markersets_template.markersets_template_obj import *
 
 
 class Project:
     def __init__(self, token, projectInfo):
         self.token = token
-        self.projectInfo = {
-            'idProject': projectInfo['idProject'],
-            'name': projectInfo['name'],
-            'alias': projectInfo['alias']
-        }
+        self.projectInfo = projectInfo
         self.projectId = projectInfo['idProject']
+        self.projectName = projectInfo['name']
+        self.alias = projectInfo['alias']
+        self.shared = projectInfo['shared'] if 'shared' in projectInfo else False
+        self.owner = projectInfo['owner'] if 'owner' in projectInfo else projectInfo['createdBy']
 
     def __repr__(self):
         payload = {
             'idProject': self.projectId,
-            'name': self.projectInfo['name'],
+            'name': self.projectName,
+            'shared': self.shared
         }
         return str(payload)
 
@@ -110,10 +111,15 @@ class Project:
         """
         return getInfoProject(self.token, self.projectId)
 
-    def getFullProjectInfo(self):
+    def getFullProjectInfo(self, **data):
         """Return full version for project.
         """
-        return getFullInfoProject(self.token, self.projectId)
+        payload = {'idProject': self.projectId}
+        if 'shared' and 'owner' in data:
+            payload['shared'] = data['shared']
+            payload['owner'] = data['owner']
+            payload['name'] = self.projectName
+        return getFullInfoProject(self.token, payload)
 
     def createProject(self, **data):
         """Create project for this account.
@@ -253,8 +259,8 @@ class Project:
                     if self.isExistsTag(relatedTo, tag):
                         result = result + [curve]
         return result
-    
-    def findPlotByTag(self,tag):
+
+    def findPlotByTag(self, tag):
         plots = self.getAllPlots()
         result = []
         for plot in plots:
@@ -262,8 +268,8 @@ class Project:
             if self.isExistsTag(relatedTo, tag):
                 result = result + [plot]
         return result
-    
-    def findCrossPlotByTag(self,tag):
+
+    def findCrossPlotByTag(self, tag):
         crossPlots = self.getAllCrossPlots()
         result = []
         for crossPlot in crossPlots:
@@ -272,7 +278,7 @@ class Project:
                 result = result + [crossPlot]
         return result
 
-    def findHistogramByTag(self,tag):
+    def findHistogramByTag(self, tag):
         histograms = self.getAllHistograms()
         result = []
         for histogram in histograms:
@@ -318,7 +324,7 @@ class Project:
             relatedTo = crossPlot.getInfoCrossPlot()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['crossPlots'] = result['crossPlots'] + [crossPlot]
-                
+
         for histogram in histograms:
             relatedTo = histogram.getInfoHistogram()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
@@ -357,7 +363,7 @@ class Project:
         for well in objects["wells"]:
             # print("do well ", well.wellName)
             result = result and well.removeTags([oldTag])
-            result = result and well.addTags([newtag])    
+            result = result and well.addTags([newtag])
         for plot in objects["plots"]:
             result = result and plot.removeTags([oldTag])
             result = result and plot.addTags([newtag])
@@ -378,14 +384,14 @@ class Project:
         else:
             print(content)
         return result
-    
+
     def newBlankHistogram(self, **kwargs):
         check, content = createHistogram(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idHistogram'], content['name'])
         else:
             return None
-    
+
     def getAllCrossPlots(self):
         result = []
         check, content = getCrossPlotList(self.token, self.projectId)
@@ -395,12 +401,12 @@ class Project:
         else:
             print(content)
         return result
-    
+
     def newBlankCrossPlot(self, **kwargs):
         check, content = createCrossPlot(self.token, self.projectId, **kwargs)
         if check:
             return Histogram(self.token, content['idCrossPlot'], content['name'])
         else:
             return None
-    
+
     # def createMarkerSetTemplate()
