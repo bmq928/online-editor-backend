@@ -88,10 +88,14 @@ class Wilib:
     def getProjectByName(self, projectName):
         projects = self.getAllProjects()
         for project in projects:
-            projectObj = project.getProjectInfo()[1] if project.getProjectInfo()[0] else {}
-            if projectObj["alias"].lower() == projectName.lower() or projectObj["name"].lower() == projectName.lower():
-                return project
-        print("No project found for name query.")
+            if project.alias.lower() == projectName.lower() or project.projectName.lower() == projectName.lower():
+                if project.shared:
+                    print("Working in sharing project ...")
+                    project = project.getFullInfo(shared=project.shared, owner=project.owner)
+                    return Project(self.token, project)
+                else:
+                    project = project.getFullInfo()
+                    return Project(self.token, project)
         return False
 
     def getWellByName(self, wellName, projectName):
@@ -145,7 +149,7 @@ class Wilib:
         str += "\n*** Warning: All files will be deleted after 1 hour ***\n"
         print(str)
         return True
-    
+
     def getCrossPlotByName(self, crossPlotName, projectName):
         project = self.getProjectByName(projectName)
         if project:
@@ -155,7 +159,7 @@ class Wilib:
                     return cplot
         print("No cross plot found for name query.")
         return False
-    
+
     def getHistogramByName(self, histogramName, projectName):
         project = self.getProjectByName(projectName)
         if project:

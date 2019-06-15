@@ -7,8 +7,8 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
-from .well.markerset_template.markerset_template_api import createMarkerset
+from .well.markersets_template.markersets_template_obj import MarkerSetTemplate
+from .well.markersets_template.markersets_template_api import createMarkerset
 
 
 class Project:
@@ -125,7 +125,7 @@ class Project:
         """
         return getInfoProject(self.token, self.projectId)
 
-    def getFullInfo(self):
+    def getFullInfo(self, **data):
         """Return full version for project.
         """
         payload = {'idProject': self.projectId}
