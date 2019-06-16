@@ -1,16 +1,12 @@
 from ....api_url import ROOT_API
 from ....api_url import EXPORT_PATH
+import os as os
 from ....common import *
 import requests
 
-def createMarkerset(token, projectId, **data):
-    payload = {
-        'idproject' : projectId
-    }
-    if 'name' in data:
-        payload['name'] = data['name']
-    r = createMarkerSetTemplate_RAW(token, payload)
-    return verifyAndReturn(r)
+def createMarkerSetTemplate(token, projectId, name):
+   r = createMarkerSetTemplate_RAW(token, projectId, name)
+   return verfyAndReturn(r)
 
 def listMarkerSetTemplate(token, projectId):
     payload = {
@@ -26,17 +22,17 @@ def deleteMarkerSetTemplate(token, markerSetTemplateId):
     return verifyAndReturn(r)
 
 #RAW
-def createMarkerSetTemplate_RAW(token, payload):
-    url = ROOT_API + '/project/marker-set/new'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+def createMarkerSetTemplate_RAW(token, projectId, name):
+    url = ROOT_API + '/marker-set-template/new'
+    r = requests.post(url, json = {'idProject' : projectId, 'name' : name}, headers = tokenHeader(token))
     return r.json()
 
 def listMarkerSetTemplate_RAW(token, projectId):
-    url = ROOT_API + '/project/marker-set-template/list'
+    url = ROOT_API + '/marker-set-template/list'
     r = requests.post(url, json = {'idProject' : projectId} , headers = tokenHeader(token))
     return r.json()
 
 def deleteMarkerSetTemplate_RAW(token, markerSetTemplateId):
-    url = ROOT_API + '/project/marker-set-template/delete'
-    r = requests.post(url, json = {'idMarkerTemplate' :markerSetTemplateId} , headers = tokenHeader(token))
+    url = ROOT_API + '/marker-set-template/delete'
+    r = requests.post(url, json = {'idMarkerTemplate' : markerSetTemplateId} , headers = tokenHeader(token))
     return r.json()

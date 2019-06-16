@@ -7,8 +7,7 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-from .well.markersets_template.markersets_template_obj import MarkerSetTemplate
-from .well.markersets_template.markersets_template_api import createMarkerset
+
 
 
 class Project:
