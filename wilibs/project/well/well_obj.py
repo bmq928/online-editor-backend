@@ -6,7 +6,8 @@ from .imageset.imageset_obj import *
 from .imageset.imageset_api import createImageSet
 from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
-
+from .markersets_template.markersets.markersets_api import createMarkerSets
+from .markersets_template.markersets.markersets_obj import MarkerSets
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
     {'header': 'WELL', 'value': '', 'unit': ''},
@@ -96,10 +97,28 @@ class Well:
 
         return None
     
+    def getListMarkerSets(self):
+        check, list = getListMarkerSets(self.token,self.wellId)
+        if check is False and list is None:
+            return []
+        listObj = []
+        for i in list:
+            listObj.append(MarkerSets(self.token, i))
+        return listObj
+    
+    
     def createImageSet(self, name):
         check, content = createImageSet(name, self.wellId, name)
         if check:
             return ImageSet(self.token, content)
+        else:
+            print(content)
+        return None
+    
+    def createMarkerSets(self, name):
+        check, content = createMarkerSets(self.token, self.wellId, name)
+        if check:
+            return MarkerSets(self.token, content)
         else:
             print(content)
         return None
