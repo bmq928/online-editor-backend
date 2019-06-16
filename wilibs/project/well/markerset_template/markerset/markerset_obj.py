@@ -1,5 +1,6 @@
-from .markersets_api import *   
-from wilibs.project.well.markersets_template.markersets.marker_template.marker.marker_api import createMarker 
+from .markerset_api import *
+from .marker.marker_api import createMarker
+from .marker.marker_obj import Marker
 
 class MarkerSets:
     def __init__(self, token, markersetsInfo):
@@ -26,3 +27,11 @@ class MarkerSets:
         else:
             print(content)
         return False
+
+    def createMarker(self, MarkerSetTemplateId, name):
+        check, content = createMarker(self.token, self.markersetId, MarkerSetTemplateId, name)
+        if check:
+            return Marker(self.token, content)
+        else:
+            print(content)
+        return None

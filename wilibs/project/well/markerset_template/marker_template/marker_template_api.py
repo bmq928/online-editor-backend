@@ -1,33 +1,35 @@
-from ....api_url import ROOT_API
-from ....api_url import EXPORT_PATH
+
+from wilibs.api_url import *
 import os as os
-from ....common import *
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from wilibs.common import *
+# from requests.packages.urllib3.exceptions import InsecureRequestWarning
+#
+# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-
-def createMarkerTemplate(token, MarkerSetTemplateId, payload):
+def createMarkerTemplate(token, MarkerSetTemplateId, **data):
     payload = {
-        'idMarkerSetTemplate' : MarkerSetTemplateId
+        'idMarkerSetTemplate': MarkerSetTemplateId
     }
-    r = createImageSet_RAW(token, MarkerSetTemplateId, payload)
+    if 'name' in data:
+        payload['name'] = data['name']
+    r = createMarkerTemplate_RAW(token, MarkerSetTemplateId, payload)
     return verifyAndReturn(r)
 
 
 def deleteMarkerTemplate(token, imageSetId):
-    r = deleteImageSet_RAW(token, imageSetId)
+    r = deleteMarkerTemplate_RAW(token, imageSetId)
     return verifyAndReturn(r)
 
 def getListMarkerTemplate(token, wellId):
-    r = getListImageSet_RAW(token, wellId)
+    r = getListMarkerTemplate_RAW(token, wellId)
     return verifyAndReturn(r)
 
 #RAW:
 def createMarkerTemplate_RAW(token, payload):
     url = ROOT_API + '/marker-set-template/marker-template/new'
-    r = requests.post(url, json= payload , headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def deleteMarkerTemplate_RAW(token, MarkerTemplateId):

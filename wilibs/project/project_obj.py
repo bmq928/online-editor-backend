@@ -7,7 +7,9 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-
+from .well.markerset_template.markerset_template_obj import createMarkerSetTemplate
+from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
+from .well.markerset_template.markerset_template_api import *
 
 
 class Project:
@@ -78,7 +80,7 @@ class Project:
             return False
 
     def newBlankPlot(self, name):
-        return self.createBlankPlot(name = name)
+        return self.createBlankPlot(name=name)
 
     def createWell(self, **data):
         """Create well and put it into this project.
@@ -104,8 +106,8 @@ class Project:
     def newWell(self, **data):
         return self.createWell(**data)
 
-    def createMarkerSetTemplate(self, **data):
-        check, content = createCrossPlot(self.token, self.projectId, **data)
+    def createMarkerSetTemplate(self, name):
+        check, content = createMarkerSetTemplate(self.token, self.projectId, name)
         if check:
             return MarkerSetTemplate(self.token, content)
         else:
@@ -364,7 +366,7 @@ class Project:
             return None
     
     def newBlankHistogram(self, name):
-        return self.createBlankHistogram(name = name)
+        return self.createBlankHistogram(name=name)
 
     def getAllCrossPlots(self):
         result = []
@@ -384,6 +386,16 @@ class Project:
             return None
     
     def newBlankCrossPlot(self, name):
-        return self.createBlankCrossPlot(name = name)
-    
-    # def createMarkerSetTemplate()
+        return self.createBlankCrossPlot(name=name)
+
+    def listMarkerTemplate(self):
+        check, list = listMarkerSetTemplate(self.token, self.projectId)
+        if check is False and list is None:
+            return []
+        listObj = []
+        for i in list:
+            listObj.append(MarkerSetTemplate(self.token, i))
+        return listObj
+
+
+

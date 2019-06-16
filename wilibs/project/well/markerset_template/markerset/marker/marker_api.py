@@ -1,36 +1,35 @@
 from wilibs.api_url import ROOT_API
 from wilibs.api_url import EXPORT_PATH
 import os as os
-# from ....common import *
+from wilibs.common import *
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+# from requests.packages.urllib3.exceptions import InsecureRequestWarning
+# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
-def createMarker(token, wellId, name):
-    r = createImageSet_RAW(token, wellId, name)
+def createMarker(token,markerSetId, markerTemplateId, name):
+    r = createMarker_RAW(token, markerSetId, markerTemplateId, name)
     return verifyAndReturn(r)
 
-def deleteMarker(token, imageSetId):
-   
+def deleteMarker(token, markerId):
+    r = deleteMarker_RAW(token, markerId)
     return verifyAndReturn(r)
 
-def getListMarker(token, wellId):
-   
+def getListMarker(token, markerSetId):
+    r = getListMarker_RAW(token, markerSetId)
     return verifyAndReturn(r)
 
 #RAW:
-def createMarker_RAW(token, wellId, name):
+def createMarker_RAW(token, markerSetId, markerTemplateId, name):
     url = ROOT_API + '/project/well/marker-set/marker/new'
-    r = requests.post(url, json={'idWell': wellId, 'name':name}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json={'idMarkerSet':markerSetId, 'idMarkerTemplate':markerTemplateId, 'name':name}, headers=tokenHeader(token), verify=False)
     return r.json()
 
-def deleteMarker_RAW(token, imageSetId):
+def deleteMarker_RAW(token, markerId):
     url = ROOT_API + '/project/well/marker-set/marker/delete'
-    r = requests.post(url, json={'idImageSet': imageSetId}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json={'idMarker': markerId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
-def getListMarker_RAW(token, wellId):
+def getListMarker_RAW(token, markerSetId):
     url = ROOT_API + '/project/well/marker-set/marker/list'
-    r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json={'idMarkerSet': markerSetId}, headers=tokenHeader(token), verify=False)
     return r.json()

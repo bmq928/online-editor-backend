@@ -4,11 +4,14 @@ class Marker:
     def __init__(self, token, markerInfo):
         self.token = token
         self.markerInfo = {
-            'idMarker' : markerInfo['idMarker']
+            'idMarker': markerInfo['idMarker'],
             'idMarkerTemplate': markerInfo['idMarkerTemplate'],
+            'idMarkerSet': markerInfo['idMarkerTemplate'],
+            'name': markerInfo['name'],
+
         }
-        self.markerId =  markerInfo['idMarker']
-        
+        self.markerId = markerInfo['idMarker']
+        self.Depth = markerInfo['depth']
 
     def __repr__(self):
         obj = dict(self.imagesetInfo)

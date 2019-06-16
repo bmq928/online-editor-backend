@@ -1,23 +1,22 @@
 from .marker_template_api import *
-from .marker_api import createMarker
 class MarkerTemplate:
     def __init__(self, token, MarkerTemplateInfo):
         self.token = token
-        self. = {
+        self.MarkerTemplateInfo = {
            'idMarkerTemplate': MarkerTemplateInfo['idMarkerTemplate'],
-           'name' : MarkerTemplateInfo['name'],
-           'lineWidth' : MarkerTemplateInfo['lineWidth'],
-           'lineStyle' : MarkerTemplateInfo['lineStyle'],
-           'depth' :  MarkerTemplateInfo['depth'],
-           'color' :  MarkerTemplateInfo['color']
+           'name': MarkerTemplateInfo['name'],
+           'lineWidth': MarkerTemplateInfo['lineWidth'],
+           'lineStyle': MarkerTemplateInfo['lineStyle'],
+           'depth':  MarkerTemplateInfo['depth'],
+           'color':  MarkerTemplateInfo['color']
 
         }
-        self.MarkerTemplateId =  markerInfo['idMarkerTemplate']
-        self.MarkerTemplateName =  markerInfo['name']
-        self.LineWidth =  markerInfo['lineWidth']
-        self.LineStyle =  markerInfo['lineStyle']
-        self.Depth =  markerInfo['Depth']
-        self.Color =  markerInfo['color']
+        self.MarkerTemplateId = MarkerTemplateInfo['idMarkerTemplate']
+        self.MarkerTemplateName = MarkerTemplateInfo['name']
+        self.LineWidth = MarkerTemplateInfo['lineWidth']
+        self.LineStyle = MarkerTemplateInfo['lineStyle']
+        self.Depth = MarkerTemplateInfo['Depth']
+        self.Color = MarkerTemplateInfo['color']
 
     def __repr__(self):
         obj = dict(self.imagesetInfo)
@@ -25,9 +24,8 @@ class MarkerTemplate:
 
     def __str__(self):
         return self.__repr__()
-    
-    def createMarker(self, name):
-        check, content = createMarker(self.token, self.MarkerTemplateId, name)
+    def deleteMarkerTemplate(self):
+        check, content = deleteMarkerTemplate(self.token, self.MarkerTemplateId)
         if check:
             return True
         else:
