@@ -6,8 +6,7 @@ from .imageset.imageset_obj import *
 from .imageset.imageset_api import createImageSet
 from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
-# from .markersets_template.markersets.markersets_api import createMarkerSets
-# from .markersets_template.markersets.markersets_obj import MarkerSets
+
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
     {'header': 'WELL', 'value': '', 'unit': ''},

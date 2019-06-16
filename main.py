@@ -7,7 +7,7 @@ from wilibs.common import *
 import json
 from wilibs.common import convertUnit
 import wilibs.export as obj
-from wilibs.project.well.markersets_template.markersets import markersets_obj
+
 
 #login
 client = wilib.login("hoang","1")
@@ -34,3 +34,4 @@ client = wilib.login("hoang","1")
 # list_set = well_obj.getListMarkerSets(client.token, 61)
 # print(list_set)
 # markersets_obj.deleteMarkerSets(client.token, 24)
+print("hello")
