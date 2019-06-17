@@ -29,8 +29,8 @@ class MarkerSets:
             print(content)
         return False
 
-    def createMarker(self, MarkerTemplateId):
-        check, content = createMarker(self.token, self.markersetId, MarkerTemplateId)
+    def createMarker(self, MarkerTemplateId, Depth):
+        check, content = createMarker(self.token, self.markersetId, MarkerTemplateId, Depth)
         if check:
             return Marker(self.token, content)
         else:

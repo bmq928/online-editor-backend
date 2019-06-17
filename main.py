@@ -57,8 +57,8 @@ client = wilib.login("hoang","1")
 # markerset_obj.createMarker(client.token, 25, 105)
 # tmp = client.getWellById(61)
 # mar = tmp.getListMarkerSets()
-test = client.getMarkerSetById(36)
-test.deleteMarkerSets()
+# test = client.getMarkerSetById(25)
+# test.createMarker(151, 2134.43)
 
 
 

@@ -7,13 +7,14 @@ class Marker:
             'idMarker': markerInfo['idMarker'],
             'idMarkerTemplate': markerInfo['idMarkerTemplate'],
             'idMarkerSet': markerInfo['idMarkerTemplate'],
-            'name': markerInfo['name'],
+            # 'name': markerInfo['name']
         }
         self.markerId = markerInfo['idMarker']
         self.Depth = markerInfo['depth']
+        
 
     def __repr__(self):
-        obj = dict(self.imagesetInfo)
+        obj = dict(self.markerInfo)
         return str(obj)
 
     def __str__(self):
@@ -27,3 +28,10 @@ class Marker:
             print(content)
         return False
     
+    def getMarkerSetInfo(self):
+        check, content = getMarkerInfo(self.token, self.markerId)
+        if check:
+            return content
+        else:
+            print(content)
+        return {}

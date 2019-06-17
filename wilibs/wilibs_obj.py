@@ -23,8 +23,8 @@ from .project.well.markerset_template.marker_template.marker_template_api import
 from .project.well.markerset_template.marker_template.marker__template_obj import MarkerTemplate
 from .project.well.markerset_template.markerset.markerset_api import getMarkerSetInfo
 from .project.well.markerset_template.markerset.markerset_obj import MarkerSets
-
-
+from .project.well.markerset_template.markerset.marker.marker_api import getMarkerInfo
+from .project.well.markerset_template.markerset.marker.marker_obj import Marker
 
 class Wilib:
     def __init__(self, token):
@@ -65,6 +65,12 @@ class Wilib:
         check, markerSetTemplateInfo = getMarkerSetTeamplateInfo(self.token, MarkerSetTemplateId)
         if check:
             return MarkerSetTemplate(self.token, markerSetTemplateInfo)
+        return None
+    
+    def getMarkerById(self, MarkerId):
+        check, markerInfo = getMarkerInfo(self.token, MarkerId)
+        if check:
+            return Marker(self.token, markerInfo)
         return None
 
     def getMarkerTemplatebyId(self, MarkerTemplateId):
