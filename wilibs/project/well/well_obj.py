@@ -79,6 +79,9 @@ class Well:
         if check:
             return info
         return None
+    
+    def getInfo(self):
+        return self.getWellInfo()
 
     def getListDataset(self):
         """Get list dataset in this well
@@ -93,7 +96,6 @@ class Well:
             for i in list:
                 listObj.append(Dataset(self.token, i))
             return listObj
-
         return None
     
     def getListMarkerSets(self):
@@ -138,6 +140,9 @@ class Well:
             return Dataset(self.token, dataset)
         else:
             return None
+    
+    def newDataset(self, **data):
+        return self.createDataset(**data)
 
     def getWellFullInfo(self):
         """Returns well full info as dict
@@ -146,6 +151,9 @@ class Well:
         if check:
             return info
         return None
+    
+    def getFullInfo(self, **data):
+        return self.getWellFullInfo(**data)
 
     # def getWellHeaders(self):
     #     """Returns list well headers for this well as array of dict
@@ -175,6 +183,12 @@ class Well:
         if check:
             return None
         return content
+    
+    def delete(self):
+        return self.deleteWell()
+    
+    def edit(self, **data):
+        return self.editWellInfo(**data)
 
     def createZoneSet(self, zoneSetName):
         check, content = createZoneSetTemplate(self.token, {'name': zoneSetName, 'idProject': self.projectId})
@@ -190,6 +204,9 @@ class Well:
         else:
             print(content)
             return None
+    
+    def newZoneSet(self, zoneSetName):
+        return self.createZoneSet(zoneSetName)
 
     def limitWell(self, top, bottom, unit):
         top = convertUnit(top, unit)

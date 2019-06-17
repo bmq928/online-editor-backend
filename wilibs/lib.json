@@ -623,20 +623,21 @@
         "renameZoneSet(oldZoneSetName, newZoneSetName)": {
             "params": {
                 "required": {
-                    
+                    "oldZoneSetName": "String. old name of zone set need to rename",
+                    "newZoneSetName": "String. new name"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if rename successfully, False if error",
+            "explain": "Rename zone set in well",
+            "example": "success = well.rename('old zoneSet', 'new zoneSet')\nif success:\n\tprint('rename successfully')"
         },
-        "renameZone(zoneName, zoneSetName, newZoneSetName)": {
+        "renameZone(zoneName, zoneSetName, newZoneName)": {
             "params": {
                 "required": {
-                    
+                    "zoneName": 
                 },
                 "optional": {
 
