@@ -43,6 +43,9 @@ class Dataset:
             return content
         return None
 
+    def getInfo(self):
+        return self.getDatasetInfo()
+    
     def createCurve(self, name, **kwargsData):
         """Create new Curve for this Dataset
         
@@ -80,6 +83,10 @@ class Dataset:
         if check:
             return Curve(self.token, content)
         return None
+    
+    def newCurve(self, name, **data):
+        return self.createCurve(name, **data)
+    
 
     def getListCurve(self):
         """Get list object curve in this dataset
@@ -91,7 +98,7 @@ class Dataset:
             for i in list:
                 listObj.append(Curve(self.token, i))
             return listObj
-        return None
+        return []
 
     def editDatasetInfo(self, **data):
         """Edit dataset info
@@ -104,23 +111,29 @@ class Dataset:
             str describe err if fail
         
         Example:
-            err = datasetobj.editDatasetInfo(name = 'hello', datasetKey='new key', idWell='2')
+            err = datasetobj.edit
+            DatasetInfo(name = 'hello', datasetKey='new key', idWell='2')
             if err:
                 print(err)
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
+    
+    def edit(self, **data):
+        return self.editDatasetInfo()
 
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])
         if check:
-            return None
-        return content
-
-    def createBlankCurve(self, curveName, **data):
-        return self.createCurve(curveName, **data)
+            return True
+        print(content)
+        return False
+    
+    def delete(self):
+        return self.deleteDataset()
 
     def getAllCurves(self):
         curves = self.getListCurve()

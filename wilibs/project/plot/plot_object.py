@@ -27,18 +27,24 @@ class Plot:
     def editPlot(self, **data):
         check, content = editPlot(self.token, self.plotId, **data)
         if check:
-            return content
+            return True
         else:
             print(content)
             return False
+    
+    def edit(self, **data):
+        return self.editPlot(**data)
 
     def deletePlot(self):
         check, content = deletePlot(self.token, self.plotId)
         if check:
-            return content
+            return True
         else:
             print(content)
             return False
+    
+    def delete(self):
+        return self.deletePlot()
 
     def getPlotInfo(self):
         check, content = infoPlot(self.token, self.plotId)
@@ -47,6 +53,9 @@ class Plot:
         else:
             print(content)
             return False
+
+    def getInfo(self):
+        return self.getPlotInfo()
 
     def addTags(self, tags):
         plotInfo = self.getPlotInfo()
