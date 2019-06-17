@@ -11,4 +11,7 @@ builtins.well_obj = well_obj
 builtins.dataset_obj = dataset_obj
 builtins.curve_obj = curve_obj
 builtins.plot_object = plot_object
-
+welcome = """
++---------------------------------------------------------|*WELCOME*|---------------------------------------------------------+
+"""
+print(welcome)
