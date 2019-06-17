@@ -9,10 +9,7 @@ def createMarkerSetTemplate(token, projectId, name):
     return verifyAndReturn(r)
 
 def listMarkerSetTemplate(token, projectId):
-    payload = {
-        'idProject': projectId
-    }
-    r = listMarkerSetTemplate_RAW(token, payload)
+    r = listMarkerSetTemplate_RAW(token, projectId)
     if 'content' in r:
         return r['content']
     return verifyAndReturn(r)
