@@ -7,25 +7,36 @@ from wilibs.common import *
 import json
 from wilibs.common import convertUnit
 import wilibs.export as obj
+from wilibs.project.well.markerset_template import markerset_template_obj
+
 
 #login
 client = wilib.login("hoang","1")
 
 # arrayCurve = client.findCurveByName("array_curve","source","g_1x","demo_edit_curve")
 # textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
-# singleCurve = client.findCurveByName("bs","source","g_1x","demo_edit_curve")
+# singleCurve = client.getCurveByName("bs","source","g_1x","demo_edit_curve")
+# print(singleCurve)
 
 # well = client.getWellById(31)
 
 # well.limitWell(10,1300,'m')
 
-for i in obj.__dict__:
-    if (i[0] != '_'):
-        print("----'"+i+"'-----")
-        for j in getattr(obj, i).__dict__:
-            if (j[0] != '_'):
-                print(j)
+# for i in obj.__dict__:
+#     if (i[0] != '_'):
+#         print("----'"+i+"'-----")
+#         for j in getattr(obj, i).__dict__:
+#             if (j[0] != '_'):
+#                 print(j)
 
 #{'idProject': 3, 'name': 'hoang'
-# project = client.getProjectById(3)
-# project.createWell(3)
+
+# well_obj.createMarkerSets(client.token, 61,name = "thinhjjj")
+# list_set = well_obj.getListMarkerSets(client.token, 61)
+# print(list_set)
+# markersets_obj.deleteMarkerSets(client.token, 24)
+#proto = client.getProjectById(2)
+# tpm = markerset_template_obj.deleteMarkerSetTemplate(client.token,16)
+
+tmp = project_obj.listMarkerSetTemplate(client.token, 3)
+print(tmp)

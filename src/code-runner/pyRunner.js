@@ -1,5 +1,4 @@
 const path = require('path')
-const execa = require('execa')
 const exec = require('child_process').spawn;
 const readline = require('readline');
 
@@ -19,10 +18,11 @@ module.exports.isPython = (fileName) => {
  * @returns {Object}
  */
 module.exports.exec = async (dir, socket, key) => {
-	// console.log(socket);
 	let opts = {};
+	let pid = null;
 	if (socket) {
-		let pythonProcess = exec('unbuffer', ['python', dir], {stdio: ['pipe', 'pipe', 'pipe'], ...opts})
+		let pythonProcess = exec('unbuffer', ['python', dir], {stdio: ['pipe', 'pipe', 'pipe'], ...opts});
+		pid = pythonProcess.pid;
 		const rl = readline.createInterface({
 			input: pythonProcess.stdout,
 			prompt: "output> ",
@@ -30,6 +30,7 @@ module.exports.exec = async (dir, socket, key) => {
 		});
 		rl.on('line', function (line) {
 			socket.send(JSON.stringify({
+				pid: pythonProcess.pid,
 				key: key,
 				content: line.toString()
 			}));
@@ -42,25 +43,11 @@ module.exports.exec = async (dir, socket, key) => {
 		rlerror.on('line', line => {
 			socket.send(JSON.stringify({
 				key: key,
+				pid: pythonProcess.pid,
 				content: line.toString(),
 				error: true
 			}));
 		});
-		/*
-		pythonProcess.stdout.on('data', data => {
-			socket.send(JSON.stringify({
-				key: key,
-				content: data.toString()
-			}));
-		});
-		pythonProcess.stderr.on('data', data => {
-			socket.send(JSON.stringify({
-				key: key,
-				content: data.toString(),
-				error: true
-			}));
-		});
-		*/
 		pythonProcess.on('exit', code => {
 			let msg = "+-----------------------------------------------------------|*END*|-----------------------------------------------------------+";
 			socket.send(JSON.stringify({
@@ -70,29 +57,5 @@ module.exports.exec = async (dir, socket, key) => {
 			}));
 		});
 	}
-	return socket ? socket._wiId : "No socket connection"
-	// try {
-	// 	const resp = await execa.shell(`python3 ${dir}`)
-	// 	return resp.stdout
-	// 		.split('\n')
-	// 		.filter(line => !!line)
-	// 		.map(line => ({error: false, line}))
-	//
-	//
-	// } catch (error) {
-	// 	const ERR_MARKER = 'NameError'
-	// 	const idxAppError = error.stderr.lastIndexOf(ERR_MARKER)
-	// 	const errorMsg = error.stderr.slice(idxAppError + ERR_MARKER.length + 1)
-	//
-	// 	const succLines = error.stdout
-	// 		.split('\n')
-	// 		.filter(line => !!line)
-	// 		.map(line => ({error: false, line}))
-	// 	const errLine = {
-	// 		line: errorMsg,
-	// 		error: true
-	// 	}
-	//
-	// 	return [...succLines, errLine]
-	// }
+	return socket ? {wiId: socket._wiId, pid: pid} : "No socket connection"
 };

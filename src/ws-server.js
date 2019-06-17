@@ -6,7 +6,7 @@ function wsServer(express, port) {
 	express._activeSockets = {};
 	let wss = new WebSocket.Server({
 		server: express.listen(port, () => {
-			logger.info("Websocket server listening on port ", port);
+			logger.info("Websocket server listening on port " + port);
 		})
 	});
 	wss.on('connection', ws => {

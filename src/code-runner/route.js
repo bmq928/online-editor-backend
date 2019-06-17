@@ -1,5 +1,6 @@
 const route = require('express').Router();
 const controller = require('./controller');
+const exec = require('child_process').exec;
 
 route.get('/', async (req, res) => {
 	// console.log(req.connection.server._activeSockets);
@@ -12,6 +13,16 @@ route.get('/', async (req, res) => {
 	} catch (error) {
 		if (!error.isOperational) throw error;
 		res.status(400).json({message: error.message})
+	}
+});
+route.get('/teminate', async (req, res) => {
+	const {pid} = req.query;
+	const command = 'kill -9 ' + pid;
+	try {
+		exec(command);
+		res.status(200).json('Killed ' + pid);
+	} catch (e) {
+		res.status(200).json(e);
 	}
 });
 
