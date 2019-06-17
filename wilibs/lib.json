@@ -1022,41 +1022,49 @@
         "updateRawCurveData(curveData)": {
             "params": {
                 "required": {
-
+                    "curveData": "Array of object contain two key 'x' and 'y'. 'y' can be index if curve have step, depth if step zero"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if update successfully, False if fail",
+            "explain": "Update curve data to server",
+            "example": "curveData = ['y':0, 'x':35]\nsuccess = curve.updateRawCurveData(curveData)\nif success:\n\tprint('updated')"
         },
         "updateRawCurveDataByFile(curveDataFile)": {
             "params": {
                 "required": {
-
+                    "curveDataFile": "Txt file or readable text file"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if update successfully, False if fail",
+            "explain": "Update file curve data to server",
+            "example": "with open('text', 'r+') as f:\n\tcurve.updateRawCurveDataByFile(f)"
         },
-        "edit()": {
+        "edit(**dict)": {
             "params": {
                 "required": {
-
+                    
                 },
                 "optional": {
-
+                    "dict.name": "String. New name",
+                    "dict.duplicate": "Number",
+                    "dict.unit": "String",
+                    "dict.type": "String. (ARRAY, NUMBER, TEXT)",
+                    "dict.dimension": "Number",
+                    "dict.columnsTitle": "JSON",
+                    "dict.idDataset": "Number",
+                    "dict.idFamily": "Number",
+                    "dict.realtedTo": "JSON"
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if edit successfully, False if fail",
+            "explain": "Edit curve info.",
+            "example": "success = curve.edit(name = 'new name', unit = 'm')\nif success:\n\tprint('edited')"
         },
         "delete()": {
             "params": {
@@ -1067,9 +1075,9 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if delete successfully, False if fail",
+            "explain": "Delete curve. Do not keep this object after call delete method successfully",
+            "example": "success = curve.delete()\nif success:\n\tdel curve"
         },
         "clipDataCurve(minValue, maxValue)": {
             "params": {
@@ -1100,17 +1108,58 @@
         "renameCurve(newName)": {
             "params": {
                 "required": {
-
+                    "newName": "New name of curve"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
+            "returns": "True if rename successfully, False if fail",
+            "explain": "Rename curve",
+            "example": "success = curve.renameCurve('new name')\nif success:\n\tprint('change name success')"
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to add to curve"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if add tags successfully, False if fail",
+            "explain": "Add tags to curve",
+            "example": "success = curve.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to remove from curve"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if remove tags successfully, False if fail",
+            "explain": "Remove tags fromm curve",
+            "example": "success = curve.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        }
+    },
+    "Plot": {
+        "edit(**dict)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+                    
+                }
+            },
+            "returns": "True if edit plot info successfully, False if fail",
+            "explain": "Edit plot info",
             "example": ""
         },
-        "addTags()": {
+        "delete()": {
             "params": {
                 "required": {
 
@@ -1119,11 +1168,65 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
+            "returns": "True if delete plot info successfully, False if fail",
+            "explain": "Delete plot. Do not use this object after call delete method",
+            "example": "success = plot.delete()\nif success:\n\tdel plot"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON. None if fail",
+            "explain": "Get info of plot as JSON",
+            "example": "info = plot.getInfo()\nprint(info)"
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to add to plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if add tags successfully, False if fail",
+            "explain": "Add tags to plot",
+            "example": "success = plot.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to remove from plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if remove tags successfully, False if fail",
+            "explain": "Remove tags fromm plot",
+            "example": "success = plot.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        }
+    },
+    "CrossPlot": {
+        "edit(**dict)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+                    
+                }
+            },
+            "returns": "True if edit cross plot info successfully, False if fail",
+            "explain": "Edit cross plot info",
             "example": ""
         },
-        "removeTags()": {
+        "delete()": {
             "params": {
                 "required": {
 
@@ -1132,9 +1235,115 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
+            "returns": "True if delete cross plot info successfully, False if fail",
+            "explain": "Delete cross plot. Do not use this object after call delete method",
+            "example": "success = crossPlot.delete()\nif success:\n\tdel crossPlot"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON. None if fail",
+            "explain": "Get info of plot as JSON",
+            "example": "info = crossPlot.getInfo()\nprint(info)"
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to add to plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if add tags successfully, False if fail",
+            "explain": "Add tags to cross plot",
+            "example": "success = crossPlot.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to remove from cross plot"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if remove tags successfully, False if fail",
+            "explain": "Remove tags fromm cross plot",
+            "example": "success = crossPlot.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        }
+    },
+    "Histogram": {
+        "edit(**dict)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+                    
+                }
+            },
+            "returns": "True if edit histogram info successfully, False if fail",
+            "explain": "Edit histogram info",
             "example": ""
+        },
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete histogram info successfully, False if fail",
+            "explain": "Delete histogram. Do not use this object after call delete method",
+            "example": "success = histogram.delete()\nif success:\n\tdel histogram"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON. None if fail",
+            "explain": "Get info of histogram as JSON",
+            "example": "info = histogram.getInfo()\nprint(info)"
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to add to histogram"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if add tags successfully, False if fail",
+            "explain": "Add tags to histogram",
+            "example": "success = histogram.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to remove from histogram"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if remove tags successfully, False if fail",
+            "explain": "Remove tags fromm histogram",
+            "example": "success = histogram.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
         }
     }
 }

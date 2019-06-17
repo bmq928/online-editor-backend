@@ -59,5 +59,5 @@ pro = client.getProjectById(2)
 # tmp = client.getWellById(61)
 # mar = tmp.getListMarkerSets()
 
-# tm = client.getMarkerSetTemplateById(34)
-# tm.deleteMarkerSetTemplate()
+tm = client.getMarkerSetTemplateById(34)
+tm.deleteMarkerSetTemplate()

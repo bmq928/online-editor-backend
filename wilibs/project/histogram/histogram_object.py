@@ -19,27 +19,35 @@ class Histogram:
     def deleteHistogram(self):
         check, content = deleteHistogram(self.token, self.histogramId)
         if check:
-            return False
+            return True
         else:
             print(content)
-        return True
+        return False
+    
+    def delete(self):
+        return self.deleteHistogram()
     
     def editHistogram(self, **kwargs):
         check, content = editHistogram(self.token, self.histogramId, **kwargs)
         if check:
-            return False
+            return True
         else:
             print(content)
-        return True
+        return False
+    
+    def edit(self, **data):
+        return self.editHistogram(**data)
 
     def getInfoHistogram(self):
-        result = {}
         check, content = getHistogramInfo(self.token, self.histogramId)
         if check:
-            result = content
+            return content
         else:
             print(content)
-        return result
+        return None
+    
+    def getInfo(self):
+        return self.getInfoHistogram()
 
     def addTags(self, tags):
         info = self.getInfoHistogram()

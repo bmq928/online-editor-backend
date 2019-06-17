@@ -58,11 +58,19 @@ class Curve:
             tempFile.write(line)
             tempFile.write('\n')
         tempFile.seek(0)
-        return createRawCurveData(self.token, self.curveId, tempFile)
+        check, content = createRawCurveData(self.token, self.curveId, tempFile)
+        if check:
+            return True
+        print(content)
+        return False
     
     def updateRawCurveDataByFile(self, curveDataFile):
         curveDataFile.seek(0)
-        return createRawCurveData(self.token, self.curveId, curveDataFile)
+        check, content = createRawCurveData(self.token, self.curveId, curveDataFile)
+        if check:
+            return True
+        print(content)
+        return False
 
     def updateCurveData(self, curveData, name=False):
         """Update data to curve by array of object
@@ -125,6 +133,18 @@ class Curve:
     def editCurveInfo(self, **data):
         check, content = editCurveInfo(self.token, self, **data)
         if check:
+            self.curveInfo = {
+            'idDataset': content['idDataset'],
+            'idCurve': content['idCurve'],
+            'name': content['name'],
+            'description': content['description'],
+            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+                "relatedTo"] else [],
+            'type': content['type']
+            }
+            self.curveId = content['idCurve']
+            self.curveName = content['name']
+            self.datasetId = content['idDataset']
             return True
         print(content)
         return False

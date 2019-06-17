@@ -157,8 +157,14 @@ class Project:
         """
         check, content = editProject(self.token, self.projectId, **data)
         if check:
-            return None
-        return content
+            self.projectInfo = content
+            self.projectId = content['idProject']
+            self.projectName = content['name']
+            self.alias = content['alias']
+            self.shared = content['shared'] if 'shared' in content else False
+            self.owner = content['owner'] if 'owner' in content else content['createdBy']
+            return True
+        return False
 
     def delete(self):
         """Delete project
@@ -170,8 +176,9 @@ class Project:
 
         check, reason = deleteProject(self.token, self.projectId)
         if check:
-            return None
-        return reason
+            return True
+        print(reason)
+        return False
 
     def isExistsTag(self, relatedTo, tag):
         if relatedTo and "tags" in relatedTo:

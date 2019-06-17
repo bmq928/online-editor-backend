@@ -19,18 +19,24 @@ class CrossPlot:
     def deleteCrossPlot(self):
         check, content = deleteCrossPlot(self.token, self.crossPlotId)
         if check:
-            return False
+            return True
         else:
             print(content)
-        return True
+        return False
+
+    def delete(self):
+        return self.deleteCrossPlot()
     
     def editCrossPlot(self, **kwargs):
         check, content = editCrossPlot(self.token, self.crossPlotId, **kwargs)
         if check:
-            return False
+            return True
         else:
             print(content)
-        return True
+        return False
+
+    def edit(self, **data):
+        return self.editCrossPlot(**data)
 
     def getInfoCrossPlot(self):
         result = {}
@@ -40,6 +46,9 @@ class CrossPlot:
         else:
             print(content)
         return result
+
+    def getInfo(self):
+        return self.getInfoCrossPlot()
 
     def addTags(self, tags):
         info = self.getInfoCrossPlot()

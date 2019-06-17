@@ -35,8 +35,7 @@ def listMarkerSetTemplate_RAW(token, projectId):
 def deleteMarkerSetTemplate_RAW(token, markerSetTemplateId):
     url = ROOT_API + '/marker-set-template/delete'
     r = requests.post(url, json={'idMarkerSetTemplate': markerSetTemplateId}, headers=tokenHeader(token), verify=False)
-    response = requests.get(url)
-    print(response.text)
+    print(r)
     return r.json()
 
 def getMarkerSetTemplateInfo_RAW(token, markerSetTemplateId):

@@ -175,9 +175,21 @@ class Well:
             True if success, false if fail
         
         """
-        check, _ = editWellInfo(self.token, self.wellId, **data)
+        check, content = editWellInfo(self.token, self.wellId, **data)
         if check:
+            self.wellInfo = {
+            'idProject': content['idProject'],
+            'idWell': content['idWell'],
+            'name': content['name'],
+            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+                "relatedTo"] else []
+            }
+            self.wellId = content['idWell']
+            self.projectId = content['idProject']
+            self.wellName = content['name']
+            self.headers = content['well_headers']
             return True
+        print(content)
         return False
 
     def deleteWell(self):
