@@ -6,6 +6,8 @@ from .imageset.imageset_obj import *
 from .imageset.imageset_api import createImageSet
 from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
+from .markerset_template.markerset.markerset_api import getListMarkerSets
+from .markerset_template.markerset.markerset_obj import MarkerSets
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -416,3 +418,7 @@ class Well:
         else:
             print(content)
         return result
+    
+    # def getAllMarkerSets(self):
+    #     check, content = getListMarkerSets(self.)
+    

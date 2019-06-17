@@ -6,8 +6,8 @@ import requests
 # from requests.packages.urllib3.exceptions import InsecureRequestWarning
 # requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-def createMarker(token,markerSetId, markerTemplateId, name):
-    r = createMarker_RAW(token, markerSetId, markerTemplateId, name)
+def createMarker(token,markerSetId, markerTemplateId):
+    r = createMarker_RAW(token, markerSetId, markerTemplateId)
     return verifyAndReturn(r)
 
 def deleteMarker(token, markerId):
@@ -19,9 +19,9 @@ def getListMarker(token, markerSetId):
     return verifyAndReturn(r)
 
 #RAW:
-def createMarker_RAW(token, markerSetId, markerTemplateId, name):
+def createMarker_RAW(token, markerSetId, markerTemplateId):
     url = ROOT_API + '/project/well/marker-set/marker/new'
-    r = requests.post(url, json={'idMarkerSet':markerSetId, 'idMarkerTemplate':markerTemplateId, 'name':name}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json={'idMarkerSet':markerSetId, 'idMarkerTemplate':markerTemplateId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def deleteMarker_RAW(token, markerId):

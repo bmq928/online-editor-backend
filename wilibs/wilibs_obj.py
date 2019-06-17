@@ -17,6 +17,9 @@ from .project.cross_plot.cross_plotapi import getCrossPlotInfo
 from .project.well.imageset.imageset_api import getImageSetInfo
 from .project.well.imageset.imageset_obj import ImageSet
 from .project.projectapi import createProject
+from .project.well.markerset_template.markerset_template_obj import MarkerSetTemplate
+from .project.well.markerset_template.markerset_template_api import getMarkerSetTeamplateInfo
+
 
 
 class Wilib:
@@ -47,10 +50,17 @@ class Wilib:
             return None
         return Well(self.token, wellInfo)
 
+
     def getDatasetById(self, datasetId):
         check, datasetInfo = getDatasetInfo(self.token, datasetId)
         if check:
             return Dataset(self.token, datasetInfo)
+        return None
+    
+    def getMarkerSetTemplateById(self, MarkerSetTemplateId):
+        check, markerTemplateInfo = getMarkerSetTeamplateInfo(self.token, MarkerSetTemplateId)
+        if check:
+            return MarkerSetTemplate(self.token, markerTemplateInfo)
         return None
 
     def getCurveById(self, curveId):

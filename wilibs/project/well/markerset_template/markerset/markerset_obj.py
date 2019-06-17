@@ -1,6 +1,7 @@
 from .markerset_api import *
-from .marker.marker_api import createMarker
+from .marker.marker_api import *
 from .marker.marker_obj import Marker
+
 
 class MarkerSets:
     def __init__(self, token, markersetsInfo):
@@ -28,10 +29,20 @@ class MarkerSets:
             print(content)
         return False
 
-    def createMarker(self, MarkerSetTemplateId, name):
-        check, content = createMarker(self.token, self.markersetId, MarkerSetTemplateId, name)
+    def createMarker(self, MarkerTemplateId):
+        check, content = createMarker(self.token, self.markersetId, MarkerTemplateId)
         if check:
             return Marker(self.token, content)
         else:
             print(content)
         return None
+    
+    def getListMarker(self):
+        check, list = getListMarker(self.token, self.markersetId)
+        if check is False and list is None:
+            return []
+        listObj = []
+        for i in list:
+            listObj.append(Marker(self.token, i))
+        return listObj
+    
