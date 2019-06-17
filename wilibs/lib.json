@@ -637,28 +637,30 @@
         "renameZone(zoneName, zoneSetName, newZoneName)": {
             "params": {
                 "required": {
-                    "zoneName": 
+                    "zoneName": "String. Old zone name",
+                    "zoneSetName": "String. Name of zone set contain zone",
+                    "newZoneName": "String. New zone name"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if rename successfully, False if error",
+            "explain": "Rename zone in zone set",
+            "example": "success = well.rename('old zone', 'zone set', 'new zone')\nif success:\n\tprint('rename successfully')"
         },
-        "getZoneSetByName()": {
+        "getZoneSetByName(zoneSetName)": {
             "params": {
                 "required": {
-                    
+                    "zoneSetName": "String. zone set name"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "Info of zone set as JSON.",
+            "explain": "Get info of zone set in well with specified name",
+            "example": "zoneSet = well.getZoneSetByName('zone set name')\n\tprint(zoneSet)"
         },
         "exportWellDatacsv()": {
             "params": {
@@ -702,41 +704,43 @@
         "updateWellHeader(**dict)": {
             "params": {
                 "required": {
-                    
+                    "dict.header": "String.Name of header need to update",
+                    "dict.value": "New value of header. Can be empty",
+                    "dict.unit": "String.New unit of header. Can be empty"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if update successfully. False if fail",
+            "explain": "Update Well header in well",
+            "example": "success = well,updateWellHeader(header='example header', unit='', value=''"
         },
         "addTags(tags)": {
             "params": {
                 "required": {
-                    
+                    "tags": "Array of string. tags need to add to well"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if successfully add tags. False if fail",
+            "explain": "Add some tags to well",
+            "example": "success = well.addTags(['tag1', 'tag2'])\nif success:\n\tprint('Added tags successfully')"
         },
         "removeTags(tags)": {
             "params": {
                 "required": {
-                    
+                    "tags": "Array of string. tags need to remove from well"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if successfully remove tags. False if fail",
+            "explain": "Remove some tags from well",
+            "example": "success = well.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('Removed tags successfully')"
         },
         "getAllImageSets()": {
             "params": {
@@ -747,9 +751,9 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "Array of ImageSet object. Empty if well don't have Image Set or if get fail",
+            "explain": "Get all Image Sets in well",
+            "example": "imageSets = well.getAllImageSets()\nprint(imageSets)"
         },
         "getInfo()": {
             "params": {
@@ -760,9 +764,9 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "JSON",
+            "explain": "Get info of well as JSON",
+            "example": "info = well.getInfo()\nprint(info)"
         },
         "getFullInfo()": {
             "params": {
@@ -773,22 +777,24 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "JSON",
+            "explain": "Get full info of well as JSON",
+            "example": "info = well.getInfo()\nprint(info)"
         },
-        "edit()": {
+        "edit(**dict)": {
             "params": {
                 "required": {
                     
                 },
                 "optional": {
-
+                    "dict.name": "String. New name of well",
+                    "dict.unit": "String. New unit of well",
+                    "dict.relatedTo": "Object. New related to of well"
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if edit successfully, False if fail",
+            "explain": "Edit name, unit, relatedTo of Well.",
+            "example": "success = well.edit(name = 'new name', unit='m')\nif success:\n\tprint('edited well successfully')"
         },
         "getAllDatasets()": {
             "params": {

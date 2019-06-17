@@ -74,19 +74,11 @@ def getWellHeaders(token, wellId):
 
 
 def editWellInfo(token, wellId, **data):
+    payload = data
+    payload['idWell'] = wellId
     payload = {
         'idWell': wellId
     }
-    if 'name' in data:
-        payload['name'] = data['name']
-    if 'topDepth' in data:
-        payload['topDepth'] = data['topDepth']
-    if 'bottomDepth' in data:
-        payload['bottomDepth'] = data['bottomDepth']
-    if 'step' in data:
-        payload['step'] = data['step']
-    if 'relatedTo' in data:
-        payload['relatedTo'] = data['relatedTo']
     r = editWellInfo_RAW(token, payload)
     return verifyAndReturn(r)
 
