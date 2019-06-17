@@ -43,8 +43,8 @@ class MarkerSetTemplate:
         else:
             return None
     
-    def getListMarkerTemplate(self):
-        check, list = getListMarkerTemplate()
+    def getListMarkerTemplate(self, wellId):
+        check, list = getListMarkerTemplate(self.token, wellId)
         if check is False and list is None:
             return []
         listObj = []

@@ -18,6 +18,9 @@ def deleteMarkerSets(token, markerSetId):
     r = deleteMarkerSets_RAW(token, markerSetId)
     return verifyAndReturn(r)
 
+def getMarkerSetInfo(token, markersetId):
+    r = getMarkerSetInfo_RAW(token, markersetId)
+    return verifyAndReturn(r)
 #RAW:
 def createMarkerSets_RAW(token,wellId,  markerSetTemplateId, name):
     url = ROOT_API + '/project/well/marker-set/new'
@@ -33,4 +36,9 @@ def deleteMarkerSets_RAW(token, markerSetId):
 def getListMarkerSets_RAW(token, wellId):
     url = ROOT_API + '/project/well/marker-set/list'
     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
+    return r.json()
+
+def getMarkerSetInfo_RAW(token, MarkerSetId):
+    url = ROOT_API + '/project/well/marker-set/info'
+    r = requests.post(url, json={'idMarkerSet': MarkerSetId}, headers=tokenHeader(token), verify=False)
     return r.json()

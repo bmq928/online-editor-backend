@@ -46,3 +46,10 @@ class MarkerSets:
             listObj.append(Marker(self.token, i))
         return listObj
     
+    def getMarkerSetInfo(self):
+        check, content = getMarkerSetInfo(self.token, self.markersetId)
+        if check:
+            return content
+        else:
+            print(content)
+        return {}

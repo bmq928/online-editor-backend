@@ -21,6 +21,8 @@ from .project.well.markerset_template.markerset_template_obj import MarkerSetTem
 from .project.well.markerset_template.markerset_template_api import getMarkerSetTeamplateInfo
 from .project.well.markerset_template.marker_template.marker_template_api import getMarkerTemplateInfo
 from .project.well.markerset_template.marker_template.marker__template_obj import MarkerTemplate
+from .project.well.markerset_template.markerset.markerset_api import getMarkerSetInfo
+from .project.well.markerset_template.markerset.markerset_obj import MarkerSets
 
 
 
@@ -69,6 +71,12 @@ class Wilib:
         check, markerTemplateInfo = getMarkerTemplateInfo(self.token, MarkerTemplateId)
         if check:
             return MarkerTemplate(self.token, markerTemplateInfo)
+        return None
+    
+    def getMarkerSetById(self, MarkerSetId):
+        check, markerSetInfo = getMarkerSetInfo(self.token, MarkerSetId)
+        if check:
+            return MarkerSets(self.token, markerSetInfo)
         return None
 
     def getCurveById(self, curveId):

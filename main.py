@@ -58,7 +58,5 @@ client = wilib.login("hoang","1")
 # tmp = client.getWellById(61)
 # mar = tmp.getListMarkerSets()
 
-# test = client.getMarkerSetTemplateById(16)
-# test.createMarkerTemplate("thinhlv-done")
-test = client.getMarkerTemplatebyId(154)
-test.deleteMarkerTemplate()
+
+
