@@ -38,5 +38,5 @@ client = wilib.login("hoang","1")
 #proto = client.getProjectById(2)
 # tpm = markerset_template_obj.deleteMarkerSetTemplate(client.token,16)
 
-tmp = project_obj.listMarkerSetTemplate(client.token, 3)
-print(tmp)
+                
+

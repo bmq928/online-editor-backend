@@ -705,7 +705,7 @@
             "params": {
                 "required": {
                     "dict.header": "String.Name of header need to update",
-                    "dict.value": "New value of header. Can be empty",
+                    "dict.value": "String. New value of header. Can be empty",
                     "dict.unit": "String.New unit of header. Can be empty"
                 },
                 "optional": {
@@ -805,11 +805,128 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "Array of Dataset object. Array empty if fail or have no dataset",
+            "explain": "Get list dataset in this well",
+            "example": "datasets = well.getAllDatasets()\nprint(datasets)"
         },
         "delete()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete well successfully, False if delete fail",
+            "explain": "Delete this well. Do not use this object(reference) after delete it. Should delete it",
+            "example": "well = client.getWellById(19)\nsuccess = well.delete()\nif success:\n\tdel well"
+        },
+        "newDataset(**dict)": {
+            "params": {
+                "required": {
+                    "dict.name": "String. Name of dataset",
+                    "dict.step": "Float. Step of well. Can be zero",
+                    "dict.top": "Float. Top of well",
+                    "dict.bottom": "Float. Bottom of well",
+                    "dict.unit": "String. Unit well"
+                },
+                "optional": {
+                    "dict.datasetKey": "String. Key of dataset",
+                    "dict.datasetLabel": "String. Label of dataset"
+                }
+            },
+            "returns": "Dataset object if create successfully, None if fail",
+            "explain": "Create new Dataset in this well",
+            "example": "dataset = well.newDataset(name = 'new', step = 0.5, top = 3500, bottom = 7000, unit = 'm')\nif dataset:\n\tprint(dataset)"
+        }
+    },
+    "Dataset": {
+        "getInfo()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON. None if fail",
+            "explain": "Get info of dataset as JSON",
+            "example": "info = dataset.getInfo()\nprint(info)"
+        },
+        "newCurve(name, **dict)": {
+            "params": {
+                "required": {
+                    "name": "String. Name of curve"
+                },
+                "optional": {
+                    "dict.type": "String. Type of curve. ('NUMBER', 'ARRAY', 'TEXT')",
+                    "dict.unit": "String. Unit of curve",
+                    "dict.idFamily": "Number",
+                    "dict.description": "String"
+                }
+            },
+            "returns": "New Curve object if create successful, None if False",
+            "explain": "Create a curve in dataset",
+            "example": "curve = dataset.newCurve('new Curve', unit = 'm')\nif curve:\n\tcurve.delete()"
+        },
+        "getAllCurves()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of curve object. Array can be empty if dataset don't have curve or get curve error",
+            "explain": "Get all curve in dataset",
+            "example": "curves = well.getAllCurves()\nprint(curves)"
+        },
+        "edit(**dict)": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+                    "dict.name": "String. New name",
+                    "dict.idWell": "Number. New id well. Should be a valid id",
+                    "dict.datasetKey": "String. New datasetKey",
+                    "dict.datasetLabel": "String. New datasetLabel"
+                }
+            },
+            "returns": "True if edit successfully. False if fail",
+            "explain": "Edit name, datasetKey, datasetLabel of dataset, or move dataset to another well by changing idWell",
+            "example": "success = dataset.edit(name = 'new name')\nif success\n\tprint('edited successfully')"
+        },
+        "delete()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete successfully, False if fail",
+            "explain": "Delete this dataset. Do not keep this dataset object after call delete it",
+            "example": "success = dataset.delete()\nif success:\n\tdel dataset"
+        },
+        "renameDataset(newName)": {
+            "params": {
+                "required": {
+                    "newName": "String. New name of dataset"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if rename successfully, False if fail",
+            "explain": "Fast rename dataset, also change datasetKey, datasetLabel to new name",
+            "example": "success = dataset.renameDataset('new name')\nif success:\n\tprint('rename successfully')"
+        },
+        "getDepth()": {
             "params": {
                 "required": {
                     
@@ -822,10 +939,194 @@
             "explain": "",
             "example": ""
         },
-        "newDataset(**dict)": {
+        "getSampleRate()": {
             "params": {
                 "required": {
                     
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "getTotalDepth()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "addTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to add to dataset"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if add tags successfully, False if fail",
+            "explain": "Add tags to dataset",
+            "example": "success = dataset.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
+        },
+        "removeTags(tags)": {
+            "params": {
+                "required": {
+                    "tags": "Array of string describe tag need to remove from dataset"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if remove tags successfully, False if fail",
+            "explain": "Remove tags fromm dataset",
+            "example": "success = dataset.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        }
+    },
+    "Curve": {
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON. None if fail",
+            "explain": "Get info of curve as JSON",
+            "example": "info = curve.getInfo()\nprint(info)"
+        },
+        "getCurveData()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of object which contain key 'x' and key 'y'.( [{'x': 5, 'y': 6}] )",
+            "explain": "Get curve data. key 'y' as index run from 0 to end. if 'y' is not integer, this is core data",
+            "example": "data = curve.getCurveData()\nprint(data)"
+        },
+        "updateRawCurveData(curveData)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "updateRawCurveDataByFile(curveDataFile)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "edit()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "clipDataCurve(minValue, maxValue)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "copyFamily(sourceCurve)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "renameCurve(newName)": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "addTags()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "",
+            "explain": "",
+            "example": ""
+        },
+        "removeTags()": {
+            "params": {
+                "required": {
+
                 },
                 "optional": {
 

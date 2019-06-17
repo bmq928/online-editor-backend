@@ -96,7 +96,7 @@ class Well:
             for i in list:
                 listObj.append(Dataset(self.token, i))
             return listObj
-        return None
+        return []
     
     def getListMarkerSets(self):
         check, list = getListMarkerSets(self.token,self.wellId)

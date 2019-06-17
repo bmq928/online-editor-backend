@@ -33,6 +33,9 @@ class Curve:
         if check:
             return content
         return None
+    
+    def getInfo(self):
+        return self.getCurveInfo()
 
     def getCurveData(self):
         """Return object contain data of curve
@@ -56,6 +59,10 @@ class Curve:
             tempFile.write('\n')
         tempFile.seek(0)
         return createRawCurveData(self.token, self.curveId, tempFile)
+    
+    def updateRawCurveDataByFile(self, curveDataFile):
+        curveDataFile.seek(0)
+        return createRawCurveData(self.token, self.curveId, curveDataFile)
 
     def updateCurveData(self, curveData, name=False):
         """Update data to curve by array of object
@@ -116,25 +123,14 @@ class Curve:
         return False
 
     def editCurveInfo(self, **data):
-        """Edit curve info
-
-        Args:
-            name, duplicate, unit, initValue (**kwargs) (optional)
-        
-        Returns:
-            None if edit success
-            String describe err if false
-        
-        Example:
-            err = curve.editCurveInfo(name = 'new name', unit = 'cm', initValue = '60', duplicate = 1)
-            if err:
-                print(err)
-
-        """
         check, content = editCurveInfo(self.token, self, **data)
         if check:
             return True
+        print(content)
         return False
+    
+    def edit(self, **data):
+        return self.editCurveInfo(**data)
 
     def deleteCurve(self):
         check, content = deleteCurve(self.token, self.curveId)
@@ -143,6 +139,9 @@ class Curve:
         else:
             print(content)
         return False
+    
+    def delete(self):
+        return self.deleteCurve()
 
     def clipDataCurve(self, minValue, maxValue):
         if minValue > maxValue:
@@ -174,12 +173,7 @@ class Curve:
             return True
 
     def renameCurve(self, newName):
-        err = self.editCurveInfo(name=newName)
-        if err:
-            print(err)
-            return False
-        else:
-            return True
+        return self.editCurveInfo(name = newName)
 
     def addTags(self, tags):
         curveInfo = self.getCurveInfo()

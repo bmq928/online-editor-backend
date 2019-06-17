@@ -62,7 +62,7 @@ class Project:
         """
         list = listWell(self.token, self.projectId, **data)
         if list is None:
-            return None
+            return []
         listObj = []
         for i in list:
             listObj.append(Well(self.token, i))

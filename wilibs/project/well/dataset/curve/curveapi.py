@@ -60,6 +60,8 @@ def createCurve(token, datasetId, name, data, **kwargsData):
         payload['idFamily'] = kwargsData['idFamily']
     if 'type' in kwargsData:
         payload['type'] = kwargsData['type']
+    if 'description' in kwargsData:
+        payload['description'] = kwargsData['description']
     data = {'data': data}
     r = updateCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
