@@ -29,8 +29,8 @@ class MarkerSetTemplate:
             return None
         return content
 
-    def createMarkerTemplate(self, **data):
-        check, content = createMarkerTemplate(self.token, self.markerSetTemplateId, **data)
+    def createMarkerTemplate(self, name):
+        check, content = createMarkerTemplate(self.token, self.markerSetTemplateId, name)
         if check:
             return MarkerTemplate(self.token, content)
         else:

@@ -7,16 +7,12 @@ class MarkerTemplate:
            'idMarkerTemplate': MarkerTemplateInfo['idMarkerTemplate'],
            'name': MarkerTemplateInfo['name'],
            'lineWidth': MarkerTemplateInfo['lineWidth'],
-           'lineStyle': MarkerTemplateInfo['lineStyle'],
-           'depth':  MarkerTemplateInfo['depth'],
-           'color':  MarkerTemplateInfo['color']
+            'color':  MarkerTemplateInfo['color']
 
         }
         self.MarkerTemplateId = MarkerTemplateInfo['idMarkerTemplate']
         self.MarkerTemplateName = MarkerTemplateInfo['name']
         self.LineWidth = MarkerTemplateInfo['lineWidth']
-        self.LineStyle = MarkerTemplateInfo['lineStyle']
-        self.Depth = MarkerTemplateInfo['Depth']
         self.Color = MarkerTemplateInfo['color']
 
     def __repr__(self):

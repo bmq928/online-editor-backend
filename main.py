@@ -48,7 +48,6 @@ client = wilib.login("hoang","1")
 # markerset_template_obj.deleteMarkerSetTemplate(client.token, 27)
 # markerset_template_obj.createMarkerTemplate(client.token,27, "thiithtithti")
 
-pro = client.getProjectById(2)
 # pro.createMarkerSetTemplate("hthththt")
 
 # markerset_template_obj.createMarkerTemplate(client.token, 27, "please")
@@ -59,5 +58,7 @@ pro = client.getProjectById(2)
 # tmp = client.getWellById(61)
 # mar = tmp.getListMarkerSets()
 
-# tm = client.getMarkerSetTemplateById(34)
-# tm.deleteMarkerSetTemplate()
+# test = client.getMarkerSetTemplateById(16)
+# test.createMarkerTemplate("thinhlv-done")
+test = client.getMarkerTemplatebyId(154)
+test.deleteMarkerTemplate()
