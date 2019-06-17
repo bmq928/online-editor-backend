@@ -1,4 +1,5 @@
 from .marker_template_api import *
+
 class MarkerTemplate:
     def __init__(self, token, MarkerTemplateInfo):
         self.token = token
@@ -31,4 +32,10 @@ class MarkerTemplate:
         else:
             print(content)
         return False
-    
+    def getMarkerTemplateInfo(self):
+        check, content = getMarkerTemplateInfo(self.token, self.MarkerTemplateId)
+        if check:
+            return content
+        else:
+            print(content)
+        return {}
