@@ -10,6 +10,7 @@ from .cross_plot.cross_plotapi import *
 from .well.markerset_template.markerset_template_obj import createMarkerSetTemplate
 from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
 from .well.markerset_template.markerset_template_api import *
+from .well.markerset_template.markerset.markerset_api import *
 
 
 class Project:
@@ -354,7 +355,7 @@ class Project:
     def newBlankCrossPlot(self, name):
         return self.createBlankCrossPlot(name=name)
 
-    def listMarkerTemplate(self):
+    def getListMarkerSetTemplate(self):
         check, list = listMarkerSetTemplate(self.token, self.projectId)
         if check is False and list is None:
             return []
@@ -363,5 +364,4 @@ class Project:
             listObj.append(MarkerSetTemplate(self.token, i))
         return listObj
 
-
-
+    

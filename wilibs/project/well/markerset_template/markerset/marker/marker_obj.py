@@ -8,7 +8,6 @@ class Marker:
             'idMarkerTemplate': markerInfo['idMarkerTemplate'],
             'idMarkerSet': markerInfo['idMarkerTemplate'],
             'name': markerInfo['name'],
-
         }
         self.markerId = markerInfo['idMarker']
         self.Depth = markerInfo['depth']

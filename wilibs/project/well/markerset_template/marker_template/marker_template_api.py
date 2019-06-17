@@ -8,18 +8,13 @@ from wilibs.common import *
 # requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
-def createMarkerTemplate(token, MarkerSetTemplateId, **data):
-    payload = {
-        'idMarkerSetTemplate': MarkerSetTemplateId
-    }
-    if 'name' in data:
-        payload['name'] = data['name']
-    r = createMarkerTemplate_RAW(token, MarkerSetTemplateId, payload)
+def createMarkerTemplate(token, MarkerSetTemplateId, name):
+    r = createMarkerTemplate_RAW(token, MarkerSetTemplateId, name)
     return verifyAndReturn(r)
 
 
-def deleteMarkerTemplate(token, imageSetId):
-    r = deleteMarkerTemplate_RAW(token, imageSetId)
+def deleteMarkerTemplate(token, MarkerTemplateId):
+    r = deleteMarkerTemplate_RAW(token,MarkerTemplateId)
     return verifyAndReturn(r)
 
 def getListMarkerTemplate(token, wellId):
@@ -27,9 +22,9 @@ def getListMarkerTemplate(token, wellId):
     return verifyAndReturn(r)
 
 #RAW:
-def createMarkerTemplate_RAW(token, payload):
+def createMarkerTemplate_RAW(token, MarkerSetTemplateId, name):
     url = ROOT_API + '/marker-set-template/marker-template/new'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json={'idMarkerSetTemplate': MarkerSetTemplateId, 'name':name}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def deleteMarkerTemplate_RAW(token, MarkerTemplateId):

@@ -3,9 +3,8 @@ from wilibs.api_url import EXPORT_PATH
 import os as os
 from wilibs.common import *
 import requests
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
-#
-# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def createMarkerSets(token, wellId, markerSetTemplateId, name):
     r = createMarkerSets_RAW(token, wellId, markerSetTemplateId, name)
@@ -24,6 +23,7 @@ def createMarkerSets_RAW(token,wellId,  markerSetTemplateId, name):
     url = ROOT_API + '/project/well/marker-set/new'
     r = requests.post(url, json={'idWell': wellId, 'idMarkerSetTemplate':markerSetTemplateId ,'name': name}, headers=tokenHeader(token), verify=False)
     return r.json()
+
 
 def deleteMarkerSets_RAW(token, markerSetId):
     url = ROOT_API + '/project/well/marker-set/delete'

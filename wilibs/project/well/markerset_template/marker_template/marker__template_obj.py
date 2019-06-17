@@ -19,7 +19,7 @@ class MarkerTemplate:
         self.Color = MarkerTemplateInfo['color']
 
     def __repr__(self):
-        obj = dict(self.imagesetInfo)
+        obj = dict(self.MarkerTemplateInfo)
         return str(obj)
 
     def __str__(self):
