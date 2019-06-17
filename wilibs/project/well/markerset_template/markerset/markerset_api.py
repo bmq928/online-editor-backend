@@ -30,7 +30,7 @@ def createMarkerSets_RAW(token,wellId,  markerSetTemplateId, name):
 
 def deleteMarkerSets_RAW(token, markerSetId):
     url = ROOT_API + '/project/well/marker-set/delete'
-    r = requests.post(url, json={'idMarkerSet': markerSetId}, headers=tokenHeader(token), verify=False)
+    r = requests.delete(url, json={'idMarkerSet': markerSetId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def getListMarkerSets_RAW(token, wellId):
