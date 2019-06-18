@@ -1530,7 +1530,9 @@
 
                 }
             },
-            "return":"A list of Marker Template object"
+            "return":"A list of Marker Template object",
+            "explain":"Get list of marker template",
+            "example":"list = client.getMarkerSetTemplateById(200)\nprint(list.getListMarkerTemplate())"
         },
         "getMarkerSetTemplateInfo()":
         {
