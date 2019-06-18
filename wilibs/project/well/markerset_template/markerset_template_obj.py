@@ -51,5 +51,13 @@ class MarkerSetTemplate:
         for i in list:
             listObj.append(MarkerSetTemplate(self.token, i))
         return listObj
+    
+    def getMarkerSetTemplateInfo(self):
+        check, content = getMarkerSetTeamplateInfo(self.token, self.markerSetTemplateId)
+        if check:
+            return content
+        else:
+            print(content)
+        return {}
 
 

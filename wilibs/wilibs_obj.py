@@ -25,6 +25,8 @@ from .project.well.markerset_template.markerset.markerset_api import getMarkerSe
 from .project.well.markerset_template.markerset.markerset_obj import MarkerSets
 from .project.well.markerset_template.markerset.marker.marker_api import getMarkerInfo
 from .project.well.markerset_template.markerset.marker.marker_obj import Marker
+from .project.param.param_api import getParamInfo
+from .project.param.param_obj import Param
 
 class Wilib:
     def __init__(self, token):
@@ -54,6 +56,12 @@ class Wilib:
             return None
         return Well(self.token, wellInfo)
 
+
+    def getParamById(self, paramId):
+        check, paramInfo = getParamInfo(self.token, paramId)
+        if not check:
+            return None
+        return Param(self.token, paramInfo)
 
     def getDatasetById(self, datasetId):
         check, datasetInfo = getDatasetInfo(self.token, datasetId)
