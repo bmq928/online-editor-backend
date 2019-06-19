@@ -2,7 +2,9 @@ from .datasetapi import *
 from .curve.curve_obj import Curve
 from .curve.curveapi import createCurve
 from .curve.curveapi import checkIfCurveExisted
+from .curve.curveapi import textTypeConverter, numberTypeConverter, arrayTypeConverter
 import math
+from .curve.curveapi import createCurve
 from tempfile import TemporaryFile
 import json
 
@@ -93,9 +95,64 @@ class Dataset:
         if 'name' not in data:
             print('Name is required')
             return None
+        checkIfExisted, content = checkIfCurveExisted(self.token, self.datasetId, data['name'])
+        if checkIfExisted:
+            return Curve(self.token, content)
         if 'unit' not in data:
             print('Unit is required')
             return None
+        initValue = 0
+        tempFile = TemporaryFile('r+')
+        if 'initValue' in data:
+            initValue = data['initValue']
+            del data['initValue']
+        if self.step == 0:
+            cloneData = self.cloneDataFromFirstCurve()
+            if cloneData:
+                for i in cloneData:
+                    i['x'] = initValue
+                cloneData = numberTypeConverter(cloneData)
+                for line in cloneData:
+                    tempFile.write(line)
+                    tempFile.write('\n')
+                tempFile.seek(0)
+                check, content = createCurve(self.token, self.datasetId, tempFile, **data)
+                if check:
+                    return True
+                print(content)
+                return False
+            else:
+                print("No curve in dataset. Can't init a core curve data")
+        datasetInfo = self.getInfo()
+        top = float(datasetInfo['top'])
+        bottom = float(datasetInfo['bottom'])
+        step = float(datasetInfo['step'])
+        length = math.ceil((bottom - top) / step)
+        tempArray = []
+        for i in range(0, length + 1):
+            arr = {
+                'x': initValue,
+                'y': i
+            }
+            tempArray.append(arr)
+        tempArray = numberTypeConverter(tempArray)
+        for line in tempArray:
+            tempFile.write(line)
+            tempFile.write('\n')
+        tempFile.seek(0)
+        check, content = createCurve(self.token, self.datasetId, tempFile, **data)
+        if check:
+            return True
+        print(content)
+        return False
+    
+
+            
+    def cloneDataFromFirstCurve(self):
+        curves = self.getAllCurves()
+        if len(curves) == 0:
+            return None
+        return curves[0].getCurveData()
         
 
     def getListCurve(self):
