@@ -273,6 +273,9 @@ class Well:
         else:
             print(content)
         return False
+    
+    def rename(self, newName):
+        return self.renameWell(newName)
 
     def deleteAllZoneSets(self):
         zonesets = self.getAllZoneSets()
