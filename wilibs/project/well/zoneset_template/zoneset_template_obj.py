@@ -17,10 +17,19 @@ class ZoneSetTemplate:
     def __str__(self):
         return self.__repr__()  
     
-    def getMarkerSetTemplateInfo(self):
-        check, content = getZoneSetTeamplateInfo(self.token, self.ZoneSetTemplateId)
+    def getZoneSetTemplateInfo(self):
+        check, info = getZoneSetTeamplateInfo(self.token, self.ZoneSetTemplateId)
         if check:
-            return content
+            return info
         else:
-            print(content)
+            print(info)
         return {}
+
+    def deleteZoneSetTemplate(self):
+        check , content = deleteZoneSetTemplate(self.token, self.ZoneSetTemplateId)
+        if check:
+            return None
+        return content
+    
+    def delete(self):
+        return self.deleteZoneSetTemplate();

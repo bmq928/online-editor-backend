@@ -23,20 +23,11 @@ def deleteZoneSetTemplate(token, idZoneSetTemplate):
     return verifyAndReturn(r)
 
 def createZoneSetTemplate(token, payload):
-    r = createZoneSetTemplate_RAW(token, payload)
+    r = createZoneSetTemplate_RAW(token,payload)
     return verifyAndReturn(r)
 
 #RAW
-# def createZoneSetTemplate_RAW(token, projectId, name):
-#     url = ROOT_API + '/zone-set-template/new'
-#     r = requests.post(url, json={'idProject': projectId, 'name': name}, headers=tokenHeader(token), verify=False)
-#     return r.json()
 
-def createZoneSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/zone-set/new'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
-    
 def listZoneSetTemplate_RAW(token, projectId):
     url = ROOT_API + '/zone-set-template/list'
     r = requests.post(url, json={'idProject': projectId}, headers=tokenHeader(token), verify=False)
@@ -54,7 +45,7 @@ def getZoneSetTemplateInfo_RAW(token, ZoneSetTemplateId):
 
 def createZoneSetTemplate_RAW(token, payload):
     url = ROOT_API + '/zone-set-template/new'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, json=payload , headers=tokenHeader(token), verify=False)
     return r.json()
 
 def editZoneSetTemplate_RAW(token, payload):
