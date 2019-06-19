@@ -76,9 +76,6 @@ def getWellHeaders(token, wellId):
 def editWellInfo(token, wellId, **data):
     payload = data
     payload['idWell'] = wellId
-    payload = {
-        'idWell': wellId
-    }
     r = editWellInfo_RAW(token, payload)
     return verifyAndReturn(r)
 

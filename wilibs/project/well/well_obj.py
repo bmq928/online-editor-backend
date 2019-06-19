@@ -172,17 +172,18 @@ class Well:
         """
         check, content = editWellInfo(self.token, self.wellId, **data)
         if check:
+            newInfo = self.getWellInfo()
             self.wellInfo = {
-            'idProject': content['idProject'],
-            'idWell': content['idWell'],
-            'name': content['name'],
-            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+            'idProject': newInfo['idProject'],
+            'idWell': newInfo['idWell'],
+            'name': newInfo['name'],
+            'tags': newInfo['relatedTo']['tags'] if newInfo["relatedTo"] is not None and "tags" in newInfo[
                 "relatedTo"] else []
             }
-            self.wellId = content['idWell']
-            self.projectId = content['idProject']
-            self.wellName = content['name']
-            self.headers = content['well_headers']
+            self.wellId = newInfo['idWell']
+            self.projectId = newInfo['idProject']
+            self.wellName = newInfo['name']
+            self.headers = newInfo['well_headers']
             self.wellName = self.name
             return True
         print(content)
