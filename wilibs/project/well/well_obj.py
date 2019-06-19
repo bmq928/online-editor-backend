@@ -10,6 +10,8 @@ from .markerset_template.markerset.markerset_api import getListMarkerSets
 from .markerset_template.markerset.markerset_obj import MarkerSets
 from .markerset_template.markerset.markerset_api import *
 from .markerset_template.markerset.markerset_api import createMarkerSets
+from .zoneset_template.zoneset_template_api import *
+from .zoneset_template.zoneset_template_obj import ZoneSetTemplate
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -211,6 +213,13 @@ class Well:
                 return None
         else:
             print(content)
+            return None
+        
+    def createZoneSetTemplate(self, zoneSetTemplateName):
+        check, content = createZoneSetTemplate("Test")
+        if check:
+            return ZoneSetTemplate(self.token, content)
+        else:
             return None
     
     def newZoneSet(self, zoneSetName):

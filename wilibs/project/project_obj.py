@@ -364,7 +364,7 @@ class Project:
     def newBlankCrossPlot(self, name):
         return self.createBlankCrossPlot(name=name)
 
-    def getListMarkerSetTemplate(self):
+    def getAllMarkerSetTemplates(self):
         check, list = listMarkerSetTemplate(self.token, self.projectId)
         if check is False and list is None:
             return []
@@ -373,7 +373,7 @@ class Project:
             listObj.append(MarkerSetTemplate(self.token, i))
         return listObj
     
-    def getListZoneSetTemplate(self):
+    def getAllZoneSetTemplates(self):
         check, list = getlistZoneSetTemplate(self.token, self.projectId)
         if check is False and list is None:
             return []
