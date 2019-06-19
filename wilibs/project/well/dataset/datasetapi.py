@@ -71,5 +71,5 @@ def createDataSet_RAW(token, payload):
 
 def deleteDataset_RAW(token, datasetId):
     url = ROOT_API + '/project/well/dataset/delete'
-    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
+    r = requests.delete(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
     return r.json()

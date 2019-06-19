@@ -50,5 +50,5 @@ def editHistogram_RAW(token, payload):
 
 def deleteHistogram_RAW(token, histogramId):
     url = ROOT_API + '/project/histogram/delete'
-    r = requests.post(url, json={'idHistogram': histogramId}, headers=tokenHeader(token), verify=False)
+    r = requests.delete(url, json={'idHistogram': histogramId}, headers=tokenHeader(token), verify=False)
     return r.json()
