@@ -1158,7 +1158,7 @@
             "example": "success = curve.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
         }
     },
-    "Plot": {
+    "LogPlot": {
         "edit(**dict)": {
             "params": {
                 "required": {
@@ -1168,7 +1168,7 @@
                     
                 }
             },
-            "returns": "True if edit plot info successfully, False if fail",
+            "returns": "True if edit log plot info successfully, False if fail",
             "explain": "Edit plot info",
             "example": ""
         },
@@ -1181,8 +1181,8 @@
 
                 }
             },
-            "returns": "True if delete plot info successfully, False if fail",
-            "explain": "Delete plot. Do not use this object after call delete method",
+            "returns": "True if delete log plot info successfully, False if fail",
+            "explain": "Delete log plot. Do not use this object after call delete method",
             "example": "success = plot.delete()\nif success:\n\tdel plot"
         },
         "getInfo()": {
@@ -1195,33 +1195,33 @@
                 }
             },
             "returns": "JSON. None if fail",
-            "explain": "Get info of plot as JSON",
+            "explain": "Get info of log plot as JSON",
             "example": "info = plot.getInfo()\nprint(info)"
         },
         "addTags(tags)": {
             "params": {
                 "required": {
-                    "tags": "Array of string describe tag need to add to plot"
+                    "tags": "Array of string describe tag need to add to log plot"
                 },
                 "optional": {
 
                 }
             },
             "returns": "True if add tags successfully, False if fail",
-            "explain": "Add tags to plot",
+            "explain": "Add tags to log plot",
             "example": "success = plot.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
         },
         "removeTags(tags)": {
             "params": {
                 "required": {
-                    "tags": "Array of string describe tag need to remove from plot"
+                    "tags": "Array of string describe tag need to remove from log plot"
                 },
                 "optional": {
 
                 }
             },
             "returns": "True if remove tags successfully, False if fail",
-            "explain": "Remove tags fromm plot",
+            "explain": "Remove tags from log plot",
             "example": "success = plot.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
         }
     },
