@@ -191,7 +191,7 @@
             "explain": "Get a curve with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncurve = client.getCurveByName('Example curve', 'Example Dataset', 'Example Well', 'Example Project')\ncurve.delete()"
         },
-        "getPlotByName(plotName, projectName)": {
+        "getLogPlotByName(plotName, projectName)": {
             "params": {
                 "required": {
                     "plotName": "String. Name of plot you want to query",
