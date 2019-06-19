@@ -17,8 +17,10 @@ module.exports.isPython = (fileName) => {
  * @param {String} dir directory to the file
  * @returns {Object}
  */
-module.exports.exec = async (dir, socket, key) => {
-	let opts = {};
+module.exports.exec = async (dir, socket, key, cwd) => {
+	let opts = {
+		cwd: cwd
+	};
 	let pid = null;
 	if (socket) {
 		let pythonProcess = exec('unbuffer', ['python', dir], {stdio: ['pipe', 'pipe', 'pipe'], ...opts});

@@ -21,10 +21,11 @@ module.exports.execute = async (project, fileName, user, socket, key) => {
 	if (!fileName) throw new AppError('file is required');
 
 	const filePath = path.join(PROJECT_STORAGE, user, project, fileName);
+	const cwd = path.join(PROJECT_STORAGE, user, project);
 	if (!(await exists(filePath))) throw new AppError('file is not exist');
 
 	// if(jsRunner.isJs(fileName)) return await jsRunner.exec(filePath);
-	let resp = await pyRunner.exec(filePath, socket, key);
+	let resp = await pyRunner.exec(filePath, socket, key, cwd);
 	console.log(resp);
 	if (pyRunner.isPython(fileName)) return resp;
 
