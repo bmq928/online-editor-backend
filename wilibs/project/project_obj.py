@@ -229,7 +229,7 @@ class Project:
         plots = self.getAllLogPlots()
         result = []
         for plot in plots:
-            relatedTo = plot.getLogPlotInfo()['relatedTo']
+            relatedTo = plot.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result = result + [plot]
         return result
@@ -268,7 +268,7 @@ class Project:
         }
 
         for plot in plots:
-            relatedTo = plot.getLogPlotInfo()['relatedTo']
+            relatedTo = plot.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['plots'] = result['plots'] + [plot]
 
