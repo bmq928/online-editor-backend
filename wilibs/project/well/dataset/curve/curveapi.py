@@ -49,24 +49,24 @@ def getCurveData(token, curveId):
     return verifyAndReturn(r)
 
 
-def createCurve(token, datasetId, name, data, **kwargsData):
-    payload = {
-        'curveName': name,
-        'idDataset': datasetId
-    }
-    if 'unit' in kwargsData:
-        payload['unit'] = kwargsData['unit']
-    if 'idFamily' in kwargsData:
-        payload['idFamily'] = kwargsData['idFamily']
-    if 'type' in kwargsData:
-        payload['type'] = kwargsData['type']
-    if 'description' in kwargsData:
-        payload['description'] = kwargsData['description']
-    if 'initValue' in kwargsData:
-        payload['initValue'] = kwargsData['initValue']
-    data = {'data': data}
-    r = updateCurveData_RAW(token, payload, data)
-    return verifyAndReturn(r)
+# def createCurve(token, datasetId, name, data, **kwargsData):
+#     payload = {
+#         'curveName': name,
+#         'idDataset': datasetId
+#     }
+#     if 'unit' in kwargsData:
+#         payload['unit'] = kwargsData['unit']
+#     if 'idFamily' in kwargsData:
+#         payload['idFamily'] = kwargsData['idFamily']
+#     if 'type' in kwargsData:
+#         payload['type'] = kwargsData['type']
+#     if 'description' in kwargsData:
+#         payload['description'] = kwargsData['description']
+#     if 'initValue' in kwargsData:
+#         payload['initValue'] = kwargsData['initValue']
+#     data = {'data': data}
+#     r = updateCurveData_RAW(token, payload, data)
+#     return verifyAndReturn(r)
 
 
 def updateCurveData(token, datasetId, desCurveId, data, name):
@@ -81,7 +81,13 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
     r = updateCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
 
-def createRawCurveData(token, curveId, data):
+def createCurve(token, datasetId, file, **data):
+    payload = data
+    payload['idDataset'] = datasetId
+    r = createCurveData_RAW(token, payload, file)
+    return verifyAndReturn(r)
+
+def updateRawCurveData(token, curveId, data):
     payload = {
         'idCurve': curveId
     }

@@ -1056,7 +1056,7 @@
                     "dict.columnsTitle": "JSON",
                     "dict.idDataset": "Number",
                     "dict.idFamily": "Number",
-                    "dict.realtedTo": "JSON"
+                    "dict.relatedTo": "JSON"
                 }
             },
             "returns": "True if edit successfully, False if fail",

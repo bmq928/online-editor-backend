@@ -48,49 +48,55 @@ class Dataset:
         return self.getDatasetInfo()
         
     
-    def createCurve(self, name, **kwargsData):
-        """Create new Curve for this Dataset
+    # def createCurve(self, name, **kwargsData):
+    #     """Create new Curve for this Dataset
         
-        Args:
-            name: curve name
-            **kwargsData: type, unit, idFamily (optional)
+    #     Args:
+    #         name: curve name
+    #         **kwargsData: type, unit, idFamily (optional)
 
-        Returns:
-            If curve name is existed, return curve obj for that curve
-            Else create new curve and return
-            Return None if there is err
-        """
-        # check if existed
-        checkIfExisted, content = checkIfCurveExisted(self.token, self.datasetInfo['idDataset'], name)
-        if checkIfExisted:
-            return Curve(self.token, content)
-        initValue = None
-        if 'initValue' in kwargsData:
-            initValue = kwargsData['initValue']
-        datasetInfo = self.getDatasetInfo()
-        top = float(datasetInfo['top'])
-        bottom = float(datasetInfo['bottom'])
-        step = float(datasetInfo['step'])
-        length = math.ceil((bottom - top) / step)
-        tempArray = []
-        for i in range(0, length + 1):
-            arr = []
-            arr.append(i)
-            arr.append(initValue)
-            tempArray.append(arr)
-        tempFile = TemporaryFile('r+')
-        tempFile.write(str(json.dumps(tempArray)))
-        tempFile.seek(0)
-        check, content = createCurve(self.token, self.datasetInfo['idDataset'], name, tempFile, **kwargsData)
-        if check:
-            return Curve(self.token, content)
-        return None
+    #     Returns:
+    #         If curve name is existed, return curve obj for that curve
+    #         Else create new curve and return
+    #         Return None if there is err
+    #     """
+    #     # check if existed
+    #     checkIfExisted, content = checkIfCurveExisted(self.token, self.datasetInfo['idDataset'], name)
+    #     if checkIfExisted:
+    #         return Curve(self.token, content)
+    #     initValue = None
+    #     if 'initValue' in kwargsData:
+    #         initValue = kwargsData['initValue']
+    #     datasetInfo = self.getDatasetInfo()
+    #     top = float(datasetInfo['top'])
+    #     bottom = float(datasetInfo['bottom'])
+    #     step = float(datasetInfo['step'])
+    #     length = math.ceil((bottom - top) / step)
+    #     tempArray = []
+    #     for i in range(0, length + 1):
+    #         arr = []
+    #         arr.append(i)
+    #         arr.append(initValue)
+    #         tempArray.append(arr)
+    #     tempFile = TemporaryFile('r+')
+    #     tempFile.write(str(json.dumps(tempArray)))
+    #     tempFile.seek(0)
+    #     check, content = createCurve(self.token, self.datasetInfo['idDataset'], name, tempFile, **kwargsData)
+    #     if check:
+    #         return Curve(self.token, content)
+    #     return None
     
-    def newCurve(self, name, **data):
-        return self.createCurve(name, **data)
+    # def newCurve(self, name, **data):
+    #     return self.createCurve(name, **data)
     
-    def newNumericCurve(self):
-        pass
+    def newNumericCurve(self, **data):
+        if 'name' not in data:
+            print('Name is required')
+            return None
+        if 'unit' not in data:
+            print('Unit is required')
+            return None
+        
 
     def getListCurve(self):
         """Get list object curve in this dataset

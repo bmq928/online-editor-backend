@@ -59,7 +59,7 @@ class Curve:
             tempFile.write(line)
             tempFile.write('\n')
         tempFile.seek(0)
-        check, content = createRawCurveData(self.token, self.curveId, tempFile)
+        check, content = updateRawCurveData(self.token, self.curveId, tempFile)
         if check:
             return True
         print(content)
@@ -67,7 +67,7 @@ class Curve:
     
     def updateRawCurveDataByFile(self, curveDataFile):
         curveDataFile.seek(0)
-        check, content = createRawCurveData(self.token, self.curveId, curveDataFile)
+        check, content = updateRawCurveData(self.token, self.curveId, curveDataFile)
         if check:
             return True
         print(content)
