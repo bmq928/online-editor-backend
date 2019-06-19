@@ -19,6 +19,7 @@ class Project:
         self.projectInfo = projectInfo
         self.projectId = projectInfo['idProject']
         self.name = projectInfo['name']
+        self.projectName = self.name
         self.alias = projectInfo['alias']
         self.shared = projectInfo['shared'] if 'shared' in projectInfo else False
         self.owner = projectInfo['owner'] if 'owner' in projectInfo else projectInfo['createdBy']
@@ -163,6 +164,7 @@ class Project:
             self.alias = content['alias']
             self.shared = content['shared'] if 'shared' in content else False
             self.owner = content['owner'] if 'owner' in content else content['createdBy']
+            self.name = self.projectName
             return True
         return False
 

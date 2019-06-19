@@ -19,6 +19,7 @@ class Dataset:
                 "relatedTo"] else []
         }
         self.name = datasetInfo['name']
+        self.datasetName = self.name
         self.datasetId = datasetInfo['idDataset']
         self.wellId = datasetInfo['idWell']
         self.top = float(datasetInfo['top'])
@@ -118,6 +119,23 @@ class Dataset:
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
+            self.datasetInfo = {
+            'idWell': content['idWell'],
+            'idDataset': content['idDataset'],
+            'name': content['name'],
+            'datasetKey': content['datasetKey'],
+            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+                "relatedTo"] else []
+            }
+            self.name = content['name']
+            self.datasetName = self.name
+            self.datasetId = content['idDataset']
+            self.wellId = content['idWell']
+            self.top = float(content['top'])
+            self.step = float(content['step'])
+            self.bottom = float(content['bottom'])
+            self.sampleRate = float(content['step'])
+            self.unit = content['unit']
             return True
         print(content)
         return False

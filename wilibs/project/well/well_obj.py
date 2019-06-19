@@ -63,6 +63,7 @@ class Well:
         self.wellId = wellInfo['idWell']
         self.projectId = wellInfo['idProject']
         self.name = wellInfo['name']
+        self.wellName = self.name
         self.headers = wellInfo['well_headers']
 
     def __repr__(self):
@@ -119,14 +120,7 @@ class Well:
             print(content)
         return None
     
-    def createMarkerSets(self, name):
-        check, content = createMarkerSets(self.token, self.wellId, name)
-        if check:
-            return MarkerSets(self.token, content)
-        else:
-            print(content)
-        return None
-
+   
     def createDataset(self, **data):
         """Add dataset to this well
 
@@ -189,6 +183,7 @@ class Well:
             self.projectId = content['idProject']
             self.wellName = content['name']
             self.headers = content['well_headers']
+            self.wellName = self.name
             return True
         print(content)
         return False
