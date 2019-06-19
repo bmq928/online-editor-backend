@@ -1335,8 +1335,6 @@
                 "example": "to_delete = client.getMarkerById(100)\nto_delete.deleteMarker()"
             }
         }
-<<<<<<< HEAD
-=======
     },
     "Well": {
         "newZoneSet(zoneSetName)": {
@@ -2385,7 +2383,7 @@
         "getMarkerSetInfo()":{
             "param":{
                 "required":{
-                   
+            
                 },
                 "optional":{
 
@@ -2407,6 +2405,5 @@
     "returns": "True if delete Marker info successfully, False if fail",
     "explain": "Delete Marker. Do not use this object after call delete method",
     "example": "to_delete = client.getMarkerById(100)\nto_delete.deleteMarker()"
->>>>>>> fac3ccdb174183110e3328710f4d8303b25d166b
     }
 }

@@ -14,12 +14,7 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
-well = client.getWellById(66)
-success = well.delete()
-if success:
-    print('success')
-
-
+print(client.newProject(name = "NEW PROJECT HEHE3"))
 
 
 

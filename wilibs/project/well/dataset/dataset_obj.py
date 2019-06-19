@@ -46,6 +46,7 @@ class Dataset:
 
     def getInfo(self):
         return self.getDatasetInfo()
+        
     
     def createCurve(self, name, **kwargsData):
         """Create new Curve for this Dataset
@@ -88,6 +89,8 @@ class Dataset:
     def newCurve(self, name, **data):
         return self.createCurve(name, **data)
     
+    def newNumericCurve(self):
+        pass
 
     def getListCurve(self):
         """Get list object curve in this dataset
@@ -141,7 +144,7 @@ class Dataset:
         return False
     
     def edit(self, **data):
-        return self.editDatasetInfo()
+        return self.editDatasetInfo(**data)
 
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])

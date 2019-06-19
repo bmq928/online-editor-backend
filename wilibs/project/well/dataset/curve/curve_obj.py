@@ -134,6 +134,7 @@ class Curve:
     def editCurveInfo(self, **data):
         check, content = editCurveInfo(self.token, self, **data)
         if check:
+            
             self.curveInfo = {
             'idDataset': content['idDataset'],
             'idCurve': content['idCurve'],
