@@ -203,7 +203,7 @@
             },
             "returns": "A Plot object",
             "explain": "Get a plot with specified name. Print err if get err and return nothing",
-            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getPlotByName('Example Plot','Example Project')\nplot.delete()"
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getLogPlotByName('Example Plot','Example Project')\nplot.delete()"
         },
         "getCrossPlotByName(crossPlotName, projectName)": {
             "params": {
@@ -286,16 +286,16 @@
             "explain": "Get a list of histogram in this project",
             "example": "project = client.getProjectById(56)\nhistograms = project.getAllHistograms()\nprint(histograms)"
         },
-        "getAllPlots()": {
+        "getAllLogPlots()": {
             "params": {
                 "required": {
                 }, 
                 "optional": {
                 }
             },
-            "returns": "A list of Plot object",
-            "explain": "Get a list of plot in this project",
-            "example": "project = client.getProjectById(56)\nplots = project.getAllPlots()\nprint(plots)"
+            "returns": "A list of LogPlot object",
+            "explain": "Get a list of log plot in this project",
+            "example": "project = client.getProjectById(56)\nplots = project.getAllLogPlots()\nprint(plots)"
         },
         "getAllCrossPlots()": {
             "params": {

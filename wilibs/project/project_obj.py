@@ -47,6 +47,9 @@ class Project:
     def getAllLogPlots(self):
         return self.getListPlot()
     
+    def getAllPlots(self):
+        return self.getListPlot()
+    
 
     def getListWell(self, **data):
         """Get list well from this project
