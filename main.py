@@ -14,7 +14,9 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
-print(client.newProject(name = "NEW PROJECT HEHE3"))
+project = client.getProjectById(11)
+
+print(project.rename('A new name'))
 
 
 

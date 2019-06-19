@@ -175,6 +175,9 @@ class Project:
         print(content)
         return False
 
+    def rename(self, newName):
+        return self.edit(name = newName)
+
     def delete(self):
         """Delete project
 
