@@ -122,23 +122,24 @@ class Dataset:
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
+            newInfo = self.getDatasetInfo()
             self.datasetInfo = {
-            'idWell': content['idWell'],
-            'idDataset': content['idDataset'],
-            'name': content['name'],
-            'datasetKey': content['datasetKey'],
-            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+            'idWell': newInfo['idWell'],
+            'idDataset': newInfo['idDataset'],
+            'name': newInfo['name'],
+            'datasetKey': newInfo['datasetKey'],
+            'tags': newInfo['relatedTo']['tags'] if newInfo["relatedTo"] is not None and "tags" in newInfo[
                 "relatedTo"] else []
             }
-            self.name = content['name']
+            self.name = newInfo['name']
             self.datasetName = self.name
-            self.datasetId = content['idDataset']
-            self.wellId = content['idWell']
-            self.top = float(content['top'])
-            self.step = float(content['step'])
-            self.bottom = float(content['bottom'])
-            self.sampleRate = float(content['step'])
-            self.unit = content['unit']
+            self.datasetId = newInfo['idDataset']
+            self.wellId = newInfo['idWell']
+            self.top = float(newInfo['top'])
+            self.step = float(newInfo['step'])
+            self.bottom = float(newInfo['bottom'])
+            self.sampleRate = float(newInfo['step'])
+            self.unit = newInfo['unit']
             return True
         print(content)
         return False
