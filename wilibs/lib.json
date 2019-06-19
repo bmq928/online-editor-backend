@@ -197,6 +197,9 @@
             "explain": "Get a histogram with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nhistogram = client.getHistogramByName('Example Histogram', 'Example Project')\nhistogram.delete()"
         },
+<<<<<<< HEAD
+        "wiSavefig(plt, fileName, **data)": {},
+=======
         "wiSavefig(plt, fileName, **data)": {
             "params": {
                 "required": {},
@@ -206,6 +209,7 @@
             "explain": "",
             "example": ""
         },
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
         "newProject(**dict)": {
             "params": {
                 "required": {
@@ -1163,7 +1167,11 @@
             }
         },
         "Param": {
+<<<<<<< HEAD
+            " editParam(**data)": {
+=======
             "edit(**dict)": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "params": {
                     "required": {},
                     "optional": {}
@@ -1172,14 +1180,22 @@
                 "explain": "Edit param info",
                 "example": ""
             },
+<<<<<<< HEAD
+            "deleteParam()": {
+=======
             "delete()": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "True if delete Param info successfully, False if fail",
                 "explain": "Delete param. Do not use this object after call delete method",
+<<<<<<< HEAD
+                "example": "test = client.getParamById(1000)\ntest.deleteParam()"
+=======
                 "example": "test = param.delete()\nif success:\n\tdelparam"
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
             },
             "getInfo()": {
                 "params": {
@@ -1211,61 +1227,105 @@
                 "example": "info = markersettemplate.getInfo()\nprint(info)"
             },
             "createMarkerTemplate(name)": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {
                         "name": "String. Name of Marker Template"
                     },
                     "optional": {}
                 },
+<<<<<<< HEAD
+                "return": "A Marker Template object",
+=======
                 "returns": "A Marker Template object",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Create a new Marker Template in a sepcified Well",
                 "example": "marker_template = markertemplate.createMarkerTemplate('test marker temlate')\nif marker_template:\n\tmarker_template.delete()"
             },
             "createMarkerSets(idWell, name)": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {
                         "idWell": "Interger. Specified id of well that you want to creat markerset",
                         "name": "String. Name of Marker Sets"
                     },
                     "optional": {}
                 },
+<<<<<<< HEAD
+                "return": "A Marker Sets object",
+=======
                 "returns": "A Marker Sets object",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Create a new Marker Sets in a sepcified Well",
                 "example": "markerset = markertemplate.createMarkerSets(61,'test_markerset')\nif markerset:\n\tmarkerset.delete()"
             },
             "getListMarkerTemplate(idWell)": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {
                         "idWell": "Interger. Specified id of well that you want to list marker template"
                     },
                     "optional": {}
                 },
+<<<<<<< HEAD
+                "return": "A list of Marker Template object",
+=======
                 "returns": "A list of Marker Template object",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get list of marker template",
                 "example": "list = client.getMarkerSetTemplateById(200)\nprint(list.getListMarkerTemplate())"
             },
             "getMarkerSetTemplateInfo()": {
+<<<<<<< HEAD
+                "param": {
+                    "required": {},
+                    "optional": {}
+                },
+                "return": "Information of marker set template in a specified project",
+=======
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "Information of marker set template in a specified project",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get info of markerset template as JSON",
                 "example": "info = markertemplate.getMarkerSetTemplateInfo()\nprint(info)"
             }
         },
         "MarkerTemplate": {
             "getMarkerTemplateInfo()": {
+<<<<<<< HEAD
+                "param": {
+                    "required": {},
+                    "optional": {}
+                },
+                "return": "Information of marker template in a specified markerset template",
+=======
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "Information of marker template in a specified markerset template",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get info of marker template as JSON",
                 "example": "info = markertemplate.getMarkerTemplateInfo()\nprint(info)"
             },
             "deleteMarkerTemplate()": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {},
                     "optional": {}
                 },
@@ -1276,28 +1336,48 @@
         },
         "MarkerSet": {
             "createMarker(idMarkerTemplate, depth)": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {
                         "idMarkerTemplate": "Interger. Id of marker template that you want to use for this marker",
                         "depth": "depth of the marker"
                     },
                     "optional": {}
                 },
+<<<<<<< HEAD
+                "return": "A Marker object",
+=======
                 "returns": "A Marker object",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Create a new Marker in a Marker Template Set use a specified Marker Template",
                 "example": "marker = markerset.createMarker(61,4567.8)\nif marker:\n\tmarker.delete()"
             },
             "getListMarker()": {
+<<<<<<< HEAD
+                "param": {
+                    "required": {},
+                    "optional": {}
+                },
+                "return": "A list of Marker in a specified Marker Set",
+=======
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "A list of Marker in a specified Marker Set",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get list of Marker in a Marker Set",
                 "example": "markerset = client.getMarkerSetById(13)\nlist = markerset.getListMarker()\nprint(list)"
             },
             "deleteMarkerSets()": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {},
                     "optional": {}
                 },
@@ -1306,27 +1386,47 @@
                 "example": "to_delete = client.getMarkerSetById(100)\nto_delete.deleteMarkerSet()"
             },
             "getMarkerSetInfo()": {
+<<<<<<< HEAD
+                "param": {
+                    "required": {},
+                    "optional": {}
+                },
+                "return": "Information of Marker Set in a specified Marker Set Template",
+=======
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "Information of Marker Set in a specified Marker Set Template",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get info of Marker Set as JSON",
                 "example": "test = client.getMarkerSetById(200)\nprint(test.getMarkerSetInfo())"
             }
         },
         "Marker": {
             "getMarkerSetInfo()": {
+<<<<<<< HEAD
+                "param": {
+                    "required": {},
+                    "optional": {}
+                },
+                "return": "Information of Marker in a specified Marker Set ",
+=======
                 "params": {
                     "required": {},
                     "optional": {}
                 },
                 "returns": "Information of Marker in a specified Marker Set ",
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                 "explain": "Get info of Marker Set as JSON",
                 "example": "test = client.getMarkerById(200)\nprint(test.getMarkerInfo())"
             },
             "deleteMarker()": {
+<<<<<<< HEAD
+                "param": {
+=======
                 "params": {
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
                     "required": {},
                     "optional": {}
                 },
@@ -1335,6 +1435,8 @@
                 "example": "to_delete = client.getMarkerById(100)\nto_delete.deleteMarker()"
             }
         }
+<<<<<<< HEAD
+=======
     },
     "Well": {
         "newZoneSet(zoneSetName)": {
@@ -2405,5 +2507,6 @@
     "returns": "True if delete Marker info successfully, False if fail",
     "explain": "Delete Marker. Do not use this object after call delete method",
     "example": "to_delete = client.getMarkerById(100)\nto_delete.deleteMarker()"
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
     }
 }

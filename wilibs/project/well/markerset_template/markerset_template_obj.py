@@ -60,4 +60,7 @@ class MarkerSetTemplate:
             print(content)
         return {}
 
+    def delete(self):
+        return self.deleteMarkerSetTemplate()
+
 

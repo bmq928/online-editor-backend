@@ -85,49 +85,49 @@ def deleteWell(token, wellId):
     return verifyAndReturn(r)
 
 
-def createNewZoneSet(token, payload):
-    r = createZoneSet_RAW(token, payload)
-    return verifyAndReturn(r)
+# def createNewZoneSet(token, payload):
+#     r = createZoneSet_RAW(token, payload)
+#     return verifyAndReturn(r)
 
 
-def editZoneSetTemplate(token, payload):
-    r = editZoneSetTemplate_RAW(token, payload)
-    return verifyAndReturn(r)
+# def editZoneSetTemplate(token, payload):
+#     r = editZoneSetTemplate_RAW(token, payload)
+#     return verifyAndReturn(r)
 
 
-def editZoneTemplate(token, payload):
-    r = editZoneTemplate_RAW(token, payload)
-    return verifyAndReturn(r)
+# def editZoneTemplate(token, payload):
+#     r = editZoneTemplate_RAW(token, payload)
+#     return verifyAndReturn(r)
 
 
-def editZoneSet(token, payload):
-    r = editZoneSet_RAW(token, payload)
-    return verifyAndReturn(r)
+# def editZoneSet(token, payload):
+#     r = editZoneSet_RAW(token, payload)
+#     return verifyAndReturn(r)
 
 
-def deleteZoneSet(token, idZoneSet):
-    r = deleteZoneSet_RAW(token, idZoneSet)
-    return verifyAndReturn(r)
+# def deleteZoneSet(token, idZoneSet):
+#     r = deleteZoneSet_RAW(token, idZoneSet)
+#     return verifyAndReturn(r)
 
 
-def infoZoneSet(token, idZoneSet):
-    r = infoZoneSet_RAW(token, idZoneSet)
-    return verifyAndReturn(r)
+# def infoZoneSet(token, idZoneSet):
+#     r = infoZoneSet_RAW(token, idZoneSet)
+#     return verifyAndReturn(r)
 
 
-def listZoneSet(token, idWell):
-    r = listZoneSet_RAW(token, idWell)
-    return verifyAndReturn(r)
+# def listZoneSet(token, idWell):
+#     r = listZoneSet_RAW(token, idWell)
+#     return verifyAndReturn(r)
 
 
-def deleteZoneSetTemplate(token, idZoneSetTemplate):
-    r = deleteZoneSetTemplate_RAW(token, idZoneSetTemplate)
-    return verifyAndReturn(r)
+# def deleteZoneSetTemplate(token, idZoneSetTemplate):
+#     r = deleteZoneSetTemplate_RAW(token, idZoneSetTemplate)
+#     return verifyAndReturn(r)
 
 
-def createZoneSetTemplate(token, payload):
-    r = createZoneSetTemplate_RAW(token, payload)
-    return verifyAndReturn(r)
+# def createZoneSetTemplate(token, payload):
+#     r = createZoneSetTemplate_RAW(token, payload)
+#     return verifyAndReturn(r)
 
 
 def exportCsvWDRV(token, payload):
@@ -196,34 +196,34 @@ def deleteWell_RAW(token, wellId):
     return r.json()
 
 
-def createZoneSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/zone-set/new'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def createZoneSet_RAW(token, payload):
+#     url = ROOT_API + '/project/well/zone-set/new'
+#     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def editZoneSetTemplate_RAW(token, payload):
-    url = ROOT_API + '/zone-set-template/edit'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def editZoneSetTemplate_RAW(token, payload):
+#     url = ROOT_API + '/zone-set-template/edit'
+#     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def editZoneTemplate_RAW(token, payload):
-    url = ROOT_API + '/zone-set-template/zone-template/edit'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def editZoneTemplate_RAW(token, payload):
+#     url = ROOT_API + '/zone-set-template/zone-template/edit'
+#     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def editZoneSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/zone-set/edit'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def editZoneSet_RAW(token, payload):
+#     url = ROOT_API + '/project/well/zone-set/edit'
+#     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def listZoneSet_RAW(token, wellId):
-    url = ROOT_API + '/project/well/zone-set/list'
-    r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def listZoneSet_RAW(token, wellId):
+#     url = ROOT_API + '/project/well/zone-set/list'
+#     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
 def deleteZoneSet_RAW(token, idZoneSet):
@@ -232,22 +232,22 @@ def deleteZoneSet_RAW(token, idZoneSet):
     return r.json()
 
 
-def infoZoneSet_RAW(token, idZoneSet):
-    url = ROOT_API + '/project/well/zone-set/info'
-    r = requests.post(url, json={'idZoneSet': idZoneSet}, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def infoZoneSet_RAW(token, idZoneSet):
+#     url = ROOT_API + '/project/well/zone-set/info'
+#     r = requests.post(url, json={'idZoneSet': idZoneSet}, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def createZoneSetTemplate_RAW(token, payload):
-    url = ROOT_API + '/zone-set-template/new'
-    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def createZoneSetTemplate_RAW(token, payload):
+#     url = ROOT_API + '/zone-set-template/new'
+#     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
-def deleteZoneSetTemplate_RAW(token, idZoneSetTemplate):
-    url = ROOT_API + '/zone-set-template/delete'
-    r = requests.delete(url, json={'idZoneSetTemplate': idZoneSetTemplate}, headers=tokenHeader(token), verify=False)
-    return r.json()
+# def deleteZoneSetTemplate_RAW(token, idZoneSetTemplate):
+#     url = ROOT_API + '/zone-set-template/delete'
+#     r = requests.delete(url, json={'idZoneSetTemplate': idZoneSetTemplate}, headers=tokenHeader(token), verify=False)
+#     return r.json()
 
 
 def exportCsvRDRV_RAW(token, payload):

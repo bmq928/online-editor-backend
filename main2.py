@@ -15,4 +15,6 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
+test = client.getWellById(61)
 
+test.createZoneSet("thinh_test")

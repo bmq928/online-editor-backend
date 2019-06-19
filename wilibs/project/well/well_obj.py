@@ -9,6 +9,11 @@ from ...common import convertUnit
 from .markerset_template.markerset.markerset_api import getListMarkerSets
 from .markerset_template.markerset.markerset_obj import MarkerSets
 from .markerset_template.markerset.markerset_api import *
+from .markerset_template.markerset.markerset_api import createMarkerSets
+from .zoneset_template.zoneset_template_api import *
+from .zoneset_template.zoneset_template_obj import ZoneSetTemplate
+from .zoneset.zoneset_api import *
+from .zoneset.zoneset_obj import ZoneSet
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -206,7 +211,7 @@ class Well:
     def createZoneSet(self, zoneSetName):
         check, content = createZoneSetTemplate(self.token, {'name': zoneSetName, 'idProject': self.projectId})
         if check:
-            check, content = createNewZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,'idZoneSetTemplate': content['idZoneSetTemplate']})
+            check, content = createZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,'idZoneSetTemplate': content['idZoneSetTemplate']})
             if check:
                 print("Created zoneset ", zoneSetName)
                 return content
@@ -216,6 +221,7 @@ class Well:
         else:
             print(content)
             return None
+        
     
     def newZoneSet(self, zoneSetName):
         return self.createZoneSet(zoneSetName)
@@ -236,20 +242,20 @@ class Well:
         #     if i.top < top or i.bottom > bottom:
         #         i.deleteImage()
 
-    def getAllZoneSets(self):
-        check, content = listZoneSet(self.token, self.wellId)
-        if check:
-            return content
-        else:
-            print(check)
-            return []
+    # def getAllZoneSets(self):
+    #     check, content = listZoneSet(self.token, self.wellId)
+    #     if check:
+    #         return content
+    #     else:
+    #         print(check)
+    #         return []
 
-    def getAllZones(self, zonesetname):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            if zoneset["name"].lower() == zonesetname.lower():
-                return zoneset["zones"]
-        return []
+    # def getAllZones(self, zonesetname):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         if zoneset["name"].lower() == zonesetname.lower():
+    #             return zoneset["zones"]
+    #     return []
 
     def getAllDatasets(self):
         return self.getListDataset()

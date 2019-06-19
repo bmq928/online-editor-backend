@@ -11,6 +11,9 @@ from .well.markerset_template.markerset_template_obj import createMarkerSetTempl
 from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
 from .well.markerset_template.markerset_template_api import *
 from .well.markerset_template.markerset.markerset_api import *
+from .well.zoneset_template.zoneset_template_api import getlistZoneSetTemplate
+from .well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
+from .well.zoneset_template.zoneset_template_api import *
 
 
 class Project:
@@ -361,7 +364,7 @@ class Project:
     def newBlankCrossPlot(self, name):
         return self.createBlankCrossPlot(name=name)
 
-    def getListMarkerSetTemplate(self):
+    def getAllMarkerSetTemplates(self):
         check, list = listMarkerSetTemplate(self.token, self.projectId)
         if check is False and list is None:
             return []
@@ -369,5 +372,19 @@ class Project:
         for i in list:
             listObj.append(MarkerSetTemplate(self.token, i))
         return listObj
-
     
+    def getAllZoneSetTemplates(self):
+        check, list = getlistZoneSetTemplate(self.token, self.projectId)
+        if check is False and list is None:
+            return []
+        listObj = []
+        for i in list:
+            listObj.append(ZoneSetTemplate(self.token,i))
+        return listObj
+
+    def createZoneSetTemplate(self, zoneSetTemplateName):
+        check, content = createZoneSetTemplate(self.token, self.projectId, zoneSetTemplateName)
+        if check:
+            return ZoneSetTemplate(self.token, content)
+        else:
+            return None

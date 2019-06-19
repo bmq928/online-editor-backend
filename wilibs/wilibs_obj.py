@@ -27,7 +27,8 @@ from .project.well.markerset_template.markerset.marker.marker_api import getMark
 from .project.well.markerset_template.markerset.marker.marker_obj import Marker
 from .project.param.param_api import getParamInfo
 from .project.param.param_obj import Param
-
+from .project.well.zoneset_template.zoneset_template_api import getZoneSetTeamplateInfo
+from .project.well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -237,4 +238,10 @@ class Wilib:
         if check:
             return Project(self.token, content)
         print(content)
+        return None
+    
+    def getZoneSetTemplateById(self, ZoneSetTemplateId):
+        check, info = getZoneSetTeamplateInfo(self.token, ZoneSetTemplateId)
+        if check:
+            return ZoneSetTemplate(self.token, info)
         return None
