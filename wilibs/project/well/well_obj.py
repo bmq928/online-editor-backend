@@ -185,7 +185,7 @@ class Well:
             self.projectId = newInfo['idProject']
             self.wellName = newInfo['name']
             self.headers = newInfo['well_headers']
-            self.wellName = self.name
+            self.name = self.wellName
             return True
         print(content)
         return False
@@ -267,14 +267,7 @@ class Well:
         return None
 
     def renameWell(self, newName):
-        check, content = self.editWellInfo(name=newName, idGroup=self.getWellInfo()["idGroup"])
-        if check:
-            self.wellName = newName
-            self.wellInfo["name"] = newName
-            return True
-        else:
-            print(content)
-        return False
+        return self.editWellInfo(name = newName)
     
     def rename(self, newName):
         return self.renameWell(newName)

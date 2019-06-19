@@ -14,9 +14,9 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
-project = client.getProjectById(11)
 
-print(project.rename('A new name'))
+plot = client.getLogPlotByName('BlankLogPlot','NEW PROJECT HEHE2')
+print(plot.delete())
 
 
 

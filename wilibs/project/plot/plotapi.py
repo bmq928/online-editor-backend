@@ -93,6 +93,6 @@ def editPlot_RAW(token, payload):
 
 
 def deletePlot_RAW(token, payload):
-    url = ROOT_API + '/project/plot/edit'
+    url = ROOT_API + '/project/plot/delete'
     r = requests.delete(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()

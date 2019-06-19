@@ -5,14 +5,15 @@ class LogPlot:
     def __init__(self, token, plotInfo):
         self.token = token
         self.plotInfo = {
-            "plotId": plotInfo["idLogPlot"],
+            "plotId": plotInfo["idPlot"],
             "plotName": plotInfo["name"],
             "tags": plotInfo["relatedTo"]["tags"] if plotInfo["relatedTo"] is not None and "tags" in plotInfo[
                 "relatedTo"] else []
         }
-        self.plotId = plotInfo["idLogPlot"]
+        self.plotId = plotInfo["idPlot"]
         self.projectId = plotInfo["idProject"]
         self.name = plotInfo["name"]
+        self.plotName = self.name
         self.tags = self.plotInfo["tags"]
 
     def __repr__(self):
@@ -29,12 +30,12 @@ class LogPlot:
         check, content = editPlot(self.token, self.plotId, **data)
         if check:
             self.plotInfo = {
-            "plotId": content["idLogPlot"],
+            "plotId": content["idPlot"],
             "plotName": content["name"],
             "tags": content["relatedTo"]["tags"] if content["relatedTo"] is not None and "tags" in content[
                 "relatedTo"] else []
             }
-            self.plotId = content["idLogPlot"]
+            self.plotId = content["idPlot"]
             self.projectId = content["idProject"]
             self.name = content["name"]
             self.tags = self.plotInfo["tags"]

@@ -177,6 +177,8 @@ def editProject(token, projectId, **modifyData):
         payload['department'] = modifyData['department']
     if 'description' in modifyData:
         payload['description'] = modifyData['description']
+    if 'alias' in modifyData:
+        payload['alias'] = modifyData['description']
     r = editProject_RAW(token, payload)
     return verifyAndReturn(r)
 

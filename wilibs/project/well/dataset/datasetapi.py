@@ -12,8 +12,6 @@ def getDatasetInfo(token, datasetId):
 def editDatasetInfo(token, datasetId, **data):
     payload = data
     payload['idDataset'] = datasetId
-    payload['datasetKey'] = data['name']
-    payload['datasetLabel'] = data['name']
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)
 

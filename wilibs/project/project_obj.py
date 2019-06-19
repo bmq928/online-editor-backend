@@ -145,42 +145,25 @@ class Project:
             payload['name'] = self.projectName
         return getFullInfoProject(self.token, payload)
 
-    def edit(self, **data):
-        """Edit project for this account
-        
-        pass info need to modify (name, company, department, description)
+    # def edit(self, **data):
+    #     check, content = editProject(self.token, self.projectId, **data)
+    #     if check:
+    #         newInfo = self.getInfo()
+    #         if newInfo == None:
+    #             return False
+    #         self.projectInfo = newInfo
+    #         self.projectId = newInfo['idProject']
+    #         self.projectName = newInfo['name']
+    #         self.alias = newInfo['alias']
+    #         self.shared = newInfo['shared'] if 'shared' in newInfo else False
+    #         self.owner = newInfo['owner'] if 'owner' in newInfo else newInfo['createdBy']
+    #         self.name = self.projectName
+    #         return True
+    #     print(content)
+    #     return False
 
-        Args:
-            projectId (int): project id.
-            **data: need name, company, department, description, all as STRING and optional
-        
-        Retunns:
-            None if no err.
-            String describe error if fail
-
-        Example:
-            err = editProject(1, name = 'test project', description='example for lib')
-            if (err):
-                print(err)
-        """
-        check, content = editProject(self.token, self.projectId, **data)
-        if check:
-            newInfo = self.getInfo()
-            if newInfo == None:
-                return False
-            self.projectInfo = newInfo
-            self.projectId = newInfo['idProject']
-            self.projectName = newInfo['name']
-            self.alias = newInfo['alias']
-            self.shared = newInfo['shared'] if 'shared' in newInfo else False
-            self.owner = newInfo['owner'] if 'owner' in newInfo else newInfo['createdBy']
-            self.name = self.projectName
-            return True
-        print(content)
-        return False
-
-    def rename(self, newName):
-        return self.edit(name = newName)
+    # def rename(self, newName):
+    #     return self.edit(name = newName)
 
     def delete(self):
         """Delete project

@@ -197,6 +197,9 @@ class Curve:
 
     def renameCurve(self, newName):
         return self.editCurveInfo(name = newName)
+    
+    def rename(self, newName):
+        return self.renameCurve(newName)
 
     def addTags(self, tags):
         curveInfo = self.getCurveInfo()

@@ -120,7 +120,7 @@ class Dataset:
             if err:
                 print(err)
         """
-        check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
+        check, content = editDatasetInfo(self.token, self.datasetId, **data)
         if check:
             newInfo = self.getDatasetInfo()
             self.datasetInfo = {
@@ -165,12 +165,10 @@ class Dataset:
         return curves
 
     def renameDataset(self, newName):
-        check, content = self.editDatasetInfo(name=newName, datasetKey=newName, datasetLabel=newName)
-        if check:
-            return True
-        else:
-            print(content)
-        return False
+        return self.editDatasetInfo(name=newName, datasetKey=newName, datasetLabel=newName)
+    
+    def rename(self, newName):
+        return self.renameDataset(newName)
 
     # def limitAllCurves(self, top, bottom):
     #     if top <= self.top and bottom >= self.bottom:
@@ -287,8 +285,7 @@ class Dataset:
             relatedTo = {
                 "tags": tags
             }
-        check = self.editDatasetInfo(relatedTo=relatedTo)
-        return check
+        return self.editDatasetInfo(relatedTo=relatedTo)
 
     def removeTags(self, tags):
         datasetInfo = self.getDatasetInfo()
