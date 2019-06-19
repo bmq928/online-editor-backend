@@ -131,7 +131,11 @@ class Project:
     def getInfo(self):
         """Return project info mini ver
         """
-        return getInfoProject(self.token, self.projectId)
+        check, content = getInfoProject(self.token, self.projectId)
+        if check:
+            return content
+        print(content)
+        return None
 
     def getFullInfo(self, **data):
         """Return full version for project.
