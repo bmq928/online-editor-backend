@@ -35,3 +35,6 @@ class Marker:
         else:
             print(content)
         return {}
+
+    def delete(self):
+        return self.deleteMarker()

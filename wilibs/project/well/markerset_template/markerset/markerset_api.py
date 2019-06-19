@@ -22,7 +22,7 @@ def getMarkerSetInfo(token, markersetId):
     r = getMarkerSetInfo_RAW(token, markersetId)
     return verifyAndReturn(r)
 #RAW:
-def createMarkerSets_RAW(token,wellId,  markerSetTemplateId, name):
+def createMarkerSets_RAW(token,wellId, markerSetTemplateId, name):
     url = ROOT_API + '/project/well/marker-set/new'
     r = requests.post(url, json={'idWell': wellId, 'idMarkerSetTemplate':markerSetTemplateId ,'name': name}, headers=tokenHeader(token), verify=False)
     return r.json()

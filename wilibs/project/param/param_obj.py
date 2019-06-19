@@ -34,3 +34,6 @@ class Param:
         if check:
             return None
         return content
+
+    def delete(self):
+        return self.deleteParam()

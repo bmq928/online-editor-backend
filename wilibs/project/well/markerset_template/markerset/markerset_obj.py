@@ -53,3 +53,6 @@ class MarkerSets:
         else:
             print(content)
         return {}
+    
+    def delete(self):
+        return self.deleteMarkerSets()

@@ -9,6 +9,7 @@ from ...common import convertUnit
 from .markerset_template.markerset.markerset_api import getListMarkerSets
 from .markerset_template.markerset.markerset_obj import MarkerSets
 from .markerset_template.markerset.markerset_api import *
+from .markerset_template.markerset.markerset_api import createMarkerSets
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -119,13 +120,6 @@ class Well:
             print(content)
         return None
     
-    def createMarkerSets(self, name):
-        check, content = createMarkerSets(self.token, self.wellId, name)
-        if check:
-            return MarkerSets(self.token, content)
-        else:
-            print(content)
-        return None
 
     def createDataset(self, **data):
         """Add dataset to this well

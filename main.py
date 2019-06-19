@@ -12,6 +12,7 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 
 
 
+
 #login
 client = wilib.login("hoang","1")
 
@@ -33,32 +34,5 @@ client = wilib.login("hoang","1")
 
 #{'idProject': 3, 'name': 'hoang'
 
-# well_obj.createMarkerSets(client.token, 61,name = "thinhjjj")
-# list_set = well_obj.getListMarkerSets(client.token, 61)
-# print(list_set)
-# markersets_obj.deleteMarkerSets(client.token, 24)
-#proto = client.getProjectById(2)
-# tpm = markerset_template_obj.deleteMarkerSetTemplate(client.token,16)
-
-# project_obj.createMarkerSetTemplate(client.token, 2, "please")
-
-# please = project_obj.listMarkerSetTemplate(client.token, 2)
-# print(please)
-
-# markerset_template_obj.deleteMarkerSetTemplate(client.token, 27)
-# markerset_template_obj.createMarkerTemplate(client.token,27, "thiithtithti")
-
-# pro.createMarkerSetTemplate("hthththt")
-
-# markerset_template_obj.createMarkerTemplate(client.token, 27, "please")
-# list_markertemplate = markerset_template_obj.getListMarkerTemplate(client.token,61)
-# print(list_markertemplate)
-# markerset_template_obj.createMarkerSets(client.token, 61, 27, "troi oi la troi")
-# markerset_obj.createMarker(client.token, 25, 105)
-# tmp = client.getWellById(61)
-# mar = tmp.getListMarkerSets()
-# test = client.getMarkerSetById(25)
-# test.createMarker(151, 2134.43)
-
-
-
+tmp = client.getProjectById(2)
+print(tmp.getListZoneSetTemplate())
