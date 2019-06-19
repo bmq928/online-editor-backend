@@ -8,6 +8,7 @@ from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
 from .markerset_template.markerset.markerset_api import getListMarkerSets
 from .markerset_template.markerset.markerset_obj import MarkerSets
+from .markerset_template.markerset.markerset_api import *
 
 defaultHeaders = [
     {'header': 'NULL', 'value': '-9999', 'unit': ''},
@@ -207,8 +208,7 @@ class Well:
     def createZoneSet(self, zoneSetName):
         check, content = createZoneSetTemplate(self.token, {'name': zoneSetName, 'idProject': self.projectId})
         if check:
-            check, content = createNewZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,
-                                                           'idZoneSetTemplate': content['idZoneSetTemplate']})
+            check, content = createNewZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,'idZoneSetTemplate': content['idZoneSetTemplate']})
             if check:
                 print("Created zoneset ", zoneSetName)
                 return content
@@ -431,6 +431,4 @@ class Well:
             print(content)
         return result
     
-    # def getAllMarkerSets(self):
-    #     check, content = getListMarkerSets(self.)
     

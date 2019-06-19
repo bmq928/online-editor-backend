@@ -1425,7 +1425,7 @@
     },
     "Param":
     {
-        "edit(**dict)": {
+        " editParam(**data)": {
             "params": {
                 "required": {
 
@@ -1438,7 +1438,7 @@
             "explain": "Edit param info",
             "example": ""
         },
-        "delete()": {
+        "deleteParam()": {
             "params": {
                 "required": {
                     
@@ -1449,7 +1449,7 @@
             },
             "returns": "True if delete Param info successfully, False if fail",
             "explain": "Delete param. Do not use this object after call delete method",
-            "example": "test = param.delete()\nif success:\n\tdelparam"
+            "example": "test = client.getParamById(1000)\ntest.deleteParam()"
         },
         "getInfo()": {
             "params": {
