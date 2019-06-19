@@ -152,7 +152,7 @@ def createCurveData_RAW(token, payload, data):
 
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
-    r = requests.post(url, data=payload, files={'file': data}, headers=tokenHeader(token), verify=False)
+    r = requests.post(url, data=payload, files=data, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()
     except:
