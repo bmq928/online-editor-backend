@@ -16,7 +16,8 @@ class Curve:
             'type': curveInfo['type']
         }
         self.curveId = curveInfo['idCurve']
-        self.curveName = curveInfo['name']
+        self.name = curveInfo['name']
+        self.curveName = self.name
         self.datasetId = curveInfo['idDataset']
 
     def __repr__(self):
@@ -133,18 +134,20 @@ class Curve:
     def editCurveInfo(self, **data):
         check, content = editCurveInfo(self.token, self, **data)
         if check:
+            newInfo = self.getCurveInfo()
             self.curveInfo = {
-            'idDataset': content['idDataset'],
-            'idCurve': content['idCurve'],
-            'name': content['name'],
-            'description': content['description'],
-            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+            'idDataset': newInfo['idDataset'],
+            'idCurve': newInfo['idCurve'],
+            'name': newInfo['name'],
+            'description': newInfo['description'],
+            'tags': newInfo['relatedTo']['tags'] if newInfo["relatedTo"] is not None and "tags" in newInfo[
                 "relatedTo"] else [],
-            'type': content['type']
+            'type': newInfo['type']
             }
-            self.curveId = content['idCurve']
-            self.curveName = content['name']
-            self.datasetId = content['idDataset']
+            self.curveId = newInfo['idCurve']
+            self.name = newInfo['name']
+            self.curveName = self.name
+            self.datasetId = newInfo['idDataset']
             return True
         print(content)
         return False

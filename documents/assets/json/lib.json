@@ -66,7 +66,7 @@
             },
             "returns": "A Well object",
             "explain": "Get a well with specified id",
-            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nwell = client.getProjectById(55)\nwell.delete()"
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nwell = client.getWellById(55)\nwell.delete()"
         },
         "getDatasetById(datasetId)": {
             "params": {
@@ -191,10 +191,10 @@
             "explain": "Get a curve with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\ncurve = client.getCurveByName('Example curve', 'Example Dataset', 'Example Well', 'Example Project')\ncurve.delete()"
         },
-        "getPlotByName(plotName, projectName)": {
+        "getLogPlotByName(plotName, projectName)": {
             "params": {
                 "required": {
-                    "plotName": "String. Name of plot you want to query",
+                    "plotName": "String. Name of log plot you want to query",
                     "projectName": "String. Name of project you want to query from"
                 }, 
                 "optional": {
@@ -203,7 +203,7 @@
             },
             "returns": "A Plot object",
             "explain": "Get a plot with specified name. Print err if get err and return nothing",
-            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getPlotByName('Example Plot','Example Project')\nplot.delete()"
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nplot = client.getLogPlotByName('Example Plot','Example Project')\nplot.delete()"
         },
         "getCrossPlotByName(crossPlotName, projectName)": {
             "params": {
@@ -286,16 +286,16 @@
             "explain": "Get a list of histogram in this project",
             "example": "project = client.getProjectById(56)\nhistograms = project.getAllHistograms()\nprint(histograms)"
         },
-        "getAllPlots()": {
+        "getAllLogPlots()": {
             "params": {
                 "required": {
                 }, 
                 "optional": {
                 }
             },
-            "returns": "A list of Plot object",
-            "explain": "Get a list of plot in this project",
-            "example": "project = client.getProjectById(56)\nplots = project.getAllPlots()\nprint(plots)"
+            "returns": "A list of LogPlot object",
+            "explain": "Get a list of log plot in this project",
+            "example": "project = client.getProjectById(56)\nplots = project.getAllLogPlots()\nprint(plots)"
         },
         "getAllCrossPlots()": {
             "params": {
@@ -306,7 +306,7 @@
             },
             "returns": "A list of CrossPlot object",
             "explain": "Get a list of cross plot in this project",
-            "example": "project = client.getProjectById(56)\ncrossPlots = project.getAllWells()\nprint(crossPlots)"
+            "example": "project = client.getProjectById(56)\ncrossPlots = project.getAllCrossPlots()\nprint(crossPlots)"
         },
         "getId()": {
             "params": {
@@ -461,7 +461,7 @@
             "explain": "Find all curve that match tag",
             "example": "project = client.getProjectById(56)\ncurves = project.findCurvesByTag('Example Tag')\nprint(curves)"
         },
-        "findPlotsByTag(tag)": {
+        "findLogPlotsByTag(tag)": {
             "params": {
                 "required": {
                     "tag": "String. plot tag need to find"
@@ -525,7 +525,7 @@
             },
             "returns": "True if successfully change all tag to new name. False if get error.",
             "explain": "Rename name of tag to new name",
-            "example": "project = client.getProjectById(56)\n success = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
+            "example": "project = client.getProjectById(56)\nsuccess = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
         }
     },
     "Well": {
@@ -1158,7 +1158,7 @@
             "example": "success = curve.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
         }
     },
-    "Plot": {
+    "LogPlot": {
         "edit(**dict)": {
             "params": {
                 "required": {
@@ -1168,7 +1168,7 @@
                     
                 }
             },
-            "returns": "True if edit plot info successfully, False if fail",
+            "returns": "True if edit log plot info successfully, False if fail",
             "explain": "Edit plot info",
             "example": ""
         },
@@ -1181,8 +1181,8 @@
 
                 }
             },
-            "returns": "True if delete plot info successfully, False if fail",
-            "explain": "Delete plot. Do not use this object after call delete method",
+            "returns": "True if delete log plot info successfully, False if fail",
+            "explain": "Delete log plot. Do not use this object after call delete method",
             "example": "success = plot.delete()\nif success:\n\tdel plot"
         },
         "getInfo()": {
@@ -1195,33 +1195,33 @@
                 }
             },
             "returns": "JSON. None if fail",
-            "explain": "Get info of plot as JSON",
+            "explain": "Get info of log plot as JSON",
             "example": "info = plot.getInfo()\nprint(info)"
         },
         "addTags(tags)": {
             "params": {
                 "required": {
-                    "tags": "Array of string describe tag need to add to plot"
+                    "tags": "Array of string describe tag need to add to log plot"
                 },
                 "optional": {
 
                 }
             },
             "returns": "True if add tags successfully, False if fail",
-            "explain": "Add tags to plot",
+            "explain": "Add tags to log plot",
             "example": "success = plot.addTags(['tag1', 'tag2'])\nif success:\n\tprint('added tags')"
         },
         "removeTags(tags)": {
             "params": {
                 "required": {
-                    "tags": "Array of string describe tag need to remove from plot"
+                    "tags": "Array of string describe tag need to remove from log plot"
                 },
                 "optional": {
 
                 }
             },
             "returns": "True if remove tags successfully, False if fail",
-            "explain": "Remove tags fromm plot",
+            "explain": "Remove tags from log plot",
             "example": "success = plot.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
         }
     },

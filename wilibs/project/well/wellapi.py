@@ -76,9 +76,6 @@ def getWellHeaders(token, wellId):
 def editWellInfo(token, wellId, **data):
     payload = data
     payload['idWell'] = wellId
-    payload = {
-        'idWell': wellId
-    }
     r = editWellInfo_RAW(token, payload)
     return verifyAndReturn(r)
 
@@ -195,7 +192,7 @@ def editWellInfo_RAW(token, payload):
 
 def deleteWell_RAW(token, wellId):
     url = ROOT_API + '/project/well/delete'
-    r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
+    r = requests.delete(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
@@ -229,10 +226,17 @@ def deleteWell_RAW(token, wellId):
 #     return r.json()
 
 
+<<<<<<< HEAD
 # def deleteZoneSet_RAW(token, idZoneSet):
 #     url = ROOT_API + '/dustbin/delete'
 #     r = requests.post(url, json={'idObject': idZoneSet, 'type': 'zoneset'}, headers=tokenHeader(token), verify=False)
 #     return r.json()
+=======
+def deleteZoneSet_RAW(token, idZoneSet):
+    url = ROOT_API + '/dustbin/delete'
+    r = requests.delete(url, json={'idObject': idZoneSet, 'type': 'zoneset'}, headers=tokenHeader(token), verify=False)
+    return r.json()
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
 
 
 # def infoZoneSet_RAW(token, idZoneSet):

@@ -18,7 +18,8 @@ class Dataset:
             'tags': datasetInfo['relatedTo']['tags'] if datasetInfo["relatedTo"] is not None and "tags" in datasetInfo[
                 "relatedTo"] else []
         }
-        self.datasetName = datasetInfo['name']
+        self.name = datasetInfo['name']
+        self.datasetName = self.name
         self.datasetId = datasetInfo['idDataset']
         self.wellId = datasetInfo['idWell']
         self.top = float(datasetInfo['top'])
@@ -45,6 +46,7 @@ class Dataset:
 
     def getInfo(self):
         return self.getDatasetInfo()
+        
     
     def createCurve(self, name, **kwargsData):
         """Create new Curve for this Dataset
@@ -87,6 +89,8 @@ class Dataset:
     def newCurve(self, name, **data):
         return self.createCurve(name, **data)
     
+    def newNumericCurve(self):
+        pass
 
     def getListCurve(self):
         """Get list object curve in this dataset
@@ -118,12 +122,30 @@ class Dataset:
         """
         check, content = editDatasetInfo(self.token, self.datasetInfo['idDataset'], **data)
         if check:
+            newInfo = self.getDatasetInfo()
+            self.datasetInfo = {
+            'idWell': newInfo['idWell'],
+            'idDataset': newInfo['idDataset'],
+            'name': newInfo['name'],
+            'datasetKey': newInfo['datasetKey'],
+            'tags': newInfo['relatedTo']['tags'] if newInfo["relatedTo"] is not None and "tags" in newInfo[
+                "relatedTo"] else []
+            }
+            self.name = newInfo['name']
+            self.datasetName = self.name
+            self.datasetId = newInfo['idDataset']
+            self.wellId = newInfo['idWell']
+            self.top = float(newInfo['top'])
+            self.step = float(newInfo['step'])
+            self.bottom = float(newInfo['bottom'])
+            self.sampleRate = float(newInfo['step'])
+            self.unit = newInfo['unit']
             return True
         print(content)
         return False
     
     def edit(self, **data):
-        return self.editDatasetInfo()
+        return self.editDatasetInfo(**data)
 
     def deleteDataset(self):
         check, content = deleteDataset(self.token, self.datasetInfo['idDataset'])
@@ -184,7 +206,7 @@ class Dataset:
                             break
             for i in range(0, len(curves)):
                 curves[i].updateRawCurveData(datas[i])
-                print(curves[i].curveName, self.datasetName, "Done")
+                print(curves[i].curveName, self.name, "Done")
             self.editDatasetInfo(top=newTop, bottom=newBottom)
             return
         newTopInteger = 0
@@ -218,7 +240,7 @@ class Dataset:
                 j['y'] = k
                 k += 1
             curves[i].updateRawCurveData(datas[i])
-            print(curves[i].curveName, self.datasetName, "Done")
+            print(curves[i].curveName, self.name, "Done")
         self.editDatasetInfo(top=newTop, bottom=newBottom)
         return
 

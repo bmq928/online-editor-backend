@@ -6,7 +6,6 @@ from wilibs.project.well.dataset.curve import curve_obj
 from wilibs.common import *
 import json
 from wilibs.common import convertUnit
-import wilibs.export as obj
 from wilibs.project.well.markerset_template import markerset_template_obj
 from wilibs.project.well.markerset_template.markerset import markerset_obj
 
@@ -16,11 +15,9 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
-# arrayCurve = client.findCurveByName("array_curve","source","g_1x","demo_edit_curve")
-# textCurve = client.findCurveByName("text_curve","source","g_1x","demo_edit_curve")
-# singleCurve = client.getCurveByName("bs","source","g_1x","demo_edit_curve")
-# print(singleCurve)
+project = client.getProjectById(11)
 
+<<<<<<< HEAD
 # well = client.getWellById(31)
 
 # well.limitWell(10,1300,'m')
@@ -36,3 +33,9 @@ client = wilib.login("hoang","1")
 
 tmp = client.getProjectById(2)
 print(tmp.getListZoneSetTemplate())
+=======
+print(project.rename('A new name'))
+
+
+
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a

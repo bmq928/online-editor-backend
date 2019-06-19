@@ -2,7 +2,7 @@ from .projectapi import *
 from .well.wellapi import *
 from .well.well_obj import Well
 from .plot.plotapi import *
-from .plot.plot_object import Plot
+from .plot.plot_object import LogPlot
 from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
@@ -20,7 +20,8 @@ class Project:
         self.token = token
         self.projectInfo = projectInfo
         self.projectId = projectInfo['idProject']
-        self.projectName = projectInfo['name']
+        self.name = projectInfo['name']
+        self.projectName = self.name
         self.alias = projectInfo['alias']
         self.shared = projectInfo['shared'] if 'shared' in projectInfo else False
         self.owner = projectInfo['owner'] if 'owner' in projectInfo else projectInfo['createdBy']
@@ -42,9 +43,12 @@ class Project:
             return []
         listObj = []
         for i in list:
-            listObj.append(Plot(self.token, i))
+            listObj.append(LogPlot(self.token, i))
         return listObj
 
+    def getAllLogPlots(self):
+        return self.getListPlot()
+    
     def getAllPlots(self):
         return self.getListPlot()
     
@@ -159,14 +163,22 @@ class Project:
         """
         check, content = editProject(self.token, self.projectId, **data)
         if check:
-            self.projectInfo = content
-            self.projectId = content['idProject']
-            self.projectName = content['name']
-            self.alias = content['alias']
-            self.shared = content['shared'] if 'shared' in content else False
-            self.owner = content['owner'] if 'owner' in content else content['createdBy']
+            newInfo = self.getInfo()
+            if newInfo == None:
+                return False
+            self.projectInfo = newInfo
+            self.projectId = newInfo['idProject']
+            self.projectName = newInfo['name']
+            self.alias = newInfo['alias']
+            self.shared = newInfo['shared'] if 'shared' in newInfo else False
+            self.owner = newInfo['owner'] if 'owner' in newInfo else newInfo['createdBy']
+            self.name = self.projectName
             return True
+        print(content)
         return False
+
+    def rename(self, newName):
+        return self.edit(name = newName)
 
     def delete(self):
         """Delete project
@@ -222,11 +234,11 @@ class Project:
                         result = result + [curve]
         return result
     
-    def findPlotsByTag(self,tag):
-        plots = self.getAllPlots()
+    def findLogPlotsByTag(self,tag):
+        plots = self.getAllLogPlots()
         result = []
         for plot in plots:
-            relatedTo = plot.getPlotInfo()['relatedTo']
+            relatedTo = plot.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result = result + [plot]
         return result
@@ -251,7 +263,7 @@ class Project:
 
     def findAllByTag(self, tag):
         wells = self.getAllWells()
-        plots = self.getAllPlots()
+        plots = self.getAllLogPlots()
         crossPlots = self.getAllCrossPlots()
         histograms = self.getAllHistograms()
 
@@ -265,34 +277,34 @@ class Project:
         }
 
         for plot in plots:
-            relatedTo = plot.getPlotInfo()['relatedTo']
+            relatedTo = plot.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['plots'] = result['plots'] + [plot]
 
         for crossPlot in crossPlots:
-            relatedTo = crossPlot.getInfoCrossPlot()['relatedTo']
+            relatedTo = crossPlot.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['crossPlots'] = result['crossPlots'] + [crossPlot]
 
         for histogram in histograms:
-            relatedTo = histogram.getInfoHistogram()['relatedTo']
+            relatedTo = histogram.getInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['histogram'] = result['histogram'] + [histogram]
 
         for well in wells:
-            relatedTo = well.getWellInfo()["relatedTo"]
+            relatedTo = well.getInfo()["relatedTo"]
             if self.isExistsTag(relatedTo, tag):
                 result["wells"] = result["wells"] + [well]
             # else:
             datasets = well.getAllDatasets()
             for dataset in datasets:
-                relatedToDataset = dataset.getDatasetInfo()["relatedTo"]
+                relatedToDataset = dataset.getInfo()["relatedTo"]
                 if self.isExistsTag(relatedToDataset, tag):
                     result["datasets"] = result["datasets"] + [dataset]
                 # else:
                 curves = dataset.getAllCurves()
                 for curve in curves:
-                    relatedToCurve = curve.getCurveInfo()["relatedTo"]
+                    relatedToCurve = curve.getInfo()["relatedTo"]
                     if self.isExistsTag(relatedToCurve, tag):
                         result["curves"] = result["curves"] + [curve]
         return result

@@ -65,8 +65,10 @@ class Well:
         }
         self.wellId = wellInfo['idWell']
         self.projectId = wellInfo['idProject']
-        self.wellName = wellInfo['name']
-        self.headers = wellInfo['well_headers']
+        self.name = wellInfo['name']
+        self.wellName = self.name
+        _, info = getWellInfo(self.token, self.wellId)
+        self.headers = info['well_headers']
 
     def __repr__(self):
         obj = dict(self.wellInfo)
@@ -122,7 +124,11 @@ class Well:
             print(content)
         return None
     
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 704f063a1ec4c17ee29334824af90c8ff4a6b93a
     def createDataset(self, **data):
         """Add dataset to this well
 
@@ -174,17 +180,19 @@ class Well:
         """
         check, content = editWellInfo(self.token, self.wellId, **data)
         if check:
+            newInfo = self.getWellInfo()
             self.wellInfo = {
-            'idProject': content['idProject'],
-            'idWell': content['idWell'],
-            'name': content['name'],
-            'tags': content['relatedTo']['tags'] if content["relatedTo"] is not None and "tags" in content[
+            'idProject': newInfo['idProject'],
+            'idWell': newInfo['idWell'],
+            'name': newInfo['name'],
+            'tags': newInfo['relatedTo']['tags'] if newInfo["relatedTo"] is not None and "tags" in newInfo[
                 "relatedTo"] else []
             }
-            self.wellId = content['idWell']
-            self.projectId = content['idProject']
-            self.wellName = content['name']
-            self.headers = content['well_headers']
+            self.wellId = newInfo['idWell']
+            self.projectId = newInfo['idProject']
+            self.wellName = newInfo['name']
+            self.headers = newInfo['well_headers']
+            self.wellName = self.name
             return True
         print(content)
         return False
@@ -192,8 +200,9 @@ class Well:
     def deleteWell(self):
         check, content = deleteWell(self.token, self.wellId)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
     
     def delete(self):
         return self.deleteWell()
@@ -280,6 +289,9 @@ class Well:
         else:
             print(content)
         return False
+    
+    def rename(self, newName):
+        return self.renameWell(newName)
 
     def deleteAllZoneSets(self):
         zonesets = self.getAllZoneSets()

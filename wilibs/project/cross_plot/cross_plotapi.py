@@ -54,5 +54,5 @@ def editCrossPlot_RAW(token, payload):
 
 def deleteCrossPlot_RAW(token, crossPlotId):
     url = ROOT_API + '/project/cross-plot/delete'
-    r = requests.post(url, json={'idCrossPlot': crossPlotId}, headers=tokenHeader(token), verify=False)
+    r = requests.delete(url, json={'idCrossPlot': crossPlotId}, headers=tokenHeader(token), verify=False)
     return r.json()
