@@ -131,7 +131,7 @@
             },
             "returns": "A ImageSet object",
             "explain": "Get a imageSet with specified id",
-            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nimageSet = client.getProjectById(55)\nimageSet.delete()"
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nimageSet = client.getImageSetById(55)\nimageSet.delete()"
         },
         "getProjectByName(projectName)": {
             "params": {
@@ -351,22 +351,6 @@
             "returns": "Return True if successfully delete this project, False if get some error",
             "explain": "Delete this project.\nWarning: You should delete this project object right after call this function successful",
             "example": "project = client.getProjectById(56)\nsuccess = project.delete()\nif success:\n\tdel project"
-        },
-        "edit(**dict)": {
-            "params": {
-                "required": {
-                }, 
-                "optional": {
-                    "dict.name": "String. new name",
-                    "dict.alias": "String. new alias",
-                    "dict.company": "String. new company",
-                    "dict.department": "String. new department",
-                    "dict.description": "String. new description"
-                }
-            },
-            "returns": "Return True if successfully edit this project, False if get some error",
-            "explain": "Edit this project info",
-            "example": "project = client.getProjectById(56)\nsuccess = project.edit(name='new name', company='your company',description='example description')\nif success:\n\tprint('edit successful')"
         },
         "newWell(**dict)": {
             "params": {
@@ -895,7 +879,7 @@
             },
             "returns": "Array of curve object. Array can be empty if dataset don't have curve or get curve error",
             "explain": "Get all curve in dataset",
-            "example": "curves = well.getAllCurves()\nprint(curves)"
+            "example": "curves = dataset.getAllCurves()\nprint(curves)"
         },
         "edit(**dict)": {
             "params": {
@@ -926,7 +910,7 @@
             "explain": "Delete this dataset. Do not keep this dataset object after call delete it",
             "example": "success = dataset.delete()\nif success:\n\tdel dataset"
         },
-        "renameDataset(newName)": {
+        "rename(newName)": {
             "params": {
                 "required": {
                     "newName": "String. New name of dataset"
@@ -937,7 +921,7 @@
             },
             "returns": "True if rename successfully, False if fail",
             "explain": "Fast rename dataset, also change datasetKey, datasetLabel to new name",
-            "example": "success = dataset.renameDataset('new name')\nif success:\n\tprint('rename successfully')"
+            "example": "success = dataset.rename('new name')\nif success:\n\tprint('rename successfully')"
         },
         "getDepth()": {
             "params": {
@@ -1118,7 +1102,7 @@
             "explain": "",
             "example": ""
         },
-        "renameCurve(newName)": {
+        "rename(newName)": {
             "params": {
                 "required": {
                     "newName": "New name of curve"
@@ -1129,7 +1113,7 @@
             },
             "returns": "True if rename successfully, False if fail",
             "explain": "Rename curve",
-            "example": "success = curve.renameCurve('new name')\nif success:\n\tprint('change name success')"
+            "example": "success = curve.rename('new name')\nif success:\n\tprint('change name success')"
         },
         "addTags(tags)": {
             "params": {

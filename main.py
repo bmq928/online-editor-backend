@@ -15,4 +15,4 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("hoang","1")
 
-
+client.getDatasetById(109).delete()
