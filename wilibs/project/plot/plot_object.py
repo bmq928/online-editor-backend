@@ -1,41 +1,52 @@
 from .plotapi import *
 
 
-class Plot:
+class LogPlot:
     def __init__(self, token, plotInfo):
         self.token = token
         self.plotInfo = {
-            "plotId": plotInfo["idPlot"],
+            "plotId": plotInfo["idLogPlot"],
             "plotName": plotInfo["name"],
             "tags": plotInfo["relatedTo"]["tags"] if plotInfo["relatedTo"] is not None and "tags" in plotInfo[
                 "relatedTo"] else []
         }
-        self.plotId = plotInfo["idPlot"]
+        self.plotId = plotInfo["idLogPlot"]
         self.projectId = plotInfo["idProject"]
-        self.plotName = plotInfo["name"]
+        self.name = plotInfo["name"]
+        self.tags = self.plotInfo["tags"]
 
     def __repr__(self):
         payload = {
             'idProject': self.projectId,
-            'name': self.plotName,
+            'name': self.name,
         }
         return str(payload)
 
     def __str__(self):
         return self.__repr__()
 
-    def editPlot(self, **data):
+    def editLogPlot(self, **data):
         check, content = editPlot(self.token, self.plotId, **data)
         if check:
+            self.plotInfo = {
+            "plotId": content["idLogPlot"],
+            "plotName": content["name"],
+            "tags": content["relatedTo"]["tags"] if content["relatedTo"] is not None and "tags" in content[
+                "relatedTo"] else []
+            }
+            self.plotId = content["idLogPlot"]
+            self.projectId = content["idProject"]
+            self.name = content["name"]
+            self.tags = self.plotInfo["tags"]
             return True
         else:
             print(content)
             return False
     
     def edit(self, **data):
-        return self.editPlot(**data)
+        return self.editLogPlot(**data)
 
-    def deletePlot(self):
+    def deleteLogPlot(self):
         check, content = deletePlot(self.token, self.plotId)
         if check:
             return True
@@ -44,9 +55,9 @@ class Plot:
             return False
     
     def delete(self):
-        return self.deletePlot()
+        return self.deleteLogPlot()
 
-    def getPlotInfo(self):
+    def getLogPlotInfo(self):
         check, content = infoPlot(self.token, self.plotId)
         if check:
             return content
@@ -55,10 +66,10 @@ class Plot:
             return False
 
     def getInfo(self):
-        return self.getPlotInfo()
+        return self.getLogPlotInfo()
 
     def addTags(self, tags):
-        plotInfo = self.getPlotInfo()
+        plotInfo = self.getLogPlotInfo()
         relatedTo = plotInfo["relatedTo"]
         if relatedTo and "tags" in relatedTo:
             oldTags = relatedTo["tags"]
@@ -72,16 +83,16 @@ class Plot:
             relatedTo = {
                 "tags": tags
             }
-        check = self.editPlot(relatedTo=relatedTo)
+        check = self.editLogPlot(relatedTo=relatedTo)
         return check
 
     def removeTags(self, tags):
-        plotInfo = self.getPlotInfo()
+        plotInfo = self.getLogPlotInfo()
         relatedTo = plotInfo["relatedTo"]
         if relatedTo and "tags" in relatedTo:
             for t in tags:
                 if t in relatedTo["tags"]:
                     relatedTo["tags"].remove(t)
                     self.plotInfo["tags"] = relatedTo["tags"]
-        check = self.editPlot(relatedTo=relatedTo)
+        check = self.editLogPlot(relatedTo=relatedTo)
         return check

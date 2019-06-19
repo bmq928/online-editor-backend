@@ -4,12 +4,12 @@ class Histogram:
     def __init__(self, token, histogramId, name):
         self.token = token
         self.histogramId = histogramId
-        self.histogramName = name
+        self.name = name
 
     def __repr__(self):
         payload = {
             'idHistogram': self.histogramId,
-            'name': self.histogramName,
+            'name': self.name,
         }
         return str(payload)
 
@@ -30,6 +30,8 @@ class Histogram:
     def editHistogram(self, **kwargs):
         check, content = editHistogram(self.token, self.histogramId, **kwargs)
         if check:
+            self.histogramId = content['idHistogram'],
+            self.name = content['name']
             return True
         else:
             print(content)

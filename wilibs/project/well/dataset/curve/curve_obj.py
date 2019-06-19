@@ -16,7 +16,7 @@ class Curve:
             'type': curveInfo['type']
         }
         self.curveId = curveInfo['idCurve']
-        self.curveName = curveInfo['name']
+        self.name = curveInfo['name']
         self.datasetId = curveInfo['idDataset']
 
     def __repr__(self):
@@ -143,7 +143,7 @@ class Curve:
             'type': content['type']
             }
             self.curveId = content['idCurve']
-            self.curveName = content['name']
+            self.name = content['name']
             self.datasetId = content['idDataset']
             return True
         print(content)

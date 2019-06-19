@@ -2,7 +2,7 @@ from .projectapi import *
 from .well.wellapi import *
 from .well.well_obj import Well
 from .plot.plotapi import *
-from .plot.plot_object import Plot
+from .plot.plot_object import LogPlot
 from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
@@ -18,7 +18,7 @@ class Project:
         self.token = token
         self.projectInfo = projectInfo
         self.projectId = projectInfo['idProject']
-        self.projectName = projectInfo['name']
+        self.name = projectInfo['name']
         self.alias = projectInfo['alias']
         self.shared = projectInfo['shared'] if 'shared' in projectInfo else False
         self.owner = projectInfo['owner'] if 'owner' in projectInfo else projectInfo['createdBy']
@@ -40,10 +40,10 @@ class Project:
             return []
         listObj = []
         for i in list:
-            listObj.append(Plot(self.token, i))
+            listObj.append(LogPlot(self.token, i))
         return listObj
 
-    def getAllPlots(self):
+    def getAllLogPlots(self):
         return self.getListPlot()
     
 
@@ -220,11 +220,11 @@ class Project:
                         result = result + [curve]
         return result
     
-    def findPlotsByTag(self,tag):
-        plots = self.getAllPlots()
+    def findLogPlotsByTag(self,tag):
+        plots = self.getAllLogPlots()
         result = []
         for plot in plots:
-            relatedTo = plot.getPlotInfo()['relatedTo']
+            relatedTo = plot.getLogPlotInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result = result + [plot]
         return result
@@ -249,7 +249,7 @@ class Project:
 
     def findAllByTag(self, tag):
         wells = self.getAllWells()
-        plots = self.getAllPlots()
+        plots = self.getAllLogPlots()
         crossPlots = self.getAllCrossPlots()
         histograms = self.getAllHistograms()
 
@@ -263,7 +263,7 @@ class Project:
         }
 
         for plot in plots:
-            relatedTo = plot.getPlotInfo()['relatedTo']
+            relatedTo = plot.getLogPlotInfo()['relatedTo']
             if self.isExistsTag(relatedTo, tag):
                 result['plots'] = result['plots'] + [plot]
 

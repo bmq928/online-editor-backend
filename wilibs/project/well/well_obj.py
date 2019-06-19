@@ -61,7 +61,7 @@ class Well:
         }
         self.wellId = wellInfo['idWell']
         self.projectId = wellInfo['idProject']
-        self.wellName = wellInfo['name']
+        self.name = wellInfo['name']
         self.headers = wellInfo['well_headers']
 
     def __repr__(self):

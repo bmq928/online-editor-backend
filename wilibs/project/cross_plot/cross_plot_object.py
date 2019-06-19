@@ -4,12 +4,12 @@ class CrossPlot:
     def __init__(self, token, crossPlotId, name):
         self.token = token
         self.crossPlotId = crossPlotId
-        self.crossPlotName = name
+        self.name = name
 
     def __repr__(self):
         payload = {
             'idCrossPlot': self.crossPlotId,
-            'name': self.crossPlotName,
+            'name': self.name,
         }
         return str(payload)
 
@@ -30,6 +30,8 @@ class CrossPlot:
     def editCrossPlot(self, **kwargs):
         check, content = editCrossPlot(self.token, self.crossPlotId, **kwargs)
         if check:
+            self.crossPlotId = content['idCrossPlot'],
+            self.name = content['name']
             return True
         else:
             print(content)

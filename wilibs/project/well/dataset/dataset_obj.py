@@ -18,7 +18,7 @@ class Dataset:
             'tags': datasetInfo['relatedTo']['tags'] if datasetInfo["relatedTo"] is not None and "tags" in datasetInfo[
                 "relatedTo"] else []
         }
-        self.datasetName = datasetInfo['name']
+        self.name = datasetInfo['name']
         self.datasetId = datasetInfo['idDataset']
         self.wellId = datasetInfo['idWell']
         self.top = float(datasetInfo['top'])
@@ -184,7 +184,7 @@ class Dataset:
                             break
             for i in range(0, len(curves)):
                 curves[i].updateRawCurveData(datas[i])
-                print(curves[i].curveName, self.datasetName, "Done")
+                print(curves[i].curveName, self.name, "Done")
             self.editDatasetInfo(top=newTop, bottom=newBottom)
             return
         newTopInteger = 0
@@ -218,7 +218,7 @@ class Dataset:
                 j['y'] = k
                 k += 1
             curves[i].updateRawCurveData(datas[i])
-            print(curves[i].curveName, self.datasetName, "Done")
+            print(curves[i].curveName, self.name, "Done")
         self.editDatasetInfo(top=newTop, bottom=newBottom)
         return
 
