@@ -25,16 +25,16 @@ def createDataSet(token, wellId, **data):
     payload = {
         'idWell': wellId,
     }
-    # if 'datasetKey' in data:
-    #     payload['datasetKey'] = data['datasetKey']
-    # if 'datasetLabel' in data:
-    #     payload['datasetLabel'] = data['datasetLabel']
     if 'name' in data:
         payload['name'] = data['name']
         payload['datasetKey'] = data['name']
         payload['datasetLabel'] = data['name']
     else:
         return False, 'name is required'
+    if 'datasetKey' in data:
+        payload['datasetKey'] = data['datasetKey']
+    if 'datasetLabel' in data:
+        payload['datasetLabel'] = data['datasetLabel']
     if 'bottom' in data:
         payload['bottom'] = data['bottom']
     else:

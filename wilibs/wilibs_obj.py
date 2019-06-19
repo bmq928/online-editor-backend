@@ -233,4 +233,8 @@ class Wilib:
         return createProject(self.token, **data)
     
     def newProject(self, **data):
-        return createProject(self.token, **data)
+        check, content =  createProject(self.token, **data)
+        if check:
+            return Project(self.token, content)
+        print(content)
+        return None
