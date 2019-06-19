@@ -191,8 +191,9 @@ class Well:
     def deleteWell(self):
         check, content = deleteWell(self.token, self.wellId)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
     
     def delete(self):
         return self.deleteWell()
