@@ -172,7 +172,7 @@ class Wilib:
         print("No curve found for name query.")
         return False
 
-    def getPlotByName(self, plotName, projectName):
+    def getLogPlotByName(self, plotName, projectName):
         project = self.getProjectByName(projectName)
         if project:
             plots = project.getAllPlots()
