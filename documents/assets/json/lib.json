@@ -306,7 +306,7 @@
             },
             "returns": "A list of CrossPlot object",
             "explain": "Get a list of cross plot in this project",
-            "example": "project = client.getProjectById(56)\ncrossPlots = project.getAllWells()\nprint(crossPlots)"
+            "example": "project = client.getProjectById(56)\ncrossPlots = project.getAllCrossPlots()\nprint(crossPlots)"
         },
         "getId()": {
             "params": {
@@ -525,7 +525,7 @@
             },
             "returns": "True if successfully change all tag to new name. False if get error.",
             "explain": "Rename name of tag to new name",
-            "example": "project = client.getProjectById(56)\n success = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
+            "example": "project = client.getProjectById(56)\nsuccess = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
         }
     },
     "Well": {
