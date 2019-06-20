@@ -42,9 +42,6 @@ class MarkerSetTemplate:
     
     def newMarkerTemplate(self, name):
         return self.createMarkerTemplate(name)
-    
-    def newMarkerSetTemplate(self,name):
-        return self.createMarkerTemplate(name)
 
     def getAllMarkerTemplates(self):
         markerTemplates = self.getMarkerSetTemplateInfo()
