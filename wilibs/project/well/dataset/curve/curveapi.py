@@ -136,6 +136,10 @@ def deleteCurve(token, curveId):
     r = deleteCurve_RAW(token, {'idCurve': curveId})
     return verifyAndReturn(r)
 
+def getRawCurveData(token, curveId, columnIndex):
+    r = getRawCurveData_RAW(token, curveId, columnIndex)
+    return verifyAndReturn(r)
+
 
 # RAW:
 
@@ -185,4 +189,9 @@ def deleteCurve_RAW(token, payload):
 def checkIfCurveExisted_RAW(token, datasetId, name):
     url = ROOT_API + '/project/well/dataset/curve/is-existed'
     r = requests.post(url, json={'idDataset': datasetId, 'name': name}, headers=tokenHeader(token), verify=False)
+    return r.json()
+
+def getRawCurveData_RAW(token, curveId, columnIndex):
+    url = ROOT_API + '/project/well/dataset/curve/getRawData'
+    r = requests.post(url, json={'idCurve': curveId, 'columnIndex': columnIndex}, headers=tokenHeader(token), verify=False)
     return r.json()

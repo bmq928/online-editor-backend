@@ -1033,18 +1033,18 @@
             "explain": "Get info of curve as JSON",
             "example": "info = curve.getInfo()\nprint(info)"
         },
-        "getCurveData()": {
+        "getCurveData(columnIndex)": {
             "params": {
                 "required": {
 
                 },
                 "optional": {
-
+                    "columnIndex": "Array of integer. Contain index want to query data in array type data."
                 }
             },
             "returns": "Array of object which contain key 'x' and key 'y'.( [{'x': 5, 'y': 6}] )",
             "explain": "Get curve data. key 'y' as index run from 0 to end. if 'y' is not integer, this is core data",
-            "example": "data = curve.getCurveData()\nprint(data)"
+            "example": "data = curve.getCurveData()\nprint(data)\ndata = curve.getCurveData([0,1])\nprint(data)"
         },
         "updateRawCurveData(curveData)": {
             "params": {

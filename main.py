@@ -15,4 +15,4 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("su_hoang","1")
 
-client.getDatasetById(55).newCurve(name="hello4", unit="m", type="NUMBER")
+print(client.getCurveById(363).getCurveData([0,1]))

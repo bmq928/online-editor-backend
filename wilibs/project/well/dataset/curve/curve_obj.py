@@ -38,9 +38,17 @@ class Curve:
     def getInfo(self):
         return self.getCurveInfo()
 
-    def getCurveData(self):
-        """Return object contain data of curve
-        """
+    def getCurveData(self, columnIndex = None):
+        if columnIndex:
+            if self.curveInfo['type'].lower() != "array":
+                print("This isn't array type data")
+                return None
+            else:
+                check, content = getRawCurveData(self.token, self.curveId, columnIndex)
+                if check:
+                    return content
+                print(content)
+                return None
         check, content = getCurveData(self.token, self.curveId)
         if check:
             return content
