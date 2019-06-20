@@ -112,6 +112,7 @@ class Well:
         if check:
             for i in content:
                 listObj.append(MarkerSets(self.token, i))
+            return listObj
         print(content)
         return listObj
 
