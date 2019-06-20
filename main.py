@@ -13,5 +13,7 @@ client = wilib.login("su_hoang","1")
 
 project = client.getProjectById(6)
 zst = project.getAllZoneSetTemplates()
-zsts = zst[0].getAllZoneTemplates()
-print(zsts)
+
+zt = zst[0].getAllZoneTemplates()
+print(zt)
+print(zt.getInfo())
