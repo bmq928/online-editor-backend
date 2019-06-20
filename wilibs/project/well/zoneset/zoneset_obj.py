@@ -34,7 +34,7 @@ class ZoneSet:
         return {}
     
     def getAllZones(self):
-        zoneInfo = self.getZoneTemplateInfo()
+        zoneInfo = self.getZoneSetInfo()
         listObj = []
         if zoneInfo:
             listObj = zoneInfo['zones']
