@@ -32,4 +32,7 @@ class ZoneSetTemplate:
         return content
     
     def delete(self):
-        return self.deleteZoneSetTemplate();
+        return self.deleteZoneSetTemplate()
+    
+    def getInfo(self):
+        return self.getZoneSetTemplateInfo()
