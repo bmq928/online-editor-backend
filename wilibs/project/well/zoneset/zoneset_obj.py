@@ -34,11 +34,15 @@ class ZoneSet:
         return {}
     
     def getAllZones(self):
-        check, list = getZoneSetInfo(self.token, self.ZoneSetId)
-        if check is False and list is None:
-            return [] 
-        listObj = list['zones']
-        return listObj
+        zoneInfo = self.getZoneTemplateInfo()
+        listObj = []
+        if zoneInfo:
+            listObj = zoneInfo['zones']
+            newArr = []
+            for i in listObj:
+                newArr.append(Zone(self.token, i))
+            return newArr
+        return []
     
     def deleteZoneSet(self):
         check , content = deleteZoneSet(self.token, self.ZoneSetId)
