@@ -377,7 +377,7 @@ class Project:
         check, content = getlistZoneSetTemplate(self.token, self.projectId)
         listObj = []
         if check:
-            for i in list:
+            for i in content:
                 listObj.append(ZoneSetTemplate(self.token,i))
             return listObj
         print(content)
@@ -388,7 +388,8 @@ class Project:
         if check:
             return ZoneSetTemplate(self.token, content)
         else:
+            print(content)
             return None
 
-    def newZoneSetTemplate(self):
-        return self.createZoneSetTemplate()
+    def newZoneSetTemplate(self, name):
+        return self.createZoneSetTemplate(name)
