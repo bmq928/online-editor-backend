@@ -31,6 +31,8 @@ from .project.well.zoneset_template.zoneset_template_api import getZoneSetTeampl
 from .project.well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
 from .project.well.zoneset.zoneset_api import *
 from .project.well.zoneset.zoneset_obj import ZoneSet
+from .project.well.zoneset.zoneset_obj import getZoneSetInfo
+from .project.well.well_obj import *
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -253,3 +255,14 @@ class Wilib:
         if check:
             return ZoneSet(self.token, info)
         return None
+     
+    def getZoneSetByName(self, zonesetName, wellName, projectName):
+        well = self.getWellByName(wellName, projectName)
+        if well:
+            ZoneSets = well.getAllZoneSets()
+            for i in ZoneSets:
+                tmpObj = i.getZoneSetInfo()
+                if tmpObj["name"].lower() == zonesetName.lower():
+                    return tmpObj
+        print("!!!!!!!!!Not found!!!!!!!!!!!")
+        return False

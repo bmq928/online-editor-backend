@@ -431,7 +431,7 @@ class Well:
             print(content)
         return result
     
-    def getAllZoneSets(self):
+    def getListZoneSets(self):
         check, content = getListZoneSets(self.token, self.wellId)
         result = []
         if check:
@@ -440,3 +440,6 @@ class Well:
         else:
             print(content)
         return result
+    
+    def getAllZoneSets(self):
+        return self.getListZoneSets()

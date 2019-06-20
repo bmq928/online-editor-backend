@@ -34,8 +34,13 @@ class ZoneSet:
         if check is False and list is None:
             return [] 
         listObj = list['zones']
-        print(listObj)
-        # for i in list:
-        #     listObj.append(Zone(self.token,i))
-        # return listObj
-        return None
+        return listObj
+    
+    def deleteZoneSet(self):
+        check , content = deleteZoneSet(self.token, self.ZoneSetId)
+        if check:
+            return None
+        return content
+    
+    def delete(self):
+        return self.deleteZoneSet()
