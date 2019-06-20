@@ -41,14 +41,6 @@ class MarkerSetTemplate:
     
     def newMarkerSetTemplate(self,name):
         return self.createMarkerTemplate(name)
-
-    def createMarkerSets(self, wellId, name):
-        check, content = createMarkerSets(self.token, wellId, name)
-        if check:
-            return MarkerSets(self.token, content)
-        else:
-            return None
-    
     
     def getAllMarkerTemplate(self):
         markerTemplates = self.getMarkerSetTemplateInfo()
@@ -65,5 +57,8 @@ class MarkerSetTemplate:
 
     def delete(self):
         return self.deleteMarkerSetTemplate()
+    
+    def getInfo(self):
+        return self.getMarkerSetTemplateInfo()
 
 
