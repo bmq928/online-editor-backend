@@ -62,3 +62,6 @@ class ZoneSet:
             print(content, co)
             return False
         return False
+    
+    def getInfo(self):
+        return self.getZoneSetInfo()

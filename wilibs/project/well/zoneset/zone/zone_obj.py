@@ -71,3 +71,6 @@ class Zone:
         else:
             print(content)
         return {}
+    
+    def getInfo(self):
+        return self.getZoneInfo()
