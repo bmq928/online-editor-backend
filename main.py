@@ -13,4 +13,5 @@ client = wilib.login("su_hoang","1")
 
 well = client.getWellById(31)
 
-print(well.getAllMarkerSets())
+mks = well.getAllMarkerSets()
+print(client.getMarkerSetById(4))
