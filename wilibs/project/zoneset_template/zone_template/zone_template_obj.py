@@ -20,7 +20,6 @@ class ZoneTemplate:
         return self.__repr__()  
     def getZoneTemplateInfo(self):
         check, content = getZoneSetTeamplateInfo(self.token, self.ZoneSetTeamplateId)
-        listObj = []
         if check:
             tmpObj = content['zone_templates']
             for i in tmpObj:
