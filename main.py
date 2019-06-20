@@ -10,10 +10,4 @@ import json
 
 #login
 client = wilib.login("su_hoang","1")
-
-well = client.getWellById(31)
-
-zs = well.getAllZoneSets()
-
-z = zs[0].getAllZones()
-print(z[0].getInfo())
+print(client.getZoneById(346).delete())

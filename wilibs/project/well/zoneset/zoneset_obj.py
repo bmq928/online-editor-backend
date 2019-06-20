@@ -59,13 +59,13 @@ class ZoneSet:
         print(zoneset)
         check, content = editZoneSetTemplate(self.token, {'idZoneSetTemplate': zoneset['idZoneSetTemplate'], 'name': newZoneSetName})
         c, co = editZoneSet(self.token, {'idZoneSet': zoneset['idZoneSet'], 'name': newZoneSetName})
-        if check and c:
-            print("Update zoneset name successfull")
+        if check:
             return True
-        else:
-            print(content, co)
-            return False
+        print(content, co)
         return False
+    
+    def rename(self, newZoneSetName):
+        return self.renameZoneSet(newZoneSetName)
     
     def getInfo(self):
         return self.getZoneSetInfo()

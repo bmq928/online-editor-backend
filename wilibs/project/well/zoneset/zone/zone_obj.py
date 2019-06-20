@@ -33,37 +33,39 @@ class Zone:
     def delete(self):
         return self.deleteZone()
     
-    def editZone(self, **data):
-        check, content = editZone(self.token, **data)
-        if check:
-            self.ZoneInfo = {
-            'idZoneTemplate': ZoneInfo['idWell'],
-            'idZoneSet': ZoneInfo['idZoneSet'],
-            'idZone': ZoneInfo['idZone'],
-            'name': ZoneInfo['name'],
-            'endDepth': ZoneInfo['endDepth'],
-            'endDepthTemp': ZoneInfo['endDepthTemp'],
-            'startDepth': ZoneInfo['startDepth'],
-            'startDepthTemp': ZoneInfo['startDepthTemp']
-            }
-            self.ZoneId = ZoneInfo['idZone']
-            self.name = ZoneInfo['name']
-            return True
-        print(content)
-        return False
+    # def editZone(self, **data):
+    #     check, content = editZone(self.token, **data)
+    #     if check:
+    #         self.ZoneInfo = {
+    #         'idZoneTemplate': ZoneInfo['idWell'],
+    #         'idZoneSet': ZoneInfo['idZoneSet'],
+    #         'idZone': ZoneInfo['idZone'],
+    #         'name': ZoneInfo['name'],
+    #         'endDepth': ZoneInfo['endDepth'],
+    #         'endDepthTemp': ZoneInfo['endDepthTemp'],
+    #         'startDepth': ZoneInfo['startDepth'],
+    #         'startDepthTemp': ZoneInfo['startDepthTemp']
+    #         }
+    #         self.ZoneId = ZoneInfo['idZone']
+    #         self.name = ZoneInfo['name']
+    #         return True
+    #     print(content)
+    #     return False
     
-    def edit(self,**data):
-        return self.editZone(**data)
+    # def edit(self,**data):
+    #     return self.editZone(**data)
         
     def renameZone(self, newZoneName):
         zone = self.getZoneInfo()
         check, content = editZoneTemplate(self.token,{'idZoneTemplate': zone["idZoneTemplate"],'name': newZoneName})
         if check:
-            print("Update zone name successfull")
             return True
         else:
             print(content)
         return False
+    
+    def rename(self, newZoneName):
+        return self.renameZone(newZoneName)
     
     def getZoneInfo(self):
         check, content = getZoneInfo(self.token, self.ZoneId)
