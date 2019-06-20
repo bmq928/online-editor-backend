@@ -1,5 +1,6 @@
 from .zone_api import *
-from ...zoneset_template.zone_template.zone_template_api import *
+# from ...zoneset_template.zone_template.zone_template_api import *
+from ....zoneset_template.zone_template.zone_template_api import *
 
 class Zone:
     def __init__(self, token, ZoneInfo):

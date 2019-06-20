@@ -7,9 +7,11 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-from .well.zoneset_template.zoneset_template_api import getlistZoneSetTemplate
-from .well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
-from .well.zoneset_template.zoneset_template_api import *
+# from .well.zoneset_template.zoneset_template_api import getlistZoneSetTemplate
+# from .well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
+# from .well.zoneset_template.zoneset_template_api import *
+from .zoneset_template.zoneset_template_api import *
+from .zoneset_template.zoneset_template_obj import ZoneSetTemplate
 from .markerset_template.markerset_template_api import *
 from .markerset_template.markerset_template_obj import MarkerSetTemplate
 

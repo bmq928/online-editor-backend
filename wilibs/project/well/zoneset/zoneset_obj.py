@@ -2,7 +2,8 @@ from .zoneset_api import *
 from .zone.zone_api import *
 from .zone.zone_obj import Zone
 from .zone.zone_api import *
-from ..zoneset_template.zoneset_template_api import *
+# from ..zoneset_template.zoneset_template_api import *
+from ...zoneset_template.zoneset_template_api import *
 
 
 class ZoneSet:

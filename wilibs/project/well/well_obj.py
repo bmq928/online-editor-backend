@@ -8,8 +8,8 @@ from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
 from ..well.markerset.markerset_api import *
 from ..well.markerset.markerset_obj import MarkerSets
-from .zoneset_template.zoneset_template_api import *
-from .zoneset_template.zoneset_template_obj import ZoneSetTemplate
+from ..zoneset_template.zoneset_template_api import *
+from ..zoneset_template.zoneset_template_obj import ZoneSetTemplate
 from .zoneset.zoneset_api import *
 from .zoneset.zoneset_obj import ZoneSet
 
