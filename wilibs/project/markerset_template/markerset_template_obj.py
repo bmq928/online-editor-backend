@@ -37,11 +37,15 @@ class MarkerSetTemplate:
         if check:
             return MarkerTemplate(self.token, content)
         else:
+            print(content)
             return None
+    
+    def newMarkerTemplate(self, name):
+        return self.createMarkerTemplate(name)
     
     def newMarkerSetTemplate(self,name):
         return self.createMarkerTemplate(name)
-    
+
     def getAllMarkerTemplate(self):
         markerTemplates = self.getMarkerSetTemplateInfo()
         listObj = markerTemplates['marker_templates']

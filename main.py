@@ -3,11 +3,7 @@ from wilibs.project import project_obj
 from wilibs.project.well import well_obj
 from wilibs.project.well.dataset import dataset_obj
 from wilibs.project.well.dataset.curve import curve_obj
-from wilibs.common import *
 import json
-from wilibs.common import convertUnit
-from wilibs.project.well.markerset_template import markerset_template_obj
-from wilibs.project.well.markerset_template.markerset import markerset_obj
 
 
 
@@ -15,4 +11,8 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 #login
 client = wilib.login("su_hoang","1")
 
-print(client.getCurveById(363).getCurveData([0,1]))
+project = client.getProjectById(6)
+
+mks = project.getAllMarkerSetTemplates()
+
+print(mks[0].getInfo())
