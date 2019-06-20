@@ -1,4 +1,5 @@
 from .zone_api import *
+from ...zoneset_template.zone_template.zone_template_api import *
 
 class Zone:
     def __init__(self, token, ZoneInfo):
@@ -7,14 +8,12 @@ class Zone:
             'idZoneTemplate': ZoneInfo['idZoneTemplate'],
             'idZoneSet': ZoneInfo['idZoneSet'],
             'idZone': ZoneInfo['idZone'],
-            'name': ZoneInfo['name'],
+            'zone_template': ZoneInfo['zone_template'],
             'endDepth': ZoneInfo['endDepth'],
-            'endDepthTemp': ZoneInfo['endDepthTemp'],
             'startDepth': ZoneInfo['startDepth'],
-            'startDepthTemp': ZoneInfo['startDepthTemp']
         }
         self.ZoneId = ZoneInfo['idZone']
-        self.name = ZoneInfo['name']
+        
     
     def __repr__(self):
         obj = dict(self.ZoneInfo)
@@ -53,3 +52,21 @@ class Zone:
     
     def edit(self,**data):
         return self.editZone(**data)
+        
+    def renameZone(self, newZoneName):
+        zone = self.getZoneInfo()
+        check, content = editZoneTemplate(self.token,{'idZoneTemplate': zone["idZoneTemplate"],'name': newZoneName})
+        if check:
+            print("Update zone name successfull")
+            return True
+        else:
+            print(content)
+        return False
+    
+    def getZoneInfo(self):
+        check, content = getZoneInfo(self.token, self.ZoneId)
+        if check:
+            return content
+        else:
+            print(content)
+        return {}
