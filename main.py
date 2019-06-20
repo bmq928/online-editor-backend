@@ -11,7 +11,7 @@ import json
 #login
 client = wilib.login("su_hoang","1")
 
-well = client.getWellById(31)
+project = client.getProjectById(6)
 
-mks = well.getAllMarkerSets()
-print(client.getMarkerSetById(4))
+zst = project.getAllZoneSetTemplates()
+print(zst[0].getInfo())
