@@ -278,16 +278,16 @@ class Well:
     def rename(self, newName):
         return self.renameWell(newName)
 
-    def deleteAllZoneSets(self):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            # if zoneset["zone_set_template"]["name"].lower() == zonesetName.lower():
-            check, content = deleteZoneSet(self.token, zoneset["idZoneSet"])
-            if check:
-                print("Deleted zoneset ", zoneset["name"])
-            else:
-                print(content)
-        return True
+    # def deleteAllZoneSets(self):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         # if zoneset["zone_set_template"]["name"].lower() == zonesetName.lower():
+    #         check, content = deleteZoneSet(self.token, zoneset["idZoneSet"])
+    #         if check:
+    #             print("Deleted zoneset ", zoneset["name"])
+    #         else:
+    #             print(content)
+    #     return True
 
     def deleteZoneSet(self, zonesetName):
         zonesets = self.getAllZoneSets()
