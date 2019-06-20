@@ -28,7 +28,7 @@ class Marker:
             print(content)
         return False
     
-    def getMarkerSetInfo(self):
+    def getMarkerInfo(self):
         check, content = getMarkerInfo(self.token, self.markerId)
         if check:
             return content
@@ -38,3 +38,6 @@ class Marker:
 
     def delete(self):
         return self.deleteMarker()
+    
+    def getInfo(self):
+        return self.getMarkerInfo()
