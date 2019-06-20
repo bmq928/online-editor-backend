@@ -26,8 +26,9 @@ class Zone:
     def deleteZone(self):
         check, content = deleteZone(self.token, self.ZoneId)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
 
     def delete(self):
         return self.deleteZone()
