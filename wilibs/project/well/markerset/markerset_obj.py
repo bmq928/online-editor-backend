@@ -56,3 +56,6 @@ class MarkerSets:
     
     def delete(self):
         return self.deleteMarkerSets()
+    
+    def getInfo(self):
+        return self.getMarkerSetInfo()

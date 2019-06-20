@@ -46,7 +46,7 @@ class MarkerSetTemplate:
     def newMarkerSetTemplate(self,name):
         return self.createMarkerTemplate(name)
 
-    def getAllMarkerTemplate(self):
+    def getAllMarkerTemplates(self):
         markerTemplates = self.getMarkerSetTemplateInfo()
         listObj = markerTemplates['marker_templates']
         return listObj

@@ -107,15 +107,17 @@ class Well:
         return []
     
     def getListMarkerSets(self):
-        check, list = getListMarkerSets(self.token,self.wellId)
-        if check is False and list is None:
-            return []
+        check, content = getListMarkerSets(self.token,self.wellId)
         listObj = []
-        for i in list:
-            listObj.append(MarkerSets(self.token, i))
+        if check:
+            for i in content:
+                listObj.append(MarkerSets(self.token, i))
+        print(content)
         return listObj
-    
-    
+
+    def getAllMarkerSets(self):
+        return self.getListMarkerSets()
+
     def createImageSet(self, name):
         check, content = createImageSet(name, self.wellId, name)
         if check:
