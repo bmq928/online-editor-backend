@@ -14,5 +14,5 @@ from wilibs.common import convertUnit
 #login
 import wilibs.wilib
 client = wilib.login("hoang","1")
-test = client.getMarkerSetTemplateById(4)
-print(test.getInfo())
+tmp = client.getMarkerSetById(25)
+print(tmp.delete())

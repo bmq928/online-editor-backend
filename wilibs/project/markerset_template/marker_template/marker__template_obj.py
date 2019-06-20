@@ -6,14 +6,11 @@ class MarkerTemplate:
         self.markerTemplateInfo = {
            'idMarkerTemplate': markerTemplateInfo['idMarkerTemplate'],
            'name': markerTemplateInfo['name'],
-           'lineWidth': markerTemplateInfo['lineWidth'],
-            'color':  markerTemplateInfo['color']
-
+           'lineWidth': markerTemplateInfo['lineWidth']
         }
         self.MarkerTemplateId = markerTemplateInfo['idMarkerTemplate']
         self.MarkerTemplateName = markerTemplateInfo['name']
         self.LineWidth = markerTemplateInfo['lineWidth']
-        self.Color = markerTemplateInfo['color']
 
     def __repr__(self):
         obj = dict(self.markerTemplateInfo)
@@ -38,3 +35,6 @@ class MarkerTemplate:
 
     def delete(self):
         return self.deleteMarkerTemplate()
+    
+    def getInfo(self):
+        return self.getMarkerTemplateInfo()
