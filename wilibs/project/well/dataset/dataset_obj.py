@@ -408,3 +408,12 @@ class Dataset:
                     self.datasetInfo["tags"] = relatedTo["tags"]
         check = self.editDatasetInfo(relatedTo=relatedTo, name=datasetInfo["name"])
         return check
+
+    def getCurveByName(self, curveName):
+        curves = self.getListCurve()
+        for curve in curves:
+            curveObj = curve.getCurveInfo()
+            if curveObj["name"].lower() == curveName.lower():
+                return curve
+        print("No curve found for name query.")
+        return None

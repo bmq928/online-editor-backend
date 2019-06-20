@@ -614,6 +614,58 @@
             "returns": "Array of ZoneSetTemplate object, Array empty if fail",
             "explain": "Get all ZoneSet Template object in this project",
             "example": "project = client.getProjectById(55)\nzst = project.getAllZoneSetTemplates()\nprint(zst)"
+        },
+        "getLogPlotByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Log Plot need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "LogPlot Object if success, None if fail",
+            "explain": "Get Log Plot from this project with specified name",
+            "example": "project = client.getProjectById(55)\nlogPlot = project.getLogPlotByName('example')\nprint(logPlot)"
+        },
+        "getCrossPlotByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Cross Plot need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "CrossPlot Object if success, None if fail",
+            "explain": "Get Cross Plot from this project with specified name",
+            "example": "project = client.getProjectById(55)\ncrossPlot = project.getCrossPlotByName('example')\nprint(crossPlot)"
+        },
+        "getHistogramByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Histogram need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Histogram Object if success, None if fail",
+            "explain": "Get Histogram from this project with specified name",
+            "example": "project = client.getProjectById(55)\nhistogram = project.getHistogramByName('example')\nprint(histogram)"
+        },
+        "getWellByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Well need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Well Object if success, None if fail",
+            "explain": "Get Well from this project with specified name",
+            "example": "project = client.getProjectById(55)\nwell = project.getWellByName('example')\nprint(well)"
         }
     },
     "Well": {
@@ -859,6 +911,19 @@
             "returns": "Array of ZoneSet object in well. Array empty if err or no ZoneSet found",
             "explain": "Get all ZoneSet in well",
             "example": "zs = well.getAllZoneSets()\nprint(zs)"
+        },
+        "getDatasetByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Dataset need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Dataset Object if success, None if fail",
+            "explain": "Get Dataset from this project with specified name",
+            "example": "well = client.getWellById(55)\ndataset = well.getDatasetByName('example')\nprint(dataset)"
         }
     },
     "Dataset": {
@@ -1040,6 +1105,19 @@
             "returns": "True if remove tags successfully, False if fail",
             "explain": "Remove tags fromm dataset",
             "example": "success = dataset.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        },
+        "getCurveByName(name)": {
+            "params": {
+                "required":{
+                    "name": "String. Name of Curve need to find in this project"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Curve Object if success, None if fail",
+            "explain": "Get Curve from this project with specified name",
+            "example": "dataset = client.getDatasetById(55)\ncurve = dataset.getCurveByName('example')\nprint(curve)"
         }
     },
     "Curve": {

@@ -146,7 +146,7 @@ class Wilib:
                 else:
                     project = project.getFullInfo()
                     return Project(self.token, project)
-        return False
+        return None
 
     def getWellByName(self, wellName, projectName):
         project = self.getProjectByName(projectName)
@@ -157,7 +157,7 @@ class Wilib:
                 if wellObj["name"].lower() == wellName.lower():
                     return well
         print("No well found for name query.")
-        return False
+        return None
 
     def getDatasetByName(self, datasetName, wellName, projectName):
         well = self.getWellByName(wellName, projectName)
@@ -168,7 +168,7 @@ class Wilib:
                 if datasetObj["name"].lower() == datasetName.lower():
                     return dataset
         print("No dataset found for name query.")
-        return False
+        return None
 
     def getCurveByName(self, curveName, datasetName, wellName, projectName):
         dataset = self.getDatasetByName(datasetName, wellName, projectName)
@@ -179,17 +179,17 @@ class Wilib:
                 if curveObj["name"].lower() == curveName.lower():
                     return curve
         print("No curve found for name query.")
-        return False
+        return None
 
     def getLogPlotByName(self, plotName, projectName):
         project = self.getProjectByName(projectName)
         if project:
             plots = project.getAllPlots()
             for plot in plots:
-                if plot.plotName == plotName:
+                if plot.name == plotName:
                     return plot
         print("No plot found for name query.")
-        return False
+        return None
 
     def wiSavefig(self, plt, fileName, **data):
         filePath = EXPORT_PATH + '/' + fileName
@@ -205,20 +205,20 @@ class Wilib:
         if project:
             cps = project.getAllCrossPlots()
             for cplot in cps:
-                if cplot.crossPlotName == crossPlotName:
+                if cplot.name == crossPlotName:
                     return cplot
         print("No cross plot found for name query.")
-        return False
+        return None
 
     def getHistogramByName(self, histogramName, projectName):
         project = self.getProjectByName(projectName)
         if project:
             htgs = project.getAllHistograms()
             for htg in htgs:
-                if htg.histogramName == histogramName:
+                if htg.name == histogramName:
                     return htg
         print("No histogram found for name query.")
-        return False
+        return None
 
     def createProject(self, **data):
         """Create project for this account.

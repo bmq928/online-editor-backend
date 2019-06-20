@@ -445,4 +445,12 @@ class Well:
     
     def getAllZoneSets(self):
         return self.getListZoneSets()
-    
+
+    def getDatasetByName(self, datasetName):
+        datasets = self.getListDataset()
+        for dataset in datasets:
+            datasetObj = dataset.getDatasetInfo()
+            if datasetObj["name"].lower() == datasetName.lower():
+                return dataset
+        print("No dataset found for name query.")
+        return None

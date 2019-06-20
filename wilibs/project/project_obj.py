@@ -384,6 +384,39 @@ class Project:
             return listObj
         print(content)
         return listObj
+    
+    def getLogPlotByName(self, logPlotName):
+        plots = self.getAllLogPlots()
+        for plot in plots:
+            if plot.name == logPlotName:
+                return plot
+        print("No log plot found for name query")
+        return None
+    
+    def getCrossPlotByName(self, crossPlotName):
+        cps = self.getAllCrossPlots()
+        for cplot in cps:
+            if cplot.name == crossPlotName:
+                return cplot
+        print("No cross plot found for name query.")
+        return None
+
+    def getHistogramByName(self, histogramName):
+        htgs = self.getAllHistograms()
+        for htg in htgs:
+            if htg.name == histogramName:
+                return htg
+        print("No histogram found for name query.")
+        return None
+
+    def getWellByName(self, wellName):
+        wells = self.getListWell()
+        for well in wells:
+            wellObj = well.getWellInfo()
+            if wellObj["name"].lower() == wellName.lower():
+                return well
+        print("No well found for name query.")
+        return None
 
     # def createZoneSetTemplate(self, zoneSetTemplateName):
     #     check, content = createZoneSetTemplate(self.token,{'idProject' : self.projectId, 'name' : zoneSetTemplateName})
