@@ -59,3 +59,13 @@ class MarkerSets:
     
     def getInfo(self):
         return self.getMarkerSetInfo()
+    
+    def getAllMarkers(self):
+        markers = self.getMarkerSetInfo()
+        if markers:
+            listObj = markers['markers']
+            newArr = []
+            for i in listObj:
+                newArr.append(Marker(self.token, i))
+            return newArr
+        return []
