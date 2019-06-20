@@ -83,6 +83,7 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
 
 def createCurve(token, datasetId, file, **data):
     payload = data
+    payload['curveName'] = data['name']
     payload['idDataset'] = datasetId
     r = createCurveData_RAW(token, payload, file)
     return verifyAndReturn(r)
@@ -151,6 +152,7 @@ def getCurveData_RAW(token, curveId):
 
 def createCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/new-raw-curve'
+    print(payload)
     r = requests.post(url, data=payload, files={'data': data}, headers=tokenHeader(token), verify=False)
     try:
         r = r.json()

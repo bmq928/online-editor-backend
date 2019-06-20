@@ -852,21 +852,51 @@
             "explain": "Get info of dataset as JSON",
             "example": "info = dataset.getInfo()\nprint(info)"
         },
-        "newCurve(name, **dict)": {
+        "newNumericCurve(**dict)": {
             "params": {
                 "required": {
-                    "name": "String. Name of curve"
+                    "dict.name": "String. Name of new curve"
                 },
                 "optional": {
-                    "dict.type": "String. Type of curve. ('NUMBER', 'ARRAY', 'TEXT')",
-                    "dict.unit": "String. Unit of curve",
-                    "dict.idFamily": "Number",
-                    "dict.description": "String"
+                    "dict.initValue": "Number. Init value for new curve",
+                    "dict.idFamily": "Integer. family id for new curve",
+                    "dict.unit": "String. Unit for new curve"
                 }
             },
-            "returns": "New Curve object if create successful, None if False",
-            "explain": "Create a curve in dataset",
-            "example": "curve = dataset.newCurve('new Curve', unit = 'm')\nif curve:\n\tcurve.delete()"
+            "returns": "Curve object of new curve, None if fail",
+            "explain": "Create a new numberic curve in dataset. If step = 0, clone depth of first curve in dataset",
+            "example": "curve = client.getDatasetById(55).newNumericCurve(name = 'new curve')\nif curve:\n\tprint('curve curve successfully')\n\tprint(curve)"
+        },
+        "newTextCurve(**dict)": {
+            "params": {
+                "required": {
+                    "dict.name": "String. Name of new curve"
+                },
+                "optional": {
+                    "dict.initValue": "String. Init value for new curve",
+                    "dict.idFamily": "Integer. family id for new curve",
+                    "dict.unit": "String. Unit for new curve"
+                }
+            },
+            "returns": "Curve object of new curve, None if fail",
+            "explain": "Create a new text curve in dataset. If step = 0, clone depth of first curve in dataset",
+            "example": "curve = client.getDatasetById(55).newTextCurve(name = 'new curve')\nif curve:\n\tprint('curve curve successfully')\n\tprint(curve)"
+        },
+        "newArrayCurve(**dict)": {
+            "params": {
+                "required": {
+                    "dict.name": "String. Name of new curve",
+                    "dict.dimension": "Integer. Only Integer, do not insert any kind of data else"
+                },
+                "optional": {
+                    "dict.initValue": "Number. Init value for new curve",
+                    "dict.idFamily": "Integer. family id for new curve",
+                    "dict.unit": "String. Unit for new curve"
+                }
+            },
+            "returns": "Curve object of new curve, None if fail",
+            "explain": "Create a new array curve in dataset. If step = 0, clone depth of first curve in dataset",
+            "example": "curve = client.getDatasetById(55).newArrayCurve(name = 'new curve', dimension = 3)\nif curve:\n\tprint('curve curve successfully')\n\tprint(curve)"
         },
         "getAllCurves()": {
             "params": {

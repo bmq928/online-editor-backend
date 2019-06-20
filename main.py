@@ -13,6 +13,6 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 
 
 #login
-client = wilib.login("hoang","1")
+client = wilib.login("su_hoang","1")
 
-client.getDatasetById(105).newNumericCurve(name="hello", unit="m")
+client.getDatasetById(55).newCurve(name="hello4", unit="m", type="NUMBER")

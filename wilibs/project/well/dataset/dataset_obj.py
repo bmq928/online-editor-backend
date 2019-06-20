@@ -92,37 +92,81 @@ class Dataset:
     #     return self.createCurve(name, **data)
     
     def newNumericCurve(self, **data):
+        data['type'] = "NUMBER"
+        return self.newCurve(**data)
+    
+    def newTextCurve(self, **data):
+        data['type'] = "TEXT"
+        return self.newCurve(**data)
+    
+    def newArrayCurve(self, **data):
+        data['type'] = "ARRAY"
+        return self.newCurve(**data)
+
+    def newCurve(self, **data):
+        if 'type' not in data:
+            print('type is required')
+            return None
         if 'name' not in data:
             print('Name is required')
             return None
         checkIfExisted, content = checkIfCurveExisted(self.token, self.datasetId, data['name'])
         if checkIfExisted:
-            return Curve(self.token, content)
-        if 'unit' not in data:
-            print('Unit is required')
+            print("Curve existed")
             return None
         initValue = 0
+        if data['type'].lower() == "number":
+            initValue = 0
+            if 'initValue' in data:
+                initValue = data['initValue']
+        elif data['type'].lower() == "array":
+            if 'dimension' not in data:
+                print('dimension is required for array type data')
+                return None
+            if 'initValue' in data:
+                initValue = data['initValue']
+            else:
+                k = int(data['dimension'])
+                initValueTemp = initValue
+                initValue = []
+                for i in range(0,k):
+                    initValue.append(initValueTemp)
+        elif data['type'].lower() == "text":
+            initValue = 'i2g'
+            if 'initValue' in data:
+                initValue = data['initValue']
+        else:
+            print("INVALID type")
+            return None
         tempFile = TemporaryFile('r+')
+
         if 'initValue' in data:
-            initValue = data['initValue']
             del data['initValue']
+
         if self.step == 0:
             cloneData = self.cloneDataFromFirstCurve()
             if cloneData:
                 for i in cloneData:
                     i['x'] = initValue
-                cloneData = numberTypeConverter(cloneData)
+                if data['type'].lower() == "number":
+                    cloneData = numberTypeConverter(cloneData)
+                if data['type'].lower() == "array":
+                    cloneData = arrayTypeConverter(cloneData)
+                if data['type'].lower() == "text":
+                    cloneData = textTypeConverter(cloneData)
                 for line in cloneData:
                     tempFile.write(line)
                     tempFile.write('\n')
                 tempFile.seek(0)
                 check, content = createCurve(self.token, self.datasetId, tempFile, **data)
+                print(content)
                 if check:
-                    return True
+                    return Curve(self.token, content)
                 print(content)
                 return False
             else:
                 print("No curve in dataset. Can't init a core curve data")
+                return False
         datasetInfo = self.getInfo()
         top = float(datasetInfo['top'])
         bottom = float(datasetInfo['bottom'])
@@ -135,17 +179,21 @@ class Dataset:
                 'y': i
             }
             tempArray.append(arr)
-        tempArray = numberTypeConverter(tempArray)
+        if data['type'].lower() == "number":
+                tempArray = numberTypeConverter(tempArray)
+        if data['type'].lower() == "array":
+                tempArray = arrayTypeConverter(tempArray)
+        if data['type'].lower() == "text":
+                tempArray = textTypeConverter(tempArray)
         for line in tempArray:
             tempFile.write(line)
             tempFile.write('\n')
         tempFile.seek(0)
         check, content = createCurve(self.token, self.datasetId, tempFile, **data)
         if check:
-            return True
+            return Curve(self.token, content)
         print(content)
         return False
-    
 
             
     def cloneDataFromFirstCurve(self):
