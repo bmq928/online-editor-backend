@@ -14,6 +14,7 @@ class Zone:
             'startDepth': ZoneInfo['startDepth'],
         }
         self.ZoneId = ZoneInfo['idZone']
+        self.name = ZoneInfo['zone_template']['name']
         
     
     def __repr__(self):
