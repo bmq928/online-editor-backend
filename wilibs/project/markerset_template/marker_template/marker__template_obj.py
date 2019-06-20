@@ -31,7 +31,7 @@ class MarkerTemplate:
             return content
         else:
             print(content)
-        return {}
+        return None
 
     def delete(self):
         return self.deleteMarkerTemplate()
