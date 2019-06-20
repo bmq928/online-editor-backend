@@ -30,5 +30,15 @@ class ZoneTemplate:
     def getInfo(self):
         return self.getZoneTemplateInfo()
     
+    def deleteZoneTemplate(self):
+        check , content = deleteZoneTemplate(self.token, self.ZoneTemplateId)
+        if check:
+            return True
+        print(content)
+        return False
+    
+    def delete(self):
+        return self.deleteZoneTemplate()
+
     
     
