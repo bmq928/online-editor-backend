@@ -14,5 +14,5 @@ from wilibs.common import convertUnit
 #login
 import wilibs.wilib
 client = wilib.login("hoang","1")
-test = client.getMarkerTemplatebyId(24)
-print(test.delete())
+test = client.getProjectById(2)
+test.createZoneSetTemplate("thinh_test")

@@ -364,26 +364,31 @@ class Project:
         return self.createBlankCrossPlot(name=name)
 
     def getAllMarkerSetTemplates(self):
-        check, list = listMarkerSetTemplate(self.token, self.projectId)
-        if check is False and list is None:
-            return []
+        check, content = listMarkerSetTemplate(self.token, self.projectId)
         listObj = []
-        for i in list:
-            listObj.append(MarkerSetTemplate(self.token, i))
+        if check :
+            for i in content:
+                listObj.append(MarkerSetTemplate(self.token, i))
+            return listObj
+        print(content)   
         return listObj
     
     def getAllZoneSetTemplates(self):
-        check, list = getlistZoneSetTemplate(self.token, self.projectId)
-        if check is False and list is None:
-            return []
+        check, content = getlistZoneSetTemplate(self.token, self.projectId)
         listObj = []
-        for i in list:
-            listObj.append(ZoneSetTemplate(self.token,i))
+        if check:
+            for i in list:
+                listObj.append(ZoneSetTemplate(self.token,i))
+            return listObj
+        print(content)
         return listObj
 
     def createZoneSetTemplate(self, zoneSetTemplateName):
-        check, content = createZoneSetTemplate(self.token, self.projectId, zoneSetTemplateName)
+        check, content = createZoneSetTemplate(self.token,{'idProject' : self.projectId, 'name' : zoneSetTemplateName})
         if check:
             return ZoneSetTemplate(self.token, content)
         else:
             return None
+
+    def newZoneSetTemplate(self):
+        return self.createZoneSetTemplate()
