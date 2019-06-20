@@ -43,7 +43,7 @@ class ZoneSetTemplate:
         zoneSetInfo = self.getZoneSetTemplateInfo()
         listObj = []
         if zoneSetInfo:
-            listObj = zoneSetInfo['zone_templates']
+            listObj = zoneSetInfo['zone_templatess']
             newArr = []
             for i in listObj:
                 newArr.append(ZoneTemplate(self.token, i))
