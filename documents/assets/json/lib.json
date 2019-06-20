@@ -617,19 +617,6 @@
         }
     },
     "Well": {
-        "newZoneSet(zoneSetName)": {
-            "params": {
-                "required": {
-                    "zoneSetName": "String. Name of Zone Set that need to create"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "Json contain info of new zone set if success, None if create zone set fail",
-            "explain": "Create new Zone set in well with specified name",
-            "example": "jsonZoneSet = well.newZoneSet('ZoneSet Name')\nif jsonZoneSet:\n\tprint(jsonZoneSet)"
-        },
         "getWellHeaders()": {
             "params": {
                 "required": {

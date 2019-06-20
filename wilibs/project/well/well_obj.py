@@ -209,23 +209,23 @@ class Well:
     def edit(self, **data):
         return self.editWellInfo(**data)
 
-    def createZoneSet(self, zoneSetName):
-        check, content = createZoneSetTemplate(self.token, {'name': zoneSetName, 'idProject': self.projectId})
-        if check:
-            check, content = createZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,'idZoneSetTemplate': content['idZoneSetTemplate']})
-            if check:
-                print("Created zoneset ", zoneSetName)
-                return content
-            else:
-                print(content)
-                return None
-        else:
-            print(content)
-            return None
+    # def createZoneSet(self, zoneSetName):
+    #     check, content = createZoneSetTemplate(self.token, {'name': zoneSetName, 'idProject': self.projectId})
+    #     if check:
+    #         check, content = createZoneSet(self.token, {'name': zoneSetName, 'idWell': self.wellId,'idZoneSetTemplate': content['idZoneSetTemplate']})
+    #         if check:
+    #             print("Created zoneset ", zoneSetName)
+    #             return content
+    #         else:
+    #             print(content)
+    #             return None
+    #     else:
+    #         print(content)
+    #         return None
         
     
-    def newZoneSet(self, zoneSetName):
-        return self.createZoneSet(zoneSetName)
+    # def newZoneSet(self, zoneSetName):
+    #     return self.createZoneSet(zoneSetName)
 
     def limitWell(self, top, bottom, unit):
         top = convertUnit(top, unit)
