@@ -630,19 +630,6 @@
             "explain": "Create new Zone set in well with specified name",
             "example": "jsonZoneSet = well.newZoneSet('ZoneSet Name')\nif jsonZoneSet:\n\tprint(jsonZoneSet)"
         },
-        "getAllZones(zoneSetName)": {
-            "params": {
-                "required": {
-                    "zoneSetName": "String. Name of Zone set that you need to query all zones from"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "Array<json> contain zone info in zone set. Array can be empty",
-            "explain": "Get all zones info in a zone set with specified name",
-            "example": "zones = well.getAllZones('Example zone set')\nprint(zones)"
-        },
         "getWellHeaders()": {
             "params": {
                 "required": {
