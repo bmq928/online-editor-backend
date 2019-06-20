@@ -16,4 +16,4 @@ zst = project.getAllZoneSetTemplates()
 
 zt = zst[0].getAllZoneTemplates()
 print(zt)
-print(zt.getInfo())
+print(zt[0].getInfo())
