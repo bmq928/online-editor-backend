@@ -16,4 +16,4 @@ well = client.getWellById(31)
 zs = well.getAllZoneSets()
 
 z = zs[0].getAllZones()
-print(z)
+print(z[0].getInfo())
