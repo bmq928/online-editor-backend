@@ -8,10 +8,7 @@ class MarkerTemplate:
            'name': markerTemplateInfo['name'],
            'lineWidth': markerTemplateInfo['lineWidth']
         }
-        self.MarkerTemplateId = markerTemplateInfo['idMarkerTemplate']
-        self.MarkerTemplateName = markerTemplateInfo['name']
-        self.LineWidth = markerTemplateInfo['lineWidth']
-
+        
     def __repr__(self):
         obj = dict(self.markerTemplateInfo)
         return str(obj)
