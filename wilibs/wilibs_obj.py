@@ -260,16 +260,16 @@ class Wilib:
             return ZoneSet(self.token, info)
         return None
      
-    def getZoneSetByName(self, zonesetName, wellName, projectName):
-        well = self.getWellByName(wellName, projectName)
-        if well:
-            ZoneSets = well.getAllZoneSets()
-            for i in ZoneSets:
-                tmpObj = i.getZoneSetInfo()
-                if tmpObj["name"].lower() == zonesetName.lower():
-                    return tmpObj
-        print("Zone Set not found")
-        return False
+    # def getZoneSetByName(self, zonesetName, wellName, projectName):
+    #     well = self.getWellByName(wellName, projectName)
+    #     if well:
+    #         ZoneSets = well.getAllZoneSets()
+    #         for i in ZoneSets:
+    #             tmpObj = i.getZoneSetInfo()
+    #             if tmpObj["name"].lower() == zonesetName.lower():
+    #                 return tmpObj
+    #     print("Zone Set not found")
+    #     return False
     
     def getZoneById(self, zoneId):
         check, info = getZoneInfo(self.token, zoneId)

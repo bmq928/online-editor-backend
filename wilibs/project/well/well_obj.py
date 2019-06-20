@@ -290,16 +290,16 @@ class Well:
     #             print(content)
     #     return True
 
-    def deleteZoneSet(self, zonesetName):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            if zoneset["name"].lower() == zonesetName.lower():
-                check, content = deleteZoneSet(self.token, zoneset["idZoneSet"])
-                if check:
-                    print("Deleted zoneset ", zonesetName)
-                else:
-                    print(content)
-        return True
+    # def deleteZoneSet(self, zonesetName):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         if zoneset["name"].lower() == zonesetName.lower():
+    #             check, content = deleteZoneSet(self.token, zoneset["idZoneSet"])
+    #             if check:
+    #                 print("Deleted zoneset ", zonesetName)
+    #             else:
+    #                 print(content)
+    #     return True
 
     # def renameZoneSet(self, zonesetName, newZoneSetName):
     #     zonesets = self.getAllZoneSets()
@@ -446,9 +446,3 @@ class Well:
     def getAllZoneSets(self):
         return self.getListZoneSets()
     
-    def deleteAllZoneSets(self):
-        tmp_obj = self.getAllZoneSets()
-        for i in tmp_obj:
-            if(type(i) is ZoneSet):
-                i.delete()
-        return None

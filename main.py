@@ -9,5 +9,3 @@ import json
 
 
 #login
-client = wilib.login("su_hoang","1")
-print(client.getZoneById(346).delete())

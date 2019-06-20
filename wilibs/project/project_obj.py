@@ -385,13 +385,13 @@ class Project:
         print(content)
         return listObj
 
-    def createZoneSetTemplate(self, zoneSetTemplateName):
-        check, content = createZoneSetTemplate(self.token,{'idProject' : self.projectId, 'name' : zoneSetTemplateName})
-        if check:
-            return ZoneSetTemplate(self.token, content)
-        else:
-            print(content)
-            return None
+    # def createZoneSetTemplate(self, zoneSetTemplateName):
+    #     check, content = createZoneSetTemplate(self.token,{'idProject' : self.projectId, 'name' : zoneSetTemplateName})
+    #     if check:
+    #         return ZoneSetTemplate(self.token, content)
+    #     else:
+    #         print(content)
+    #         return None
 
-    def newZoneSetTemplate(self, name):
-        return self.createZoneSetTemplate(name)
+    # def newZoneSetTemplate(self, name):
+    #     return self.createZoneSetTemplate(name)

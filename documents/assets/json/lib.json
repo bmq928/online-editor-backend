@@ -260,6 +260,84 @@
             "returns": "A Project object if create project successfully, None if fail",
             "explain": "Create a new project",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nproject = client.newProject(name='example name', description='example project description')\nif project:\n\tprint('create project successful')"
+        },
+        "getMarkerSetTemplateById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of MarkerSet Template"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "MarkerSetTemplate object if success, None if fail",
+            "explain": "Get a MarkerSet Template with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nmkt = client.getMarkerSetTemplateById(55)\nprint(mkt)"
+        },
+        "getMarkerTemplateById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Marker Template"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "MarkerTemplate object if success, None if fail",
+            "explain": "Get a Marker Template with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nmkt = client.getMarkerTemplateById(55)\nprint(mkt)"
+        },
+        "getMarkerSetById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Marker Set"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "MarkerSet object if success, None if fail",
+            "explain": "Get a Marker Set with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nmkt = client.getMarkerSetById(55)\nprint(mkt)"
+        },
+        "getZoneSetTemplateById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Zone Set Template"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "ZoneSetTemplate object if success, None if fail",
+            "explain": "Get a ZoneSet Template with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nzst = client.getZoneSetTemplateById(55)\nprint(zst)"
+        },
+        "getZoneSetById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Zone Set"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "ZoneSet object if success, None if fail",
+            "explain": "Get a ZoneSet with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nzs = client.getZoneSetById(55)\nprint(zs)"
+        },
+        "getZoneById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Zone"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Zone object if success, None if fail",
+            "explain": "Get a Zone with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nzone = client.getZoneById(55)\nprint(zone)"
         }
     }
     ,
@@ -510,6 +588,32 @@
             "returns": "True if successfully change all tag to new name. False if get error.",
             "explain": "Rename name of tag to new name",
             "example": "project = client.getProjectById(56)\nsuccess = project.renameTag('old tag', 'new tag')\nif success:\n\tprint('change tag name successfully')"
+        },
+        "getAllMarkerSetTemplates()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of MarketSetTemplate object, Array empty if fail",
+            "explain": "Get all marker set object in this project",
+            "example": "project = client.getProjectById(55)\nmks = project.getAllMarkerSetTemplates()\nprint(mks)"
+        },
+        "getAllZoneSetTemplates()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of ZoneSetTemplate object, Array empty if fail",
+            "explain": "Get all ZoneSet Template object in this project",
+            "example": "project = client.getProjectById(55)\nzst = project.getAllZoneSetTemplates()\nprint(zst)"
         }
     },
     "Well": {
@@ -525,19 +629,6 @@
             "returns": "Json contain info of new zone set if success, None if create zone set fail",
             "explain": "Create new Zone set in well with specified name",
             "example": "jsonZoneSet = well.newZoneSet('ZoneSet Name')\nif jsonZoneSet:\n\tprint(jsonZoneSet)"
-        },
-        "getAllZoneSets()": {
-            "params": {
-                "required": {
-
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "Array<json> contain zone set info of all zoneset in well. Array can be empty",
-            "explain": "Get list info of all zone set in well",
-            "example": "zonesets = well.getAllZoneSets()\nprint(zonesets)"
         },
         "getAllZones(zoneSetName)": {
             "params": {
@@ -590,74 +681,6 @@
             "returns": "True if changing name successful, False if error",
             "explain": "Rename well",
             "example": "success = well.rename('New name')\nif success:\n\tprint('rename successfully')"
-        },
-        "deleteAllZoneSets()": {
-            "params": {
-                "required": {
-                    
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if delete successfully, False if error",
-            "explain": "Delete all Zone set in well",
-            "example": "success = well.deleteAllZoneSets()\nif success:\n\tprint('delete successfully')"
-        },
-        "deleteZoneSet(zoneSetName)": {
-            "params": {
-                "required": {
-                    "zoneSetName": "String. Name of zone set need to delete"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if delete successfully, False if error",
-            "explain": "Delete a zone set with specified name",
-            "example": "success = well.deleteZoneSet()\nif success:\n\tprint('delete successfully')"
-        },
-        "renameZoneSet(oldZoneSetName, newZoneSetName)": {
-            "params": {
-                "required": {
-                    "oldZoneSetName": "String. old name of zone set need to rename",
-                    "newZoneSetName": "String. new name"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if rename successfully, False if error",
-            "explain": "Rename zone set in well",
-            "example": "success = well.rename('old zoneSet', 'new zoneSet')\nif success:\n\tprint('rename successfully')"
-        },
-        "renameZone(zoneName, zoneSetName, newZoneName)": {
-            "params": {
-                "required": {
-                    "zoneName": "String. Old zone name",
-                    "zoneSetName": "String. Name of zone set contain zone",
-                    "newZoneName": "String. New zone name"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if rename successfully, False if error",
-            "explain": "Rename zone in zone set",
-            "example": "success = well.rename('old zone', 'zone set', 'new zone')\nif success:\n\tprint('rename successfully')"
-        },
-        "getZoneSetByName(zoneSetName)": {
-            "params": {
-                "required": {
-                    "zoneSetName": "String. zone set name"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "Info of zone set as JSON.",
-            "explain": "Get info of zone set in well with specified name",
-            "example": "zoneSet = well.getZoneSetByName('zone set name')\n\tprint(zoneSet)"
         },
         "exportWellDatacsv()": {
             "params": {
@@ -836,6 +859,32 @@
             "returns": "Dataset object if create successfully, None if fail",
             "explain": "Create new Dataset in this well",
             "example": "dataset = well.newDataset(name = 'new', step = 0.5, top = 3500, bottom = 7000, unit = 'm')\nif dataset:\n\tprint(dataset)"
+        },
+        "getAllMarkerSets()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of MarkerSet object in well. Array empty if err or no MarkerSet found",
+            "explain": "Get all MarkerSet in well",
+            "example": "mks = well.getAllMarkerSets()\nprint(mks)"
+        },
+        "getAllZoneSets()": {
+            "params": {
+                "required": {
+                    
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of ZoneSet object in well. Array empty if err or no ZoneSet found",
+            "explain": "Get all ZoneSet in well",
+            "example": "zs = well.getAllZoneSets()\nprint(zs)"
         }
     },
     "Dataset": {
@@ -1369,8 +1418,310 @@
                 }
             },
             "returns": "True if remove tags successfully, False if fail",
-            "explain": "Remove tags fromm histogram",
+            "explain": "Remove tags from histogram",
             "example": "success = histogram.removeTags(['tag1', 'tag2'])\nif success:\n\tprint('removed tags')"
+        }
+    },
+    "MarkerSetTemplate": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this MarkerSet Template successfully, False if fail",
+            "explain": "Remove this MarkerSetTemplate. Do not use this object after call delete method",
+            "example": "mks = client.getMarkerSetTemplateById(55)\nsuccess = mks.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this Marker Set Template",
+            "example": "mks = client.getMarkerSetTemplateById(55)\ninfo = mks.info()\nprint(info)"
+        },
+        "getAllMarkerTemplates()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Marker Template object. Array empty if fail or no marker template in marker set template",
+            "explain": "Get all Marker Template in MarkerSet Template",
+            "example": "mks = client.getMarkerSetTemplateById(55)\nmts = mks.getAllMarkerTemplates()\nprint(mts)"
+        }
+    },
+    "MarkerTemplate": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this Marker Template successfully, False if fail",
+            "explain": "Remove this Marker Template. Do not use this object after call delete method",
+            "example": "mks = client.getMarkerTemplateById(55)\nsuccess = mks.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this Marker Template",
+            "example": "mks = client.getMarkerTemplateById(55)\ninfo = mks.info()\nprint(info)"
+        }
+    },
+    "MarkerSet": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this Marker Set successfully, False if fail",
+            "explain": "Remove this Marker Set. Do not use this object after call delete method",
+            "example": "mks = client.getMarkerSetById(55)\nsuccess = mks.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this Marker Set",
+            "example": "mks = client.getMarkerSetById(55)\ninfo = mks.info()\nprint(info)"
+        },
+        "getAllMarkers()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of Marker object. Array empty if fail or no marker in marker set",
+            "explain": "Get all Marker in MarkerSet",
+            "example": "mks = client.getMarkerSetById(55)\nmts = mks.getAllMarkers()\nprint(mts)"
+        }
+    },
+    "Marker": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this Marker successfully, False if fail",
+            "explain": "Remove this Marker. Do not use this object after call delete method",
+            "example": "mks = client.getMarkerById(55)\nsuccess = mks.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this Marker",
+            "example": "mks = client.getMarkerById(55)\ninfo = mks.getInfo()\nprint(info)"
+        }
+    },
+    "ZoneSetTemplate": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this ZoneSetTemplate successfully, False if fail",
+            "explain": "Remove this ZoneSetTemplate. Do not use this object after call delete method",
+            "example": "zst = client.getZoneSetTemplateById(55)\nsuccess = zst.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this ZoneSetTemplate",
+            "example": "zst = client.getZoneSetTemplateById(55)\ninfo = zst.getInfo()\nprint(info)"
+        },
+        "getAllZoneTemplates()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of ZoneTemplate object. Array empty if fail or no Zone Template in ZoneSetTemplate",
+            "explain": "Get all Zone Template in MarkerSet",
+            "example": "zst = client.getZoneTemplateById(55)\nzts = mst.getAllZoneTemplates()\nprint(zts)"
+        }
+    },
+    "ZoneTemplate": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this ZoneTemplate successfully, False if fail",
+            "explain": "Remove this ZoneTemplate. Do not use this object after call delete method",
+            "example": "zt = client.getZoneTemplateById(55)\nsuccess = zt.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this ZoneTemplate",
+            "example": "zst = client.getZoneSetTemplateById(55)\nzonet = zst.getAllZoneTemplates()\ninfo = zonet[0].getInfo()\nprint(info)"
+        }
+    },
+    "ZoneSet": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this ZoneSet successfully, False if fail",
+            "explain": "Remove this ZoneSet. Do not use this object after call delete method",
+            "example": "zs = client.getZoneSetById(55)\nsuccess = zs.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this ZoneSetTemplate",
+            "example": "zst = client.getZoneSetById(55)\ninfo = zst.getInfo()\nprint(info)"
+        },
+        "getAllZones()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Array of ZoneTemplate object. Array empty if fail or no Zone Template in ZoneSetTemplate",
+            "explain": "Get all Zone Template in MarkerSet",
+            "example": "zst = client.getZoneSetById(55)\nzs = zst.getAllZones()\nprint(zs)"
+        },
+        "rename(newName)": {
+            "params": {
+                "required": {
+                    "newName": "String. New name of ZoneSet"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if rename successfully, False if fail",
+            "explain": "Rename this zone set",
+            "example": "zs = client.getZoneSetById(55)\nsuccess = zs.rename('new name')\nif success:\n\tprint('rename successfully')"
+        }
+    },
+    "Zone": {
+        "delete()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if delete this Zone successfully, False if fail",
+            "explain": "Remove this Zone. Do not use this object after call delete method",
+            "example": "z = client.getZoneById(55)\nsuccess = z.delete()\nif success:\n\tprint('delete successfully')"
+        },
+        "getInfo()": {
+            "params": {
+                "required": {
+
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "JSON if success, None if fail",
+            "explain": "Get info of this ZoneTemplate",
+            "example": "zone = client.getZoneById(55)\ninfo = zone.getInfo()\nprint(info)"
+        },
+        "rename(newName)": {
+            "params": {
+                "required": {
+                    "newName": "String. New name of Zone"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "True if rename successfully, False if fail",
+            "explain": "Rename this zone",
+            "example": "z = client.getZoneById(55)\nsuccess = z.rename('new name')\nif success:\n\tprint('rename successfully')"
         }
     }
 }
