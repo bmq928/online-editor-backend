@@ -12,6 +12,6 @@ import json
 client = wilib.login("su_hoang","1")
 
 project = client.getProjectById(6)
-
 zst = project.getAllZoneSetTemplates()
-print(zst[0].getInfo())
+zsts = zst[0].getAllZoneTemplates()
+print(zsts)
