@@ -1,4 +1,5 @@
 from .zoneset_template_api import *
+from .zone_template.zone_template_obj import ZoneTemplate
 
 class ZoneSetTemplate:
     def __init__(self, token, ZoneSetTemplateInfo):
@@ -23,16 +24,28 @@ class ZoneSetTemplate:
             return info
         else:
             print(info)
-        return {}
+        return None
 
     def deleteZoneSetTemplate(self):
         check , content = deleteZoneSetTemplate(self.token, self.ZoneSetTemplateId)
         if check:
-            return None
-        return content
-    
+            return True
+        print(content)
+        return False
+
     def delete(self):
         return self.deleteZoneSetTemplate()
     
     def getInfo(self):
         return self.getZoneSetTemplateInfo()
+    
+    def getAllZoneTemplates(self):
+        zoneSetInfo = self.getZoneSetTemplateInfo()
+        listObj = []
+        if zoneSetInfo:
+            listObj = zoneSetInfo['zones']
+            newArr = []
+            for i in listObj:
+                newArr.append(ZoneTemplate(self.token, i))
+            return newArr
+        return []
