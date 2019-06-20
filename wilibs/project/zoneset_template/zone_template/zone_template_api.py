@@ -9,7 +9,7 @@ def createZoneTemplate(token, payload):
     r = createZoneTemplate_RAW(token, payload)
     return verifyAndReturn(r)
 
-def deleteZoneSetTemplate(token, ZoneTemplateId):
+def deleteZoneTemplate(token, ZoneTemplateId):
     r = deleteZoneTemplate_RAW(token, ZoneTemplateId)
     return verifyAndReturn(r)
 
