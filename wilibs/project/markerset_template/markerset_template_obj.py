@@ -59,7 +59,7 @@ class MarkerSetTemplate:
             return content
         else:
             print(content)
-        return {}
+        return None
 
     def delete(self):
         return self.deleteMarkerSetTemplate()
