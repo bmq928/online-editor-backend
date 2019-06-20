@@ -10,11 +10,12 @@ from wilibs.project.well.markerset_template import markerset_template_obj
 from wilibs.project.well.markerset_template.markerset import markerset_obj
 
 
-
+ 
 
 #login
+import wilibs.wilib
 client = wilib.login("hoang","1")
 
-test = client.getWellById(61)
+test = client.getZoneSetById(58)
 
-test.createZoneSet("thinh_test")
+print(test.getAllZones())

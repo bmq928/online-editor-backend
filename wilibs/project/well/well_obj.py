@@ -431,4 +431,12 @@ class Well:
             print(content)
         return result
     
-    
+    def getAllZoneSets(self):
+        check, content = getListZoneSets(self.token, self.wellId)
+        result = []
+        if check:
+            for i in content:
+                result.append(ZoneSet(self.token, i))
+        else:
+            print(content)
+        return result

@@ -29,6 +29,8 @@ from .project.param.param_api import getParamInfo
 from .project.param.param_obj import Param
 from .project.well.zoneset_template.zoneset_template_api import getZoneSetTeamplateInfo
 from .project.well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
+from .project.well.zoneset.zoneset_api import *
+from .project.well.zoneset.zoneset_obj import ZoneSet
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -244,4 +246,10 @@ class Wilib:
         check, info = getZoneSetTeamplateInfo(self.token, ZoneSetTemplateId)
         if check:
             return ZoneSetTemplate(self.token, info)
+        return None
+    
+    def getZoneSetById(self, ZoneSetId):
+        check, info = getZoneSetInfo(self.token, ZoneSetId)
+        if check:
+            return ZoneSet(self.token, info)
         return None

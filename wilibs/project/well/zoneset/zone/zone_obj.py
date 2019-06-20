@@ -4,7 +4,7 @@ class Zone:
     def __init__(self, token, ZoneInfo):
         self.token = token
         self.ZoneInfo = {
-            'idZoneTemplate': ZoneInfo['idWell'],
+            'idZoneTemplate': ZoneInfo['idZoneTemplate'],
             'idZoneSet': ZoneInfo['idZoneSet'],
             'idZone': ZoneInfo['idZone'],
             'name': ZoneInfo['name'],

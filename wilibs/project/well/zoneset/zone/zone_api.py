@@ -16,6 +16,11 @@ def deleteZoneSetTemplate(token, ZoneId):
 def editZoneTemplate(token, payload):
     r = editZone_RAW(token, payload)
     return verifyAndReturn(r)
+
+def getListZone(token, ZoneSetId):
+    r = getListZone_RAW(token, ZoneSetId)
+    return verifyAndReturn(r)
+
 #RAW
 def createZone_RAW(token, payload):
     url = ROOT_API + '/project/well/zone-set/zone/new'
@@ -30,4 +35,9 @@ def deleteZone_RAW(token, ZoneId):
 def editZone_RAW(token, payload):
     url = ROOT_API + '/project/well/zone-set/zone/edit'
     r = requests.delete(url, json={'idZone':payload}, headers=tokenHeader(token), verify=False)
+    return r.json()
+
+def getListZone_RAW(token, ZoneSetId):
+    url = ROOT_API + '/project/well/zone-set/zone/list'
+    r = requests.post(url, json={'idZoneSet':ZoneSetId}, headers=tokenHeader(token), verify=False)
     return r.json()
