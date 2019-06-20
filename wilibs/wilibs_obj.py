@@ -33,6 +33,8 @@ from .project.well.zoneset.zoneset_api import *
 from .project.well.zoneset.zoneset_obj import ZoneSet
 from .project.well.zoneset.zoneset_obj import getZoneSetInfo
 from .project.well.well_obj import *
+from .project.well.zoneset.zone.zone_api import *
+from .project.well.zoneset.zone.zone_obj import Zone
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -266,3 +268,9 @@ class Wilib:
                     return tmpObj
         print("!!!!!!!!!Not found!!!!!!!!!!!")
         return False
+    
+    def getZoneById(self, zoneId):
+        check, info = getZoneInfo(self.token, zoneId)
+        if check:
+            return Zone(self.token, info)
+        return None

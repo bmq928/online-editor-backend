@@ -1,6 +1,9 @@
 from .zoneset_api import *
 from .zone.zone_api import *
 from .zone.zone_obj import Zone
+from .zone.zone_api import *
+from ..zoneset_template.zoneset_template_api import *
+
 
 class ZoneSet:
     def __init__(self, token, ZoneSetInfo):
@@ -44,3 +47,16 @@ class ZoneSet:
     
     def delete(self):
         return self.deleteZoneSet()
+
+    def renameZoneSet(self, newZoneSetName):
+        zoneset = self.getZoneSetInfo()
+        print(zoneset)
+        check, content = editZoneSetTemplate(self.token, {'idZoneSetTemplate': zoneset['idZoneSetTemplate'], 'name': newZoneSetName})
+        c, co = editZoneSet(self.token, {'idZoneSet': zoneset['idZoneSet'], 'name': newZoneSetName})
+        if check and c:
+            print("Update zoneset name successfull")
+            return True
+        else:
+            print(content, co)
+            return False
+        return False

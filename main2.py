@@ -14,11 +14,6 @@ from wilibs.project.well.markerset_template.markerset import markerset_obj
 
 #login
 import wilibs.wilib
-from wilibs.project.well.zoneset.zoneset_obj import ZoneSet
 client = wilib.login("hoang","1")
-test = client.getWellById(61)
-tmp_obj = test.getAllZoneSets()
-for i in tmp_obj:
-    if(type(i) is ZoneSet):
-        i.delete()
-    
+test = client.getZoneById(735)
+print(test.renameZone("test"))

@@ -300,43 +300,44 @@ class Well:
                     print(content)
         return True
 
-    def renameZoneSet(self, zonesetName, newZoneSetName):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            if zoneset["name"].lower() == zonesetName.lower():
-                check, content = editZoneSetTemplate(self.token, {
-                    'idZoneSetTemplate': zoneset["zone_set_template"]["idZoneSetTemplate"], 'name': newZoneSetName})
-                c, co = editZoneSet(self.token, {'idZoneSet': zoneset["idZoneSet"], 'name': newZoneSetName})
-                if check and c:
-                    print("Update zoneset name successfull")
-                    return True
-                else:
-                    print(content, co)
-                    return False
-        return False
+    # def renameZoneSet(self, zonesetName, newZoneSetName):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         print(zoneset)
+    #         if zoneset['name'].lower() == zonesetName.lower():
+    #             check, content = editZoneSetTemplate(self.token, {
+    #                 'idZoneSetTemplate': zoneset["zone_set_template"]["idZoneSetTemplate"], 'name': newZoneSetName})
+    #             c, co = editZoneSet(self.token, {'idZoneSet': zoneset["idZoneSet"], 'name': newZoneSetName})
+    #             if check and c:
+    #                 print("Update zoneset name successfull")
+    #                 return True
+    #             else:
+    #                 print(content, co)
+    #                 return False
+    #     return False
 
-    def renameZone(self, zoneName, zoneSetname, newZoneName):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            if zoneset["name"].lower() == zoneSetname.lower():
-                for zone in zoneset["zones"]:
-                    if zone["zone_template"]["name"].lower() == zoneName.lower():
-                        check, content = editZoneTemplate(self.token,
-                                                          {'idZoneTemplate': zone["zone_template"]["idZoneTemplate"],
-                                                           'name': newZoneName})
-                        if check:
-                            print("Update zone name successfull")
-                            return True
-                        else:
-                            print(content)
-        return False
+    # def renameZone(self, zoneName, zoneSetname, newZoneName):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         if zoneset["name"].lower() == zoneSetname.lower():
+    #             for zone in zoneset["zones"]:
+    #                 if zone["zone_template"]["name"].lower() == zoneName.lower():
+    #                     check, content = editZoneTemplate(self.token,
+    #                                                       {'idZoneTemplate': zone["zone_template"]["idZoneTemplate"],
+    #                                                        'name': newZoneName})
+    #                     if check:
+    #                         print("Update zone name successfull")
+    #                         return True
+    #                     else:
+    #                         print(content)
+    #     return False
 
-    def getZoneSetByName(self, zonesetName):
-        zonesets = self.getAllZoneSets()
-        for zoneset in zonesets:
-            if zoneset["name"].lower() == zonesetName.lower():
-                return zoneset
-        return None
+    # def getZoneSetByName(self, zonesetName):
+    #     zonesets = self.getAllZoneSets()
+    #     for zoneset in zonesets:
+    #         if zoneset["name"].lower() == zonesetName.lower():
+    #             return zoneset
+    #     return None
 
     def exportWellDatacsv(self):
         payload = {'idObjs': [{'idProject': self.projectId, 'idWell': self.wellId, 'datasets': []}]}
@@ -443,3 +444,10 @@ class Well:
     
     def getAllZoneSets(self):
         return self.getListZoneSets()
+    
+    def deleteAllZoneSets(self):
+        tmp_obj = self.getAllZoneSets()
+        for i in tmp_obj:
+            if(type(i) is ZoneSet):
+                i.delete()
+        return None
