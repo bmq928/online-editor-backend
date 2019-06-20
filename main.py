@@ -11,8 +11,6 @@ import json
 #login
 client = wilib.login("su_hoang","1")
 
-project = client.getProjectById(6)
+mksTemplate = client.getMarkerSetTemplateById(23).getAllMarkerTemplate()
 
-mks = project.getAllMarkerSetTemplates()
-
-print(mks[0].getInfo())
+print(mksTemplate[0].getInfo())
