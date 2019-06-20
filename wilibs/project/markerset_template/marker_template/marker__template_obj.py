@@ -1,22 +1,22 @@
 from .marker_template_api import *
 
 class MarkerTemplate:
-    def __init__(self, token, MarkerTemplateInfo):
+    def __init__(self, token, markerTemplateInfo):
         self.token = token
-        self.MarkerTemplateInfo = {
-           'idMarkerTemplate': MarkerTemplateInfo['idMarkerTemplate'],
-           'name': MarkerTemplateInfo['name'],
-           'lineWidth': MarkerTemplateInfo['lineWidth'],
-            'color':  MarkerTemplateInfo['color']
+        self.markerTemplateInfo = {
+           'idMarkerTemplate': markerTemplateInfo['idMarkerTemplate'],
+           'name': markerTemplateInfo['name'],
+           'lineWidth': markerTemplateInfo['lineWidth'],
+            'color':  markerTemplateInfo['color']
 
         }
-        self.MarkerTemplateId = MarkerTemplateInfo['idMarkerTemplate']
-        self.MarkerTemplateName = MarkerTemplateInfo['name']
-        self.LineWidth = MarkerTemplateInfo['lineWidth']
-        self.Color = MarkerTemplateInfo['color']
+        self.MarkerTemplateId = markerTemplateInfo['idMarkerTemplate']
+        self.MarkerTemplateName = markerTemplateInfo['name']
+        self.LineWidth = markerTemplateInfo['lineWidth']
+        self.Color = markerTemplateInfo['color']
 
     def __repr__(self):
-        obj = dict(self.MarkerTemplateInfo)
+        obj = dict(self.markerTemplateInfo)
         return str(obj)
 
     def __str__(self):

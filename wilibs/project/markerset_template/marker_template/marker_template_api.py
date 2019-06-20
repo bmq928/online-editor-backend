@@ -17,9 +17,6 @@ def deleteMarkerTemplate(token, MarkerTemplateId):
     r = deleteMarkerTemplate_RAW(token,MarkerTemplateId)
     return verifyAndReturn(r)
 
-def getListMarkerTemplate(token, wellId):
-    r = getListMarkerTemplate_RAW(token, wellId)
-    return verifyAndReturn(r)
 
 def getMarkerTemplateInfo(token, MarkerTemplateId):
     r = getMarkerTemplateInfo_RAW(token, MarkerTemplateId)
@@ -34,11 +31,6 @@ def createMarkerTemplate_RAW(token, MarkerSetTemplateId, name):
 def deleteMarkerTemplate_RAW(token, MarkerTemplateId):
     url = ROOT_API + '/marker-set-template/marker-template/delete'
     r = requests.delete(url, json={'idMarkerTemplate': MarkerTemplateId}, headers=tokenHeader(token), verify=False)
-    return r.json()
-
-def getListMarkerTemplate_RAW(token, wellId):
-    url = ROOT_API + '/marker-set-template/marker-template/list'
-    r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def getMarkerTemplateInfo_RAW(token, MarkerTemplateId):

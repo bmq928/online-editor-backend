@@ -7,13 +7,12 @@ from .histogram.histogramapi import *
 from .histogram.histogram_object import Histogram
 from .cross_plot.cross_plot_object import CrossPlot
 from .cross_plot.cross_plotapi import *
-from .well.markerset_template.markerset_template_obj import createMarkerSetTemplate
-from .well.markerset_template.markerset_template_obj import MarkerSetTemplate
-from .well.markerset_template.markerset_template_api import *
-from .well.markerset_template.markerset.markerset_api import *
 from .well.zoneset_template.zoneset_template_api import getlistZoneSetTemplate
 from .well.zoneset_template.zoneset_template_obj import ZoneSetTemplate
 from .well.zoneset_template.zoneset_template_api import *
+from .markerset_template.markerset_template_api import *
+from .markerset_template.markerset_template_obj import MarkerSetTemplate
+
 
 
 class Project:
@@ -121,8 +120,8 @@ class Project:
         else:
             return None
     
-    def newMarketSetTemplate(self, **data):
-        return self.createMarkerSetTemplate(**data)
+    def newMarketSetTemplate(self, name):
+        return self.createMarkerSetTemplate(name)
 
     def getId(self):
         """Get this project Id

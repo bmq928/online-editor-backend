@@ -6,10 +6,8 @@ from .imageset.imageset_obj import *
 from .imageset.imageset_api import createImageSet
 from .imageset.imageset_api import getListImageSet
 from ...common import convertUnit
-from .markerset_template.markerset.markerset_api import getListMarkerSets
-from .markerset_template.markerset.markerset_obj import MarkerSets
-from .markerset_template.markerset.markerset_api import *
-from .markerset_template.markerset.markerset_api import createMarkerSets
+from ..well.markerset.markerset_api import *
+from ..well.markerset.markerset_obj import MarkerSets
 from .zoneset_template.zoneset_template_api import *
 from .zoneset_template.zoneset_template_obj import ZoneSetTemplate
 from .zoneset.zoneset_api import *
