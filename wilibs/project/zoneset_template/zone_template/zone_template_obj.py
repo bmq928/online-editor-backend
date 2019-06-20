@@ -27,5 +27,8 @@ class ZoneTemplate:
                 return(ZoneTemplate(self.token, i))
         return False
     
+    def getInfo(self):
+        return self.getZoneTemplateInfo()
+    
     
     
