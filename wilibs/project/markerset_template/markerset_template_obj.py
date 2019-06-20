@@ -37,7 +37,11 @@ class MarkerSetTemplate:
         if check:
             return MarkerTemplate(self.token, content)
         else:
+            print(content)
             return None
+    
+    def newMarkerTemplate(self, name):
+        return self.createMarkerTemplate(name)
     
     def newMarkerSetTemplate(self,name):
         return self.createMarkerTemplate(name)
@@ -48,6 +52,8 @@ class MarkerSetTemplate:
             return MarkerSets(self.token, content)
         else:
             return None
+    
+
     
     
     def getAllMarkerTemplate(self):
