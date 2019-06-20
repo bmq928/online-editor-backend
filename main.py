@@ -15,5 +15,5 @@ project = client.getProjectById(6)
 zst = project.getAllZoneSetTemplates()
 
 zt = zst[0].getAllZoneTemplates()
-print(zt)
-print(zt[0].getInfo())
+# print(zt)
+print(zt[0].delete())
