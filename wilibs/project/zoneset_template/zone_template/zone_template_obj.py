@@ -4,14 +4,14 @@ class ZoneTemplate:
     def __init__(self, token, ZoneTemplateInfo):
         self.token = token
         self.ZoneTemplateInfo = {
-            'idProject': ZoneTemplateInfo['idProject'],
+            'idZoneTemplate': ZoneTemplateInfo['idZoneTemplate'],
             'idZoneSetTemplate': ZoneTemplateInfo['idZoneSetTemplate'],
             'name': ZoneTemplateInfo['name']
         }
-        self.ZoneSetTemplateId = ZoneTemplateInfo['idZoneSetTemplate']
+        self.ZoneTemplateId = ZoneTemplateInfo['idZoneTemplate']
    
     def __repr__(self):
-        obj = dict(self.ZoneSetTemplateInfo)
+        obj = dict(self.ZoneTemplateInfo)
         return str(obj)
 
     def __str__(self):
