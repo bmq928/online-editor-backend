@@ -19,13 +19,14 @@ class ZoneTemplate:
     def __str__(self):
         return self.__repr__()  
     def getZoneTemplateInfo(self):
-        tmp = getZoneSetTeamplateInfo(self.token, self.ZoneSetTeamplateId)
+        check, content = getZoneSetTeamplateInfo(self.token, self.ZoneSetTeamplateId)
         listObj = []
-        tmpObj = tmp['zone_templates']
-        for i in tmpObj:
-            if self.ZoneTemplateId == tmpObj[i]['idZoneTemplate']:
-                return(ZoneTemplate(self.token, i))
-        return False
+        if check:
+            tmpObj = content['zone_templates']
+            for i in tmpObj:
+                if self.ZoneTemplateId == i['idZoneTemplate']:
+                    return(ZoneTemplate(self.token, i))
+        return None
     
     def getInfo(self):
         return self.getZoneTemplateInfo()
