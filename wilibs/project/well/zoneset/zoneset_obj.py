@@ -43,8 +43,9 @@ class ZoneSet:
     def deleteZoneSet(self):
         check , content = deleteZoneSet(self.token, self.ZoneSetId)
         if check:
-            return None
-        return content
+            return True
+        print(content)
+        return False
     
     def delete(self):
         return self.deleteZoneSet()
