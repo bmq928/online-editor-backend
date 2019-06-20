@@ -45,8 +45,13 @@ class MarkerSetTemplate:
 
     def getAllMarkerTemplates(self):
         markerTemplates = self.getMarkerSetTemplateInfo()
-        listObj = markerTemplates['marker_templates']
-        return listObj
+        if markerTemplates:
+            listObj = markerTemplates['marker_templates']
+            newArr = []
+            for i in listObj:
+                newArr.append(MarkerTemplate(self.token, i))
+            return newArr
+        return []
     
     def getMarkerSetTemplateInfo(self):
         check, content = getMarkerSetTeamplateInfo(self.token, self.markerSetTemplateId)
