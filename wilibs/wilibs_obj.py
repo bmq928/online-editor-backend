@@ -90,7 +90,7 @@ class Wilib:
             return Marker(self.token, markerInfo)
         return None
 
-    def getMarkerTemplatebyId(self, MarkerTemplateId):
+    def getMarkerTemplateById(self, MarkerTemplateId):
         check, markerTemplateInfo = getMarkerTemplateInfo(self.token, MarkerTemplateId)
         if check:
             return MarkerTemplate(self.token, markerTemplateInfo)
