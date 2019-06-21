@@ -300,6 +300,19 @@
             "explain": "Get a Marker Set with specified id",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nmkt = client.getMarkerSetById(55)\nprint(mkt)"
         },
+        "getMarkerById(id)": {
+            "params": {
+                "required": {
+                    "id": "Integer. Id of Marker"
+                },
+                "optional": {
+
+                }
+            },
+            "returns": "Marker object if success, None if fail",
+            "explain": "Get a Marker with specified id",
+            "example": "client = wilib.loginByToken('YOUR_TOKEN')\nmk = client.getMarkerById(55)\nprint(mk)"
+        },
         "getZoneSetTemplateById(id)": {
             "params": {
                 "required": {
