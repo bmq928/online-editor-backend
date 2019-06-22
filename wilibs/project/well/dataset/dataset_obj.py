@@ -319,13 +319,11 @@ class Dataset:
             self.editDatasetInfo(top=newTop, bottom=newBottom)
             return
         newTopInteger = 0
-        delStep = 0
         while self.top + newTopInteger * self.step < top:
             newTopInteger += 1
         newBottomInteger = int((self.bottom - self.top) / self.step)
         while self.top + newBottomInteger * self.step > bottom:
             newBottomInteger -= 1
-            delStep += 1
         oldBottomInteger = int((self.bottom - self.top) / self.step)
         newTop = self.top + round(newTopInteger * self.step, 4)
         newBottom = self.top + round(newBottomInteger * self.step, 4)

@@ -37,8 +37,8 @@ class Histogram:
             print(content)
         return False
     
-    def edit(self, **data):
-        return self.editHistogram(**data)
+    # def edit(self, **data):
+    #     return self.editHistogram(**data)
 
     def getInfoHistogram(self):
         check, content = getHistogramInfo(self.token, self.histogramId)

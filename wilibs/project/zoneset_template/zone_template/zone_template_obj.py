@@ -18,7 +18,8 @@ class ZoneTemplate:
         return str(obj)
 
     def __str__(self):
-        return self.__repr__()  
+        return self.__repr__()
+        
     def getZoneTemplateInfo(self):
         check, content = getZoneSetTeamplateInfo(self.token, self.ZoneSetTeamplateId)
         if check:

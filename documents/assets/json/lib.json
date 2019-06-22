@@ -233,18 +233,19 @@
             "explain": "Get a histogram with specified name. Print err if get err and return nothing",
             "example": "client = wilib.loginByToken('YOUR_TOKEN')\nhistogram = client.getHistogramByName('Example Histogram', 'Example Project')\nhistogram.delete()"
         },
-        "wiSavefig(plt, fileName, **data)": {
+        "wiSavefig(plt, fileName, **dict)": {
             "params": {
                 "required": {
-                    
+                    "plt": "matplotlib.pyplot object",
+                    "fileName": "File name"
                 },
                 "optional": {
-
+                    "dict.*": "Option for pyplot"
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True",
+            "explain": "Save fig of mat plotlib",
+            "example": "import matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\nclient = wilib.login('YOUR_TOKEN')\ncurve = client.getCurveByName(55)\ndataX = []\ndataY = []\nfor row in curve.getCurveData():\n\tdataX.append(row['x'])\n\tdataY.append(row['y'])\nplt.plot(dataX, dataY)\nplt.ylabel('Depth')\nclient.wiSavefig(plt, 'demo.png')"
         },
         "newProject(**dict)": {
             "params": {
@@ -730,9 +731,9 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if export successfully, False if fail",
+            "explain": "Export Well Data to csv",
+            "example": "well.exportWellDatacsv()"
         },
         "downloadExportedFile()": {
             "params": {
@@ -743,11 +744,11 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if download successfully, False if fail",
+            "explain": "Download Exported file",
+            "example": "well.downloadExportedFile()"
         },
-        "updateDefaultWellHeaders": {
+        "updateDefaultWellHeaders()": {
             "params": {
                 "required": {
                     
@@ -756,9 +757,9 @@
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if update successfully, False if fail",
+            "explain": "Update well headers to default value",
+            "example": "success = well.updateDefaultWellHeaders()\nif success:\n\tprint('Update successfully')"
         },
         "updateWellHeader(**dict)": {
             "params": {
@@ -773,7 +774,7 @@
             },
             "returns": "True if update successfully. False if fail",
             "explain": "Update Well header in well",
-            "example": "success = well,updateWellHeader(header='example header', unit='', value=''"
+            "example": "success = well.updateWellHeader(header='example header', unit='', value=''"
         },
         "addTags(tags)": {
             "params": {
@@ -1223,28 +1224,29 @@
         "clipDataCurve(minValue, maxValue)": {
             "params": {
                 "required": {
-
+                    "minValue": "Float. Min value",
+                    "maxValue": "Float. Max value"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if clip curve successfully, None if fail",
+            "explain": "Clip data curve",
+            "example": "curve = getCurveById(55)\nsuccess = curve.clipDataCurve(1000,2000)\nif success:\n\tprint('clip curve successfully')"
         },
         "copyFamily(sourceCurve)": {
             "params": {
                 "required": {
-
+                    "sourceCurve": "Curve object. Curve source"
                 },
                 "optional": {
 
                 }
             },
-            "returns": "",
-            "explain": "",
-            "example": ""
+            "returns": "True if copy successfully",
+            "explain": "Copy this curve object to family of source curve",
+            "example": "curve = client.getCurveById(55)\nsourceCurve = client.getCurveById(56)\nsuccess = curve.copyFamily(sourceCurve)\nif success:\n\tprint('copy successfully')"
         },
         "rename(newName)": {
             "params": {
@@ -1287,19 +1289,6 @@
         }
     },
     "LogPlot": {
-        "edit(**dict)": {
-            "params": {
-                "required": {
-
-                },
-                "optional": {
-                    
-                }
-            },
-            "returns": "True if edit log plot info successfully, False if fail",
-            "explain": "Edit plot info",
-            "example": ""
-        },
         "delete()": {
             "params": {
                 "required": {
@@ -1354,19 +1343,6 @@
         }
     },
     "CrossPlot": {
-        "edit(**dict)": {
-            "params": {
-                "required": {
-
-                },
-                "optional": {
-                    
-                }
-            },
-            "returns": "True if edit cross plot info successfully, False if fail",
-            "explain": "Edit cross plot info",
-            "example": ""
-        },
         "delete()": {
             "params": {
                 "required": {
@@ -1421,19 +1397,6 @@
         }
     },
     "Histogram": {
-        "edit(**dict)": {
-            "params": {
-                "required": {
-
-                },
-                "optional": {
-                    
-                }
-            },
-            "returns": "True if edit histogram info successfully, False if fail",
-            "explain": "Edit histogram info",
-            "example": ""
-        },
         "delete()": {
             "params": {
                 "required": {
@@ -1733,19 +1696,6 @@
             "returns": "Array of ZoneTemplate object. Array empty if fail or no Zone Template in ZoneSetTemplate",
             "explain": "Get all Zone Template in MarkerSet",
             "example": "zst = client.getZoneSetById(55)\nzs = zst.getAllZones()\nprint(zs)"
-        },
-        "rename(newName)": {
-            "params": {
-                "required": {
-                    "newName": "String. New name of ZoneSet"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if rename successfully, False if fail",
-            "explain": "Rename this zone set",
-            "example": "zs = client.getZoneSetById(55)\nsuccess = zs.rename('new name')\nif success:\n\tprint('rename successfully')"
         }
     },
     "Zone": {
@@ -1774,19 +1724,6 @@
             "returns": "JSON if success, None if fail",
             "explain": "Get info of this ZoneTemplate",
             "example": "zone = client.getZoneById(55)\ninfo = zone.getInfo()\nprint(info)"
-        },
-        "rename(newName)": {
-            "params": {
-                "required": {
-                    "newName": "String. New name of Zone"
-                },
-                "optional": {
-
-                }
-            },
-            "returns": "True if rename successfully, False if fail",
-            "explain": "Rename this zone",
-            "example": "z = client.getZoneById(55)\nsuccess = z.rename('new name')\nif success:\n\tprint('rename successfully')"
         }
     }
 }

@@ -37,8 +37,8 @@ class CrossPlot:
             print(content)
         return False
 
-    def edit(self, **data):
-        return self.editCrossPlot(**data)
+    # def edit(self, **data):
+    #     return self.editCrossPlot(**data)
 
     def getInfoCrossPlot(self):
         result = {}

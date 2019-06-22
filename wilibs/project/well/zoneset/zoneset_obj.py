@@ -54,18 +54,18 @@ class ZoneSet:
     def delete(self):
         return self.deleteZoneSet()
 
-    def renameZoneSet(self, newZoneSetName):
-        zoneset = self.getZoneSetInfo()
-        print(zoneset)
-        check, content = editZoneSetTemplate(self.token, {'idZoneSetTemplate': zoneset['idZoneSetTemplate'], 'name': newZoneSetName})
-        c, co = editZoneSet(self.token, {'idZoneSet': zoneset['idZoneSet'], 'name': newZoneSetName})
-        if check:
-            return True
-        print(content, co)
-        return False
+    # def renameZoneSet(self, newZoneSetName):
+    #     zoneset = self.getZoneSetInfo()
+    #     print(zoneset)
+    #     check, content = editZoneSetTemplate(self.token, {'idZoneSetTemplate': zoneset['idZoneSetTemplate'], 'name': newZoneSetName})
+    #     _, co = editZoneSet(self.token, {'idZoneSet': zoneset['idZoneSet'], 'name': newZoneSetName})
+    #     if check:
+    #         return True
+    #     print(content, co)
+    #     return False
     
-    def rename(self, newZoneSetName):
-        return self.renameZoneSet(newZoneSetName)
+    # def rename(self, newZoneSetName):
+    #     return self.renameZoneSet(newZoneSetName)
     
     def getInfo(self):
         return self.getZoneSetInfo()
