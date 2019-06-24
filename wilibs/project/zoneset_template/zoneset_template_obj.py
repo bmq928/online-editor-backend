@@ -10,6 +10,7 @@ class ZoneSetTemplate:
             'name': ZoneSetTemplateInfo['name']
         }
         self.name = self.ZoneSetTemplateInfo['name']
+        self.ZoneSetName = self.name
         self.ZoneSetTemplateId = ZoneSetTemplateInfo['idZoneSetTemplate']
    
     def __repr__(self):

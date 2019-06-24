@@ -1,0 +1,53 @@
+{
+    "Wilibs": {
+        "attributes": ["token"]
+    },
+    "Client":{
+        "attributes" : ["token"]
+    },
+    "Project":{
+        "attributes": ["projectInfo", "projectId", "projectName", "alias", "shared", "owner"]
+    },
+    "Well":{
+        "attributes": ["wellInfo","wellId", "projectId", "wellName", "headers"]
+    },
+    "Dataset":{
+        "attributes": ["datasetInfo", "datasetName", "datasetId", "wellId", "top", "step", "bottom", "sampleRate", "unit"]
+    },
+    "Curve":{
+        "attributes": ["curveInfo", "curveId", "curveName", "datasetId"]
+    },
+    "LogPlot":{
+        "attributes": ["plotInfo", "plotId", "plotName", "projectId", "tags"]
+    },
+    "CrossPlot":{
+        "attributes": ["crossPlotId", "name"]
+    },
+    "Histogram":{
+        "attributes": ["histogramId", "name"]
+    },
+    "MarkerSetTemplate":{
+        "attributes": ["markerSetTempateInfo", "markerSetTemplateId"]
+    },
+    "MarkerTemplate":{
+        "attributes": ["markerTemplateInfo", "markerTemplateId", "markerTemplateName", "lineWidth"]
+    },
+    "MarkerSet":{
+        "attributes": ["markersetsInfo", "markersetId"]
+    },
+    "Marker":{
+        "attributes": ["markerInfo", "markerId", "Depth"]
+    },
+    "ZoneSetTemplate":{
+        "attributes": ["ZoneSetTemplateInfo", "ZoneSetName", "ZoneSetTemplateId"]
+    },
+    "ZoneTemplate":{
+        "attributes": ["ZoneTemplateInfo", "ZoneTemplateId", "ZoneSetTeamplateId", "ZoneTemplateName"]
+    },
+    "ZoneSet":{
+        "attributes": ["ZoneSetInfo", "ZoneSetId", "ZoneSetName"]
+    },
+    "Zone":{
+        "attributes": ["ZoneInfo", "ZoneId", "ZoneName"]
+    }
+}
