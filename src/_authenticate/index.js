@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken');
 
 //this path can be used without authentication
-const EXCEPTION_PATH = ['^/download/exported-files/.*',  '/documents/.*'];
+const EXCEPTION_PATH = ['^/download/exported-files/.*',  '/index.*'];
 
 module.exports = function () {
 	return function (req, res, next) {
