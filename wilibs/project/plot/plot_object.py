@@ -44,8 +44,8 @@ class LogPlot:
             print(content)
             return False
     
-    def edit(self, **data):
-        return self.editLogPlot(**data)
+    # def edit(self, **data):
+    #     return self.editLogPlot(**data)
 
     def deleteLogPlot(self):
         check, content = deletePlot(self.token, self.plotId)

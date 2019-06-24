@@ -57,17 +57,17 @@ class Zone:
     # def edit(self,**data):
     #     return self.editZone(**data)
         
-    def renameZone(self, newZoneName):
-        zone = self.getZoneInfo()
-        check, content = editZoneTemplate(self.token,{'idZoneTemplate': zone["idZoneTemplate"],'name': newZoneName})
-        if check:
-            return True
-        else:
-            print(content)
-        return False
+    # def renameZone(self, newZoneName):
+    #     zone = self.getZoneInfo()
+    #     check, content = editZoneTemplate(self.token,{'idZoneTemplate': zone["idZoneTemplate"],'name': newZoneName})
+    #     if check:
+    #         return True
+    #     else:
+    #         print(content)
+    #     return False
     
-    def rename(self, newZoneName):
-        return self.renameZone(newZoneName)
+    # def rename(self, newZoneName):
+    #     return self.renameZone(newZoneName)
     
     def getZoneInfo(self):
         check, content = getZoneInfo(self.token, self.ZoneId)
