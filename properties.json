@@ -1,53 +1,130 @@
 {
     "Wilibs": {
-        "attributes": ["token"]
+        "attributes": {
+            "username": "String",
+            "password": "String"
+        }
     },
     "Client":{
-        "attributes" : ["token"]
+        "attributes" : {
+
+        }
     },
     "Project":{
-        "attributes": ["projectInfo", "projectId", "projectName", "alias", "shared", "owner"]
+        "attributes": {
+            "projectInfo": "Dictionary",
+            "projectId": "Integer",
+            "projectName": "String",
+            "alias": "String",
+            "shared": "Boolean",
+            "owner": "String"
+        }
     },
     "Well":{
-        "attributes": ["wellInfo","wellId", "projectId", "wellName", "headers"]
+        "attributes": {
+            "wellInfo": "Dictionary",
+            "wellId": "Integer",
+            "projectId": "Integer",
+            "wellName": "String",
+            "headers": "List"
+        }
     },
     "Dataset":{
-        "attributes": ["datasetInfo", "datasetName", "datasetId", "wellId", "top", "step", "bottom", "sampleRate", "unit"]
+        "attributes": {
+            "datasetInfo": "Dictionary",
+            "datasetName": "String",
+            "datasetId": "Integer",
+            "wellId": "Integer",
+            "top": "Float",
+            "step": "Float",
+            "bottom": "Float",
+            "sampleRate": "Float",
+            "unit": "String"
+        }
     },
     "Curve":{
-        "attributes": ["curveInfo", "curveId", "curveName", "datasetId"]
+        "attributes": {
+            "curveInfo": "Dictionary",
+            "curveId": "Integer",
+            "curveName": "String",
+            "datasetId": "Integer"
+        }
     },
     "LogPlot":{
-        "attributes": ["plotInfo", "plotId", "plotName", "projectId", "tags"]
+        "attributes": {
+            "plotInfo": "Dictionary",
+            "plotId": "Integer",
+            "plotName": "String",
+            "projectId": "Integer",
+            "tags":"List"
+        }
     },
     "CrossPlot":{
-        "attributes": ["crossPlotId", "name"]
+        "attributes": {
+            "crossPlotId": "Integer",
+            "name": "String"
+        }
     },
     "Histogram":{
-        "attributes": ["histogramId", "name"]
+        "attributes": {
+            "histogramId": "Integer",
+            "name": "String"
+        }
     },
     "MarkerSetTemplate":{
-        "attributes": ["markerSetTempateInfo", "markerSetTemplateId"]
+        "attributes": {
+            "markerSetTempateInfo": "Dictionary",
+            "markerSetTemplateId": "Integer"
+        }
     },
     "MarkerTemplate":{
-        "attributes": ["markerTemplateInfo", "markerTemplateId", "markerTemplateName", "lineWidth"]
+        "attributes": {
+            "markerTemplateInfo": "Dictionary",
+            "markerTemplateId": "Integer",
+            "markerTemplateName": "String",
+            "lineWidth": "Float"
+        }
     },
     "MarkerSet":{
-        "attributes": ["markersetsInfo", "markersetId"]
+        "attributes": {
+            "markersetsInfo": "Dictionary",
+            "markersetId": "Integer"
+        }
     },
     "Marker":{
-        "attributes": ["markerInfo", "markerId", "Depth"]
+        "attributes":{
+            "markerInfo": "Dictionary",
+            "markerId": "Integer",
+            "Depth": "Float"
+        }
     },
     "ZoneSetTemplate":{
-        "attributes": ["ZoneSetTemplateInfo", "ZoneSetName", "ZoneSetTemplateId"]
+        "attributes": {
+            "ZoneSetTemplateInfo": "Dictionary" ,
+            "ZoneSetName": "String",
+            "ZoneSetTemplateId": "Integer"
+        }
     },
     "ZoneTemplate":{
-        "attributes": ["ZoneTemplateInfo", "ZoneTemplateId", "ZoneSetTeamplateId", "ZoneTemplateName"]
+        "attributes": {
+            "ZoneTemplateInfo": "Dictionary",
+            "ZoneTemplateId": "Integer",
+            "ZoneSetTeamplateId": "Integer",
+            "ZoneTemplateName": "String"
+        }
     },
     "ZoneSet":{
-        "attributes": ["ZoneSetInfo", "ZoneSetId", "ZoneSetName"]
+        "attributes": {
+            "ZoneSetInfo": "Dictionary",
+            "ZoneSetId": "Integer",
+            "ZoneSetName": "String"
+        }
     },
     "Zone":{
-        "attributes": ["ZoneInfo", "ZoneId", "ZoneName"]
+        "attributes": {
+            "ZoneInfo": "Dictionary",
+            "ZoneId": "Integer",
+            "ZoneName": "String"
+        }
     }
 }
