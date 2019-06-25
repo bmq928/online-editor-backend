@@ -17,6 +17,7 @@ class ZoneSet:
         }
         self.ZoneSetId = ZoneSetInfo['idZoneSet']
         self.name = ZoneSetInfo['name']
+        self.ZoneSetName = self.name
    
     def __repr__(self):
         obj = dict(self.ZoneSetInfo)

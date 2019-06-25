@@ -15,6 +15,7 @@ class Zone:
         }
         self.ZoneId = ZoneInfo['idZone']
         self.name = ZoneInfo['zone_template']['name']
+        self.ZoneName = self.name
         
     
     def __repr__(self):

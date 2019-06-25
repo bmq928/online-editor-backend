@@ -12,6 +12,7 @@ class ZoneTemplate:
         self.ZoneTemplateId = ZoneTemplateInfo['idZoneTemplate']
         self.ZoneSetTeamplateId = ZoneTemplateInfo['idZoneSetTemplate']
         self.name = ZoneTemplateInfo['name']
+        self.ZoneTemplateName = self.name
    
     def __repr__(self):
         obj = dict(self.ZoneTemplateInfo)
