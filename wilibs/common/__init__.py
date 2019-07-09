@@ -361,3 +361,14 @@ def convertUnit(value, srcUnit, destUnit = "m"):
         return False
     return value*srcRate/destRate
 
+def depthTransfer(arr, top, bottom, step):
+    if step == 0:
+        return arr
+    for i in arr:
+        i['y'] = top + step*i['y']
+    return arr
+
+def depthConvert(value, top, step):
+    if step == 0:
+        return value
+    return top + step*value

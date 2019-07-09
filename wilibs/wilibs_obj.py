@@ -7,6 +7,7 @@ from .project.projectapi import listProject
 from .project.well.dataset.datasetapi import getDatasetInfo
 from .project.well.dataset.dataset_obj import Dataset
 from .project.well.dataset.curve.curveapi import getCurveInfo
+from .project.well.dataset.curve.curveapi import updateRawCurveData
 from .project.well.dataset.curve.curve_obj import Curve
 from .api_url import EXPORT_PATH
 from .api_url import DOWNLOAD_BASE_URL
@@ -37,6 +38,7 @@ from .project.well.zoneset.zoneset_obj import getZoneSetInfo
 from .project.well.well_obj import *
 from .project.well.zoneset.zone.zone_api import *
 from .project.well.zoneset.zone.zone_obj import Zone
+
 class Wilib:
     def __init__(self, token):
         self.token = token
@@ -276,3 +278,143 @@ class Wilib:
         if check:
             return Zone(self.token, info)
         return None
+    
+    def resamplingCurve(self, srcCurve, destCurve):
+        srcDatasetId = srcCurve.curveInfo['idDataset']
+        destDatasetId = destCurve.curveInfo['idDataset']
+
+        #get Dataset for top, bottom, step
+        srcDataset = self.getDatasetById(srcDatasetId)
+        destDataset = self.getDatasetById(destDatasetId)
+        if (not srcDataset) or (not srcDataset):
+            print('get Data set false')
+            return
+        
+        #init
+        srcTop = srcDataset.top
+        # srcBottom = srcDataset.bottom
+        srcStep = srcDataset.step
+        destTop = destDataset.top
+        # destBottom = destDataset.bottom
+        destStep = destDataset.step
+
+        srcType = srcCurve.curveInfo['type']
+        destType = destCurve.curveInfo['type']
+
+        if (srcType == "TEXT") or (destType == "TEXT"):
+            print('We do not cover text curve case')
+            return
+        
+        srcData = srcCurve.getCurveData()
+        destData = destCurve.getCurveData()
+
+        #get length
+        destLength = len(destData)
+        srcLength = len(srcData)
+
+
+        # topBoundIndex = 0
+        bottomBoundIndex = 1
+        depthFirstIndex = 0
+        depthFirst = depthConvert(destData[depthFirstIndex]['y'], destTop, destStep)
+
+
+        while (depthFirst > depthConvert(srcData[bottomBoundIndex]['y'], srcTop, srcStep)):
+            bottomBoundIndex += 1
+            # while (srcData[bottomBoundIndex]['x'] == None):
+            #     bottomBoundIndex += 1
+            #     if bottomBoundIndex >= srcLength:
+            #         return
+            if bottomBoundIndex >= srcLength:
+                return
+            # topBoundIndex = bottomBoundIndex - 1
+            # while srcData[topBoundIndex]['x'] == None:
+            #     topBoundIndex -= 1
+        
+        while (depthFirst < depthConvert(srcData[bottomBoundIndex-1]['y'], srcTop, srcStep)):
+            depthFirstIndex += 1
+            if depthFirstIndex >= destLength:
+                return
+            depthFirst = depthConvert(destData[depthFirstIndex]['y'], destTop, destStep)
+        
+        for i in range(depthFirstIndex, destLength):
+            depth = depthConvert(destData[i]['y'], destTop, destStep)
+            topBound = depthConvert(srcData[bottomBoundIndex-1]['y'], srcTop, srcStep)
+            bottomBound = depthConvert(srcData[bottomBoundIndex]['y'], srcTop, srcStep)
+            # print('-----------')
+            # print(depth)
+            # print(topBound)
+            # print(depth < topBound)
+            # print('-----------')
+            # count += 1
+            # if count > 15:
+            #     return
+            isRunOutOfSrc = False
+            while depth > bottomBound:
+                bottomBoundIndex += 1
+                # while (srcData[bottomBoundIndex]['x'] == None):
+                #     bottomBoundIndex += 1
+                #     if bottomBoundIndex >= srcLength:
+                #         break
+                if bottomBoundIndex >= srcLength:
+                    isRunOutOfSrc = True
+                    break
+                # topBound = depthConvert(srcData[bottomBoundIndex-1]['y'], srcTop, srcStep)
+                bottomBound = depthConvert(srcData[bottomBoundIndex]['y'], srcTop, srcStep)
+                
+            if isRunOutOfSrc:
+                break
+
+            topBound = depthConvert(srcData[bottomBoundIndex-1]['y'], srcTop, srcStep)
+
+            if bottomBound == depth:
+                destData[i]['x'] = srcData[bottomBoundIndex]['x']
+            elif topBound == depth:
+                destData[i]['x'] = srcData[bottomBoundIndex - 1]['x']
+            else:
+
+            # if (srcData[topBoundIndex]['x'] != None) and (srcData[bottomBoundIndex]['x'] != None):
+                scale = (depth - topBound)/(bottomBound - topBound)
+            #     updateValueForResampling(destData[i], srcData[bottomBoundIndex], srcData[topBoundIndex], srcType, destType, scale)
+            #     destData[i]['x'] = ((depth - topBound)/(bottomBound - topBound))*(srcData[bottomBoundIndex]['x'] - srcData[topBoundIndex]['x']) + srcData[topBoundIndex]['x']
+                updateValueForResampling(destData[i], srcData[bottomBoundIndex], srcData[bottomBoundIndex-1], srcType, destType, scale)
+
+            # print('----------')
+            # print(depth)
+            # print(topBound)
+            # print(bottomBound)
+            # print(srcData[bottomBoundIndex]['x'])
+            # print(srcData[bottomBoundIndex - 1]['x'])
+            # print(bottomBoundIndex)
+            # print('----------')
+        
+        # print(destData)
+
+        destCurve.updateRawCurveData(destData)
+
+
+def updateValueForResampling(destData, srcDataBottom, srcDataTop, srcType, destType, scale):
+    if srcType == 'NUMBER' and destType == 'NUMBER':
+        #NORMAL DO IT
+        if srcDataBottom['x'] == None or srcDataTop['x'] == None:
+            destData['x'] = None
+        else:
+            destData['x'] = scale * (srcDataBottom['x'] - srcDataTop['x']) + srcDataTop['x']
+    if srcType == 'ARRAY' and destType == 'ARRAY':
+        destDataLength = len(destData['x'])
+        for i in range(0, destDataLength):
+            try:
+                if srcDataBottom['x'][i] == None or srcDataTop['x'][i] == None:
+                    destData['x'][i] = None
+                else:
+                    destData['x'][i] = scale * (srcDataBottom['x'][i] - srcDataTop['x'][i]) + srcDataTop['x'][i]
+            except:
+                print("TWO ARRAY MAYBE NOT IN SAME DIMENSION")
+
+        
+        
+
+        
+        
+
+    

@@ -9,4 +9,5 @@ import json
 
 
 #login
-client = wilib.login("su_hoang", 1)
+client = wilib.login("hoang", "1")
+client.resamplingCurve(client.getCurveById(1132), client.getCurveById(1137))

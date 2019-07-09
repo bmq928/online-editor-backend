@@ -24,7 +24,10 @@ def numberTypeConverter(data):
     for i in data:
         line = ''
         line += str(i['y'])
-        line += ' ' + str(i['x'])
+        if i['x'] != None:
+            line += ' ' + str(i['x'])
+        else:
+            line += ' ' + 'null'
         result.append(line)
     return result
 
