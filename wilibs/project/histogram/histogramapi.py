@@ -29,26 +29,26 @@ def deleteHistogram(token, histogramId):
 
 #RAW:
 def getHistogramList_RAW(token, projectId):
-    url = ROOT_API + '/project/histogram/list'
+    url = genUrlWithWiId(ROOT_API + '/project/histogram/list', {"idProject": projectId}, token)
     r = requests.post(url, json={'idProject': projectId}, headers=tokenHeader(token), verify=False)
     return r.json()
     
 def getHistogramInfo_RAW(token, histogramId):
-    url = ROOT_API + '/project/histogram/info'
+    url = genUrlWithWiId(ROOT_API + '/project/histogram/info', {"idHistogram": histogramId}, token)
     r = requests.post(url, json={'idHistogram': histogramId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def createHistogram_RAW(token, payload):
-    url = ROOT_API + '/project/histogram/new'
+    url = genUrlWithWiId(ROOT_API + '/project/histogram/new', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def editHistogram_RAW(token, payload):
-    url = ROOT_API + '/project/histogram/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/histogram/edit', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 def deleteHistogram_RAW(token, histogramId):
-    url = ROOT_API + '/project/histogram/delete'
+    url = genUrlWithWiId(ROOT_API + '/project/histogram/delete', {"idHistogram": histogramId}, token)
     r = requests.delete(url, json={'idHistogram': histogramId}, headers=tokenHeader(token), verify=False)
     return r.json()

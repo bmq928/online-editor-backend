@@ -5,7 +5,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-#format convert tool
+
+# format convert tool
 def arrayTypeConverter(data):
     result = []
     for i in data:
@@ -19,6 +20,7 @@ def arrayTypeConverter(data):
         result.append(line)
     return result
 
+
 def numberTypeConverter(data):
     result = []
     for i in data:
@@ -31,6 +33,7 @@ def numberTypeConverter(data):
         result.append(line)
     return result
 
+
 def textTypeConverter(data):
     result = []
     for i in data:
@@ -40,7 +43,8 @@ def textTypeConverter(data):
         result.append(line)
     return result
 
-#api
+
+# api
 
 def getCurveInfo(token, curveId):
     r = getCurveInfo_RAW(token, curveId)
@@ -84,12 +88,14 @@ def updateCurveData(token, datasetId, desCurveId, data, name):
     r = updateCurveData_RAW(token, payload, data)
     return verifyAndReturn(r)
 
+
 def createCurve(token, datasetId, file, **data):
     payload = data
     payload['curveName'] = data['name']
     payload['idDataset'] = datasetId
     r = createCurveData_RAW(token, payload, file)
     return verifyAndReturn(r)
+
 
 def updateRawCurveData(token, curveId, data):
     payload = {
@@ -139,6 +145,7 @@ def deleteCurve(token, curveId):
     r = deleteCurve_RAW(token, {'idCurve': curveId})
     return verifyAndReturn(r)
 
+
 def getRawCurveData(token, curveId, columnIndex):
     r = getRawCurveData_RAW(token, curveId, columnIndex)
     return verifyAndReturn(r)
@@ -147,15 +154,16 @@ def getRawCurveData(token, curveId, columnIndex):
 # RAW:
 
 def getCurveInfo_RAW(token, curveId):
-    url = ROOT_API + '/project/well/dataset/curve/info'
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/info', {'idCurve': curveId}, token)
     r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def getCurveData_RAW(token, curveId):
-    url = ROOT_API + '/project/well/dataset/curve/getData'
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/getData', {'idCurve': curveId}, token)
     r = requests.post(url, json={'idCurve': curveId}, headers=tokenHeader(token), verify=False)
     return r.json()
+
 
 def createCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/new-raw-curve'
@@ -166,6 +174,7 @@ def createCurveData_RAW(token, payload, data):
     except:
         r = {'code': 501, 'reason': 'Format wrong'}
     return r
+
 
 def updateCurveData_RAW(token, payload, data):
     url = ROOT_API + '/project/well/dataset/curve/processing'
@@ -178,23 +187,27 @@ def updateCurveData_RAW(token, payload, data):
 
 
 def editCurveInfo_RAW(token, payload):
-    url = ROOT_API + '/project/well/dataset/curve/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/edit', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def deleteCurve_RAW(token, payload):
-    url = ROOT_API + '/project/well/dataset/curve/delete'
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/delete', payload, token)
     r = requests.delete(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def checkIfCurveExisted_RAW(token, datasetId, name):
-    url = ROOT_API + '/project/well/dataset/curve/is-existed'
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/is-existed', {'idDataset': datasetId, 'name': name},
+                         token)
     r = requests.post(url, json={'idDataset': datasetId, 'name': name}, headers=tokenHeader(token), verify=False)
     return r.json()
 
+
 def getRawCurveData_RAW(token, curveId, columnIndex):
-    url = ROOT_API + '/project/well/dataset/curve/getRawData'
-    r = requests.post(url, json={'idCurve': curveId, 'columnIndex': columnIndex}, headers=tokenHeader(token), verify=False)
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/curve/getRawData',
+                         {'idCurve': curveId, 'columnIndex': columnIndex}, token)
+    r = requests.post(url, json={'idCurve': curveId, 'columnIndex': columnIndex}, headers=tokenHeader(token),
+                      verify=False)
     return r.json()

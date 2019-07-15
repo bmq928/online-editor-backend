@@ -2,9 +2,10 @@ import requests
 from ...api_url import ROOT_API
 from ...common import *
 
+
 def createParam(token, projectId, **data):
     payload = {
-        'idProject' : projectId
+        'idProject': projectId
     }
     if 'name' in data:
         payload['name'] = data['name']
@@ -15,22 +16,25 @@ def createParam(token, projectId, **data):
     r = createParam_RAW(token, payload)
     return verifyAndReturn(r)
 
+
 def getParamInfo(token, paramId):
     r = getParamInfo_RAW(token, paramId)
     return verifyAndReturn(r)
 
+
 def listParam(token, projectId):
     payload = {
-        'idProject' : projectId
+        'idProject': projectId
     }
     r = listParam_RAW(token, payload)
     if 'content' in r:
         return r['content']
     return verifyAndReturn(r)
 
+
 def editParam(token, paramId, **data):
     payload = {
-        'idParameterSet': paramId    
+        'idParameterSet': paramId
     }
     if 'name' in data:
         payload['name'] = data['name']
@@ -40,34 +44,40 @@ def editParam(token, paramId, **data):
         payload['type'] = data['type']
     r = editParam_RAW(token, payload)
     return verifyAndReturn(r)
-    
+
+
 def deleteParam(token, paramId):
     r = deleteParam_RAW(token, paramId)
     return verifyAndReturn(r)
 
-#RAW 
+
+# RAW
 def createParam_RAW(token, payload):
-    url = ROOT_API + '/project/parameter-set/new'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+    url = genUrlWithWiId(ROOT_API + '/project/parameter-set/new', payload, token)
+    r = requests.post(url, json=payload, headers=tokenHeader(token))
     return r.json()
+
 
 def getParamInfo_RAW(token, paramId):
-    url = ROOT_API + '/project/parameter-set/info'
-    r = requests.post(url, json= {'idParameterSet' : paramId}, headers= tokenHeader(token))
+    url = genUrlWithWiId(ROOT_API + '/project/parameter-set/info', {'idParameterSet': paramId}, token)
+    r = requests.post(url, json={'idParameterSet': paramId}, headers=tokenHeader(token))
     return r.json()
+
 
 def listParam_RAW(token, payload):
-    url = ROOT_API + '/project/parameter-set/list'
-    r = requests.post(url, json= payload, headers= tokenHeader(token))
+    url = genUrlWithWiId(ROOT_API + '/project/parameter-set/list', payload, token)
+    r = requests.post(url, json=payload, headers=tokenHeader(token))
     return r.json()
 
-def editParam_RAW(token,payload):
-    url = ROOT_API + '/project/parameter-set/edit'
-    r = requests.post(url, json = payload, headers = tokenHeader(token))
+
+def editParam_RAW(token, payload):
+    url = genUrlWithWiId(ROOT_API + '/project/parameter-set/edit', payload, token)
+    r = requests.post(url, json=payload, headers=tokenHeader(token))
     return r.json()
+
 
 def deleteParam_RAW(token, paramId):
-    url = ROOT_API + '/project/parameter-set/delete'
-    r = requests.post(url, json={'idParameterSet' : paramId}, headers = tokenHeader(token))
+    url = genUrlWithWiId(ROOT_API + '/project/parameter-set/delete', {'idParameterSet': paramId}, token)
+    r = requests.post(url, json={'idParameterSet': paramId}, headers=tokenHeader(token))
     r = r.json()
     return r

@@ -69,30 +69,30 @@ def infoPlot(token, idPlot):
 # RAW
 
 def getListPlot_RAW(token, payload):
-    url = ROOT_API + '/project/plot/list'
+    url = genUrlWithWiId(ROOT_API + '/project/plot/list', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def infoPlot_Raw(token, payload):
-    url = ROOT_API + '/project/plot/info'
+    url = genUrlWithWiId(ROOT_API + '/project/plot/info', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def createNewPlot_RAW(token, payload):
-    url = ROOT_API + '/project/plot/new'
+    url = genUrlWithWiId(ROOT_API + '/project/plot/new', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def editPlot_RAW(token, payload):
-    url = ROOT_API + '/project/plot/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/plot/edit', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def deletePlot_RAW(token, payload):
-    url = ROOT_API + '/project/plot/delete'
+    url = genUrlWithWiId(ROOT_API + '/project/plot/delete', payload, token)
     r = requests.delete(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()

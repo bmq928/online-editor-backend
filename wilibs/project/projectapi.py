@@ -52,7 +52,7 @@ def getFullInfoProject(token, payload):
     if r['code'] == 200:
         return r['content']
     return None
-    
+
 
 def listProject(token):
     """Get project list
@@ -186,41 +186,41 @@ def editProject(token, projectId, **modifyData):
 #RAW API:
 
 def getInfoProject_RAW(token, projectId):
-    url = ROOT_API + '/project/info'
+    url = genUrlWithWiId(ROOT_API + '/project/info', {"idProject": projectId}, token)
     r = requests.post(url, json = {'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def getFullInfoProject_RAW(token, payload):
-    url = ROOT_API + '/project/fullinfo'
+    url = genUrlWithWiId(ROOT_API + '/project/fullinfo', payload, token)
     r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def closeProject_RAW(token, projectId):
-    url = ROOT_API + '/project/close'
+    url = genUrlWithWiId(ROOT_API + '/project/close', {"idProject": projectId}, token)
     r = requests.post(url, json={'idProject': projectId}, headers = tokenHeader(token), verify=False)
     return r.json()
- 
+
 def editProject_RAW(token, payload):
-    url = ROOT_API + '/project/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/edit', payload, token)
     r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def createProject_RAW(token, payload):
-    url = ROOT_API + '/project/new'
+    url = genUrlWithWiId(ROOT_API + '/project/new', payload, token)
     r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
     r = r.json()
     return r
 
 def listProject_RAW(token):
-    url = ROOT_API + '/project/list'
+    url = genUrlWithWiId(ROOT_API + '/project/list', {}, token)
     r = requests.post(url, headers = tokenHeader(token), verify=False)
     return r.json()
 
 def deleteProject_RAW(token, projectId):
-    url = ROOT_API + '/project/delete'
     payload = {
         "idProject": projectId
     }
+    url = genUrlWithWiId(ROOT_API + '/project/delete', payload, token)
     r = requests.delete(url, json = payload, headers = tokenHeader(token), verify=False)
     r = r.json()
     return r

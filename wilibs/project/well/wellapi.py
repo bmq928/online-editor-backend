@@ -155,43 +155,43 @@ def updateWellHeaders(token, payload):
 # RAW:
 
 def getWellFullInfo_RAW(token, wellId):
-    url = ROOT_API + '/project/well/full-info'
+    url = genUrlWithWiId(ROOT_API + '/project/well/full-info', {'idWell': wellId}, token)
     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def createWell_RAW(token, payload):
-    url = ROOT_API + '/project/well/new'
+    url = genUrlWithWiId(ROOT_API + '/project/well/new', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def getWellInfo_RAW(token, wellId):
-    url = ROOT_API + '/project/well/info'
+    url = genUrlWithWiId(ROOT_API + '/project/well/info', {'idWell': wellId}, token)
     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def listWell_RAW(token, payload):
-    url = ROOT_API + '/project/well/list'
+    url = genUrlWithWiId(ROOT_API + '/project/well/list', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def getWellHeaders_RAW(token, wellId):
-    url = ROOT_API + '/project/well/get-well-header'
+    url = genUrlWithWiId(ROOT_API + '/project/well/get-well-header', {'idWell': wellId}, token)
     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def editWellInfo_RAW(token, payload):
-    url = ROOT_API + '/project/well/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/well/edit', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def deleteWell_RAW(token, wellId):
-    url = ROOT_API + '/project/well/delete'
+    url = genUrlWithWiId(ROOT_API + '/project/well/delete', {'idWell': wellId}, token)
     r = requests.delete(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
@@ -227,7 +227,7 @@ def deleteWell_RAW(token, wellId):
 
 
 def deleteZoneSet_RAW(token, idZoneSet):
-    url = ROOT_API + '/dustbin/delete'
+    url = genUrlWithWiId(ROOT_API + '/dustbin/delete', {'idObject': idZoneSet, 'type': 'zoneset'}, token)
     r = requests.delete(url, json={'idObject': idZoneSet, 'type': 'zoneset'}, headers=tokenHeader(token), verify=False)
     return r.json()
 
@@ -251,24 +251,24 @@ def deleteZoneSet_RAW(token, idZoneSet):
 
 
 def exportCsvRDRV_RAW(token, payload):
-    url = ROOT_API + '/export/CSV/wdrv'
+    url = genUrlWithWiId(ROOT_API + '/export/CSV/wdrv', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def exportCsvRV_RAW(token, payload):
-    url = ROOT_API + '/export/CSV/rv'
+    url = genUrlWithWiId(ROOT_API + '/export/CSV/rv', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def downloadExportedFile_RAW(token, payload):
-    url = ROOT_API + '/export/files'
+    url = genUrlWithWiId(ROOT_API + '/export/files', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r
 
 
 def updateWellHeaders_RAW(token, payload):
-    url = ROOT_API + '/project/well/bulk-update-well-header'
+    url = genUrlWithWiId(ROOT_API + '/project/well/bulk-update-well-header', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()

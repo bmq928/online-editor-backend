@@ -5,13 +5,16 @@ from wilibs.common import *
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+
 def createZoneSet(token, payload):
     r = createZoneSet_RAW(token, payload)
     return verifyAndReturn(r)
 
+
 def editZoneSet(token, payload):
     r = editZoneSet_RAW(token, payload)
     return verifyAndReturn(r)
+
 
 def deleteZoneSet(token, idZoneSet):
     r = deleteZoneSet_RAW(token, idZoneSet)
@@ -27,30 +30,33 @@ def getListZoneSets(token, idWell):
     r = getListZoneSets_RAW(token, idWell)
     return verifyAndReturn(r)
 
-#RAW
+
+# RAW
 def editZoneSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/zone-set/edit'
+    url = genUrlWithWiId(ROOT_API + '/project/well/zone-set/edit', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
+
 
 def createZoneSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/zone-set/new'
+    url = genUrlWithWiId(ROOT_API + '/project/well/zone-set/new', payload, token)
     r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
+
 def getListZoneSets_RAW(token, wellId):
-    url = ROOT_API + '/project/well/zone-set/list'
+    url = genUrlWithWiId(ROOT_API + '/project/well/zone-set/list', {'idWell': wellId}, token)
     r = requests.post(url, json={'idWell': wellId}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def deleteZoneSet_RAW(token, idZoneSet):
-    url = ROOT_API + '/dustbin/delete'
+    url = genUrlWithWiId(ROOT_API + '/dustbin/delete', {'idObject': idZoneSet, 'type': 'zoneset'}, token)
     r = requests.post(url, json={'idObject': idZoneSet, 'type': 'zoneset'}, headers=tokenHeader(token), verify=False)
     return r.json()
 
 
 def getZoneSetInfo_RAW(token, idZoneSet):
-    url = ROOT_API + '/project/well/zone-set/info'
+    url = genUrlWithWiId(ROOT_API + '/project/well/zone-set/info', {'idZoneSet': idZoneSet}, token)
     r = requests.post(url, json={'idZoneSet': idZoneSet}, headers=tokenHeader(token), verify=False)
     return r.json()

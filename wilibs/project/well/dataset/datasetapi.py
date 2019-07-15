@@ -5,9 +5,11 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+
 def getDatasetInfo(token, datasetId):
     r = getDatasetInfo_RAW(token, datasetId)
     return verifyAndReturn(r)
+
 
 def editDatasetInfo(token, datasetId, **data):
     payload = data
@@ -18,9 +20,11 @@ def editDatasetInfo(token, datasetId, **data):
     r = editDatasetInfo_RAW(token, payload)
     return verifyAndReturn(r)
 
+
 def deleteDataset(token, datasetId):
     r = deleteDataset_RAW(token, datasetId)
     return verifyAndReturn(r)
+
 
 def createDataSet(token, wellId, **data):
     payload = {
@@ -55,24 +59,28 @@ def createDataSet(token, wellId, **data):
     r = createDataSet_RAW(token, payload)
     return verifyAndReturn(r)
 
-#RAW:
+
+# RAW:
 
 def getDatasetInfo_RAW(token, datasetId):
-    url = ROOT_API + '/project/well/dataset/info'
-    r = requests.post(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/info', {'idDataset': datasetId}, token)
+    r = requests.post(url, json={'idDataset': datasetId}, headers=tokenHeader(token), verify=False)
     return r.json()
+
 
 def editDatasetInfo_RAW(token, payload):
-    url = ROOT_API + '/project/well/dataset/edit'
-    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/edit', payload, token)
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
+
 
 def createDataSet_RAW(token, payload):
-    url = ROOT_API + '/project/well/dataset/new'
-    r = requests.post(url, json = payload, headers = tokenHeader(token), verify=False)
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/new', payload, token)
+    r = requests.post(url, json=payload, headers=tokenHeader(token), verify=False)
     return r.json()
 
+
 def deleteDataset_RAW(token, datasetId):
-    url = ROOT_API + '/project/well/dataset/delete'
-    r = requests.delete(url, json = {'idDataset': datasetId}, headers = tokenHeader(token), verify=False)
+    url = genUrlWithWiId(ROOT_API + '/project/well/dataset/delete', {'idDataset': datasetId}, token)
+    r = requests.delete(url, json={'idDataset': datasetId}, headers=tokenHeader(token), verify=False)
     return r.json()
