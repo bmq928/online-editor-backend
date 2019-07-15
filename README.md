@@ -1,19 +1,9 @@
-#convention
-* folder with underscore (_) define private module (just interact with each other or is utils)
-* folder without underscore (api: controller, route)
-
-#start
-
-
-* create config/production.json
-* create folder logs
-* create folder project-storage  which container project
-* build image
-  e.x: docker build . -t wi-python-backend
-* run container
-  e.x: docker run -d --name wi-python-backend \
-     -e USER_RELATED_ROOT_URL=''  # login url \
-     -e PROJECT_RELATED_ROOT_URL='' # project \
-     -v<logs-folder>:/app/logs \
-     -v<project-store>:/storage \
-     -p3001:3001 wi-python-backend
+#Enviroment variables
+  + PYTHON_PROJECT_STORAGE: "/storage"
+  + PYTHON_LOG_PATH: "logs"
+  + PYTHON_PORT: "3001"
+  + NODE_ENV: "production"
+  + PYTHON_EXPORT_PATH: "/app/export"
+  + PYTHON_ENV: "development"
+  + SALT: "wi-hash"
+  + PYTHON_JWTKEY: "secretKey"
