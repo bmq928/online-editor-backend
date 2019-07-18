@@ -24,7 +24,7 @@ app.use(cors());
 app.use(bodyParser.json({limit: '50mb', extended: true, type: 'application/json'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, type: 'application/json'}));
 // app.get('/documents',express.static(path.join(__dirname, '../','documents')));
-app.use('/documents', express.static(path.join(__dirname, '../', 'documents')));
+// app.use('/documents', express.static(path.join(__dirname, '../', 'documents')));
 // app.use(helmet({
 // 	frameguard: {
 // 		action: 'allow-from',
