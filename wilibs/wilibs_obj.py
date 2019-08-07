@@ -140,7 +140,7 @@ class Wilib:
     def getProjectByName(self, projectName):
         projects = self.getAllProjects()
         for project in projects:
-            if project.alias.lower() == projectName.lower() or project.projectName.lower() == projectName.lower():
+            if (project.alias and project.alias.lower() == projectName.lower()) or project.projectName.lower() == projectName.lower():
                 if project.shared:
                     print("Working in sharing project ...")
                     project = project.getFullInfo(shared=project.shared, owner=project.owner)
