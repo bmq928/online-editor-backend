@@ -9,14 +9,22 @@ def verifyAndReturn(r):
     return False, r['reason']
 
 
-def tokenHeader(token):
-    return {'Authorization': token}
+def tokenHeader(token, contentType="application/json"):
+    return {
+        'Authorization': token,
+        'Content-Type': contentType
+    }
 
 
 def genUrlWithWiId(base, payload, token):
     if payload is None:
         payload = {}
-    wiSalt = os.environ["SALT"] if os.environ["SALT"] else "wi-hash"
+    wiSalt = "wi-hash"
+    try:
+        wiSalt = os.environ["SALT"]
+    except:
+        # do nothing
+        pass
     salt = sha256((wiSalt + token).encode("utf-8")).hexdigest()
     wiid = sha256((json.dumps(payload, separators=(",", ":")) + salt).encode("utf-8")).hexdigest()
     return base + '?wiid=' + wiid
