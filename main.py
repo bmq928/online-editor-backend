@@ -7,7 +7,7 @@ import json
 
 
 #login
-client = wilib.login("hoang", "1")
+client = wilib.login("namphan.work@gmail.com", "@Revotech123")
 
 print(client.getAllProjects())
 

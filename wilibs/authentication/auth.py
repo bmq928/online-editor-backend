@@ -20,5 +20,5 @@ def login_RAW(username, password):
         "password": password
     }
     url = AUTH_API + '/login'
-    r = requests.post(url, json = payload, verify=False)
+    r = requests.post(url, json = payload, verify=False, headers = {'Service': 'WI_AUTH'})
     return r.json()

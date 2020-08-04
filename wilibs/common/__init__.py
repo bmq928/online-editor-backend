@@ -12,7 +12,8 @@ def verifyAndReturn(r):
 def tokenHeader(token, contentType="application/json"):
     return {
         'Authorization': token,
-        'Content-Type': contentType
+        'Content-Type': contentType,
+        'Service': 'WI_BACKEND'
     }
 
 
