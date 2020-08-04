@@ -14,3 +14,4 @@ __pycache__/
 venv
 node_modules
 _wilibs
+.DS_Store
