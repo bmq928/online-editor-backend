@@ -6,8 +6,6 @@ from wilibs.project.well.dataset.curve import curve_obj
 import json
 
 
-
-
 #login
 client = wilib.login("hoang", "1")
 

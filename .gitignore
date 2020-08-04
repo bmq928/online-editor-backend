@@ -12,3 +12,5 @@ __pycache__/
 /storage
 .idea
 venv
+node_modules
+_wilibs
