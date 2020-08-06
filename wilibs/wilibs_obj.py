@@ -262,16 +262,16 @@ class Wilib:
             return ZoneSet(self.token, info)
         return None
      
-    # def getZoneSetByName(self, zonesetName, wellName, projectName):
-    #     well = self.getWellByName(wellName, projectName)
-    #     if well:
-    #         ZoneSets = well.getAllZoneSets()
-    #         for i in ZoneSets:
-    #             tmpObj = i.getZoneSetInfo()
-    #             if tmpObj["name"].lower() == zonesetName.lower():
-    #                 return tmpObj
-    #     print("Zone Set not found")
-    #     return False
+    def getZoneSetByName(self, zonesetName, wellName, projectName):
+        well = self.getWellByName(wellName, projectName)
+        if well:
+            zoneSets = well.getAllZoneSets()
+            for zoneSet in zoneSets:
+                zoneSetInfo = zoneSet.getZoneSetInfo()
+                if zoneSetInfo["name"].lower() == zonesetName.lower():
+                    return zoneSet
+        print("Zone Set not found")
+        return None
     
     def getZoneById(self, zoneId):
         check, info = getZoneInfo(self.token, zoneId)
@@ -279,6 +279,16 @@ class Wilib:
             return Zone(self.token, info)
         return None
     
+    def getZoneByName(self, zoneName, zoneSetName, wellName, projectName):
+        zoneSet = self.getZoneSetByName(zoneSetName, wellName, projectName)
+        if zoneSet:
+            zones = zoneSet.getAllZones()
+            for zone in zones:
+                if zone.ZoneName.lower() == zoneName.lower():
+                    return zone
+        print("Zone not found")
+        return None
+
     def resamplingCurve(self, srcCurve, destCurve):
         srcDatasetId = srcCurve.curveInfo['idDataset']
         destDatasetId = destCurve.curveInfo['idDataset']
