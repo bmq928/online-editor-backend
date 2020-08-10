@@ -104,6 +104,28 @@ class Wilib:
             return MarkerSets(self.token, markerSetInfo)
         return None
 
+    def getMarkerSetByName(self, markerSetName, wellName, projectName):
+        well = self.getWellByName(wellName, projectName)
+        if well:
+            markerSets = well.getAllMarkerSets()
+            for markerSet in markerSets:
+                markerSetInfo = markerSet.getMarkerSetInfo()
+                if markerSetInfo["name"].lower() == markerSetName.lower():
+                    return markerSet
+        print("Marker Set not found")
+        return None
+    
+    def getMarkerByName(self, markerName, markerSetSetName, wellName, projectName):
+        markerSet = self.getMarkerSetByName(markerSetSetName, wellName, projectName)
+        if markerSet:
+            markers = markerSet.getAllMarkers()
+            for marker in markers:
+                markerInfo = marker.getInfo()
+                if markerInfo['marker_template']['name'].lower() == markerName.lower():
+                    return marker
+        print("Marker not found")
+        return None
+
     def getCurveById(self, curveId):
         check, curveInfo = getCurveInfo(self.token, curveId)
         if check:
