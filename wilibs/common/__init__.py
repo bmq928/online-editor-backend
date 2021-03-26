@@ -10,11 +10,17 @@ def verifyAndReturn(r):
 
 
 def tokenHeader(token, contentType="application/json"):
-    return {
-        'Authorization': token,
-        'Content-Type': contentType,
-        'Service': 'WI_BACKEND'
-    }
+    if contentType == "unknown":
+        return {
+            'Authorization': token,
+            'Service': 'WI_BACKEND'
+        } 
+    else:
+        return {
+            'Authorization': token,
+            'Content-Type': contentType,
+            'Service': 'WI_BACKEND'
+        }
 
 
 def genUrlWithWiId(base, payload, token):
